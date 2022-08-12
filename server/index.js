@@ -4,15 +4,22 @@ const mysql = require("mysql2");
 const app = express();
 
 // MYSQL CONNECTION
-// const db = mysql.createPool({
-//   host:,
-//   user:,
-//   password:,
-//   useranme:,
-// })
+const db = mysql.createPool({
+  host: "us-cdbr-east-06.cleardb.net",
+  user: "b4bb8c0f041384",
+  password: "f9833de4",
+  database: "heroku_289aeecd4cbfb0f",
+});
 
+// ROUTES
 app.use("/", (req, res) => {
-  res.json({ message: "call on me valerie, come and see me" });
+  db.query("SELECT * FROM heroku_289aeecd4cbfb0f.test_table", (err, result) => {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json(result);
+    }
+  });
 });
 
 // CHECKS FOR CONNECTION TO SERVER
