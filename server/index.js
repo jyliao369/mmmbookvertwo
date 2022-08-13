@@ -72,6 +72,30 @@ app.post("/register", (req, res) => {
   });
 });
 
+// #LOGIN
+app.post("/login", (req, res) => {
+  const loginEmail = req.body.loginEmail;
+  const loginPass = req.body.loginPass;
+
+  db.query(
+    `SELECT * FROM heroku_289aeecd4cbfb0f.users_table WHERE email = ?`,
+    [loginEmail],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else if (result.length > 0) {
+        bcrypt.compare(loginPass, result[0].password, (err, response) => {
+          if (response) {
+            console.log("Identification match!! Logging in");
+          } else {
+            console.log("Incorrect password!! Try again");
+          }
+        });
+      }
+    }
+  );
+});
+
 // CHECKS FOR CONNECTION TO SERVER
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

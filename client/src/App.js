@@ -11,13 +11,10 @@ function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const register = () => {
-    console.log(firstName);
-    console.log(lastName);
-    console.log(username);
-    console.log(email);
-    console.log(password);
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPass, setLoginPass] = useState("");
 
+  const register = () => {
     Axios.post("http://localhost:3001/register", {
       firstName: firstName,
       lastName: lastName,
@@ -29,7 +26,14 @@ function App() {
     });
   };
 
-  const login = () => [console.log("login")];
+  const login = () => {
+    Axios.post(`http://localhost:3001/login`, {
+      loginEmail: loginEmail,
+      loginPass: loginPass,
+    }).then((response) => {
+      console.log(response);
+    });
+  };
 
   return (
     <div className="App">
@@ -64,10 +68,20 @@ function App() {
         />
         <button onClick={() => register()}>Register</button>
       </div>
+
       <div>
         <p>login</p>
-        <input placeholder="Email" />
-        <input placeholder="Password" />
+        <input
+          value={loginEmail}
+          onChange={(e) => setLoginEmail(e.target.value)}
+          placeholder="Email"
+        />
+        <input
+          value={loginPass}
+          onChange={(e) => setLoginPass(e.target.value)}
+          placeholder="Password"
+          type={"password"}
+        />
         <button onClick={() => login()}>Login</button>
       </div>
     </div>
