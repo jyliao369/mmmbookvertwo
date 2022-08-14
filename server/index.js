@@ -2,6 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql2");
 const bcrypt = require("bcryptjs");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -18,6 +21,27 @@ app.use(
     origin: ["http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
+  })
+);
+
+// SETTING UP COOKIES AND SESSIONS FOR LOGIN
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    key: "userID",
+    secret: "If you're gone",
+    resave: false,
+    saveUninitialized: true,
+    proxy: true,
+    name: "MyFavoriteCookie",
+    cookie: {
+      secure: true,
+      httpOnly: false,
+      expires: 60 * 60 * 1000 * 2,
+      sameSite: "none",
+    },
   })
 );
 
@@ -65,6 +89,7 @@ app.post("/register", (req, res) => {
         if (err) {
           console.log(err);
         } else {
+          req.session.user = result;
           res.send(result);
         }
       }
@@ -76,6 +101,7 @@ app.post("/register", (req, res) => {
 app.post("/login", (req, res) => {
   const loginEmail = req.body.loginEmail;
   const loginPass = req.body.loginPass;
+  console.log(loginEmail);
 
   db.query(
     `SELECT * FROM heroku_289aeecd4cbfb0f.users_table WHERE email = ?`,
@@ -86,7 +112,9 @@ app.post("/login", (req, res) => {
       } else if (result.length > 0) {
         bcrypt.compare(loginPass, result[0].password, (err, response) => {
           if (response) {
+            req.session.user = result;
             console.log("Identification match!! Logging in");
+            res.send(result);
           } else {
             console.log("Incorrect password!! Try again");
           }
@@ -94,6 +122,25 @@ app.post("/login", (req, res) => {
       }
     }
   );
+});
+
+app.get("/login", (req, res) => {
+  if (req.session.user) {
+    res.send({ loggedIn: true, user: req.session.user });
+  } else {
+    res.send({ loggedIn: false });
+  }
+});
+
+// #LOGOUT
+app.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send("Logged Out");
+    }
+  });
 });
 
 // CHECKS FOR CONNECTION TO SERVER

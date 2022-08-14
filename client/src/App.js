@@ -3,7 +3,8 @@ import Axios from "axios";
 import { useState, useEffect } from "react";
 
 function App() {
-  Axios.defaults.withCredentials = true;
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState([]);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -14,8 +15,10 @@ function App() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPass, setLoginPass] = useState("");
 
+  Axios.defaults.withCredentials = true;
+
   const register = () => {
-    Axios.post("http://localhost:3001/register", {
+    Axios.post("https://mmmbook-vertwo-server.herokuapp.com/register", {
       firstName: firstName,
       lastName: lastName,
       username: username,
@@ -27,13 +30,33 @@ function App() {
   };
 
   const login = () => {
-    Axios.post(`http://localhost:3001/login`, {
+    Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/login`, {
       loginEmail: loginEmail,
       loginPass: loginPass,
     }).then((response) => {
       console.log(response);
     });
   };
+
+  const logout = () => {
+    Axios.get("https://mmmbook-vertwo-server.herokuapp.com/logout", {}).then(
+      (response) => {
+        console.log(response);
+      }
+    );
+  };
+
+  useEffect(() => {
+    Axios.get(`https://mmmbook-vertwo-server.herokuapp.com/login`, {}).then(
+      (response) => {
+        if (response.data.loggedIn === true) {
+          console.log(response.data);
+          setIsLoggedIn(response.data.loggedIn);
+          setCurrentUser(response.data.user[0]);
+        }
+      }
+    );
+  }, []);
 
   return (
     <div className="App">
@@ -82,7 +105,11 @@ function App() {
           placeholder="Password"
           type={"password"}
         />
-        <button onClick={() => login()}>Login</button>
+        {isLoggedIn === false ? (
+          <button onClick={() => login()}>Login</button>
+        ) : (
+          <button onClick={() => logout()}>Logout</button>
+        )}
       </div>
     </div>
   );
