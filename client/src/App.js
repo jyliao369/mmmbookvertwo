@@ -1,6 +1,13 @@
 import "./App.css";
 import Axios from "axios";
 import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import Profile from "./components/Profile";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -59,59 +66,72 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <p>hello world</p>
-      <div>
-        <p>register</p>
-        <input
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          placeholder="First Name"
-        />
-        <input
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          placeholder="Last Name"
-        />
-        <input
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
-        />
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-        />
-        <input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          type={"password"}
-        />
-        <button onClick={() => register()}>Register</button>
+    <Router>
+      <div className="appCont">
+        <Navbar />
+        <div className="mainPage">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </div>
       </div>
+    </Router>
+    // <div className="App">
+    //   <p>hello world</p>
+    //   <div>
+    //     <p>register</p>
+    //     <input
+    //       value={firstName}
+    //       onChange={(e) => setFirstName(e.target.value)}
+    //       placeholder="First Name"
+    //     />
+    //     <input
+    //       value={lastName}
+    //       onChange={(e) => setLastName(e.target.value)}
+    //       placeholder="Last Name"
+    //     />
+    //     <input
+    //       value={username}
+    //       onChange={(e) => setUsername(e.target.value)}
+    //       placeholder="Username"
+    //     />
+    //     <input
+    //       value={email}
+    //       onChange={(e) => setEmail(e.target.value)}
+    //       placeholder="Email"
+    //     />
+    //     <input
+    //       value={password}
+    //       onChange={(e) => setPassword(e.target.value)}
+    //       placeholder="Password"
+    //       type={"password"}
+    //     />
+    //     <button onClick={() => register()}>Register</button>
+    //   </div>
 
-      <div>
-        <p>login</p>
-        <input
-          value={loginEmail}
-          onChange={(e) => setLoginEmail(e.target.value)}
-          placeholder="Email"
-        />
-        <input
-          value={loginPass}
-          onChange={(e) => setLoginPass(e.target.value)}
-          placeholder="Password"
-          type={"password"}
-        />
-        {isLoggedIn === false ? (
-          <button onClick={() => login()}>Login</button>
-        ) : (
-          <button onClick={() => logout()}>Logout</button>
-        )}
-      </div>
-    </div>
+    //   <div>
+    //     <p>login</p>
+    //     <input
+    //       value={loginEmail}
+    //       onChange={(e) => setLoginEmail(e.target.value)}
+    //       placeholder="Email"
+    //     />
+    //     <input
+    //       value={loginPass}
+    //       onChange={(e) => setLoginPass(e.target.value)}
+    //       placeholder="Password"
+    //       type={"password"}
+    //     />
+    //     {isLoggedIn === false ? (
+    //       <button onClick={() => login()}>Login</button>
+    //     ) : (
+    //       <button onClick={() => logout()}>Logout</button>
+    //     )}
+    //   </div>
+    // </div>
   );
 }
 
