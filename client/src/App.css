@@ -1,5 +1,6 @@
 * {
   margin: 0px;
+  text-decoration: none;
 }
 
 .appCont {
@@ -15,6 +16,4 @@
   border-right: solid;
   border-width: medium;
   border-color: black;
-}
-.mainPage {
 }
