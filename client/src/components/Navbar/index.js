@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Navbar = ({ isLoggedIn }) => {
   return (
     <div className="navBar">
-      <p>mmmbookver2</p>
+      <h2>mmmbookver2</h2>
       <Link to="/">
         <p>home</p>
       </Link>
@@ -17,7 +17,10 @@ const Navbar = ({ isLoggedIn }) => {
             <p>profile</p>
           </Link>
           <p>favorites</p>
-          <p>Create</p>
+          <Link to="/create">
+            <p>Create</p>
+          </Link>
+
           <p>Settings</p>
         </>
       )}

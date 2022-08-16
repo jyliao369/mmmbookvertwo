@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
+import Create from "./components/Create";
 import Login from "./components/Login";
 import Register from "./components/Register";
 
@@ -19,7 +20,7 @@ function App() {
     Axios.get(`https://mmmbook-vertwo-server.herokuapp.com/login`, {}).then(
       (response) => {
         if (response.data.loggedIn === true) {
-          console.log(response.data);
+          // console.log(response.data);
           setIsLoggedIn(response.data.loggedIn);
           setCurrentUser(response.data.user[0]);
         }
@@ -35,6 +36,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
+            <Route
+              path="/create"
+              element={<Create currentUser={currentUser} />}
+            />
             <Route
               path="/register"
               element={

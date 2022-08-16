@@ -53,7 +53,7 @@ const db = mysql.createPool({
   database: "heroku_289aeecd4cbfb0f",
 });
 
-// ROUTES
+// #ALLROUTES
 app.get("/getAllUsers", (req, res) => {
   db.query(
     "SELECT * FROM heroku_289aeecd4cbfb0f.users_table",
@@ -141,6 +141,74 @@ app.get("/logout", (req, res) => {
       res.send("Logged Out");
     }
   });
+});
+
+// #RECIPES
+// #GETALLRECIPES
+app.get("/getAllRecipes", (req, res) => [
+  db.query(
+    "SELECT * FROM heroku_289aeecd4cbfb0f.recipes_table",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  ),
+]);
+
+// #CREATERECIPES
+app.post("/createRecipe", (req, res) => {
+  const userID = req.body.userID;
+  const username = req.body.username;
+  const recipeName = req.body.recipeName;
+  const recipeDesc = req.body.recipeDesc;
+  const prepTime = req.body.prepTime;
+  const cookTime = req.body.cookTime;
+  const totalTime = parseInt(prepTime) + parseInt(cookTime);
+  const yieldNum = req.body.yieldNum;
+  const servingsNum = req.body.servingsNum;
+  const category = req.body.category;
+  const course = req.body.course;
+  const cuisine = req.body.cuisine;
+  const diet = req.body.diet;
+  const ingredients = req.body.ingredients;
+  const instructions = req.body.instructions;
+  const addNotes = req.body.addNotes;
+
+  db.query(
+    `INSERT INTO heroku_289aeecd4cbfb0f.recipes_table
+    (userID, username, name, description, prepTime, cookTime,
+    totalTime, category, yield, servings, course, cuisine,
+    diet, ingredients, instructions, addNotes)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+    [
+      userID,
+      username,
+      recipeName,
+      recipeDesc,
+      prepTime,
+      cookTime,
+      totalTime,
+      category,
+      yieldNum,
+      servingsNum,
+      course,
+      cuisine,
+      diet,
+      ingredients,
+      instructions,
+      addNotes,
+    ],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
 });
 
 // CHECKS FOR CONNECTION TO SERVER
