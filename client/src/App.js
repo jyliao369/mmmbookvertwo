@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
+import Explore from "./components/Explore";
+import NewRecipes from "./components/NewRecipes";
 import Profile from "./components/Profile";
 import Create from "./components/Create";
 import Login from "./components/Login";
@@ -31,10 +33,11 @@ function App() {
   return (
     <Router>
       <div className="appCont">
-        <Navbar isLoggedIn={isLoggedIn} />
+        <Navbar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />
         <div className="mainPage">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/explore" element={<Explore />} />
             <Route path="/profile" element={<Profile />} />
             <Route
               path="/create"
@@ -57,6 +60,7 @@ function App() {
             />
           </Routes>
         </div>
+        <NewRecipes />
       </div>
     </Router>
   );

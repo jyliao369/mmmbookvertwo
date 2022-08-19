@@ -1,11 +1,13 @@
 import React from "react";
 import Axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = ({ setIsLoggedIn, isLoggedIn }) => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPass, setLoginPass] = useState("");
+
+  const navToHome = useNavigate();
 
   const login = () => {
     Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/login`, {
@@ -14,6 +16,7 @@ const Login = ({ setIsLoggedIn, isLoggedIn }) => {
     }).then((response) => {
       // console.log(response);
       setIsLoggedIn(true);
+      navToHome("/");
     });
   };
 

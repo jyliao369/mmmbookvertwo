@@ -1,14 +1,29 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
-const Navbar = ({ isLoggedIn }) => {
+const Navbar = ({ setIsLoggedIn, isLoggedIn }) => {
+  const navToHome = useNavigate();
+
+  const logout = () => {
+    Axios.get("https://mmmbook-vertwo-server.herokuapp.com/logout", {}).then(
+      (response) => {
+        // console.log(response);
+        setIsLoggedIn(false);
+        navToHome("/");
+      }
+    );
+  };
+
   return (
     <div className="navBar">
       <h2>mmmbookver2</h2>
       <Link to="/">
-        <p>home</p>
+        <p>Home</p>
       </Link>
-      <p>explore</p>
+      <Link to="/explore">
+        <p>Explore</p>
+      </Link>
       {isLoggedIn === false ? (
         <></>
       ) : (
@@ -24,10 +39,15 @@ const Navbar = ({ isLoggedIn }) => {
           <p>Settings</p>
         </>
       )}
-
-      <Link to="/login">
-        <p>Login</p>
-      </Link>
+      {isLoggedIn === false ? (
+        <Link to="/login">
+          <p>Login</p>
+        </Link>
+      ) : (
+        <p onClick={() => logout()} style={{ cursor: "pointer" }}>
+          Logout
+        </p>
+      )}
     </div>
   );
 };
