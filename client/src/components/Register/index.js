@@ -9,6 +9,7 @@ const Register = ({ setIsLoggedIn, isLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
 
   const register = () => {
     Axios.post("https://mmmbook-vertwo-server.herokuapp.com/register", {
@@ -23,38 +24,47 @@ const Register = ({ setIsLoggedIn, isLoggedIn }) => {
   };
 
   return (
-    <div>
-      <p>register</p>
-      <input
-        value={firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-        placeholder="First Name"
-      />
-      <input
-        value={lastName}
-        onChange={(e) => setLastName(e.target.value)}
-        placeholder="Last Name"
-      />
-      <input
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Username"
-      />
-      <input
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-      />
-      <input
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-        type={"password"}
-      />
-      <button onClick={() => register()}>Register</button>
-      <Link to="/login">
-        <p>login</p>
-      </Link>
+    <div className="registerPage">
+      <div className="registerForm">
+        <h2>Register</h2>
+        <input
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          placeholder="First Name"
+        />
+        <input
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          placeholder="Last Name"
+        />
+        <input
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Username"
+        />
+        <input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+        />
+        <input
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          type={"password"}
+        />
+        <input
+          value={rePassword}
+          onChange={(e) => setRePassword(e.target.value)}
+          placeholder="Re-Type Password"
+          type={"password"}
+        />
+        <button onClick={() => register()}>Register</button>
+        <p>Already have an account?</p>
+        <Link to="/login">
+          <p>Click here to login</p>
+        </Link>
+      </div>
     </div>
   );
 };

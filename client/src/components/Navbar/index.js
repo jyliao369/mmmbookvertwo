@@ -29,9 +29,9 @@ const Navbar = ({ setIsLoggedIn, isLoggedIn }) => {
       ) : (
         <>
           <Link to="/profile">
-            <p>profile</p>
+            <p>Profile</p>
           </Link>
-          <p>favorites</p>
+          <p>Favorites</p>
           <Link to="/create">
             <p>Create</p>
           </Link>

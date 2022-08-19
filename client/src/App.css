@@ -196,3 +196,32 @@
 .newRecipeInfoA {
   margin: 0px 20px 0px 0px;
 }
+/* #LOGIN/REGISTER */
+.loginPage,
+.registerPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.loginPage h2,
+button,
+.registerPage h2,
+button {
+  margin: 0px 0px 30px 0px;
+}
+.loginForm,
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 35%;
+  padding: 3%;
+  margin: 10% 0px 0px 0px;
+  border-style: solid;
+}
+.loginForm input,
+.registerForm input {
+  width: 75%;
+  padding: 10px;
+  margin: 0px 0px 35px 0px;
+}

@@ -30,27 +30,30 @@ const Login = ({ setIsLoggedIn, isLoggedIn }) => {
   };
 
   return (
-    <div>
-      <p>login</p>
-      <input
-        value={loginEmail}
-        onChange={(e) => setLoginEmail(e.target.value)}
-        placeholder="Email"
-      />
-      <input
-        value={loginPass}
-        onChange={(e) => setLoginPass(e.target.value)}
-        placeholder="Password"
-        type={"password"}
-      />
-      {isLoggedIn === false ? (
-        <button onClick={() => login()}>Login</button>
-      ) : (
-        <button onClick={() => logout()}>Logout</button>
-      )}
-      <Link to="/register">
-        <p>reigster</p>
-      </Link>
+    <div className="loginPage">
+      <div className="loginForm">
+        <h2>Login</h2>
+        <input
+          value={loginEmail}
+          onChange={(e) => setLoginEmail(e.target.value)}
+          placeholder="Email"
+        />
+        <input
+          value={loginPass}
+          onChange={(e) => setLoginPass(e.target.value)}
+          placeholder="Password"
+          type={"password"}
+        />
+        {isLoggedIn === false ? (
+          <button onClick={() => login()}>Login</button>
+        ) : (
+          <button onClick={() => logout()}>Logout</button>
+        )}
+        <p>Don't have an account?</p>
+        <Link to="/register">
+          <p>Click here to Register</p>
+        </Link>
+      </div>
     </div>
   );
 };
