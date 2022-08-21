@@ -9,7 +9,7 @@
 }
 .mainPage {
   width: 100%;
-  margin: 0% 30% 0% 20.1%;
+  margin: 0% 30% 0% 20%;
 }
 
 /* #RECIPECARD DESIGN */
@@ -17,47 +17,41 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 75%;
-  height: 350px;
+  width: 85%;
+  height: 400px;
   border-style: solid;
-  border-width: medium;
-  border-color: black;
   border-radius: 5px;
-  margin: 5% 0% 3% 0%;
-  padding: 2%;
-}
-.recipeCardA {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
+  margin: 2%;
 }
 .recipeCardAB {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  height: 100%;
 }
 .recipeImage {
-  width: 250px;
-  height: 250px;
-  border-style: solid;
+  display: flex;
+  width: 600px;
+  background: lightgray;
 }
 .recipeInfo {
   display: flex;
   flex-direction: column;
-  width: 65%;
+  width: 100%;
+  margin: 10px;
 }
-.recipeInfoB {
-  display: flex;
-  flex-direction: row;
+.recipeInfoA h2,
+.recipeInfoA p {
+  margin: 0px 0px 15px 0px;
+}
+.recipeInfoA p {
+  font-size: 17px;
 }
 .recipeInfoBA {
-  display: flex;
-  flex-direction: column;
-  margin: 0% 10% 0% 0%;
+  margin: 0px 0px 20px 0px;
 }
 .recipeInfoBA p {
-  margin: 15px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+  font-size: 17px;
 }
 .recipeCardB {
   display: flex;
@@ -71,27 +65,25 @@
 }
 .recipeCardIng,
 .recipeCardIns {
-  padding: 0px 0px 0px 0px;
+  width: 50%;
+  margin: 15px;
   overflow: auto;
+}
+.recipeCardIng {
+  width: 40%;
+}
+.recipeCardIns {
+  width: 60%;
+}
+.recipeCardIns p {
+  margin: 0px 0px 15px 0px;
 }
 .recipeCardIng::-webkit-scrollbar,
 .recipeCardIns::-webkit-scrollbar {
   display: none;
 }
-.recipeCardIng {
-  width: 40%;
-  padding: 10px;
-}
-.recipeCardIns {
-  width: 60%;
-  padding: 10px;
-}
-.recipeCardIng p,
-.recipeCardIns p {
-  margin: 10px 0px 0px 0px;
-}
 .recipeCardAdd {
-  padding: 10px;
+  margin: 15px;
 }
 .recipeCardC {
   display: flex;
@@ -102,12 +94,10 @@
   justify-content: center;
   align-items: center;
   padding: 5px;
-  border-style: none;
+  margin: 5px;
   background: white;
+  border: none;
   cursor: pointer;
-}
-.recipeCardC svg {
-  font-size: 25px;
 }
 /* #PAGEBANNER */
 .pageBanner p {
@@ -185,16 +175,35 @@
   width: 100%;
 }
 .newRecipe {
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 200px;
+  padding: 15px;
   margin: 0px 25px 20px 25px;
   border-style: solid;
+  border-radius: 5px;
+}
+.newRecipe h3 {
+  margin: 0px 0px 10px 0px;
 }
 .newRecipeInfo {
   display: flex;
   flex-direction: row;
+  margin: 10px 0px 15px 0px;
 }
 .newRecipeInfoA {
   margin: 0px 20px 0px 0px;
+}
+.buttonBar {
+  display: flex;
+  flex-direction: row;
+}
+.iconCont {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0px 10px 0px 0px;
 }
 /* #LOGIN/REGISTER */
 .loginPage,

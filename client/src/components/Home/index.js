@@ -52,10 +52,8 @@ const Home = () => {
                 <div className="recipeInfo">
                   <div className="recipeInfoA">
                     <h2>{recipe.name}</h2>
-                    <br />
                     <p>Description: {recipe.description.slice(0, 180)}</p>
                   </div>
-                  <br />
                   <div className="recipeInfoB">
                     <div className="recipeInfoBA">
                       <p>Prep Time: {recipe.prepTime} min</p>
