@@ -12,6 +12,7 @@
   margin: 0% 30% 0% 20%;
 }
 
+/* -------------------------------------------------------------------------------- */
 /* #RECIPECARD DESIGN */
 .recipeCard {
   display: flex;
@@ -21,7 +22,7 @@
   height: 400px;
   border-style: solid;
   border-radius: 5px;
-  margin: 2%;
+  margin: 3%;
 }
 .recipeCardAB {
   display: flex;
@@ -99,6 +100,67 @@
   border: none;
   cursor: pointer;
 }
+/* #CREATERECIPEFORM */
+.createRecipeCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.createRecipeFormA,
+.createRecipeFormB {
+  display: flex;
+  width: 85%;
+  height: 400px;
+  border-style: solid;
+  border-width: medium;
+  border-radius: 5px;
+  margin: 3% 0% 0% 0%;
+}
+.createNewRecipeImg {
+  display: flex;
+  width: 600px;
+  background: lightgrey;
+}
+.createNewRecipeInfo {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 10px;
+}
+.createNewRecipeInfoA {
+  display: flex;
+  flex-direction: column;
+}
+.createNewRecipeInfoB {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.createNewRecipeInfoBA {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+.createNewRecipeIng,
+.createNewRecipeIns {
+  display: flex;
+  width: 100%;
+  margin: 10px;
+}
+.createNewRecipeIng textarea,
+.createNewRecipeIns textarea {
+  width: 100%;
+}
+.createNewRecipeAdd {
+  display: flex;
+  margin: 10px;
+  height: 20%;
+}
+.createNewRecipeAdd textarea {
+  width: 100%;
+}
+
+/* -------------------------------------------------------------------------------- */
 /* #PAGEBANNER */
 .pageBanner p {
   padding: 2%;

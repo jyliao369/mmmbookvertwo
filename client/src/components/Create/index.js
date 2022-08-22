@@ -18,21 +18,6 @@ const Create = ({ currentUser }) => {
   const [addNotes, setAddNotes] = useState("");
 
   const createRecipe = () => {
-    // console.log("recipe created");
-    // console.log(recipeName);
-    // console.log(recipeDesc);
-    // console.log(prepTime);
-    // console.log(cookTime);
-    // console.log(yieldNum);
-    // console.log(servingsNum);
-    // console.log(category);
-    // console.log(course);
-    // console.log(cuisine);
-    // console.log(diet);
-    // console.log(ingredients);
-    // console.log(instructions);
-    // console.log(addNotes);
-
     Axios.post("http://localhost:3001/createRecipe", {
       userID: currentUser.userID,
       username: currentUser.username,
@@ -55,9 +40,48 @@ const Create = ({ currentUser }) => {
   };
 
   return (
-    <div>
-      <p>create recipe</p>
-      <div className="recipePartOne">
+    <div className="createRecipePage">
+      <div className="pageBanner">
+        <p>Create a Recipe</p>
+      </div>
+      <div className="createRecipeCont">
+        <div className="createRecipeFormA">
+          <div className="createNewRecipeImg"></div>
+          <div className="createNewRecipeInfo">
+            <input placeholder="Recipe Name" />
+            <textarea placeholder="Recipe Description" />
+            <div className="createNewRecipeInfoA">
+              <input placeholder="Prep Time" />
+              <input placeholder="Cook Time" />
+              <input placeholder="Yield" />
+              <input placeholder="Servings" />
+            </div>
+            <div className="createNewRecipeInfoA">
+              <input placeholder="Category" />
+              <input placeholder="Course" />
+              <input placeholder="Cuisine" />
+              <input placeholder="Diet" />
+            </div>
+          </div>
+        </div>
+        <div className="createRecipeFormB">
+          <div className="createNewRecipeInfoB">
+            <div className="createNewRecipeInfoBA">
+              <div className="createNewRecipeIng">
+                <textarea placeholder="Ingredients" />
+              </div>
+              <div className="createNewRecipeIns">
+                <textarea placeholder="Instructions" />
+              </div>
+            </div>
+            <div className="createNewRecipeAdd">
+              <textarea placeholder="Additional Notes" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* <div className="recipePartOne">
         <div className="recipePartOneA">
           <input
             placeholder="Recipe Name"
@@ -149,7 +173,10 @@ const Create = ({ currentUser }) => {
 
       <br />
       <br />
-      <button onClick={() => createRecipe()}>Create</button>
+      <button onClick={() => createRecipe()}>Create</button> */}
+
+      <br />
+      <br />
     </div>
   );
 };
