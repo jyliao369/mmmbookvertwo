@@ -47,35 +47,49 @@ const Create = ({ currentUser }) => {
       <div className="createRecipeCont">
         <div className="createRecipeFormA">
           <div className="createNewRecipeImg"></div>
-          <div className="createNewRecipeInfo">
-            <input placeholder="Recipe Name" />
-            <textarea placeholder="Recipe Description" />
-            <div className="createNewRecipeInfoA">
-              <input placeholder="Prep Time" />
-              <input placeholder="Cook Time" />
-              <input placeholder="Yield" />
-              <input placeholder="Servings" />
+          <div className="createNewRecipeA">
+            <div className="createNewRecipeAb">
+              <input
+                placeholder="Recipe Name"
+                value={recipeName}
+                onChange={(e) => setRecipeName(e.target.value)}
+              />
+              <textarea
+                placeholder="Recipe Description"
+                value={recipeDesc}
+                onChange={(e) => setrecipeDesc(e.target.value)}
+                rows={4}
+              />
             </div>
-            <div className="createNewRecipeInfoA">
-              <input placeholder="Category" />
-              <input placeholder="Course" />
-              <input placeholder="Cuisine" />
-              <input placeholder="Diet" />
+            <div className="createNewRecipeAc">
+              <div className="createNewRecipeInfoAc">
+                <input placeholder="Prep Time" />
+                <input placeholder="Cook Time" />
+                <input placeholder="Yield" />
+                <input placeholder="Servings" />
+              </div>
+              <div className="createNewRecipeInfoAc">
+                <input placeholder="Category" />
+                <input placeholder="Course" />
+                <input placeholder="Cuisine" />
+                <input placeholder="Diet" />
+              </div>
             </div>
           </div>
         </div>
+
         <div className="createRecipeFormB">
-          <div className="createNewRecipeInfoB">
-            <div className="createNewRecipeInfoBA">
-              <div className="createNewRecipeIng">
+          <div className="createNewRecipeB">
+            <div className="createNewRecipeBa">
+              <div className="createRecipeIng">
                 <textarea placeholder="Ingredients" />
               </div>
-              <div className="createNewRecipeIns">
+              <div className="createRecipeIns">
                 <textarea placeholder="Instructions" />
               </div>
             </div>
-            <div className="createNewRecipeAdd">
-              <textarea placeholder="Additional Notes" />
+            <div className="createRecipeAdd">
+              <textarea placeholder="Additional Notes" rows={4} />
             </div>
           </div>
         </div>

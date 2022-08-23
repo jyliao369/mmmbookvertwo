@@ -8,7 +8,7 @@
   flex-direction: row;
 }
 .mainPage {
-  width: 100%;
+  width: 50%;
   margin: 0% 30% 0% 20%;
 }
 
@@ -118,18 +118,67 @@
 }
 .createNewRecipeImg {
   display: flex;
-  width: 600px;
+  width: 550px;
   background: lightgrey;
 }
-.createNewRecipeInfo {
+.createNewRecipeA {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.createNewRecipeAb {
+  display: flex;
+  flex-direction: column;
+}
+.createNewRecipeAb input,
+.createNewRecipeAb textarea {
+  font-size: 15px;
+  padding: 7px;
+  margin: 10px;
+}
+.createNewRecipeAc {
+  display: flex;
+  flex-direction: row;
+}
+.createNewRecipeInfoAc {
+  display: flex;
+  flex-direction: column;
+}
+.createNewRecipeInfoAc input {
+  font-size: 15px;
+  padding: 7px;
+  margin: 10px;
+}
+.createNewRecipeB {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+.createNewRecipeBa {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.createRecipeIng,
+.createRecipeIns,
+.createRecipeAdd {
+  display: flex;
+  width: 100%;
+}
+.createRecipeIng textarea,
+.createRecipeIns textarea,
+.createRecipeAdd textarea {
+  width: 100%;
+  font-size: 15px;
+  padding: 7px;
   margin: 10px;
 }
-.createNewRecipeInfoA {
-  display: flex;
-  flex-direction: column;
+
+/* .createNewRecipeInfo input,
+textarea {
+  font-size: 15px;
+  padding: 7px;
+  margin: 0px 0px 15px 0px;
 }
 .createNewRecipeInfoB {
   display: flex;
@@ -148,17 +197,16 @@
   margin: 10px;
 }
 .createNewRecipeIng textarea,
-.createNewRecipeIns textarea {
+.createNewRecipeIns textarea,
+.createNewRecipeAdd textarea {
   width: 100%;
+  padding: 10px;
 }
 .createNewRecipeAdd {
   display: flex;
   margin: 10px;
   height: 20%;
-}
-.createNewRecipeAdd textarea {
-  width: 100%;
-}
+} */
 
 /* -------------------------------------------------------------------------------- */
 /* #PAGEBANNER */
