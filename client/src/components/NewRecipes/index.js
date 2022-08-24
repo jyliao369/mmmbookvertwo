@@ -12,7 +12,7 @@ const NewRecipes = () => {
 
   useEffect(() => {
     Axios.get(`http://localhost:3001/getAllRecipes`, {}).then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       setAllRecipes(response.data);
     });
   }, []);
@@ -23,7 +23,7 @@ const NewRecipes = () => {
 
       <div className="newRecipeCont">
         {allRecipes.map((recipe) => (
-          <div className="newRecipe">
+          <div className="newRecipe" key={recipe.recipeID}>
             <h3>{recipe.name}</h3>
             <p>Description: {recipe.description.slice(0, 180)}</p>
             <div className="newRecipeInfo">

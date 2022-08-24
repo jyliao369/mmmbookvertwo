@@ -9,6 +9,7 @@ import Explore from "./components/Explore";
 import NewRecipes from "./components/NewRecipes";
 import Profile from "./components/Profile";
 import Create from "./components/Create";
+import RecipePage from "./components/RecipePage";
 import Login from "./components/Login";
 import Register from "./components/Register";
 
@@ -43,6 +44,7 @@ function App() {
               path="/create"
               element={<Create currentUser={currentUser} />}
             />
+            <Route path="/recipe/:recipeID" element={<RecipePage />} />
             <Route
               path="/register"
               element={

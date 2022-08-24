@@ -27,9 +27,14 @@ const Explore = () => {
     }
   };
 
-  const ingreInstr = (test) => {
+  const instrSplit = (instr) => {
     // console.log(test.split("."));
-    return test.split(".");
+    return instr.split(".");
+  };
+
+  const ingrSplit = (ingre) => {
+    // console.log(ingre.split("\n"));
+    return ingre.split("\n");
   };
 
   useEffect(() => {
@@ -79,7 +84,7 @@ const Explore = () => {
                 <div className="recipeCardIng">
                   <h3>Ingredients</h3>
                   <div>
-                    {ingreInstr(recipe.ingredients).map((ingredient) => (
+                    {ingrSplit(recipe.ingredients).map((ingredient) => (
                       <p>{ingredient}</p>
                     ))}
                   </div>
@@ -87,7 +92,7 @@ const Explore = () => {
                 <div className="recipeCardIns">
                   <h3>Instructions</h3>
                   <div>
-                    {ingreInstr(recipe.instructions).map((instruction) => (
+                    {instrSplit(recipe.instructions).map((instruction) => (
                       <p>{instruction}</p>
                     ))}
                   </div>

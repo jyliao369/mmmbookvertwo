@@ -13,7 +13,7 @@
 }
 
 /* -------------------------------------------------------------------------------- */
-/* #RECIPECARD DESIGN */
+/* #RECIPECARDDESIGN */
 .recipeCard {
   display: flex;
   flex-direction: row;
@@ -76,8 +76,13 @@
 .recipeCardIns {
   width: 60%;
 }
-.recipeCardIns p {
-  margin: 0px 0px 15px 0px;
+.recipeCardIns h3,
+.recipeCardIng h3 {
+  margin: 0px 0px 13px 0px;
+}
+.recipeCardIns p,
+.recipeCardIng p {
+  margin: 0px 0px 13px 0px;
 }
 .recipeCardIng::-webkit-scrollbar,
 .recipeCardIns::-webkit-scrollbar {
@@ -173,40 +178,29 @@
   padding: 7px;
   margin: 10px;
 }
-
-/* .createNewRecipeInfo input,
-textarea {
-  font-size: 15px;
-  padding: 7px;
-  margin: 0px 0px 15px 0px;
+.createRecipeBtn {
+  display: flex;
+  justify-content: center;
 }
-.createNewRecipeInfoB {
+.createRecipeBtn button {
+  padding: 5px 20px 5px 20px;
+  font-size: 15px;
+}
+/* #RECIPEPAGECARD */
+.recipePage {
   display: flex;
   flex-direction: column;
-  width: 100%;
 }
-.createNewRecipeInfoBA {
-  display: flex;
-  flex-direction: row;
-  height: 100%;
+.recipeCardOne {
+  height: 500px;
+  border-style: solid;
+  border-width: medium;
 }
-.createNewRecipeIng,
-.createNewRecipeIns {
-  display: flex;
-  width: 100%;
-  margin: 10px;
+.recipeCardTwo {
+  height: 500px;
+  border-style: solid;
+  border-width: medium;
 }
-.createNewRecipeIng textarea,
-.createNewRecipeIns textarea,
-.createNewRecipeAdd textarea {
-  width: 100%;
-  padding: 10px;
-}
-.createNewRecipeAdd {
-  display: flex;
-  margin: 10px;
-  height: 20%;
-} */
 
 /* -------------------------------------------------------------------------------- */
 /* #PAGEBANNER */
@@ -275,9 +269,13 @@ textarea {
   border-color: black;
   position: fixed;
   right: 0;
+  overflow-x: auto;
 }
 .newRecipes h2 {
   margin: 15px 0px 20px 0px;
+}
+.newRecipes::-webkit-scrollbar {
+  display: none;
 }
 .newRecipeCont {
   display: flex;
@@ -323,9 +321,9 @@ textarea {
   align-items: center;
 }
 .loginPage h2,
-button,
+.loginPage button,
 .registerPage h2,
-button {
+.registerPage button {
   margin: 0px 0px 30px 0px;
 }
 .loginForm,

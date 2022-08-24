@@ -158,6 +158,29 @@ app.get("/getAllRecipes", (req, res) => [
   ),
 ]);
 
+// GETRECIPEBYID
+app.get("/getRecipe/:recipeID", (req, res) => {
+  const recipeID = req.params.recipeID;
+});
+
+// #GETRECIPEBYNAME
+app.get("/getRecipe/:recipeName", (req, res) => {
+  const recipeName = req.params.recipeName;
+  // console.log(recipeName);
+
+  db.query(
+    `SELECT * FROM heroku_289aeecd4cbfb0f.recipes_table WHERE name = ?`,
+    [recipeName],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 // #CREATERECIPES
 app.post("/createRecipe", (req, res) => {
   const userID = req.body.userID;
