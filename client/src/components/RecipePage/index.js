@@ -13,9 +13,6 @@ import StarHalfOutlinedIcon from "@mui/icons-material/StarHalfOutlined";
 const RecipePage = ({ isLoggedIn, currentUser }) => {
   let { recipeID } = useParams();
 
-  console.log("user");
-  console.log(currentUser);
-
   const [recipeInfo, setRecipeInfo] = useState([]);
   const [recipeDesc, setRecipeDesc] = useState("");
   const [recipeIng, setRecipeIng] = useState([]);
@@ -33,10 +30,21 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
   };
 
   const postReview = () => {
-    console.log("review " + review);
-    console.log("rating " + rating);
-    console.log(currentUser.userID);
-    console.log(currentUser.username);
+    Axios.post(`http://localhost:3001/postReview`, {
+      recipeID: recipeID,
+      userID: currentUser.userID,
+      username: currentUser.username,
+      review: review,
+      rating: rating,
+    }).then((response) => {
+      console.log(response);
+
+      setReview("");
+      for (let a = 1; a <= 5; a++) {
+        document.getElementById(`star${a}`).childNodes[0].style.color =
+          "lightgray";
+      }
+    });
   };
 
   const rate = (rate) => {
@@ -82,6 +90,12 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
         setRecipeDesc(response.data[0].description);
         instrSplit(response.data[0].instructions);
         ingrSplit(response.data[0].ingredients);
+      }
+    );
+
+    Axios.get(`http://localhost:3001/getReview/${recipeID}`, {}).then(
+      (response) => {
+        console.log(response.data);
       }
     );
   }, []);
@@ -152,66 +166,80 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
           </div>
         </div>
       </div>
-      <div className="commentSection">
-        {isLoggedIn === false ? (
-          <></>
-        ) : (
-          <div className="commentForm">
-            <textarea
-              placeholder="Write your Review"
-              value={review}
-              onChange={(e) => setReview(e.target.value)}
-              rows={6}
-            />
-            <div className="reviewBtnCont">
-              <div className="ratingForm">
-                <p>Your Rating:</p>
-                <div id="star1">
-                  <StarPurple500OutlinedIcon
-                    onClick={() => setRate(1)}
-                    onMouseOver={() => rate(1)}
-                    onMouseLeave={() => reset()}
-                    style={{ cursor: "pointer" }}
-                  />
+
+      {isLoggedIn === false ? (
+        <></>
+      ) : (
+        <div className="reviewFormSection">
+          <div className="reviewFormCont">
+            <div className="profileIcon">
+              <div className="profileImg" />
+              <p>{currentUser.username}</p>
+              <p>userID: {currentUser.userID}</p>
+            </div>
+            <div className="reviewForm">
+              <textarea
+                placeholder="Write your Review"
+                value={review}
+                onChange={(e) => setReview(e.target.value)}
+                rows={6}
+              />
+              <div className="reviewBtnCont">
+                <div className="ratingForm">
+                  <p>Your Rating:</p>
+                  <div id="star1">
+                    <StarPurple500OutlinedIcon
+                      onClick={() => setRate(1)}
+                      onMouseOver={() => rate(1)}
+                      onMouseLeave={() => reset()}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </div>
+                  <div id="star2">
+                    <StarPurple500OutlinedIcon
+                      onClick={() => setRate(2)}
+                      onMouseOver={() => rate(2)}
+                      onMouseLeave={() => reset()}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </div>
+                  <div id="star3">
+                    <StarPurple500OutlinedIcon
+                      onClick={() => setRate(3)}
+                      onMouseOver={() => rate(3)}
+                      onMouseLeave={() => reset()}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </div>
+                  <div id="star4">
+                    <StarPurple500OutlinedIcon
+                      onClick={() => setRate(4)}
+                      onMouseOver={() => rate(4)}
+                      onMouseLeave={() => reset()}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </div>
+                  <div id="star5">
+                    <StarPurple500OutlinedIcon
+                      onClick={() => setRate(5)}
+                      onMouseOver={() => rate(5)}
+                      onMouseLeave={() => reset()}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </div>
                 </div>
-                <div id="star2">
-                  <StarPurple500OutlinedIcon
-                    onClick={() => setRate(2)}
-                    onMouseOver={() => rate(2)}
-                    onMouseLeave={() => reset()}
-                    style={{ cursor: "pointer" }}
-                  />
-                </div>
-                <div id="star3">
-                  <StarPurple500OutlinedIcon
-                    onClick={() => setRate(3)}
-                    onMouseOver={() => rate(3)}
-                    onMouseLeave={() => reset()}
-                    style={{ cursor: "pointer" }}
-                  />
-                </div>
-                <div id="star4">
-                  <StarPurple500OutlinedIcon
-                    onClick={() => setRate(4)}
-                    onMouseOver={() => rate(4)}
-                    onMouseLeave={() => reset()}
-                    style={{ cursor: "pointer" }}
-                  />
-                </div>
-                <div id="star5">
-                  <StarPurple500OutlinedIcon
-                    onClick={() => setRate(5)}
-                    onMouseOver={() => rate(5)}
-                    onMouseLeave={() => reset()}
-                    style={{ cursor: "pointer" }}
-                  />
-                </div>
+                {rating === 0 || review === "" ? (
+                  <button disabled={true}>Post Review</button>
+                ) : (
+                  <button onClick={() => postReview()}>Post Review</button>
+                )}
               </div>
-              <button onClick={() => postReview()}>Post Review</button>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
+
+      <div></div>
 
       <br />
       <br />

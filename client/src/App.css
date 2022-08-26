@@ -419,31 +419,45 @@ a {
   border-width: thin;
   border-color: lightgray;
 }
-.commentSection {
+.reviewFormSection {
   display: flex;
   justify-content: center;
   width: 100%;
-}
-.commentForm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding: 30px 0px 30px 0px;
   border-bottom: solid;
   border-width: thin;
   border-color: lightgray;
+  padding: 3% 0px 3% 0px;
 }
-.commentForm textarea {
-  width: 65%;
+.reviewFormCont {
+  display: flex;
+  align-items: flex-start;
+  width: 80%;
+}
+.profileIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px 25px 0px 0px;
+}
+.profileImg {
+  width: 100px;
+  height: 100px;
+  background: lightgray;
+  border-radius: 50%;
+}
+.reviewForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.reviewForm textarea {
   padding: 10px;
   border-radius: 5px;
+  margin: 0px 0px 15px 0px;
 }
 .reviewBtnCont {
   display: flex;
-  width: 65%;
   flex-direction: row;
-  margin: 20px 0px 0px 0px;
   justify-content: space-between;
 }
 .ratingForm {

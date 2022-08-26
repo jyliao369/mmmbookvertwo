@@ -246,6 +246,47 @@ app.post("/createRecipe", (req, res) => {
   );
 });
 
+// #REVIEWS
+// #POSTINGREVIEW
+app.post("/postReview", (req, res) => {
+  const recipeID = req.body.recipeID;
+  const userID = req.body.userID;
+  const username = req.body.username;
+  const review = req.body.review;
+  const rating = req.body.rating;
+
+  db.query(
+    `INSERT INTO heroku_289aeecd4cbfb0f.reviews_table 
+    (recipeID, userID, username, review, rating)
+    VALUES (?,?,?,?,?)`,
+    [recipeID, userID, username, review, rating],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+// #REVIEWBASEDONID
+app.get(`/getReview/:recipeID`, (req, res) => {
+  const recipeID = req.params.recipeID;
+
+  db.query(
+    `SELECT * FROM heroku_289aeecd4cbfb0f.reviews_table WHERE recipeID = ?`,
+    [recipeID],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 // CHECKS FOR CONNECTION TO SERVER
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
