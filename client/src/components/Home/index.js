@@ -12,7 +12,9 @@ import FeaturedPlayListOutlinedIcon from "@mui/icons-material/FeaturedPlayListOu
 const Home = () => {
   const [allRecipes, setAllRecipes] = useState([]);
 
-  const flipSide = (recipeCard) => {
+  const flipSide = (event, recipeCard) => {
+    event.preventDefault();
+
     if (
       document.getElementById(`${recipeCard}a`).style.display === "" ||
       document.getElementById(`${recipeCard}a`).style.display === "flex"
@@ -51,79 +53,89 @@ const Home = () => {
       </div>
       <div className="allRecipesCont">
         {allRecipes.map((recipe) => (
-          <Link to={`/recipe/${recipe.recipeID}`}>
-            <div key={recipe.recipeID} className="recipeCard">
-              <div className="recipeCardA" id={`recipeCard${recipe.recipeID}a`}>
-                <div className="recipeCardAB">
-                  <div className="recipeImage"></div>
-                  <div className="recipeInfo">
-                    <div className="recipeInfoA">
-                      <h2>{recipe.name}</h2>
-                      <p>Description: {recipe.description.slice(0, 180)}</p>
-                    </div>
-                    <div className="recipeInfoB">
-                      <div className="recipeInfoBA">
-                        <p>Prep Time: {recipe.prepTime} min</p>
-                        <p>Cook Time: {recipe.cookTime} min</p>
-                        <p>Total Time: {recipe.totalTime} min</p>
-                        <p>Yield: {recipe.yield}</p>
-                        <p>Servings: {recipe.servings}</p>
-                      </div>
-                      <div className="recipeInfoBA">
-                        <p>Category: {recipe.category}</p>
-                        <p>Course: {recipe.course}</p>
-                        <p>Cuisine: {recipe.cuisine}</p>
-                        <p>Diet: {recipe.diet}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="recipeCardB" id={`recipeCard${recipe.recipeID}b`}>
-                <div className="recipeCardBA">
-                  <div className="recipeCardIng">
-                    <h3>Ingredients</h3>
-                    <div>
-                      {ingrSplit(recipe.ingredients).map((ingredient) => (
-                        <p>{ingredient}</p>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="recipeCardIns">
-                    <h3>Instructions</h3>
-                    <div>
-                      {instrSplit(recipe.instructions).map((instruction) => (
-                        <p>{instruction}</p>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <div className="recipeCardAdd">
-                  <h3>Additional Notes:</h3>
-                  <p>{recipe.addNotes}</p>
-                </div>
-              </div>
-              <div className="recipeCardC">
-                <button
-                  onClick={() => flipSide(`recipeCard${recipe.recipeID}`)}
+          <div key={recipe.recipeID} className="recipeCard">
+            <Link key={recipe.recipeID} to={`/recipe/${recipe.recipeID}`}>
+              <div className="recipeCardIn">
+                <div
+                  className="recipeCardA"
+                  id={`recipeCard${recipe.recipeID}a`}
                 >
-                  <FeaturedPlayListOutlinedIcon />
-                </button>
-                <button>
-                  <FavoriteBorderOutlinedIcon />
-                </button>
-                <button>
-                  <ChatBubbleOutlineOutlinedIcon />
-                </button>
-                <button>
-                  <StarOutlineOutlinedIcon />
-                </button>
-                <button>
-                  <LibraryAddOutlinedIcon />
-                </button>
+                  <div className="recipeCardAB">
+                    <div className="recipeImage"></div>
+                    <div className="recipeInfo">
+                      <div className="recipeInfoA">
+                        <h2>{recipe.name}</h2>
+                        <p>Description: {recipe.description.slice(0, 180)}</p>
+                      </div>
+                      <div className="recipeInfoB">
+                        <div className="recipeInfoBA">
+                          <p>Prep Time: {recipe.prepTime} min</p>
+                          <p>Cook Time: {recipe.cookTime} min</p>
+                          <p>Total Time: {recipe.totalTime} min</p>
+                          <p>Yield: {recipe.yield}</p>
+                          <p>Servings: {recipe.servings}</p>
+                        </div>
+                        <div className="recipeInfoBA">
+                          <p>Category: {recipe.category}</p>
+                          <p>Course: {recipe.course}</p>
+                          <p>Cuisine: {recipe.cuisine}</p>
+                          <p>Diet: {recipe.diet}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="recipeCardB"
+                  id={`recipeCard${recipe.recipeID}b`}
+                >
+                  <div className="recipeCardBA">
+                    <div className="recipeCardIng">
+                      <h3>Ingredients</h3>
+                      <div>
+                        {ingrSplit(recipe.ingredients).map((ingredient) => (
+                          <p key={ingredient.slice(5, 100)}>{ingredient}</p>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="recipeCardIns">
+                      <h3>Instructions</h3>
+                      <div>
+                        {instrSplit(recipe.instructions).map((instruction) => (
+                          <p>{instruction}</p>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="recipeCardAdd">
+                    <h3>Additional Notes:</h3>
+                    <p>{recipe.addNotes}</p>
+                  </div>
+                </div>
+                <div className="recipeCardC">
+                  <button
+                    onClick={(event) =>
+                      flipSide(event, `recipeCard${recipe.recipeID}`)
+                    }
+                  >
+                    <FeaturedPlayListOutlinedIcon />
+                  </button>
+                  <button>
+                    <FavoriteBorderOutlinedIcon />
+                  </button>
+                  <button>
+                    <ChatBubbleOutlineOutlinedIcon />
+                  </button>
+                  <button>
+                    <StarOutlineOutlinedIcon />
+                  </button>
+                  <button>
+                    <LibraryAddOutlinedIcon />
+                  </button>
+                </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          </div>
         ))}
       </div>
     </div>

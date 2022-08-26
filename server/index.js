@@ -161,6 +161,18 @@ app.get("/getAllRecipes", (req, res) => [
 // GETRECIPEBYID
 app.get("/getRecipe/:recipeID", (req, res) => {
   const recipeID = req.params.recipeID;
+
+  db.query(
+    `SELECT * FROM heroku_289aeecd4cbfb0f.recipes_table WHERE recipeID = ?`,
+    [recipeID],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
 });
 
 // #GETRECIPEBYNAME

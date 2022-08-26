@@ -44,7 +44,12 @@ function App() {
               path="/create"
               element={<Create currentUser={currentUser} />}
             />
-            <Route path="/recipe/:recipeID" element={<RecipePage />} />
+            <Route
+              path="/recipe/:recipeID"
+              element={
+                <RecipePage isLoggedIn={isLoggedIn} currentUser={currentUser} />
+              }
+            />
             <Route
               path="/register"
               element={
