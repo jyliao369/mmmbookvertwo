@@ -1,4 +1,4 @@
-export { category, course, cuisine, ingredients };
+export { category, course, cuisine, diet, ingredients };
 
 let category = ["Beverage", "Appetizer", "Entree", "Dessert"];
 let course = ["Breakfast", "Brunch", "Lunch", "Dinner", "Snack"];

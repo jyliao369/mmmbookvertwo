@@ -176,7 +176,7 @@ app.get("/getRecipe/:recipeID", (req, res) => {
 });
 
 // #GETRECIPEBYNAME
-app.get("/getRecipe/:recipeName", (req, res) => {
+app.get("/getRecipeName/:recipeName", (req, res) => {
   const recipeName = req.params.recipeName;
   // console.log(recipeName);
 

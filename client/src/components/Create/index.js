@@ -3,6 +3,8 @@ import Axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import * as dataList from "../data";
+
 const Create = ({ currentUser }) => {
   const [recipeName, setRecipeName] = useState("");
   const [recipeDesc, setrecipeDesc] = useState("");
@@ -38,10 +40,10 @@ const Create = ({ currentUser }) => {
       instructions: instructions,
       addNotes: addNotes,
     }).then((response) => {
-      console.log(response);
-      Axios.get(`http://localhost:3001/getRecipe/${recipeName}`, {}).then(
+      console.log(recipeName);
+      Axios.get(`http://localhost:3001/getRecipeName/${recipeName}`, {}).then(
         (response) => {
-          // console.log(response.data[0].recipeID);
+          // console.log(response);
           navToRecipe(`/recipe/${response.data[0].recipeID}`);
         }
       );
@@ -98,26 +100,52 @@ const Create = ({ currentUser }) => {
                 />
               </div>
               <div className="createNewRecipeInfoAc">
-                <input
+                <select
                   placeholder="Category"
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                />
-                <input
+                >
+                  <option value={""}>Select</option>
+                  {dataList.category.map((category) => (
+                    <option key={category}>{category}</option>
+                  ))}
+                </select>
+                <select
                   placeholder="Course Type"
                   value={course}
                   onChange={(e) => SetCourse(e.target.value)}
-                />
-                <input
+                >
+                  <option value={""}>Select</option>
+                  {dataList.course.map((course) => (
+                    <option key={course} value={course}>
+                      {course}
+                    </option>
+                  ))}
+                </select>
+                <select
                   placeholder="Cuisine Type"
                   value={cuisine}
                   onChange={(e) => setCuisine(e.target.value)}
-                />
-                <input
+                >
+                  <option value={""}>Select</option>
+                  {dataList.cuisine.map((cuisine) => (
+                    <option key={cuisine} value={cuisine}>
+                      {cuisine}
+                    </option>
+                  ))}
+                </select>
+                <select
                   placeholder="Diet Type"
                   value={diet}
                   onChange={(e) => setDiet(e.target.value)}
-                />
+                >
+                  <option value={""}>Select</option>
+                  {dataList.diet.map((diet) => (
+                    <option key={diet} value={diet}>
+                      {diet}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
           </div>
@@ -157,7 +185,23 @@ const Create = ({ currentUser }) => {
       <br />
 
       <div className="createRecipeBtn">
-        <button onClick={() => createRecipe()}>Create</button>
+        {recipeName === "" ||
+        recipeDesc === "" ||
+        prepTime === "" ||
+        cookTime === "" ||
+        yieldNum === "" ||
+        servingsNum === "" ||
+        category === "" ||
+        course === "" ||
+        cuisine === "" ||
+        diet === "" ||
+        ingredients === "" ||
+        instructions === "" ||
+        addNotes === "" ? (
+          <button disabled={true}>Create</button>
+        ) : (
+          <button onClick={() => createRecipe()}>Create</button>
+        )}
       </div>
 
       <br />
