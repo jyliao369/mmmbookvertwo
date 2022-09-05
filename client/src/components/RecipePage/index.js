@@ -21,6 +21,8 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(0);
 
+  const [reviews, setReviews] = useState([]);
+
   const instrSplit = (instr) => {
     setRecipeIns(instr.split("."));
   };
@@ -44,6 +46,12 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
         document.getElementById(`star${a}`).childNodes[0].style.color =
           "lightgray";
       }
+
+      Axios.get(`http://localhost:3001/getReview/${recipeID}`, {}).then(
+        (response) => {
+          setReviews(response.data.reverse());
+        }
+      );
     });
   };
 
@@ -82,6 +90,50 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
     }
   };
 
+  const ratingStar = (rating) => {
+    if (rating === 1) {
+      return (
+        <>
+          <StarPurple500OutlinedIcon />
+        </>
+      );
+    } else if (rating === 2) {
+      return (
+        <>
+          <StarPurple500OutlinedIcon />
+          <StarPurple500OutlinedIcon />
+        </>
+      );
+    } else if (rating === 3) {
+      return (
+        <>
+          <StarPurple500OutlinedIcon />
+          <StarPurple500OutlinedIcon />
+          <StarPurple500OutlinedIcon />
+        </>
+      );
+    } else if (rating === 4) {
+      return (
+        <>
+          <StarPurple500OutlinedIcon />
+          <StarPurple500OutlinedIcon />
+          <StarPurple500OutlinedIcon />
+          <StarPurple500OutlinedIcon />
+        </>
+      );
+    } else if (rating === 5) {
+      return (
+        <>
+          <StarPurple500OutlinedIcon />
+          <StarPurple500OutlinedIcon />
+          <StarPurple500OutlinedIcon />
+          <StarPurple500OutlinedIcon />
+          <StarPurple500OutlinedIcon />
+        </>
+      );
+    }
+  };
+
   useEffect(() => {
     Axios.get(`http://localhost:3001/getRecipe/${recipeID}`, {}).then(
       (response) => {
@@ -95,7 +147,8 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
 
     Axios.get(`http://localhost:3001/getReview/${recipeID}`, {}).then(
       (response) => {
-        console.log(response.data);
+        // console.log(response.data);
+        setReviews(response.data.reverse());
       }
     );
   }, []);
@@ -175,7 +228,6 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
             <div className="profileIcon">
               <div className="profileImg" />
               <p>{currentUser.username}</p>
-              <p>userID: {currentUser.userID}</p>
             </div>
             <div className="reviewForm">
               <textarea
@@ -239,10 +291,27 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
         </div>
       )}
 
-      <div></div>
+      <div className="reviewsSections">
+        {reviews.map((review) => (
+          <div className="userRatingCont">
+            <div className="userRating">
+              <div className="profileIcon">
+                <div className="profileImg" />
+              </div>
+              <div className="userReview">
+                <h3>{review.username} Posted on: (date)</h3>
+                {review.rating === 1 ? <>{ratingStar(1)}</> : <></>}
+                {review.rating === 2 ? <>{ratingStar(2)}</> : <></>}
+                {review.rating === 3 ? <>{ratingStar(3)}</> : <></>}
+                {review.rating === 4 ? <>{ratingStar(4)}</> : <></>}
+                {review.rating === 5 ? <>{ratingStar(5)}</> : <></>}
+                <p>{review.review}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
 
-      <br />
-      <br />
       <br />
       <br />
       <br />

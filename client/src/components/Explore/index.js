@@ -7,10 +7,12 @@ import LibraryAddOutlinedIcon from "@mui/icons-material/LibraryAddOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FeaturedPlayListOutlinedIcon from "@mui/icons-material/FeaturedPlayListOutlined";
+import RestartAltRoundedIcon from "@mui/icons-material/RestartAltRounded";
 
 const Explore = () => {
   const [allRecipes, setAllRecipes] = useState([]);
   const [showRecipes, setShowRecipes] = useState([]);
+  const [searchWord, setSearchWord] = useState("");
 
   const flipSide = (recipeCard) => {
     if (
@@ -37,9 +39,37 @@ const Explore = () => {
     return ingre.split("\n");
   };
 
+  const searchRecipe = () => {
+    let searchedList = [];
+
+    for (let a = 0; a < allRecipes.length; a++) {
+      if (
+        allRecipes[a].name.includes(searchWord) ||
+        allRecipes[a].ingredients.includes(searchWord) ||
+        allRecipes[a].description.includes(searchWord)
+      ) {
+        searchedList.push(allRecipes[a]);
+      }
+    }
+
+    // console.log(searchedList);
+    setShowRecipes(searchedList);
+    setSearchWord("");
+  };
+
+  const openAdvSearch = () => {
+    if (document.getElementById("filteredSection").style.display === "") {
+      document.getElementById("filteredSection").style.display = "flex";
+    } else if (
+      document.getElementById("filteredSection").style.display === "flex"
+    ) {
+      document.getElementById("filteredSection").style.display = "";
+    }
+  };
+
   useEffect(() => {
     Axios.get(`http://localhost:3001/getAllRecipes`, {}).then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       setAllRecipes(response.data);
       setShowRecipes(response.data);
     });
@@ -49,7 +79,35 @@ const Explore = () => {
     <div className="explorePage">
       <div className="pageBanner">
         <p>Explore</p>
+        <div className="searchBar">
+          <input
+            placeholder="Search..."
+            value={searchWord}
+            onChange={(e) => setSearchWord(e.target.value)}
+          />
+          {searchWord === "" ? (
+            <button disabled={true}>Search</button>
+          ) : (
+            <button onClick={() => searchRecipe()}>Search</button>
+          )}
+          <button onClick={() => setShowRecipes(allRecipes)}>
+            {/* <RestartAltRoundedIcon /> */}
+            Reset
+          </button>
+          <button onClick={() => openAdvSearch()}>Filters</button>
+        </div>
       </div>
+
+      <div className="filteredSection" id="filteredSection">
+        <p>filtered section</p>
+        <input placeholder="Category" />
+        <input placeholder="Course" />
+        <input placeholder="Cuisine" />
+        <input placeholder="Diet" />
+        <input placeholder="Ingredients" />
+        <button>Search</button>
+      </div>
+
       <div className="allRecipesCont">
         {showRecipes.map((recipe) => (
           <div key={recipe.recipeID} className="recipeCard">
