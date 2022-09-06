@@ -145,7 +145,7 @@ app.get("/logout", (req, res) => {
 
 // #RECIPES
 // #GETALLRECIPES
-app.get("/getAllRecipes", (req, res) => [
+app.get("/getAllRecipes", (req, res) => {
   db.query(
     "SELECT * FROM heroku_289aeecd4cbfb0f.recipes_table",
     (err, result) => {
@@ -155,8 +155,25 @@ app.get("/getAllRecipes", (req, res) => [
         res.send(result);
       }
     }
-  ),
-]);
+  );
+});
+
+// #GETALLRECIPESBYUSERID
+app.get("/getAllRecipesID/:userID", (req, res) => {
+  const userID = req.params.userID;
+
+  db.query(
+    "SELECT * FROM heroku_289aeecd4cbfb0f.recipes_table WHERE userID = ?",
+    [userID],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
 
 // GETRECIPEBYID
 app.get("/getRecipe/:recipeID", (req, res) => {

@@ -34,12 +34,19 @@ function App() {
   return (
     <Router>
       <div className="appCont">
-        <Navbar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />
+        <Navbar
+          setIsLoggedIn={setIsLoggedIn}
+          isLoggedIn={isLoggedIn}
+          currentUser={currentUser}
+        />
         <div className="mainPage">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/explore" element={<Explore />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route
+              path="/profile/:userID"
+              element={<Profile currentUser={currentUser} />}
+            />
             <Route
               path="/create"
               element={<Create currentUser={currentUser} />}

@@ -2,7 +2,7 @@ import React from "react";
 import Axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
-const Navbar = ({ setIsLoggedIn, isLoggedIn }) => {
+const Navbar = ({ setIsLoggedIn, isLoggedIn, currentUser }) => {
   const navToHome = useNavigate();
 
   const logout = () => {
@@ -28,7 +28,7 @@ const Navbar = ({ setIsLoggedIn, isLoggedIn }) => {
         <></>
       ) : (
         <>
-          <Link to="/profile">
+          <Link to={`/profile/${currentUser.userID}`}>
             <p>Profile</p>
           </Link>
           <p>Favorites</p>
