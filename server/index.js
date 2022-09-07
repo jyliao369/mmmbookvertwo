@@ -287,6 +287,23 @@ app.post("/postReview", (req, res) => {
   );
 });
 
+// #GETALLREVIEWSBASEDONUSERID
+app.get(`/getAllReviewsID/:userID`, (req, res) => {
+  const userID = req.params.userID;
+
+  db.query(
+    `SELECT * FROM heroku_289aeecd4cbfb0f.reviews_table WHERE userID =?`,
+    [userID],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 // #REVIEWBASEDONID
 app.get(`/getReview/:recipeID`, (req, res) => {
   const recipeID = req.params.recipeID;
