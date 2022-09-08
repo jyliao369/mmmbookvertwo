@@ -8,11 +8,22 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import FeaturedPlayListOutlinedIcon from "@mui/icons-material/FeaturedPlayListOutlined";
 import StarPurple500OutlinedIcon from "@mui/icons-material/StarPurple500Outlined";
 
+import * as dataList from "../data";
+
 const Profile = ({ currentUser }) => {
   let { userID } = useParams();
 
   const [userRecipes, setUserRecipes] = useState([]);
   const [userReviews, setUserReviews] = useState([]);
+
+  const [updateUser, setUpdateUser] = useState("");
+  const [updateDesc, setUpdateDesc] = useState("");
+  const [updateFirst, setUpdateFirst] = useState("");
+  const [updateLast, setUpdateLast] = useState("");
+  const [updateFavRec, setUpdateFavRec] = useState("");
+  const [updateFavBev, setUpdateFavBev] = useState("");
+  const [updateFavDes, setUpdateFavDes] = useState("");
+  const [updateFavCui, setUpdateFavCui] = useState("");
 
   const myRecipes = () => {
     console.log("getting my recipes");
@@ -107,6 +118,23 @@ const Profile = ({ currentUser }) => {
     }
   };
 
+  const settingsFlip = () => {
+    if (
+      document.getElementById("chefProfileInfoA").style.display === "flex" ||
+      document.getElementById("chefProfileInfoA").style.display === ""
+    ) {
+      document.getElementById("chefProfileInfoA").style.display = "none";
+      document.getElementById("chefProfileSettings").style.display = "flex";
+    } else {
+      document.getElementById("chefProfileInfoA").style.display = "flex";
+      document.getElementById("chefProfileSettings").style.display = "none";
+    }
+  };
+
+  const updateProfile = () => {
+    console.log(userID);
+  };
+
   useEffect(() => {
     Axios.get(`http://localhost:3001/getAllRecipesID/${userID}`).then(
       (response) => {
@@ -117,8 +145,8 @@ const Profile = ({ currentUser }) => {
     );
     Axios.get(`http://localhost:3001/getAllReviewsID/${userID}`).then(
       (response) => {
-        console.log("there");
-        console.log(response.data);
+        // console.log("there");
+        // console.log(response.data);
         setUserReviews(response.data);
       }
     );
@@ -129,10 +157,69 @@ const Profile = ({ currentUser }) => {
       <div className="chefProfileCard">
         <div className="chefProfileIcon"></div>
         <div className="chefProfileInfo">
-          <p>{currentUser.username}</p>
-          <p>{currentUser.firstName}</p>
-          <p>{currentUser.lastName}</p>
-          <p>{currentUser.email}</p>
+          <div className="chefProfileInfoA" id="chefProfileInfoA">
+            <h3>{currentUser.username}</h3>
+            <h3>
+              (Short Comment or Description) Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+              labore et dolore magna aliqua.
+            </h3>
+            <h3>Rating:</h3>
+            <h3>{currentUser.firstName}</h3>
+            <h3>{currentUser.lastName}</h3>
+            <h3>{currentUser.email}</h3>
+            <h3>Number of Recipes: </h3>
+            <h3>Favorite Recipe: </h3>
+            <h3>Favorite Beverage: </h3>
+            <h3>Favorite Cuisine: </h3>
+          </div>
+          <div className="chefProfileSettings" id="chefProfileSettings">
+            <input placeholder="Username" />
+            <textarea placeholder="Describe yourself" rows={3} />
+            <div className="chefProfileUpdate">
+              <div className="chefProfileUpdateA">
+                <input placeholder="First Name" />
+                <input placeholder="Last Name" />
+              </div>
+              <div className="chefProfileUpdateA">
+                <input placeholder="New Password" />
+                <input placeholder="Re-Type Password" />
+              </div>
+            </div>
+            <select>
+              <option value="" disabled={true} selected>
+                Favorite Recipe
+              </option>
+              {userRecipes.map((recipe) => (
+                <option>{recipe.name}</option>
+              ))}
+            </select>
+            <select>
+              <option value="" disabled={true} selected>
+                Favorite Beverage
+              </option>
+            </select>
+            <select>
+              <option value="" disabled={true} selected>
+                Favorite Dessert
+              </option>
+            </select>
+            <select>
+              <option value="" disabled={true} selected>
+                Favorite Cuisine
+              </option>
+              {dataList.cuisine.map((cuisine) => (
+                <option>{cuisine}</option>
+              ))}
+            </select>
+            <div className="chefProfileSub">
+              <button onClick={() => updateProfile()}>Update</button>
+            </div>
+          </div>
+          <div className="chefProfileBtn">
+            <button onClick={() => settingsFlip()}>settings</button>
+            <button>likes</button>
+          </div>
         </div>
       </div>
       <div className="chefProfileNavBar">
