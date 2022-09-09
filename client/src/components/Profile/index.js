@@ -7,11 +7,15 @@ import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutline
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FeaturedPlayListOutlinedIcon from "@mui/icons-material/FeaturedPlayListOutlined";
 import StarPurple500OutlinedIcon from "@mui/icons-material/StarPurple500Outlined";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
 
 import * as dataList from "../data";
 
 const Profile = ({ currentUser }) => {
   let { userID } = useParams();
+
+  const [profileUser, setProfileUser] = useState([]);
 
   const [userRecipes, setUserRecipes] = useState([]);
   const [userReviews, setUserReviews] = useState([]);
@@ -20,6 +24,9 @@ const Profile = ({ currentUser }) => {
   const [updateDesc, setUpdateDesc] = useState("");
   const [updateFirst, setUpdateFirst] = useState("");
   const [updateLast, setUpdateLast] = useState("");
+  const [updateEmail, setUpdateEmail] = useState("");
+  const [updatePass, setUpdatePass] = useState("");
+  const [updateRePass, setUpdateRePass] = useState("");
   const [updateFavRec, setUpdateFavRec] = useState("");
   const [updateFavBev, setUpdateFavBev] = useState("");
   const [updateFavDes, setUpdateFavDes] = useState("");
@@ -132,22 +139,51 @@ const Profile = ({ currentUser }) => {
   };
 
   const updateProfile = () => {
-    console.log(userID);
+    Axios.put(`http://localhost:3001/updateUser/${userID}`, {
+      firstName: updateFirst,
+      lastName: updateLast,
+      username: updateUser,
+      email: updateEmail,
+      favRecipe: updateFavRec,
+      favBeverage: updateFavBev,
+      favDessert: updateFavDes,
+      favCuisine: updateFavCui,
+      chefDesc: updateDesc,
+    }).then((response) => {
+      console.log(response);
+    });
   };
 
   useEffect(() => {
+    Axios.get(`http://localhost:3001/getUser/${userID}`, {}).then(
+      (response) => {
+        // console.log(response.data[0]);
+        setProfileUser(response.data[0]);
+
+        setUpdateUser(response.data[0].username);
+        setUpdateDesc(response.data[0].chefDesc);
+        setUpdateFirst(response.data[0].firstName);
+        setUpdateLast(response.data[0].lastName);
+        setUpdateEmail(response.data[0].email);
+        setUpdateFavRec(response.data[0].favRecipe);
+        setUpdateFavBev(response.data[0].favBeverage);
+        setUpdateFavDes(response.data[0].favDessert);
+        setUpdateFavCui(response.data[0].favCuisine);
+      }
+    );
+
     Axios.get(`http://localhost:3001/getAllRecipesID/${userID}`).then(
       (response) => {
         // console.log("hello");
         // console.log(response.data);
-        setUserRecipes(response.data);
+        setUserRecipes(response.data.reverse());
       }
     );
     Axios.get(`http://localhost:3001/getAllReviewsID/${userID}`).then(
       (response) => {
         // console.log("there");
         // console.log(response.data);
-        setUserReviews(response.data);
+        setUserReviews(response.data.reverse());
       }
     );
   }, []);
@@ -158,67 +194,145 @@ const Profile = ({ currentUser }) => {
         <div className="chefProfileIcon"></div>
         <div className="chefProfileInfo">
           <div className="chefProfileInfoA" id="chefProfileInfoA">
-            <h3>{currentUser.username}</h3>
-            <h3>
-              (Short Comment or Description) Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua.
-            </h3>
-            <h3>Rating:</h3>
-            <h3>{currentUser.firstName}</h3>
-            <h3>{currentUser.lastName}</h3>
-            <h3>{currentUser.email}</h3>
-            <h3>Number of Recipes: </h3>
-            <h3>Favorite Recipe: </h3>
-            <h3>Favorite Beverage: </h3>
-            <h3>Favorite Cuisine: </h3>
-          </div>
-          <div className="chefProfileSettings" id="chefProfileSettings">
-            <input placeholder="Username" />
-            <textarea placeholder="Describe yourself" rows={3} />
-            <div className="chefProfileUpdate">
-              <div className="chefProfileUpdateA">
-                <input placeholder="First Name" />
-                <input placeholder="Last Name" />
+            <div className="chefProfileInfoAb">
+              <div className="chefProfileInfoAc">
+                <h3>{profileUser.username}</h3>
+                <h3>
+                  {profileUser.firstName} {profileUser.lastName}
+                </h3>
               </div>
-              <div className="chefProfileUpdateA">
-                <input placeholder="New Password" />
-                <input placeholder="Re-Type Password" />
+              <div className="chefProfileInfoAc">
+                <h3>Rating</h3>
               </div>
             </div>
-            <select>
-              <option value="" disabled={true} selected>
-                Favorite Recipe
-              </option>
-              {userRecipes.map((recipe) => (
-                <option>{recipe.name}</option>
-              ))}
-            </select>
-            <select>
-              <option value="" disabled={true} selected>
-                Favorite Beverage
-              </option>
-            </select>
-            <select>
-              <option value="" disabled={true} selected>
-                Favorite Dessert
-              </option>
-            </select>
-            <select>
-              <option value="" disabled={true} selected>
-                Favorite Cuisine
-              </option>
-              {dataList.cuisine.map((cuisine) => (
-                <option>{cuisine}</option>
-              ))}
-            </select>
+
+            <h3>{profileUser.chefDesc}</h3>
+            <h3>{profileUser.email}</h3>
+            <h3>Number of Recipes: {userRecipes.length}</h3>
+            <h3>Favorite Recipe: {profileUser.favRecipe}</h3>
+            <h3>Favorite Beverage: {profileUser.favBeverage}</h3>
+            <h3>Favorite Cuisine: {profileUser.favCuisine}</h3>
+          </div>
+          <div className="chefProfileSettings" id="chefProfileSettings">
+            <input
+              placeholder="Username"
+              value={updateUser}
+              onChange={(e) => setUpdateUser(e.target.value)}
+            />
+            <textarea
+              placeholder="Describe yourself"
+              rows={3}
+              value={updateDesc}
+              onChange={(e) => setUpdateDesc(e.target.value)}
+            />
+            <input
+              placeholder="Email"
+              value={updateEmail}
+              onChange={(e) => setUpdateEmail(e.target.value)}
+            />
+            <div className="chefProfileUpdate">
+              <div className="chefProfileUpdateA">
+                <input
+                  placeholder="First Name"
+                  value={updateFirst}
+                  onChange={(e) => setUpdateFirst(e.target.value)}
+                />
+                <input
+                  placeholder="Last Name"
+                  value={updateLast}
+                  onChange={(e) => setUpdateLast(e.target.value)}
+                />
+              </div>
+              <div className="chefProfileUpdateA">
+                <input
+                  placeholder="New Password"
+                  value={updatePass}
+                  onChange={(e) => setUpdatePass(e.target.value)}
+                />
+                <input
+                  placeholder="Re-Type Password"
+                  value={updateRePass}
+                  onChange={(e) => setUpdateRePass(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="chefProfileUpdate">
+              <div className="chefProfileUpdateA">
+                <select
+                  value={updateFavRec}
+                  onChange={(e) => setUpdateFavRec(e.target.value)}
+                >
+                  <option value="" disabled={true} selected>
+                    Favorite Recipe
+                  </option>
+                  {userRecipes.map((recipe) => (
+                    <option>{recipe.name}</option>
+                  ))}
+                </select>
+                <select
+                  value={updateFavBev}
+                  onChange={(e) => setUpdateFavBev(e.target.value)}
+                >
+                  <option value="" disabled={true} selected>
+                    Favorite Beverage
+                  </option>
+                  {userRecipes.map((recipe) =>
+                    recipe.category === "Drinks" ||
+                    recipe.category === "Beverage" ? (
+                      <option>{recipe.name}</option>
+                    ) : (
+                      <></>
+                    )
+                  )}
+                </select>
+              </div>
+              <div className="chefProfileUpdateA">
+                <select
+                  value={updateFavDes}
+                  onChange={(e) => setUpdateFavDes(e.target.value)}
+                >
+                  <option value="" disabled={true} selected>
+                    Favorite Dessert
+                  </option>
+                  {userRecipes.map((recipe) =>
+                    recipe.category === "Dessert" ? (
+                      <option>{recipe.name}</option>
+                    ) : (
+                      <></>
+                    )
+                  )}
+                </select>
+                <select
+                  value={updateFavCui}
+                  onChange={(e) => setUpdateFavCui(e.target.value)}
+                >
+                  <option value="" disabled={true} selected>
+                    Favorite Cuisine
+                  </option>
+                  {dataList.cuisine.map((cuisine) => (
+                    <option>{cuisine}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
             <div className="chefProfileSub">
               <button onClick={() => updateProfile()}>Update</button>
             </div>
           </div>
           <div className="chefProfileBtn">
-            <button onClick={() => settingsFlip()}>settings</button>
-            <button>likes</button>
+            {currentUser.userID === userID ? (
+              <></>
+            ) : (
+              <button onClick={() => settingsFlip()}>
+                <EditOutlinedIcon />
+              </button>
+            )}
+            <button>
+              <FavoriteBorderOutlinedIcon />
+            </button>
+            <button>
+              <GroupAddOutlinedIcon />
+            </button>
           </div>
         </div>
       </div>
@@ -238,6 +352,7 @@ const Profile = ({ currentUser }) => {
         </div>
       </div>
 
+      {/* ALL USER RECIPES */}
       <div className="userRecipes" id="userRecipes">
         {userRecipes.map((recipe) => (
           <div key={recipe.recipeID} className="recipeCard">
@@ -307,12 +422,6 @@ const Profile = ({ currentUser }) => {
                 <button>
                   <ChatBubbleOutlineOutlinedIcon />
                 </button>
-                {/* <button>
-                    <StarOutlineOutlinedIcon />
-                  </button>
-                  <button>
-                    <LibraryAddOutlinedIcon />
-                  </button> */}
               </div>
             </div>
             {/* </Link> */}
@@ -320,26 +429,37 @@ const Profile = ({ currentUser }) => {
         ))}
       </div>
 
+      {/* ALL USER REVIEWS */}
       <div className="userReviews" id="userReviews">
-        {userReviews.map((review) => (
-          <div className="userRatingCont">
-            <div className="userRating">
-              <div className="profileIcon">
-                <div className="profileImg" />
+        {userReviews.length > 0 ? (
+          <>
+            {userReviews.map((review) => (
+              <div className="userRatingCont">
+                <div className="userRating">
+                  <div className="profileIcon">
+                    <div className="profileImg" />
+                  </div>
+                  <div className="userReview">
+                    <h3>{review.username} Posted on: (date)</h3>
+                    {review.rating === 1 ? <>{ratingStar(1)}</> : <></>}
+                    {review.rating === 2 ? <>{ratingStar(2)}</> : <></>}
+                    {review.rating === 3 ? <>{ratingStar(3)}</> : <></>}
+                    {review.rating === 4 ? <>{ratingStar(4)}</> : <></>}
+                    {review.rating === 5 ? <>{ratingStar(5)}</> : <></>}
+                    <p>{review.review}</p>
+                  </div>
+                </div>
               </div>
-              <div className="userReview">
-                <h3>{review.username} Posted on: (date)</h3>
-                {review.rating === 1 ? <>{ratingStar(1)}</> : <></>}
-                {review.rating === 2 ? <>{ratingStar(2)}</> : <></>}
-                {review.rating === 3 ? <>{ratingStar(3)}</> : <></>}
-                {review.rating === 4 ? <>{ratingStar(4)}</> : <></>}
-                {review.rating === 5 ? <>{ratingStar(5)}</> : <></>}
-                <p>{review.review}</p>
-              </div>
-            </div>
+            ))}
+          </>
+        ) : (
+          <div className="notification">
+            <h2>
+              You have no reviews!! Check out some recipes and share you
+              thoughts!!
+            </h2>
           </div>
-          // <div key={review.reviewID}>{review.review}</div>
-        ))}
+        )}
       </div>
     </div>
   );

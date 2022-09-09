@@ -308,6 +308,16 @@ a {
 #chefProfileInfoA {
   display: flex;
 }
+.chefProfileInfoAb {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.chefProfileInfoAc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .chefProfileSettings {
   display: flex;
   flex-direction: column;
@@ -334,19 +344,12 @@ a {
 .chefProfileSub {
   display: flex;
 }
-.chefProfileNavBar {
+.chefProfileBtn {
   display: flex;
-  padding: 2% 0% 2% 0%;
-  border-top: solid;
-  border-bottom: solid;
-  border-width: thin;
-  border-color: lightgray;
-  justify-content: space-evenly;
+  flex-direction: row;
 }
-.userRecipes {
+.chefProfileBtn button {
   display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 /* -------------------------------------------------------------------------------- */
 /* #PAGEBANNER */
@@ -613,6 +616,20 @@ a {
   display: flex;
   flex-direction: column;
 }
+.chefProfileNavBar {
+  display: flex;
+  padding: 2% 0% 2% 0%;
+  border-top: solid;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
+  justify-content: space-evenly;
+}
+.userRecipes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 #userRecipes {
   display: flex;
 }
@@ -623,4 +640,11 @@ a {
 }
 #userReviews {
   display: none;
+}
+.notification {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 15px 0px 15px 0px;
 }

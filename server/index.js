@@ -54,19 +54,6 @@ const db = mysql.createPool({
 });
 
 // #ALLROUTES
-app.get("/getAllUsers", (req, res) => {
-  db.query(
-    "SELECT * FROM heroku_289aeecd4cbfb0f.users_table",
-    (err, result) => {
-      if (err) {
-        res.json(err);
-      } else {
-        res.json(result);
-      }
-    }
-  );
-});
-
 // #ACCOUNT
 // #REGISTER
 app.post("/register", (req, res) => {
@@ -141,6 +128,89 @@ app.get("/logout", (req, res) => {
       res.send("Logged Out");
     }
   });
+});
+
+// #USERS
+// #GETALLUSERS
+app.get("/getAllUsers", (req, res) => {
+  db.query(
+    "SELECT * FROM heroku_289aeecd4cbfb0f.users_table",
+    (err, result) => {
+      if (err) {
+        res.json(err);
+      } else {
+        res.json(result);
+      }
+    }
+  );
+});
+
+// #GETUSERSBYID
+app.get("/getUser/:userID", (req, res) => {
+  const userID = req.params.userID;
+
+  db.query(
+    `SELECT * FROM heroku_289aeecd4cbfb0f.users_table WHERE userID = ?`,
+    [userID],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+// #UPDATEUSER
+app.put(`/updateUser/:userID`, (req, res) => {
+  const userID = req.params.userID;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const username = req.body.username;
+  const email = req.body.email;
+  const favRecipe = req.body.favRecipe;
+  const favBeverage = req.body.favBeverage;
+  const favDessert = req.body.favDessert;
+  const favCuisine = req.body.favCuisine;
+  const chefDesc = req.body.chefDesc;
+
+  console.log(
+    userID +
+      " " +
+      firstName +
+      " " +
+      lastName +
+      " " +
+      username +
+      " " +
+      email +
+      " " +
+      favRecipe +
+      " " +
+      favBeverage +
+      " " +
+      favDessert +
+      " " +
+      favCuisine +
+      " " +
+      chefDesc
+  );
+
+  db.query(
+    `UPDATE heroku_289aeecd4cbfb0f.users_table SET 
+    firstName = "${firstName}", lastName = "${lastName}", username = "${username}", 
+    email = "${email}", favRecipe = "${favRecipe}", favBeverage = "${favBeverage}", 
+    favDessert = "${favDessert}", favCuisine = "${favCuisine}", chefDesc = "${chefDesc}" 
+    WHERE userID = ${userID}`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
 });
 
 // #RECIPES
