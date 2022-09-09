@@ -67,6 +67,7 @@ const Home = () => {
                       <div className="recipeInfoA">
                         <h2>{recipe.name}</h2>
                         <p>Description: {recipe.description.slice(0, 180)}</p>
+                        <p>{recipe.username}</p>
                       </div>
                       <div className="recipeInfoB">
                         <div className="recipeInfoBA">

@@ -648,3 +648,32 @@ a {
   width: 100%;
   margin: 15px 0px 15px 0px;
 }
+.usersFollowers {
+  display: flex;
+}
+#usersFollowers {
+  display: none;
+}
+.usersFollowing {
+  display: flex;
+  flex-direction: row;
+}
+#usersFollowing {
+  display: none;
+}
+.followingProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2%;
+}
+.followingIcon {
+  display: flex;
+  flex-direction: column;
+}
+.followingImg {
+  width: 125px;
+  height: 125px;
+  border-radius: 67px;
+  background: lightgray;
+}

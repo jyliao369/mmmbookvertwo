@@ -1,7 +1,7 @@
 import React from "react";
 import Axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
@@ -20,6 +20,10 @@ const UserProfile = ({ currentUser }) => {
   const [userRecipes, setUserRecipes] = useState([]);
   const [userReviews, setUserReviews] = useState([]);
 
+  const [chefsFollowing, setChefsFollowing] = useState([]);
+
+  const [chefFollowers, setChefFollowers] = useState([]);
+
   const [updateUser, setUpdateUser] = useState("");
   const [updateDesc, setUpdateDesc] = useState("");
   const [updateFirst, setUpdateFirst] = useState("");
@@ -33,25 +37,39 @@ const UserProfile = ({ currentUser }) => {
   const [updateFavCui, setUpdateFavCui] = useState("");
 
   const myRecipes = () => {
-    console.log("getting my recipes");
+    // console.log("getting my recipes");
 
     document.getElementById("userRecipes").style.display = "flex";
     document.getElementById("userReviews").style.display = "none";
+    document.getElementById("usersFollowers").style.display = "none";
+    document.getElementById("usersFollowing").style.display = "none";
   };
 
   const myReviews = () => {
-    console.log("getting my reviews");
+    // console.log("getting my reviews");
 
     document.getElementById("userRecipes").style.display = "none";
     document.getElementById("userReviews").style.display = "flex";
+    document.getElementById("usersFollowers").style.display = "none";
+    document.getElementById("usersFollowing").style.display = "none";
   };
 
   const myFollowers = () => {
-    console.log("getting my followers");
+    // console.log("getting my followers");
+
+    document.getElementById("userRecipes").style.display = "none";
+    document.getElementById("userReviews").style.display = "none";
+    document.getElementById("usersFollowers").style.display = "flex";
+    document.getElementById("usersFollowing").style.display = "none";
   };
 
   const imFollowing = () => {
-    console.log("who am i following");
+    // console.log("who am i following");
+
+    document.getElementById("userRecipes").style.display = "none";
+    document.getElementById("userReviews").style.display = "none";
+    document.getElementById("usersFollowers").style.display = "none";
+    document.getElementById("usersFollowing").style.display = "flex";
   };
 
   const flipSide = (event, recipeCard) => {
@@ -174,16 +192,26 @@ const UserProfile = ({ currentUser }) => {
 
     Axios.get(`http://localhost:3001/getAllRecipesID/${userID}`).then(
       (response) => {
-        // console.log("hello");
         // console.log(response.data);
         setUserRecipes(response.data.reverse());
       }
     );
     Axios.get(`http://localhost:3001/getAllReviewsID/${userID}`).then(
       (response) => {
-        // console.log("there");
         // console.log(response.data);
         setUserReviews(response.data.reverse());
+      }
+    );
+    Axios.get(`http://localhost:3001/allFollowing/${userID}`).then(
+      (response) => {
+        // console.log(response.data);
+        setChefsFollowing(response.data.reverse());
+      }
+    );
+    Axios.get(`http://localhost:3001/allFollowers/${userID}`).then(
+      (response) => {
+        // console.log(response);
+        setChefFollowers(response.data.reverse());
       }
     );
   }, []);
@@ -351,79 +379,95 @@ const UserProfile = ({ currentUser }) => {
 
       {/* ALL USER RECIPES */}
       <div className="userRecipes" id="userRecipes">
-        {userRecipes.map((recipe) => (
-          <div key={recipe.recipeID} className="recipeCard">
-            {/* <Link key={recipe.recipeID} to={`/recipe/${recipe.recipeID}`}> */}
-            <div className="recipeCardIn">
-              <div className="recipeCardA" id={`recipeCard${recipe.recipeID}a`}>
-                <div className="recipeCardAB">
-                  <div className="recipeImage"></div>
-                  <div className="recipeInfo">
-                    <div className="recipeInfoA">
-                      <h2>{recipe.name}</h2>
-                      <p>Description: {recipe.description.slice(0, 180)}</p>
-                    </div>
-                    <div className="recipeInfoB">
-                      <div className="recipeInfoBA">
-                        <p>Prep Time: {recipe.prepTime} min</p>
-                        <p>Cook Time: {recipe.cookTime} min</p>
-                        <p>Total Time: {recipe.totalTime} min</p>
-                        <p>Yield: {recipe.yield}</p>
-                        <p>Servings: {recipe.servings}</p>
+        {userRecipes.length > 0 ? (
+          <>
+            {userRecipes.map((recipe) => (
+              <div key={recipe.recipeID} className="recipeCard">
+                {/* <Link key={recipe.recipeID} to={`/recipe/${recipe.recipeID}`}> */}
+                <div className="recipeCardIn">
+                  <div
+                    className="recipeCardA"
+                    id={`recipeCard${recipe.recipeID}a`}
+                  >
+                    <div className="recipeCardAB">
+                      <div className="recipeImage"></div>
+                      <div className="recipeInfo">
+                        <div className="recipeInfoA">
+                          <h2>{recipe.name}</h2>
+                          <p>Description: {recipe.description.slice(0, 180)}</p>
+                        </div>
+                        <div className="recipeInfoB">
+                          <div className="recipeInfoBA">
+                            <p>Prep Time: {recipe.prepTime} min</p>
+                            <p>Cook Time: {recipe.cookTime} min</p>
+                            <p>Total Time: {recipe.totalTime} min</p>
+                            <p>Yield: {recipe.yield}</p>
+                            <p>Servings: {recipe.servings}</p>
+                          </div>
+                          <div className="recipeInfoBA">
+                            <p>Category: {recipe.category}</p>
+                            <p>Course: {recipe.course}</p>
+                            <p>Cuisine: {recipe.cuisine}</p>
+                            <p>Diet: {recipe.diet}</p>
+                          </div>
+                        </div>
                       </div>
-                      <div className="recipeInfoBA">
-                        <p>Category: {recipe.category}</p>
-                        <p>Course: {recipe.course}</p>
-                        <p>Cuisine: {recipe.cuisine}</p>
-                        <p>Diet: {recipe.diet}</p>
+                    </div>
+                  </div>
+                  <div
+                    className="recipeCardB"
+                    id={`recipeCard${recipe.recipeID}b`}
+                  >
+                    <div className="recipeCardBA">
+                      <div className="recipeCardIng">
+                        <h3>Ingredients</h3>
+                        <div>
+                          {ingrSplit(recipe.ingredients).map((ingredient) => (
+                            <p key={ingredient.slice(5, 100)}>{ingredient}</p>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="recipeCardIns">
+                        <h3>Instructions</h3>
+                        <div>
+                          {instrSplit(recipe.instructions).map(
+                            (instruction) => (
+                              <p>{instruction}</p>
+                            )
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div className="recipeCardB" id={`recipeCard${recipe.recipeID}b`}>
-                <div className="recipeCardBA">
-                  <div className="recipeCardIng">
-                    <h3>Ingredients</h3>
-                    <div>
-                      {ingrSplit(recipe.ingredients).map((ingredient) => (
-                        <p key={ingredient.slice(5, 100)}>{ingredient}</p>
-                      ))}
+                    <div className="recipeCardAdd">
+                      <h3>Additional Notes:</h3>
+                      <p>{recipe.addNotes}</p>
                     </div>
                   </div>
-                  <div className="recipeCardIns">
-                    <h3>Instructions</h3>
-                    <div>
-                      {instrSplit(recipe.instructions).map((instruction) => (
-                        <p>{instruction}</p>
-                      ))}
-                    </div>
+                  <div className="recipeCardC">
+                    <button
+                      onClick={(event) =>
+                        flipSide(event, `recipeCard${recipe.recipeID}`)
+                      }
+                    >
+                      <FeaturedPlayListOutlinedIcon />
+                    </button>
+                    <button>
+                      <FavoriteBorderOutlinedIcon />
+                    </button>
+                    <button>
+                      <ChatBubbleOutlineOutlinedIcon />
+                    </button>
                   </div>
                 </div>
-                <div className="recipeCardAdd">
-                  <h3>Additional Notes:</h3>
-                  <p>{recipe.addNotes}</p>
-                </div>
+                {/* </Link> */}
               </div>
-              <div className="recipeCardC">
-                <button
-                  onClick={(event) =>
-                    flipSide(event, `recipeCard${recipe.recipeID}`)
-                  }
-                >
-                  <FeaturedPlayListOutlinedIcon />
-                </button>
-                <button>
-                  <FavoriteBorderOutlinedIcon />
-                </button>
-                <button>
-                  <ChatBubbleOutlineOutlinedIcon />
-                </button>
-              </div>
-            </div>
-            {/* </Link> */}
+            ))}
+          </>
+        ) : (
+          <div className="notification">
+            <h2>You have no Recipes. Add and share some of your recipes!!</h2>
           </div>
-        ))}
+        )}
       </div>
 
       {/* ALL USER REVIEWS */}
@@ -455,6 +499,50 @@ const UserProfile = ({ currentUser }) => {
               You have no reviews!! Check out some recipes and share you
               thoughts!!
             </h2>
+          </div>
+        )}
+      </div>
+
+      {/* ALL FOLLOWERS */}
+      <div className="usersFollowers" id="usersFollowers">
+        {chefFollowers.length > 0 ? (
+          <>
+            {chefFollowers.map((chef) => (
+              <div className="followingProfile">
+                <div className="followingIcon">
+                  <div className="followingImg" />
+                </div>
+                <Link to={`/profile/${chef.chefUserID}`}>
+                  <h3>{chef.username}</h3>
+                </Link>
+              </div>
+            ))}
+          </>
+        ) : (
+          <div className="notification">
+            <h2>You don't have any followers!!</h2>
+          </div>
+        )}
+      </div>
+
+      {/* ALL CHEFS USER IS FOLLOWING */}
+      <div className="usersFollowing" id="usersFollowing">
+        {chefsFollowing.length > 0 ? (
+          <>
+            {chefsFollowing.map((chef) => (
+              <div className="followingProfile">
+                <div className="followingIcon">
+                  <div className="followingImg" />
+                </div>
+                <Link to={`/profile/${chef.chefUserID}`}>
+                  <h3>{chef.chefUsername}</h3>
+                </Link>
+              </div>
+            ))}
+          </>
+        ) : (
+          <div className="notification">
+            <h2>You are not following anybody !!</h2>
           </div>
         )}
       </div>

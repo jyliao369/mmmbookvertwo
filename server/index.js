@@ -391,6 +391,88 @@ app.get(`/getReview/:recipeID`, (req, res) => {
   );
 });
 
+// #FOLLOWER
+// #FOLLOWINGandUNFOLLOWING
+app.post("/followingUser/:chefUserID", (req, res) => {
+  const chefUserID = req.params.chefUserID;
+  const userID = req.body.userID;
+  const chefUsername = req.body.chefUsername;
+
+  db.query(
+    `SELECT * FROM heroku_289aeecd4cbfb0f.followchef_table WHERE chefUserID = ? AND userID = ? `,
+    [chefUserID, userID],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        // console.log(result.length);
+      }
+
+      if (result.length <= 0) {
+        db.query(
+          `INSERT INTO heroku_289aeecd4cbfb0f.followchef_table
+          (userID, chefUserID, chefUsername)
+          VALUES (?,?,?)`,
+          [userID, chefUserID, chefUsername],
+          (err, result) => {
+            if (err) {
+              console.log(err);
+            } else {
+              res.send(result);
+            }
+          }
+        );
+      } else if (result.length > 0) {
+        db.query(
+          `DELETE FROM heroku_289aeecd4cbfb0f.followchef_table WHERE chefUserID = ? AND userID = ?`,
+          [chefUserID, userID],
+          (err, result) => {
+            if (err) {
+              console.log(err);
+            } else {
+              res.send(result);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
+// #FINDALLUSERISFOLLOWING
+app.get("/allFollowing/:userID", (req, res) => {
+  const userID = req.params.userID;
+
+  db.query(
+    `SELECT * FROM heroku_289aeecd4cbfb0f.followchef_table WHERE userID = ?`,
+    [userID],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+// #FINDFOLLOWERSOFUSER
+app.get("/allFollowers/:userID", (req, res) => {
+  const userID = req.params.userID;
+  // console.log(userID);
+  db.query(
+    `SELECT * FROM heroku_289aeecd4cbfb0f.followchef_table WHERE chefUserID = ?`,
+    [userID],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 // CHECKS FOR CONNECTION TO SERVER
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
