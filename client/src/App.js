@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Explore from "./components/Explore";
+import UserProfile from "./components/UserProfile";
 import NewRecipes from "./components/NewRecipes";
 import Profile from "./components/Profile";
 import Create from "./components/Create";
@@ -43,6 +44,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/explore" element={<Explore />} />
+            <Route
+              path="/userProfile/:userID"
+              element={<UserProfile currentUser={currentUser} />}
+            />
             <Route
               path="/profile/:userID"
               element={<Profile currentUser={currentUser} />}

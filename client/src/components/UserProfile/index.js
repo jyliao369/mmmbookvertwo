@@ -12,7 +12,7 @@ import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
 
 import * as dataList from "../data";
 
-const Profile = ({ currentUser }) => {
+const UserProfile = ({ currentUser }) => {
   let { userID } = useParams();
 
   const [profileUser, setProfileUser] = useState([]);
@@ -461,4 +461,4 @@ const Profile = ({ currentUser }) => {
   );
 };
 
-export default Profile;
+export default UserProfile;

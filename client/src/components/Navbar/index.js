@@ -28,8 +28,8 @@ const Navbar = ({ setIsLoggedIn, isLoggedIn, currentUser }) => {
         <></>
       ) : (
         <>
-          <Link to={`/profile/${currentUser.userID}`}>
-            <p>Profile</p>
+          <Link to={`/userProfile/${currentUser.userID}`}>
+            <p>My Profile</p>
           </Link>
           <p>Favorites</p>
           <Link to="/create">

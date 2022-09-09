@@ -1,6 +1,7 @@
 import React from "react";
 import Axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
 import LibraryAddOutlinedIcon from "@mui/icons-material/LibraryAddOutlined";
@@ -8,6 +9,7 @@ import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutline
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FeaturedPlayListOutlinedIcon from "@mui/icons-material/FeaturedPlayListOutlined";
 import RestartAltRoundedIcon from "@mui/icons-material/RestartAltRounded";
+import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 
 const Explore = () => {
   const [allRecipes, setAllRecipes] = useState([]);
@@ -176,6 +178,11 @@ const Explore = () => {
               </button>
               <button>
                 <LibraryAddOutlinedIcon />
+              </button>
+              <button>
+                <Link to={`/profile/${recipe.userID}`}>
+                  <AccountBoxOutlinedIcon />
+                </Link>
               </button>
             </div>
           </div>
