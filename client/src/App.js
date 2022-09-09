@@ -68,6 +68,7 @@ function App() {
                 <Register
                   setIsLoggedIn={setIsLoggedIn}
                   isLoggedIn={isLoggedIn}
+                  setCurrentUser={setCurrentUser}
                 />
               }
             />

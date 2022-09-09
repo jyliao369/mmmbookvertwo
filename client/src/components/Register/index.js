@@ -1,15 +1,17 @@
 import React from "react";
 import Axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Register = ({ setIsLoggedIn, isLoggedIn }) => {
+const Register = ({ setIsLoggedIn, isLoggedIn, setCurrentUser }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
+
+  const navToHome = useNavigate();
 
   const register = () => {
     Axios.post("https://mmmbook-vertwo-server.herokuapp.com/register", {
@@ -19,7 +21,15 @@ const Register = ({ setIsLoggedIn, isLoggedIn }) => {
       email: email,
       password: password,
     }).then((response) => {
-      console.log(response);
+      Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/login`, {
+        loginEmail: email,
+        loginPass: password,
+      }).then((response) => {
+        // console.log(response);
+        setIsLoggedIn(true);
+        setCurrentUser(response.data[0]);
+        navToHome("/");
+      });
     });
   };
 

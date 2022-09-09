@@ -211,6 +211,7 @@ const UserProfile = ({ currentUser }) => {
             <h3>Number of Recipes: {userRecipes.length}</h3>
             <h3>Favorite Recipe: {profileUser.favRecipe}</h3>
             <h3>Favorite Beverage: {profileUser.favBeverage}</h3>
+            <h3>Favorite Dessert: {profileUser.favDessert}</h3>
             <h3>Favorite Cuisine: {profileUser.favCuisine}</h3>
           </div>
           <div className="chefProfileSettings" id="chefProfileSettings">
