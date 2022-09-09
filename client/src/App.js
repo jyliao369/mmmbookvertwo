@@ -26,6 +26,8 @@ function App() {
         if (response.data.loggedIn === true) {
           // console.log(response.data);
           setIsLoggedIn(response.data.loggedIn);
+          // console.log("hello");
+          // console.log(response.data.user[0]);
           setCurrentUser(response.data.user[0]);
         }
       }
@@ -50,7 +52,9 @@ function App() {
             />
             <Route
               path="/profile/:userID"
-              element={<Profile currentUser={currentUser} />}
+              element={
+                <Profile isLoggedIn={isLoggedIn} currentUser={currentUser} />
+              }
             />
             <Route
               path="/create"

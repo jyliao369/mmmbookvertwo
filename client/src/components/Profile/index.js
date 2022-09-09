@@ -7,12 +7,10 @@ import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutline
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FeaturedPlayListOutlinedIcon from "@mui/icons-material/FeaturedPlayListOutlined";
 import StarPurple500OutlinedIcon from "@mui/icons-material/StarPurple500Outlined";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
+import GroupRemoveOutlinedIcon from "@mui/icons-material/GroupRemoveOutlined";
 
-import * as dataList from "../data";
-
-const Profile = ({ currentUser }) => {
+const Profile = ({ isLoggedIn, currentUser }) => {
   let { userID } = useParams();
 
   const [profileUser, setProfileUser] = useState([]);
@@ -20,16 +18,14 @@ const Profile = ({ currentUser }) => {
   const [userRecipes, setUserRecipes] = useState([]);
   const [userReviews, setUserReviews] = useState([]);
 
-  const myRecipes = () => {
-    console.log("getting my recipes");
+  const [isFollowing, setIsFollowing] = useState(false);
 
+  const myRecipes = () => {
     document.getElementById("userRecipes").style.display = "flex";
     document.getElementById("userReviews").style.display = "none";
   };
 
   const myReviews = () => {
-    console.log("getting my reviews");
-
     document.getElementById("userRecipes").style.display = "none";
     document.getElementById("userReviews").style.display = "flex";
   };
@@ -119,13 +115,33 @@ const Profile = ({ currentUser }) => {
 
     Axios.post(`http://localhost:3001/followingUser/${chefUserID}`, {
       userID: currentUser.userID,
+      username: currentUser.username,
       chefUsername: chefUsername,
     }).then((response) => {
       console.log(response);
+      setIsFollowing(!isFollowing);
     });
   };
 
   useEffect(() => {
+    Axios.get(`https://mmmbook-vertwo-server.herokuapp.com/login`, {}).then(
+      (response) => {
+        if (response.data.loggedIn === true) {
+          // console.log("hello");
+          // console.log(response.data.user[0].userID);
+          // console.log(userID);
+
+          Axios.get(
+            `http://localhost:3001/test/${response.data.user[0].userID},${userID}`,
+            {}
+          ).then((response) => {
+            // console.log(response.data.following);
+            setIsFollowing(response.data.following);
+          });
+        }
+      }
+    );
+
     Axios.get(`http://localhost:3001/getUser/${userID}`, {}).then(
       (response) => {
         // console.log(response.data[0]);
@@ -176,13 +192,29 @@ const Profile = ({ currentUser }) => {
           </div>
 
           <div className="chefProfileBtn">
-            <button
-              onClick={() =>
-                followUser([profileUser.userID, profileUser.username])
-              }
-            >
-              <GroupAddOutlinedIcon />
-            </button>
+            {isLoggedIn === true ? (
+              <>
+                {isFollowing === true ? (
+                  <button
+                    onClick={() =>
+                      followUser([profileUser.userID, profileUser.username])
+                    }
+                  >
+                    <GroupRemoveOutlinedIcon />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() =>
+                      followUser([profileUser.userID, profileUser.username])
+                    }
+                  >
+                    <GroupAddOutlinedIcon />
+                  </button>
+                )}
+              </>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>

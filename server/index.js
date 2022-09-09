@@ -392,10 +392,11 @@ app.get(`/getReview/:recipeID`, (req, res) => {
 });
 
 // #FOLLOWER
-// #FOLLOWINGandUNFOLLOWING
+// #FOLLOWINGANDUNFOLLOWING
 app.post("/followingUser/:chefUserID", (req, res) => {
   const chefUserID = req.params.chefUserID;
   const userID = req.body.userID;
+  const username = req.body.username;
   const chefUsername = req.body.chefUsername;
 
   db.query(
@@ -405,15 +406,15 @@ app.post("/followingUser/:chefUserID", (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        // console.log(result.length);
+        console.log(result.length);
       }
 
       if (result.length <= 0) {
         db.query(
           `INSERT INTO heroku_289aeecd4cbfb0f.followchef_table
-          (userID, chefUserID, chefUsername)
-          VALUES (?,?,?)`,
-          [userID, chefUserID, chefUsername],
+          (userID, username, chefUserID, chefUsername)
+          VALUES (?,?,?,?)`,
+          [userID, username, chefUserID, chefUsername],
           (err, result) => {
             if (err) {
               console.log(err);
@@ -434,6 +435,35 @@ app.post("/followingUser/:chefUserID", (req, res) => {
             }
           }
         );
+      }
+    }
+  );
+});
+
+// #CHECKFORFOLLOWERS/FOLLOWING
+app.get("/test/:userID", (req, res) => {
+  const info = req.params.userID;
+  console.log(info.split(","));
+
+  const userID = info.split(",")[0];
+  const chefUserID = info.split(",")[1];
+
+  console.log(chefUserID);
+  console.log(userID);
+
+  db.query(
+    `SELECT * FROM heroku_289aeecd4cbfb0f.followchef_table 
+    WHERE chefUserID = "${chefUserID}" AND userID = "${userID}"`,
+    [],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+
+      if (result.length > 0) {
+        res.send({ following: true });
+      } else {
+        res.send({ following: false });
       }
     }
   );
