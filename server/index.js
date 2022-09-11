@@ -175,27 +175,27 @@ app.put(`/updateUser/:userID`, (req, res) => {
   const favCuisine = req.body.favCuisine;
   const chefDesc = req.body.chefDesc;
 
-  console.log(
-    userID +
-      " " +
-      firstName +
-      " " +
-      lastName +
-      " " +
-      username +
-      " " +
-      email +
-      " " +
-      favRecipe +
-      " " +
-      favBeverage +
-      " " +
-      favDessert +
-      " " +
-      favCuisine +
-      " " +
-      chefDesc
-  );
+  // console.log(
+  //   userID +
+  //     " " +
+  //     firstName +
+  //     " " +
+  //     lastName +
+  //     " " +
+  //     username +
+  //     " " +
+  //     email +
+  //     " " +
+  //     favRecipe +
+  //     " " +
+  //     favBeverage +
+  //     " " +
+  //     favDessert +
+  //     " " +
+  //     favCuisine +
+  //     " " +
+  //     chefDesc
+  // );
 
   db.query(
     `UPDATE heroku_289aeecd4cbfb0f.users_table SET 
@@ -217,7 +217,12 @@ app.put(`/updateUser/:userID`, (req, res) => {
 // #GETALLRECIPES
 app.get("/getAllRecipes", (req, res) => {
   db.query(
-    "SELECT * FROM heroku_289aeecd4cbfb0f.recipes_table",
+    `SELECT heroku_289aeecd4cbfb0f.recipes_table.*, 
+    heroku_289aeecd4cbfb0f.likes_table.likeID
+    FROM heroku_289aeecd4cbfb0f.recipes_table
+    LEFT JOIN heroku_289aeecd4cbfb0f.likes_table 
+    ON heroku_289aeecd4cbfb0f.likes_table.recipeID = 
+    heroku_289aeecd4cbfb0f.recipes_table.recipeID`,
     (err, result) => {
       if (err) {
         console.log(err);
@@ -570,6 +575,55 @@ app.get(`/getBookmarked/:userID`, (req, res) => {
         console.log(err);
       } else {
         res.send(result);
+      }
+    }
+  );
+});
+
+// #LIKES
+// #LIKES/UNLIKES
+app.post(`/createLikes`, (req, res) => {
+  const userID = req.body.userID;
+  const username = req.body.username;
+  const recipeID = req.body.recipeID;
+
+  // console.log(userID + " " + username + " " + recipeID);
+
+  db.query(
+    `SELECT * FROM heroku_289aeecd4cbfb0f.likes_table
+    WHERE userID = ? AND recipeID = ?`,
+    [userID, recipeID],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+
+      if (result.length <= 0) {
+        db.query(
+          `INSERT INTO heroku_289aeecd4cbfb0f.likes_table
+          (userID, username, recipeID) VALUES (?,?,?)`,
+          [userID, username, recipeID],
+          (err, result) => {
+            if (err) {
+              console.log(err);
+            } else {
+              res.send(result);
+            }
+          }
+        );
+      } else if (result.length >= 1) {
+        db.query(
+          `DELETE FROM heroku_289aeecd4cbfb0f.likes_table
+          WHERE userID = ? AND recipeID = ?`,
+          [userID, recipeID],
+          (err, result) => {
+            if (err) {
+              console.log(err);
+            } else {
+              res.send(result);
+            }
+          }
+        );
       }
     }
   );

@@ -47,7 +47,11 @@ function App() {
             <Route
               path="/"
               element={
-                <Home isLoggedIn={isLoggedIn} currentUser={currentUser} />
+                <Home
+                  isLoggedIn={isLoggedIn}
+                  setCurrentUser={setCurrentUser}
+                  currentUser={currentUser}
+                />
               }
             />
             <Route path="/explore" element={<Explore />} />

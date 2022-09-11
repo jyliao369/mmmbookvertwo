@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
-import LibraryAddOutlinedIcon from "@mui/icons-material/LibraryAddOutlined";
+import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FeaturedPlayListOutlinedIcon from "@mui/icons-material/FeaturedPlayListOutlined";
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 
-const Home = ({ isLoggedIn, currentUser }) => {
+const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
   const [allRecipes, setAllRecipes] = useState([]);
 
   const flipSide = (event, recipeCard) => {
@@ -43,11 +43,6 @@ const Home = ({ isLoggedIn, currentUser }) => {
   const addFavorite = (event, recipeID) => {
     event.preventDefault();
 
-    // console.log("hello there");
-    // console.log(recipeID);
-    // console.log(currentUser.userID);
-    // console.log(currentUser.username);
-
     Axios.post(`http://localhost:3001/createBookmark`, {
       userID: currentUser.userID,
       username: currentUser.username,
@@ -57,9 +52,33 @@ const Home = ({ isLoggedIn, currentUser }) => {
     });
   };
 
+  const addLike = (event, recipeID) => {
+    event.preventDefault();
+
+    Axios.post(`http://localhost:3001/createLikes`, {
+      userID: currentUser.userID,
+      username: currentUser.username,
+      recipeID: recipeID,
+    }).then((response) => {
+      console.log(response);
+      Axios.get(`http://localhost:3001/getAllRecipes`, {}).then((response) => {
+        // console.log(response.data);
+        setAllRecipes(response.data);
+      });
+    });
+  };
+
   useEffect(() => {
+    Axios.get(`https://mmmbook-vertwo-server.herokuapp.com/login`, {}).then(
+      (response) => {
+        if (response.data.loggedIn === true) {
+          setCurrentUser(response.data.user[0]);
+        }
+      }
+    );
+
     Axios.get(`http://localhost:3001/getAllRecipes`, {}).then((response) => {
-      // console.log(response.data);
+      console.log(response.data);
       setAllRecipes(response.data);
     });
   }, []);
@@ -133,13 +152,14 @@ const Home = ({ isLoggedIn, currentUser }) => {
                 </div>
                 <div className="recipeCardC">
                   <button
+                    style={{ cursor: "pointer" }}
                     onClick={(event) =>
                       flipSide(event, `recipeCard${recipe.recipeID}`)
                     }
                   >
                     <FeaturedPlayListOutlinedIcon />
                   </button>
-                  <button>
+                  <button style={{ cursor: "pointer" }}>
                     <Link to={`/profile/${recipe.userID}`}>
                       <AccountBoxOutlinedIcon />
                     </Link>
@@ -148,23 +168,41 @@ const Home = ({ isLoggedIn, currentUser }) => {
                   {isLoggedIn === true ? (
                     <>
                       <button
+                        style={{ cursor: "pointer" }}
                         onClick={(event) => addFavorite(event, recipe.recipeID)}
                       >
-                        <LibraryAddOutlinedIcon />
+                        <FavoriteBorderOutlinedIcon />
+                        <p>#</p>
+                      </button>
+
+                      <button
+                        style={{ cursor: "pointer" }}
+                        onClick={(event) => addLike(event, recipe.recipeID)}
+                      >
+                        {recipe.likeID !== null && recipe.likeID !== "" ? (
+                          <>
+                            <StarOutlinedIcon />
+                          </>
+                        ) : (
+                          <>
+                            <StarOutlineOutlinedIcon />
+                          </>
+                        )}
+                        <p>#</p>
                       </button>
                     </>
                   ) : (
-                    <></>
+                    <>
+                      <button>
+                        <FavoriteBorderOutlinedIcon />
+                        <p>#</p>
+                      </button>
+                      <button>
+                        <StarOutlineOutlinedIcon />
+                        <p>#</p>
+                      </button>
+                    </>
                   )}
-
-                  <button>
-                    <FavoriteBorderOutlinedIcon />
-                    <p>#</p>
-                  </button>
-                  <button>
-                    <StarOutlineOutlinedIcon />
-                    <p>#</p>
-                  </button>
                   <button>
                     <ChatBubbleOutlineOutlinedIcon />
                     <p>#</p>
