@@ -44,7 +44,12 @@ function App() {
         />
         <div className="mainPage">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route
+              path="/"
+              element={
+                <Home isLoggedIn={isLoggedIn} currentUser={currentUser} />
+              }
+            />
             <Route path="/explore" element={<Explore />} />
             <Route
               path="/userProfile/:userID"

@@ -9,6 +9,7 @@ import FeaturedPlayListOutlinedIcon from "@mui/icons-material/FeaturedPlayListOu
 import StarPurple500OutlinedIcon from "@mui/icons-material/StarPurple500Outlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
+import CopyAllOutlinedIcon from "@mui/icons-material/CopyAllOutlined";
 
 import * as dataList from "../data";
 
@@ -19,9 +20,8 @@ const UserProfile = ({ currentUser }) => {
 
   const [userRecipes, setUserRecipes] = useState([]);
   const [userReviews, setUserReviews] = useState([]);
-
+  const [userBookmarked, setUserBookmarked] = useState([]);
   const [chefsFollowing, setChefsFollowing] = useState([]);
-
   const [chefFollowers, setChefFollowers] = useState([]);
 
   const [updateUser, setUpdateUser] = useState("");
@@ -40,7 +40,18 @@ const UserProfile = ({ currentUser }) => {
     // console.log("getting my recipes");
 
     document.getElementById("userRecipes").style.display = "flex";
+    document.getElementById("userBookmarked").style.display = "none";
     document.getElementById("userReviews").style.display = "none";
+    document.getElementById("usersFollowers").style.display = "none";
+    document.getElementById("usersFollowing").style.display = "none";
+  };
+
+  const myFavorite = () => {
+    // console.log("getting my bookmark");
+
+    document.getElementById("userRecipes").style.display = "none";
+    document.getElementById("userBookmarked").style.display = "flex";
+    document.getElementById("userReviews").style.display = "nopne";
     document.getElementById("usersFollowers").style.display = "none";
     document.getElementById("usersFollowing").style.display = "none";
   };
@@ -49,6 +60,7 @@ const UserProfile = ({ currentUser }) => {
     // console.log("getting my reviews");
 
     document.getElementById("userRecipes").style.display = "none";
+    document.getElementById("userBookmarked").style.display = "none";
     document.getElementById("userReviews").style.display = "flex";
     document.getElementById("usersFollowers").style.display = "none";
     document.getElementById("usersFollowing").style.display = "none";
@@ -58,6 +70,7 @@ const UserProfile = ({ currentUser }) => {
     // console.log("getting my followers");
 
     document.getElementById("userRecipes").style.display = "none";
+    document.getElementById("userBookmarked").style.display = "none";
     document.getElementById("userReviews").style.display = "none";
     document.getElementById("usersFollowers").style.display = "flex";
     document.getElementById("usersFollowing").style.display = "none";
@@ -67,6 +80,7 @@ const UserProfile = ({ currentUser }) => {
     // console.log("who am i following");
 
     document.getElementById("userRecipes").style.display = "none";
+    document.getElementById("userBookmarked").style.display = "none";
     document.getElementById("userReviews").style.display = "none";
     document.getElementById("usersFollowers").style.display = "none";
     document.getElementById("usersFollowing").style.display = "flex";
@@ -190,25 +204,31 @@ const UserProfile = ({ currentUser }) => {
       }
     );
 
-    Axios.get(`http://localhost:3001/getAllRecipesID/${userID}`).then(
+    Axios.get(`http://localhost:3001/getAllRecipesID/${userID}`, {}).then(
       (response) => {
         // console.log(response.data);
         setUserRecipes(response.data.reverse());
       }
     );
-    Axios.get(`http://localhost:3001/getAllReviewsID/${userID}`).then(
+    Axios.get(`http://localhost:3001/getAllReviewsID/${userID}`, {}).then(
       (response) => {
         // console.log(response.data);
         setUserReviews(response.data.reverse());
       }
     );
-    Axios.get(`http://localhost:3001/allFollowing/${userID}`).then(
+    Axios.get(`http://localhost:3001/getBookmarked/${userID}`, {}).then(
+      (response) => {
+        // console.log(response.data);
+        setUserBookmarked(response.data.reverse());
+      }
+    );
+    Axios.get(`http://localhost:3001/allFollowing/${userID}`, {}).then(
       (response) => {
         // console.log(response.data);
         setChefsFollowing(response.data.reverse());
       }
     );
-    Axios.get(`http://localhost:3001/allFollowers/${userID}`).then(
+    Axios.get(`http://localhost:3001/allFollowers/${userID}`, {}).then(
       (response) => {
         // console.log(response);
         setChefFollowers(response.data.reverse());
@@ -365,10 +385,12 @@ const UserProfile = ({ currentUser }) => {
         <div onClick={() => myRecipes()} style={{ cursor: "pointer" }}>
           My Recipes
         </div>
+        <div onClick={() => myFavorite()} style={{ cursor: "pointer" }}>
+          My Favorites
+        </div>
         <div onClick={() => myReviews()} style={{ cursor: "pointer" }}>
           My Reviews
         </div>
-        <div>My Favorites</div>
         <div onClick={() => myFollowers()} style={{ cursor: "pointer" }}>
           Followers
         </div>
@@ -466,6 +488,99 @@ const UserProfile = ({ currentUser }) => {
         ) : (
           <div className="notification">
             <h2>You have no Recipes. Add and share some of your recipes!!</h2>
+          </div>
+        )}
+      </div>
+
+      {/* USERS BOOKMARKED */}
+      <div className="userBookmarked" id="userBookmarked">
+        {userBookmarked.length > 0 ? (
+          <>
+            {userBookmarked.map((recipe) => (
+              <div key={recipe.recipeID} className="recipeCard">
+                {/* <Link key={recipe.recipeID} to={`/recipe/${recipe.recipeID}`}> */}
+                <div className="recipeCardIn">
+                  <div
+                    className="recipeCardA"
+                    id={`recipeCard${recipe.recipeID}a`}
+                  >
+                    <div className="recipeCardAB">
+                      <div className="recipeImage"></div>
+                      <div className="recipeInfo">
+                        <div className="recipeInfoA">
+                          <h2>{recipe.name}</h2>
+                          <p>Description: {recipe.description.slice(0, 180)}</p>
+                        </div>
+                        <div className="recipeInfoB">
+                          <div className="recipeInfoBA">
+                            <p>Prep Time: {recipe.prepTime} min</p>
+                            <p>Cook Time: {recipe.cookTime} min</p>
+                            <p>Total Time: {recipe.totalTime} min</p>
+                            <p>Yield: {recipe.yield}</p>
+                            <p>Servings: {recipe.servings}</p>
+                          </div>
+                          <div className="recipeInfoBA">
+                            <p>Category: {recipe.category}</p>
+                            <p>Course: {recipe.course}</p>
+                            <p>Cuisine: {recipe.cuisine}</p>
+                            <p>Diet: {recipe.diet}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="recipeCardB"
+                    id={`recipeCard${recipe.recipeID}b`}
+                  >
+                    <div className="recipeCardBA">
+                      <div className="recipeCardIng">
+                        <h3>Ingredients</h3>
+                        <div>
+                          {ingrSplit(recipe.ingredients).map((ingredient) => (
+                            <p key={ingredient.slice(5, 100)}>{ingredient}</p>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="recipeCardIns">
+                        <h3>Instructions</h3>
+                        <div>
+                          {instrSplit(recipe.instructions).map(
+                            (instruction) => (
+                              <p>{instruction}</p>
+                            )
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="recipeCardAdd">
+                      <h3>Additional Notes:</h3>
+                      <p>{recipe.addNotes}</p>
+                    </div>
+                  </div>
+                  <div className="recipeCardC">
+                    <button
+                      onClick={(event) =>
+                        flipSide(event, `recipeCard${recipe.recipeID}`)
+                      }
+                    >
+                      <FeaturedPlayListOutlinedIcon />
+                    </button>
+                    <button>
+                      <FavoriteBorderOutlinedIcon />
+                    </button>
+                    <button>
+                      <ChatBubbleOutlineOutlinedIcon />
+                    </button>
+                  </div>
+                </div>
+                {/* </Link> */}
+              </div>
+            ))}
+          </>
+        ) : (
+          <div className="notification">
+            <h2>You don't have any recipes bookmarked.</h2>
           </div>
         )}
       </div>

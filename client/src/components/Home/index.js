@@ -10,7 +10,7 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import FeaturedPlayListOutlinedIcon from "@mui/icons-material/FeaturedPlayListOutlined";
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 
-const Home = () => {
+const Home = ({ isLoggedIn, currentUser }) => {
   const [allRecipes, setAllRecipes] = useState([]);
 
   const flipSide = (event, recipeCard) => {
@@ -40,9 +40,26 @@ const Home = () => {
     return ingre.split("\n");
   };
 
+  const addFavorite = (event, recipeID) => {
+    event.preventDefault();
+
+    // console.log("hello there");
+    // console.log(recipeID);
+    // console.log(currentUser.userID);
+    // console.log(currentUser.username);
+
+    Axios.post(`http://localhost:3001/createBookmark`, {
+      userID: currentUser.userID,
+      username: currentUser.username,
+      recipeID: recipeID,
+    }).then((response) => {
+      console.log(response);
+    });
+  };
+
   useEffect(() => {
     Axios.get(`http://localhost:3001/getAllRecipes`, {}).then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       setAllRecipes(response.data);
     });
   }, []);
@@ -123,21 +140,34 @@ const Home = () => {
                     <FeaturedPlayListOutlinedIcon />
                   </button>
                   <button>
-                    <FavoriteBorderOutlinedIcon />
-                  </button>
-                  <button>
-                    <ChatBubbleOutlineOutlinedIcon />
-                  </button>
-                  <button>
-                    <StarOutlineOutlinedIcon />
-                  </button>
-                  <button>
-                    <LibraryAddOutlinedIcon />
-                  </button>
-                  <button>
                     <Link to={`/profile/${recipe.userID}`}>
                       <AccountBoxOutlinedIcon />
                     </Link>
+                  </button>
+                  <h2>{isLoggedIn}</h2>
+                  {isLoggedIn === true ? (
+                    <>
+                      <button
+                        onClick={(event) => addFavorite(event, recipe.recipeID)}
+                      >
+                        <LibraryAddOutlinedIcon />
+                      </button>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+
+                  <button>
+                    <FavoriteBorderOutlinedIcon />
+                    <p>#</p>
+                  </button>
+                  <button>
+                    <StarOutlineOutlinedIcon />
+                    <p>#</p>
+                  </button>
+                  <button>
+                    <ChatBubbleOutlineOutlinedIcon />
+                    <p>#</p>
                   </button>
                 </div>
               </div>

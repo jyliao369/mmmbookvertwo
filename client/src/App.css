@@ -110,6 +110,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   padding: 5px;
   margin: 5px;
   background: white;
@@ -632,6 +633,15 @@ a {
 }
 #userRecipes {
   display: flex;
+  flex-direction: column;
+}
+.userBookmarked {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#userBookmarked {
+  display: none;
 }
 .userReviews {
   display: flex;

@@ -183,16 +183,19 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
           </div>
           <div className="recipeCardC">
             <button>
-              <FavoriteBorderOutlinedIcon />
+              <LibraryAddOutlinedIcon />
             </button>
             <button>
-              <ChatBubbleOutlineOutlinedIcon />
+              <FavoriteBorderOutlinedIcon />
+              <p>#</p>
             </button>
             <button>
               <StarOutlineOutlinedIcon />
+              <p>#</p>
             </button>
             <button>
-              <LibraryAddOutlinedIcon />
+              <ChatBubbleOutlineOutlinedIcon />
+              <p>#</p>
             </button>
           </div>
         </div>

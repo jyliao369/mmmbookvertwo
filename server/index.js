@@ -503,6 +503,78 @@ app.get("/allFollowers/:userID", (req, res) => {
   );
 });
 
+// #BOOKMARK
+// #BOOKMARK/UNBOOKMARK
+app.post(`/createBookmark`, (req, res) => {
+  const userID = req.body.userID;
+  const username = req.body.username;
+  const recipeID = req.body.recipeID;
+
+  // console.log(userID + " " + username + " " + recipeID);
+
+  db.query(
+    `SELECT * FROM heroku_289aeecd4cbfb0f.bookmark_table
+    WHERE userID = ${userID} AND recipeID = ${recipeID}`,
+    [],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result.length);
+      }
+
+      if (result.length <= 0) {
+        db.query(
+          `INSERT INTO heroku_289aeecd4cbfb0f.bookmark_table
+          (userID, username, recipeID) VALUES (?,?,?)`,
+          [userID, username, recipeID],
+          (err, result) => {
+            if (err) {
+              console.log(err);
+            } else {
+              res.send(result);
+            }
+          }
+        );
+      } else {
+        db.query(
+          `DELETE FROM heroku_289aeecd4cbfb0f.bookmark_table
+          WHERE userID = ${userID} AND recipeID = ${recipeID}`,
+          [],
+          (err, result) => {
+            if (err) {
+              console.log(err);
+            } else {
+              res.send(result);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
+// #GETBOOKMARKEDRECIPES
+app.get(`/getBookmarked/:userID`, (req, res) => {
+  const userID = req.params.userID;
+  // console.log(userID);
+
+  db.query(
+    `SELECT * FROM heroku_289aeecd4cbfb0f.bookmark_table
+    LEFT JOIN heroku_289aeecd4cbfb0f.recipes_table 
+    ON heroku_289aeecd4cbfb0f.bookmark_table.recipeID = heroku_289aeecd4cbfb0f.recipes_table.recipeID
+    WHERE heroku_289aeecd4cbfb0f.bookmark_table.userID = ${userID}`,
+    [],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 // CHECKS FOR CONNECTION TO SERVER
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

@@ -168,21 +168,24 @@ const Explore = () => {
                 <FeaturedPlayListOutlinedIcon />
               </button>
               <button>
-                <FavoriteBorderOutlinedIcon />
-              </button>
-              <button>
-                <ChatBubbleOutlineOutlinedIcon />
-              </button>
-              <button>
-                <StarOutlineOutlinedIcon />
+                <Link to={`/profile/${recipe.userID}`}>
+                  <AccountBoxOutlinedIcon />
+                </Link>
               </button>
               <button>
                 <LibraryAddOutlinedIcon />
               </button>
               <button>
-                <Link to={`/profile/${recipe.userID}`}>
-                  <AccountBoxOutlinedIcon />
-                </Link>
+                <FavoriteBorderOutlinedIcon />
+                <p>#</p>
+              </button>
+              <button>
+                <ChatBubbleOutlineOutlinedIcon />
+                <p>#</p>
+              </button>
+              <button>
+                <StarOutlineOutlinedIcon />
+                <p>#</p>
               </button>
             </div>
           </div>

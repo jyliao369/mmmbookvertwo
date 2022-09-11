@@ -31,12 +31,9 @@ const Navbar = ({ setIsLoggedIn, isLoggedIn, currentUser }) => {
           <Link to={`/userProfile/${currentUser.userID}`}>
             <p>My Profile</p>
           </Link>
-          <p>Favorites</p>
           <Link to="/create">
             <p>Create</p>
           </Link>
-
-          <p>Settings</p>
         </>
       )}
       {isLoggedIn === false ? (
