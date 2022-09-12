@@ -217,12 +217,11 @@ app.put(`/updateUser/:userID`, (req, res) => {
 // #GETALLRECIPES
 app.get("/getAllRecipes", (req, res) => {
   db.query(
-    `SELECT heroku_289aeecd4cbfb0f.recipes_table.*, 
-    heroku_289aeecd4cbfb0f.likes_table.likeID
+    `SELECT heroku_289aeecd4cbfb0f.recipes_table.*, heroku_289aeecd4cbfb0f.likes_table.likeID, heroku_289aeecd4cbfb0f.likes_table.userID
     FROM heroku_289aeecd4cbfb0f.recipes_table
     LEFT JOIN heroku_289aeecd4cbfb0f.likes_table 
-    ON heroku_289aeecd4cbfb0f.likes_table.recipeID = 
-    heroku_289aeecd4cbfb0f.recipes_table.recipeID`,
+    ON heroku_289aeecd4cbfb0f.likes_table.recipeID = heroku_289aeecd4cbfb0f.recipes_table.recipeID
+    ORDER BY heroku_289aeecd4cbfb0f.recipes_table.recipeID ASC`,
     (err, result) => {
       if (err) {
         console.log(err);

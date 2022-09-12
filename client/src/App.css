@@ -407,10 +407,15 @@ a {
 }
 .filteredSection {
   display: flex;
+  justify-content: space-between;
   border-bottom: solid;
   border-width: thin;
   border-color: lightgray;
   padding: 2%;
+}
+.filteredSection select {
+  padding: 5px;
+  font-size: 15px;
 }
 #filteredSection {
   display: none;

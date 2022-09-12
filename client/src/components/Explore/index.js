@@ -3,6 +3,8 @@ import Axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import * as dataList from "../data";
+
 import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
 import LibraryAddOutlinedIcon from "@mui/icons-material/LibraryAddOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
@@ -101,12 +103,38 @@ const Explore = () => {
       </div>
 
       <div className="filteredSection" id="filteredSection">
-        <p>filtered section</p>
-        <input placeholder="Category" />
-        <input placeholder="Course" />
-        <input placeholder="Cuisine" />
-        <input placeholder="Diet" />
-        <input placeholder="Ingredients" />
+        {/* <input placeholder="Category" /> */}
+        <select>
+          <option>Category</option>
+          {dataList.category.map((category) => (
+            <option value={category}>{category}</option>
+          ))}
+        </select>
+        {/* <input placeholder="Course" /> */}
+        <select>
+          <option>Course</option>
+          {dataList.course.map((course) => (
+            <option>{course}</option>
+          ))}
+        </select>
+        {/* <input placeholder="Cuisine" /> */}
+        <select>
+          <option>Cuisine</option>
+          {dataList.cuisine.map((cuisine) => (
+            <option>{cuisine}</option>
+          ))}
+        </select>
+        {/* <input placeholder="Diet" /> */}
+        <select>
+          <option>Diet</option>
+          {dataList.diet.map((diet) => (
+            <option>{diet}</option>
+          ))}
+        </select>
+        {/* <input placeholder="Ingredients" /> */}
+        <select>
+          <option>Ingredients</option>
+        </select>
         <button>Search</button>
       </div>
 
