@@ -69,7 +69,7 @@ const Create = ({ currentUser }) => {
                 placeholder="Recipe Description"
                 value={recipeDesc}
                 onChange={(e) => setrecipeDesc(e.target.value)}
-                rows={4}
+                rows={5}
               />
             </div>
             <div className="createNewRecipeAc">
@@ -180,9 +180,6 @@ const Create = ({ currentUser }) => {
           </div>
         </div>
       </div>
-
-      <br />
-      <br />
 
       <div className="createRecipeBtn">
         {recipeName === "" ||
