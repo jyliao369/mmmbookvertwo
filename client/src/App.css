@@ -181,6 +181,36 @@ a {
   display: flex;
   align-items: center;
 }
+/* LOGIN/REGISTER */
+.loginPage,
+.registerPage {
+  display: flex;
+  justify-content: center;
+}
+.loginForm,
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 35%;
+  margin: 10% 0px 0px 0px;
+  padding: 3%;
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+}
+.loginForm h2,
+.loginForm button,
+.registerForm h2,
+.registerForm button {
+  margin: 0px 0px 5% 0px;
+}
+.loginForm input,
+.registerForm input {
+  padding: 1.5%;
+  margin: 0px 0px 5% 0px;
+  font-size: 16px;
+}
 
 /* -------------------------------------------------------------------------------- */
 /* PAGEBANNER */
