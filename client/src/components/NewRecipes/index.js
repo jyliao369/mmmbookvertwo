@@ -45,12 +45,10 @@ const NewRecipes = () => {
             </div>
             <div className="buttonBar">
               <div className="iconCont">
-                <FavoriteBorderOutlinedIcon />
-                <p>#</p>
+                <FavoriteBorderOutlinedIcon />#
               </div>
               <div className="iconCont">
-                <ChatBubbleOutlineOutlinedIcon />
-                <p>#</p>
+                <ChatBubbleOutlineOutlinedIcon />#
               </div>
               <div className="iconCont">
                 <StarOutlineOutlinedIcon />

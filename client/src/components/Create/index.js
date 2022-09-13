@@ -105,17 +105,16 @@ const Create = ({ currentUser }) => {
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                 >
-                  <option value={""}>Select</option>
+                  <option value={""}>Select Category</option>
                   {dataList.category.map((category) => (
                     <option key={category}>{category}</option>
                   ))}
                 </select>
                 <select
-                  placeholder="Course Type"
                   value={course}
                   onChange={(e) => SetCourse(e.target.value)}
                 >
-                  <option value={""}>Select</option>
+                  <option value={""}>Select Course</option>
                   {dataList.course.map((course) => (
                     <option key={course} value={course}>
                       {course}
@@ -123,23 +122,18 @@ const Create = ({ currentUser }) => {
                   ))}
                 </select>
                 <select
-                  placeholder="Cuisine Type"
                   value={cuisine}
                   onChange={(e) => setCuisine(e.target.value)}
                 >
-                  <option value={""}>Select</option>
+                  <option value={""}>Select Cuisine</option>
                   {dataList.cuisine.map((cuisine) => (
                     <option key={cuisine} value={cuisine}>
                       {cuisine}
                     </option>
                   ))}
                 </select>
-                <select
-                  placeholder="Diet Type"
-                  value={diet}
-                  onChange={(e) => setDiet(e.target.value)}
-                >
-                  <option value={""}>Select</option>
+                <select value={diet} onChange={(e) => setDiet(e.target.value)}>
+                  <option value={""}>Select Diet</option>
                   {dataList.diet.map((diet) => (
                     <option key={diet} value={diet}>
                       {diet}

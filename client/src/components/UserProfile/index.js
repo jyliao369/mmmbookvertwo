@@ -374,9 +374,7 @@ const UserProfile = ({ currentUser }) => {
                 <EditOutlinedIcon />
               </button>
             ) : (
-              <button>
-                <GroupAddOutlinedIcon />
-              </button>
+              <></>
             )}
           </div>
         </div>

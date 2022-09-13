@@ -27,6 +27,113 @@ a {
   width: 100%;
   margin: 0% 28% 0% 16%;
 }
+/* #EXPLOREPAGE */
+.filteredSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2%;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
+}
+#filteredSection {
+  display: none;
+}
+/* #USERPROPHILE */
+.chefProfileCard {
+  display: flex;
+  height: 450px;
+  margin: 4%;
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+}
+.chefProfileIcon {
+  min-width: 45%;
+  background: lightgray;
+}
+.chefProfileInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 55%;
+}
+.chefProfileInfoA {
+  display: flex;
+  flex-direction: column;
+}
+.chefProfileSettings {
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+}
+.chefProfileSettings input,
+.chefProfileSettings textarea {
+  margin: 7px;
+  padding: 5px;
+}
+#chefProfileSettings {
+  display: none;
+}
+.chefProfileUpdate {
+  display: flex;
+  flex-direction: row;
+}
+.chefProfileUpdateA {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+.chefProfileUpdateA select {
+  margin: 7px;
+  padding: 5px;
+}
+.chefProfileSub {
+  display: flex;
+  justify-content: center;
+  margin: 7px;
+}
+.chefProfileNavBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 2% 0% 2% 0%;
+  border-bottom: solid;
+  border-top: solid;
+  border-width: thin;
+  border-color: lightgray;
+}
+.userRecipes,
+.userBookmarked,
+.userReviews {
+  display: flex;
+  flex-direction: column;
+}
+#userBookmarked,
+#userReviews,
+#usersFollowers,
+#usersFollowing {
+  display: none;
+}
+.followingProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2%;
+}
+.followingIcon {
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  background: lightgray;
+}
+/* #CREATERECIPEPAGE */
+.createRecipeBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 /* #NEWRECIPES */
 .newRecipes {
   display: flex;
@@ -39,6 +146,10 @@ a {
   border-color: lightgray;
   position: fixed;
   right: 0;
+  overflow: auto;
+}
+.newRecipes::-webkit-scrollbar {
+  display: none;
 }
 .newRecipe {
   padding: 2%;
@@ -47,14 +158,27 @@ a {
   border-width: thin;
   border-color: lightgray;
 }
+.newRecipe p,
+.newRecipe h3 {
+  margin: 0px 0px 10px 0px;
+}
+.newRecipeInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.newRecipeInfoA {
+  margin: 0px 0px 10px 0px;
+}
+.newRecipeInfoA p {
+  margin: 0px;
+}
 .buttonBar {
   display: flex;
   flex-direction: row;
 }
-/* #CREATERECIPEPAGE */
-.createRecipeBtn {
+.iconCont {
   display: flex;
-  flex-direction: column;
   align-items: center;
 }
 
@@ -216,6 +340,126 @@ a {
   display: flex;
 }
 /* #RECIPEPAGECARD */
+.recipePage {
+  display: flex;
+  flex-direction: column;
+}
+.recipePageCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.recipePageCardAa {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.recipePageCardImg {
+  width: 50%;
+  background-color: lightgray;
+}
+.recipePageCardA,
+.recipePageCardB {
+  max-width: 85%;
+  border-style: solid;
+  border-width: thin;
+  border-color: lightgray;
+  margin: 2%;
+}
+.recipePageCardA {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 400px;
+  width: 100%;
+}
+.recipePageCardInfoB {
+  display: flex;
+  flex-direction: row;
+}
+.recipePageCardInfoBa {
+  display: flex;
+  flex-direction: column;
+}
+.recipePageCardInfoC {
+  display: flex;
+  flex-direction: column;
+  padding: 2.5%;
+}
+.recipePageCardInfoCa {
+  display: flex;
+  flex-direction: row;
+}
+.recipePageCardInfoCa p,
+.recipePageCardInfoCb p {
+  margin: 0px 0px 10px 0px;
+}
+.recipePageCardIng {
+  width: 35%;
+}
+.recipePageCardIns {
+  width: 65%;
+}
+.reviewFormSection {
+  display: flex;
+  justify-content: center;
+  border-top: solid;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
+  padding: 2% 0px 2% 0px;
+}
+.reviewFormCont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 95%;
+}
+.profileIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profileImg {
+  width: 100px;
+  height: 100px;
+  background: lightgray;
+  border-radius: 75px;
+}
+.reviewBtnCont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 1.5% 0px 0px 0px;
+}
+.reviewForm {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+.ratingForm {
+  display: flex;
+  flex-direction: row;
+}
+.userRatingCont {
+  padding: 1.5%;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
+}
+.userRating {
+  display: flex;
+  flex-direction: row;
+}
+.userReview {
+  width: 75%;
+  margin: 0px 0px 0px 2%;
+}
+.notification {
+  display: flex;
+  justify-content: center;
+}
+
 /* .recipePage {
   display: flex;
   flex-direction: column;
@@ -367,34 +611,6 @@ a {
   display: flex;
 } */
 /* -------------------------------------------------------------------------------- */
-/* #PAGEBANNER */
-/* .pageBanner {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border-bottom: solid;
-  border-width: thin;
-  border-color: lightgray;
-  padding: 2%;
-}
-.pageBanner p {
-  font-size: 30px;
-} */
-/* #NAVBAR */
-/* .navBar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 17%;
-  height: 100vh;
-  border-right: solid;
-  border-width: thin;
-  border-color: black;
-  position: fixed;
-}
-.navBar p {
-  font-size: 20px;
-} */
 /* #HOMEPAGE */
 /* .homePage {
   display: flex;
@@ -404,36 +620,6 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-} */
-/* #EXPLOREPAGE */
-/* .searchBar {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-.searchBar input {
-  padding: 10px;
-  margin: 0px 15px 0px 0px;
-  font-size: 15px;
-}
-.searchBar button {
-  padding: 5px 7px 5px 7px;
-  margin: 0px 0px 0px 5px;
-}
-.filteredSection {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: solid;
-  border-width: thin;
-  border-color: lightgray;
-  padding: 2%;
-}
-.filteredSection select {
-  padding: 5px;
-  font-size: 15px;
-}
-#filteredSection {
-  display: none;
 } */
 /* #CREATERECIPE */
 /* .recipePartOneA {
