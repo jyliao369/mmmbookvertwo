@@ -182,9 +182,9 @@ const Explore = ({ isLoggedIn, currentUser }) => {
                     <div className="recipeImage"></div>
                     <div className="recipeInfo">
                       <div className="recipeInfoA">
-                        <h2>{recipe.name}</h2>
+                        <h3>{recipe.name}</h3>
+                        <p>Posted by: {recipe.username} on "date"</p>
                         <p>Description: {recipe.description.slice(0, 180)}</p>
-                        <p>{recipe.username}</p>
                       </div>
                       <div className="recipeInfoB">
                         <div className="recipeInfoBA">
