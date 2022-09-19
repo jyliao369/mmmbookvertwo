@@ -69,7 +69,7 @@ const Create = ({ currentUser }) => {
                 placeholder="Recipe Description"
                 value={recipeDesc}
                 onChange={(e) => setrecipeDesc(e.target.value)}
-                rows={5}
+                rows={6}
               />
             </div>
             <div className="createNewRecipeAc">
@@ -173,30 +173,29 @@ const Create = ({ currentUser }) => {
             </div>
           </div>
         </div>
-      </div>
+        <div className="createRecipeBtn">
+          {recipeName === "" ||
+          recipeDesc === "" ||
+          prepTime === "" ||
+          cookTime === "" ||
+          yieldNum === "" ||
+          servingsNum === "" ||
+          category === "" ||
+          course === "" ||
+          cuisine === "" ||
+          diet === "" ||
+          ingredients === "" ||
+          instructions === "" ||
+          addNotes === "" ? (
+            <button disabled={true}>Create</button>
+          ) : (
+            <button onClick={() => createRecipe()}>Create</button>
+          )}
+        </div>
 
-      <div className="createRecipeBtn">
-        {recipeName === "" ||
-        recipeDesc === "" ||
-        prepTime === "" ||
-        cookTime === "" ||
-        yieldNum === "" ||
-        servingsNum === "" ||
-        category === "" ||
-        course === "" ||
-        cuisine === "" ||
-        diet === "" ||
-        ingredients === "" ||
-        instructions === "" ||
-        addNotes === "" ? (
-          <button disabled={true}>Create</button>
-        ) : (
-          <button onClick={() => createRecipe()}>Create</button>
-        )}
+        <br />
+        <br />
       </div>
-
-      <br />
-      <br />
     </div>
   );
 };

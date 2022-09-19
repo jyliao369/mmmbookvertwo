@@ -162,6 +162,7 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
             <div className="recipePageCardInfo">
               <div className="recipePageCardInfoA">
                 <h2>{recipeInfo.name}</h2>
+                <p>Posted by: {recipeInfo.username}</p>
                 <p>Description: {recipeDesc}</p>
               </div>
               <div className="recipePageCardInfoB">
@@ -204,15 +205,19 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
             <div className="recipePageCardInfoCa">
               <div className="recipePageCardIng">
                 <h3>Ingredients</h3>
-                {recipeIng.map((ingredient) => (
-                  <p key={ingredient.slice(5, 15)}>{ingredient}</p>
-                ))}
+                <div className="recipePageCardIngA">
+                  {recipeIng.map((ingredient) => (
+                    <p key={ingredient.slice(5, 15)}>{ingredient}</p>
+                  ))}
+                </div>
               </div>
               <div className="recipePageCardIns">
                 <h3>Instructions</h3>
-                {recipeIns.map((instruction) => (
-                  <p key={instruction.slice(5, 15)}>{instruction}</p>
-                ))}
+                <div className="recipePageCardInsA">
+                  {recipeIns.map((instruction) => (
+                    <p key={instruction.slice(5, 15)}>{instruction}</p>
+                  ))}
+                </div>
               </div>
             </div>
             <div className="recipePageCardInfoCb">
@@ -295,36 +300,27 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
       )}
 
       <div className="reviewsSections">
-        {reviews.map((review) => (
-          <div className="userRatingCont">
-            <div className="userRating">
-              <div className="profileIcon">
-                <div className="profileImg" />
-              </div>
-              <div className="userReview">
-                <h3>{review.username} Posted on: (date)</h3>
-                {review.rating === 1 ? <>{ratingStar(1)}</> : <></>}
-                {review.rating === 2 ? <>{ratingStar(2)}</> : <></>}
-                {review.rating === 3 ? <>{ratingStar(3)}</> : <></>}
-                {review.rating === 4 ? <>{ratingStar(4)}</> : <></>}
-                {review.rating === 5 ? <>{ratingStar(5)}</> : <></>}
-                <p>{review.review}</p>
+        <div className="reviewsSectionCont">
+          {reviews.map((review) => (
+            <div className="userRatingCont">
+              <div className="userRating">
+                <div className="profileIcon">
+                  <div className="profileImg" />
+                </div>
+                <div className="userReview">
+                  <h3>{review.username} Posted on: (date)</h3>
+                  {review.rating === 1 ? <>{ratingStar(1)}</> : <></>}
+                  {review.rating === 2 ? <>{ratingStar(2)}</> : <></>}
+                  {review.rating === 3 ? <>{ratingStar(3)}</> : <></>}
+                  {review.rating === 4 ? <>{ratingStar(4)}</> : <></>}
+                  {review.rating === 5 ? <>{ratingStar(5)}</> : <></>}
+                  <p>{review.review}</p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
     </div>
   );
 };

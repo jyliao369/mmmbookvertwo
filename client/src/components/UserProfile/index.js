@@ -388,7 +388,7 @@ const UserProfile = ({ currentUser }) => {
                 <button onClick={() => updateProfile()}>Update</button>
               </div>
             </div>
-            <div className="chefProfileBtn">
+            <div>
               {currentUser.userID === profileUser.userID ? (
                 <button onClick={() => settingsFlip()}>
                   <EditOutlinedIcon />

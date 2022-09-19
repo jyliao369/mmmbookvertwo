@@ -21,14 +21,14 @@ a {
   border-width: thin;
   border-color: lightgray;
   position: fixed;
-  background: rgb(255, 255, 200, 0.7);
+  background: rgb(246, 227, 235, 0.7);
 }
 .navBarBtn {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  width: 50%;
+  width: 60%;
 }
 .navBarBtn a,
 .navBarBtn div {
@@ -108,6 +108,7 @@ a {
 }
 .chefProfileCardCont {
   display: flex;
+  background: rgb(61, 80, 148, 0.75);
 }
 .chefProfileCard {
   display: flex;
@@ -225,10 +226,16 @@ a {
   border-top: solid;
   border-width: thin;
   border-color: lightgray;
+  background: rgb(15, 12, 81, 0.85);
+  color: white;
+  font-size: 20px;
 }
 .userProfilePageMain {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
   min-height: 100%;
-  background: rgb(134, 245, 231, 0.5);
+  background: rgb(181, 210, 229);
 }
 .userRecipes,
 .userBookmarked,
@@ -261,6 +268,11 @@ a {
   flex-direction: column;
   align-items: center;
 }
+.createRecipeCont {
+  display: flex;
+  flex-direction: column;
+  background: rgb(12, 96, 130, 0.75);
+}
 /* #NEWRECIPES */
 .newRecipes {
   display: flex;
@@ -274,6 +286,7 @@ a {
   position: fixed;
   right: 0;
   overflow: auto;
+  background: rgb(246, 227, 235, 0.7);
 }
 .newRecipes::-webkit-scrollbar {
   display: none;
@@ -290,6 +303,7 @@ a {
   border-style: solid;
   border-width: thin;
   border-color: lightgray;
+  background: white;
 }
 .newRecipe p,
 .newRecipe h3 {
@@ -493,23 +507,65 @@ a {
   display: flex;
   flex-direction: column;
 }
+.recipeCardC button {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 0px 5px 0px;
+  border-style: none;
+  border-radius: 10px;
+}
+.seeInsIngBtn {
+  background: rgb(134, 191, 87);
+}
+.seeInsIngBtn svg {
+  color: rgb(213, 233, 196);
+}
+.chefProfileBtn {
+  background: rgb(253, 202, 82);
+}
+.chefProfileBtn svg {
+  color: rgb(254, 236, 194);
+}
+.bookmarkBtn {
+  background: rgb(168, 51, 45);
+}
+.bookmarkBtn svg {
+  color: rgb(212, 153, 150);
+}
+.likeBtn {
+  background: rgb(245, 243, 145);
+}
+.likeBtn svg {
+  color: rgb(196, 194, 116);
+}
+.reviewBtn {
+  background: rgb(16, 65, 143, 0.8);
+}
+.reviewBtn svg {
+  color: rgb(195, 208, 227);
+}
 /* #CREATERECIPEFORM */
 .createRecipeFormA {
   display: flex;
-  height: 410px;
+  height: 475px;
   margin: 3%;
   border-style: solid;
-  border-width: thin;
-  border-color: black;
+  border-width: 15px;
+  border-radius: 20px;
+  border-color: #ffffc5;
+  background: #f4abac;
 }
 .createNewRecipeImg {
   width: 55%;
+  margin: 1%;
   background: lightgray;
 }
 .createNewRecipeA {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: 100%;
 }
 .createNewRecipeAb {
@@ -539,15 +595,19 @@ a {
   margin: 10px;
 }
 .createRecipeFormB {
+  display: flex;
   height: 475px;
   margin: 3%;
   border-style: solid;
-  border-width: thin;
-  border-color: black;
+  border-width: 15px;
+  border-radius: 20px;
+  border-color: #ffffc5;
+  background: #f4abac;
 }
 .createNewRecipeB {
   display: flex;
   flex-direction: column;
+  width: 100%;
   height: 100%;
 }
 .createNewRecipeBa {
@@ -579,6 +639,10 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
+  background: rgb(148, 231, 193, 0.3);
 }
 .recipePageCardAa {
   display: flex;
@@ -587,42 +651,65 @@ a {
 }
 .recipePageCardImg {
   width: 40%;
+  margin: 1%;
   background-color: lightgray;
 }
 .recipePageCardInfo {
   width: 60%;
+  margin: 1%;
 }
 .recipePageCardA,
 .recipePageCardB {
   max-width: 90%;
   border-style: solid;
-  border-width: thin;
-  border-color: lightgray;
+  border-width: 15px;
+  border-radius: 20px;
+  border-color: #ffffc5;
   margin: 2%;
+  background: #f4abac;
 }
 .recipePageCardA {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 400px;
-  width: 100%;
+  width: 90%;
+  height: 475px;
+  border-style: solid;
+  border-width: 15px;
+  border-radius: 20px;
+  border-color: #ffffc5;
+  margin: 3%;
+}
+.recipePageCardInfoA h2,
+.recipePageCardInfoA p,
+.recipePageCardInfoB p {
+  padding: 2%;
+  margin: 0px 0px 10px 0px;
+  background: #f6bcbd;
+  border-radius: 7px;
+  border-style: solid;
+  border-width: 4px;
+  border-color: #f5b3b4;
+  font-size: 16px;
 }
 .recipePageCardInfoB {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 .recipePageCardInfoBa {
   display: flex;
   flex-direction: column;
+  width: 45%;
 }
 .recipePageCardInfoC {
   display: flex;
   flex-direction: column;
-  padding: 2.5%;
 }
 .recipePageCardInfoCa {
   display: flex;
   flex-direction: row;
+  margin: 0px 0px 15px 0px;
 }
 .recipePageCardInfoCa p,
 .recipePageCardInfoCb p {
@@ -630,9 +717,28 @@ a {
 }
 .recipePageCardIng {
   width: 35%;
+  padding: 1%;
 }
 .recipePageCardIns {
   width: 65%;
+  padding: 1%;
+}
+.recipePageCardIng h3,
+.recipePageCardIns h3,
+.recipePageCardInfoCb h3 {
+  padding: 5px;
+}
+.recipePageCardIngA,
+.recipePageCardInsA,
+.recipePageCardInfoCb p {
+  display: flex;
+  background: #f6bcbd;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 10px;
+}
+.recipePageCardInfoCb {
+  padding: 1%;
 }
 .reviewFormSection {
   display: flex;
@@ -642,6 +748,12 @@ a {
   border-width: thin;
   border-color: lightgray;
   padding: 2% 0px 2% 0px;
+  background: rgb(224, 224, 224, 0.2);
+}
+.reviewSectionCont {
+  display: flex;
+  flex-direction: column;
+  background: rgb(224, 224, 224, 0.2);
 }
 .reviewFormCont {
   display: flex;
@@ -674,6 +786,9 @@ a {
 .ratingForm {
   display: flex;
   flex-direction: row;
+}
+.reviewsSections {
+  background: rgb(224, 224, 224, 0.2);
 }
 .userRatingCont {
   padding: 1.5%;

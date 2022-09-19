@@ -156,28 +156,33 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                     onClick={(event) =>
                       flipSide(event, `recipeCard${recipe.recipeID}`)
                     }
+                    className="seeInsIngBtn"
                   >
                     <FeaturedPlayListOutlinedIcon />
                   </button>
-                  <button style={{ cursor: "pointer" }}>
+                  <button
+                    style={{ cursor: "pointer" }}
+                    className="chefProfileBtn"
+                  >
                     <Link to={`/profile/${recipe.userID}`}>
                       <AccountBoxOutlinedIcon />
                     </Link>
                   </button>
-                  <h2>{isLoggedIn}</h2>
+
                   {isLoggedIn === true ? (
                     <>
                       <button
                         style={{ cursor: "pointer" }}
                         onClick={(event) => addFavorite(event, recipe.recipeID)}
+                        className="bookmarkBtn"
                       >
                         <FavoriteBorderOutlinedIcon />
-                        <p>#</p>
                       </button>
 
                       <button
                         style={{ cursor: "pointer" }}
                         onClick={(event) => addLike(event, recipe.recipeID)}
+                        className="likeBtn"
                       >
                         {recipe.likeID !== null && recipe.likeID !== "" ? (
                           <>
@@ -188,24 +193,20 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                             <StarOutlineOutlinedIcon />
                           </>
                         )}
-                        <p>#</p>
                       </button>
                     </>
                   ) : (
                     <>
-                      <button>
+                      <button className="bookmarkBtn">
                         <FavoriteBorderOutlinedIcon />
-                        <p>#</p>
                       </button>
-                      <button>
+                      <button className="likeBtn">
                         <StarOutlineOutlinedIcon />
-                        <p>#</p>
                       </button>
                     </>
                   )}
-                  <button>
+                  <button className="reviewBtn">
                     <ChatBubbleOutlineOutlinedIcon />
-                    <p>#</p>
                   </button>
                 </div>
               </div>

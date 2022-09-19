@@ -88,7 +88,7 @@ app.post("/register", (req, res) => {
 app.post("/login", (req, res) => {
   const loginEmail = req.body.loginEmail;
   const loginPass = req.body.loginPass;
-  console.log(loginEmail);
+  // console.log(loginEmail);
 
   db.query(
     `SELECT * FROM heroku_289aeecd4cbfb0f.users_table WHERE email = ?`,
@@ -175,28 +175,6 @@ app.put(`/updateUser/:userID`, (req, res) => {
   const favCuisine = req.body.favCuisine;
   const chefDesc = req.body.chefDesc;
 
-  // console.log(
-  //   userID +
-  //     " " +
-  //     firstName +
-  //     " " +
-  //     lastName +
-  //     " " +
-  //     username +
-  //     " " +
-  //     email +
-  //     " " +
-  //     favRecipe +
-  //     " " +
-  //     favBeverage +
-  //     " " +
-  //     favDessert +
-  //     " " +
-  //     favCuisine +
-  //     " " +
-  //     chefDesc
-  // );
-
   db.query(
     `UPDATE heroku_289aeecd4cbfb0f.users_table SET 
     firstName = "${firstName}", lastName = "${lastName}", username = "${username}", 
@@ -217,10 +195,12 @@ app.put(`/updateUser/:userID`, (req, res) => {
 // #GETALLRECIPES
 app.get("/getAllRecipes", (req, res) => {
   db.query(
-    `SELECT heroku_289aeecd4cbfb0f.recipes_table.*, heroku_289aeecd4cbfb0f.likes_table.likeID, heroku_289aeecd4cbfb0f.likes_table.userID
-    FROM heroku_289aeecd4cbfb0f.recipes_table
-    LEFT JOIN heroku_289aeecd4cbfb0f.likes_table 
-    ON heroku_289aeecd4cbfb0f.likes_table.recipeID = heroku_289aeecd4cbfb0f.recipes_table.recipeID
+    // `SELECT heroku_289aeecd4cbfb0f.recipes_table.*, heroku_289aeecd4cbfb0f.likes_table.likeID, heroku_289aeecd4cbfb0f.likes_table.userID
+    // FROM heroku_289aeecd4cbfb0f.recipes_table
+    // LEFT JOIN heroku_289aeecd4cbfb0f.likes_table
+    // ON heroku_289aeecd4cbfb0f.likes_table.recipeID = heroku_289aeecd4cbfb0f.recipes_table.recipeID
+    // ORDER BY heroku_289aeecd4cbfb0f.recipes_table.recipeID ASC`,
+    `SELECT * FROM heroku_289aeecd4cbfb0f.recipes_table
     ORDER BY heroku_289aeecd4cbfb0f.recipes_table.recipeID ASC`,
     (err, result) => {
       if (err) {
@@ -447,13 +427,13 @@ app.post("/followingUser/:chefUserID", (req, res) => {
 // #CHECKFORFOLLOWERS/FOLLOWING
 app.get("/test/:userID", (req, res) => {
   const info = req.params.userID;
-  console.log(info.split(","));
+  // console.log(info.split(","));
 
   const userID = info.split(",")[0];
   const chefUserID = info.split(",")[1];
 
-  console.log(chefUserID);
-  console.log(userID);
+  // console.log(chefUserID);
+  // console.log(userID);
 
   db.query(
     `SELECT * FROM heroku_289aeecd4cbfb0f.followchef_table 
