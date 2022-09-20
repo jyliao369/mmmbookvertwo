@@ -34,6 +34,7 @@ a {
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100vh;
 
   margin: 0% 30% 0% 17%;
 }
@@ -59,6 +60,15 @@ a {
 }
 #filteredSection {
   display: none;
+}
+/* LOGIN/REGISTER */
+.loginPage,
+.registerPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60%;
 }
 /* #NEWRECIPES */
 .newRecipes {
@@ -183,6 +193,18 @@ a {
 .buttonBar {
   display: flex;
   flex-direction: row;
+}
+/* LOGIN/REGISTERFORM */
+.loginForm,
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 35%;
+
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
 }
 /*.navBar {
   display: flex;
