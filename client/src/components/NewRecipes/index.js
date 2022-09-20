@@ -23,7 +23,7 @@ const NewRecipes = () => {
 
       <div className="newRecipeCont">
         {allRecipes.map((recipe) => (
-          <div className="newRecipe" key={recipe.recipeID}>
+          <div className="newRecipeCard" key={recipe.recipeID}>
             <h3>{recipe.name}</h3>
             <p>Description: {recipe.description.slice(0, 180)}</p>
             <div className="newRecipeInfo">

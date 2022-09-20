@@ -95,7 +95,9 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
             <div className="recipeCardIn">
               <div className="recipeCardA" id={`recipeCard${recipe.recipeID}a`}>
                 <div className="recipeCardMainInfo">
-                  <div className="recipeImage"></div>
+                  <Link key={recipe.recipeID} to={`/recipe/${recipe.recipeID}`}>
+                    <div className="recipeImage"></div>
+                  </Link>
                   <div className="recipeInfo">
                     <div className="recipeInfoA">
                       <h3>{recipe.name}</h3>
