@@ -1,5 +1,6 @@
 * {
   margin: 0px;
+  padding: 0px;
   text-decoration: none;
 }
 a {
@@ -12,6 +13,145 @@ a {
 }
 /* #NAVBAR */
 .navBar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 15%;
+  height: 100vh;
+
+  border-right: solid;
+  border-width: 2px;
+  border-color: black;
+
+  position: fixed;
+}
+.navBarBtn {
+  display: flex;
+  flex-direction: column;
+}
+/* #MAINPAGE */
+.mainPage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  margin: 0% 28% 0% 15%;
+}
+/* #HOMEPAGE */
+.homePage {
+  width: 100%;
+}
+.allRecipesCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* #NEWRECIPES */
+.newRecipes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 28%;
+  height: 100vh;
+
+  border-left: solid;
+  border-width: 2px;
+  border-color: black;
+
+  position: fixed;
+  overflow: auto;
+  right: 0px;
+}
+.newRecipes::-webkit-scrollbar {
+  display: none;
+}
+
+/* --------------------------------------------------------------------- */
+/* #PAGEBANNER */
+.pageBanner {
+  padding: 1.5%;
+
+  border-bottom: solid;
+  border-width: 2px;
+  border-color: black;
+}
+/* #RECIPECARDDESIGN */
+.recipeCard {
+  width: 85%;
+  height: 425px;
+  margin: 2.5%;
+
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+}
+.recipeCardIn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+}
+.recipeCardA {
+  width: 100%;
+  height: 100%;
+}
+.recipeCardMainInfo {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+.recipeImage {
+  width: 45%;
+  background: lightgoldenrodyellow;
+}
+.recipeInfo {
+  width: 55%;
+}
+.recipeCardB {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.recipeCardIngIns {
+  display: flex;
+  flex-direction: row;
+  height: 85%;
+}
+.recipeCardIng {
+  width: 40%;
+}
+.recipeCardIns {
+  width: 60%;
+}
+.recipeCardIng,
+.recipeCardIns {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.recipeCardIng div,
+.recipeCardIns div {
+  overflow: auto;
+}
+.recipeCardIng div::-webkit-scrollbar,
+.recipeCardIns div::-webkit-scrollbar {
+  display: none;
+}
+.recipeCardIng div p,
+.recipeCardIns div p {
+  margin: 0px 0px 3.5% 0px;
+}
+.recipeCardAdd {
+  display: flex;
+  flex-direction: column;
+}
+.recipeCardC {
+  display: flex;
+  flex-direction: column;
+}
+
+/*.navBar {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -76,20 +216,20 @@ a {
 .logOutButton svg {
   color: #f9f9f9;
 }
-/* #MAINPAGE */
+
 .mainPage {
   width: 100%;
   height: 100vh;
   margin: 0% 30% 0% 18%;
 }
-/* #HOMEPAGE */
+
 .allRecipesCont {
   display: flex;
   flex-direction: column;
   align-items: center;
   background: rgb(12, 198, 184, 0.25);
 }
-/* #EXPLOREPAGE */
+
 .filteredSection {
   display: flex;
   flex-direction: row;
@@ -102,7 +242,7 @@ a {
 #filteredSection {
   display: none;
 }
-/* #USERPROPHILE */
+
 .profilePage {
   height: 100%;
 }
@@ -262,7 +402,7 @@ a {
   border-radius: 50%;
   background: lightgray;
 }
-/* #CREATERECIPEPAGE */
+
 .createRecipeBtn {
   display: flex;
   flex-direction: column;
@@ -273,7 +413,7 @@ a {
   flex-direction: column;
   background: rgb(12, 96, 130, 0.75);
 }
-/* #NEWRECIPES */
+
 .newRecipes {
   display: flex;
   flex-direction: column;
@@ -328,7 +468,7 @@ a {
   display: flex;
   align-items: center;
 }
-/* LOGIN/REGISTER */
+
 .loginPage,
 .registerPage {
   display: flex;
@@ -359,8 +499,7 @@ a {
   font-size: 16px;
 }
 
-/* -------------------------------------------------------------------------------- */
-/* PAGEBANNER */
+
 .pageBanner {
   display: flex;
   flex-direction: row;
@@ -374,7 +513,7 @@ a {
 .pageBanner p {
   font-size: 20px;
 }
-/* #RECIPECARDDESIGN */
+
 .recipeCard {
   width: 90%;
   height: 475px;
@@ -547,7 +686,6 @@ a {
 .reviewBtn svg {
   color: rgb(195, 208, 227);
 }
-/* #CREATERECIPEFORM */
 .createRecipeFormA {
   display: flex;
   height: 475px;
@@ -630,7 +768,7 @@ a {
 .createRecipeAdd {
   display: flex;
 }
-/* #RECIPEPAGECARD */
+
 .recipePage {
   display: flex;
   flex-direction: column;
@@ -807,4 +945,4 @@ a {
 .notification {
   display: flex;
   justify-content: center;
-}
+} */
