@@ -70,6 +70,18 @@ a {
   justify-content: center;
   height: 60%;
 }
+/* #USERPROFILE */
+.chefProfileNavBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2%;
+
+  border-bottom: solid;
+  border-top: solid;
+  border-width: 2px;
+  border-color: black;
+}
 /* #NEWRECIPES */
 .newRecipes {
   display: flex;
@@ -276,6 +288,76 @@ a {
   height: 100%;
 }
 .createNewRecipeBa textarea {
+  width: 100%;
+}
+/* #USERPROFILECARD */
+.chefProfileCardCont {
+  display: flex;
+  justify-content: center;
+}
+.chefProfileCard {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  height: 400px;
+  margin: 2.5%;
+
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+}
+.chefProfileIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45%;
+  height: 100%;
+  background: lightgoldenrodyellow;
+}
+.userIconCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.userIcon {
+  width: 150px;
+  height: 150px;
+  background: lightgray;
+  border-radius: 37px;
+}
+.chefProfileInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 55%;
+}
+.chefProfileInfoA {
+  display: flex;
+  flex-direction: column;
+}
+.chefProfileInfoAb {
+  display: flex;
+  justify-content: space-between;
+}
+.chefProfileInfoAd {
+  display: flex;
+  flex-direction: row;
+}
+.chefProfileInfoAd div {
+  width: 100%;
+}
+.chefProfileSettings {
+  display: flex;
+  flex-direction: column;
+}
+#chefProfileSettings {
+  display: none;
+}
+.chefProfileUpdateA {
+  display: flex;
+}
+.chefProfileUpdateA input,
+.chefProfileUpdateA select {
   width: 100%;
 }
 

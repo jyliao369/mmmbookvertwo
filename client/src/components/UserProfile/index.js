@@ -258,9 +258,9 @@ const UserProfile = ({ currentUser }) => {
                 <h3>{profileUser.chefDesc}</h3>
               </div>
               {/* <div>
-              <p>Number of Recipes: </p>
-              <p>{userRecipes.length}</p>
-            </div> */}
+                <p>Number of Recipes: </p>
+                <p>{userRecipes.length}</p>
+              </div> */}
               <div className="chefProfileInfoAd">
                 <div>
                   <h3>Favorite Recipe: </h3>
@@ -400,6 +400,7 @@ const UserProfile = ({ currentUser }) => {
           </div>
         </div>
       </div>
+
       <div className="chefProfileNavBar">
         <div onClick={() => myRecipes()} style={{ cursor: "pointer" }}>
           My Recipes
