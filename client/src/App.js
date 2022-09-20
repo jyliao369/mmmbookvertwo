@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Explore from "./components/Explore";
+import DrinksPage from "./components/DrinksPage";
+import DishesPage from "./components/DishesPage";
 import UserProfile from "./components/UserProfile";
 import NewRecipes from "./components/NewRecipes";
 import Profile from "./components/Profile";
@@ -55,6 +57,8 @@ function App() {
               }
             />
             <Route path="/explore" element={<Explore />} />
+            <Route path="/drinks" element={<DrinksPage />} />
+            <Route path="/dishes" element={<DishesPage />} />
             <Route
               path="/userProfile/:userID"
               element={<UserProfile currentUser={currentUser} />}

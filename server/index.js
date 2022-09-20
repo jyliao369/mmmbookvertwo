@@ -212,6 +212,36 @@ app.get("/getAllRecipes", (req, res) => {
   );
 });
 
+// #GETONLYDRINKSANDBEVERAGES
+app.get("/drinksOnly", (req, res) => {
+  db.query(
+    `SELECT * FROM heroku_289aeecd4cbfb0f.recipes_table 
+    WHERE category = "Drinks" OR category = "Beverage"`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+// #GETALLRECIPENOTDRINKSORBEVERAGE
+app.get("/dishesOnly", (req, res) => {
+  db.query(
+    `SELECT * FROM heroku_289aeecd4cbfb0f.recipes_table 
+    WHERE category != "Drinks" OR category != "Beverage"`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 // #GETALLRECIPESBYUSERID
 app.get("/getAllRecipesID/:userID", (req, res) => {
   const userID = req.params.userID;

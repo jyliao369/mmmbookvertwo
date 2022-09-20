@@ -36,11 +36,11 @@ const Navbar = ({ setIsLoggedIn, isLoggedIn, currentUser }) => {
           <SearchIcon />
           {/* <p>Explore</p> */}
         </Link>
-        <Link to="/explore" className="drinkButton">
+        <Link to="/drinks" className="drinkButton">
           <LocalBarIcon />
           {/* <p>Drinks</p> */}
         </Link>
-        <Link to="/explore" className="entreeButton">
+        <Link to="/dishes" className="entreeButton">
           <RestaurantIcon />
           {/* <p>Entree Only</p> */}
         </Link>
