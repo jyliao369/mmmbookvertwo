@@ -69,7 +69,6 @@ const Create = ({ currentUser }) => {
                 placeholder="Recipe Description"
                 value={recipeDesc}
                 onChange={(e) => setrecipeDesc(e.target.value)}
-                rows={6}
               />
             </div>
             <div className="createNewRecipeAc">
@@ -146,32 +145,32 @@ const Create = ({ currentUser }) => {
         </div>
 
         <div className="createRecipeFormB">
-          <div className="createNewRecipeB">
-            <div className="createNewRecipeBa">
-              <div className="createRecipeIng">
-                <textarea
-                  placeholder="Ingredients"
-                  value={ingredients}
-                  onChange={(e) => setIngredients(e.target.value)}
-                />
-              </div>
-              <div className="createRecipeIns">
-                <textarea
-                  placeholder="Instructions"
-                  value={instructions}
-                  onChange={(e) => setInstructions(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="createRecipeAdd">
-              <textarea
-                placeholder="Additional Notes"
-                value={addNotes}
-                onChange={(e) => setAddNotes(e.target.value)}
-                rows={4}
-              />
-            </div>
+          {/* <div className="createNewRecipeB"> */}
+          <div className="createNewRecipeBa">
+            {/* <div className="createRecipeIng"> */}
+            <textarea
+              placeholder="Ingredients"
+              value={ingredients}
+              onChange={(e) => setIngredients(e.target.value)}
+            />
+            {/* </div> */}
+            {/* <div className="createRecipeIns"> */}
+            <textarea
+              placeholder="Instructions"
+              value={instructions}
+              onChange={(e) => setInstructions(e.target.value)}
+            />
+            {/* </div> */}
           </div>
+          {/* <div className="createRecipeAdd"> */}
+          <textarea
+            placeholder="Additional Notes"
+            value={addNotes}
+            onChange={(e) => setAddNotes(e.target.value)}
+            rows={4}
+          />
+          {/* </div> */}
+          {/* </div> */}
         </div>
         <div className="createRecipeBtn">
           {recipeName === "" ||
