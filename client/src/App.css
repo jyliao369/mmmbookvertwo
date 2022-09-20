@@ -46,6 +46,20 @@ a {
   flex-direction: column;
   align-items: center;
 }
+/* #EXPLOREPAGE */
+.filteredSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2.5%;
+
+  border-bottom: solid;
+  border-width: 2px;
+  border-color: black;
+}
+#filteredSection {
+  display: none;
+}
 /* #NEWRECIPES */
 .newRecipes {
   display: flex;
@@ -69,7 +83,10 @@ a {
 /* --------------------------------------------------------------------- */
 /* #PAGEBANNER */
 .pageBanner {
-  padding: 1.5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2.5%;
 
   border-bottom: solid;
   border-width: 2px;
