@@ -91,7 +91,6 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
       <div className="allRecipesCont">
         {allRecipes.map((recipe) => (
           <div key={recipe.recipeID} className="recipeCard">
-            {/* <Link key={recipe.recipeID} to={`/recipe/${recipe.recipeID}`}> */}
             <div className="recipeCardIn">
               <div className="recipeCardA" id={`recipeCard${recipe.recipeID}a`}>
                 <div className="recipeCardMainInfo">
@@ -206,7 +205,6 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                 </button>
               </div>
             </div>
-            {/* </Link> */}
           </div>
         ))}
       </div>

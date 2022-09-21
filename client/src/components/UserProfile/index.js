@@ -10,6 +10,9 @@ import StarPurple500OutlinedIcon from "@mui/icons-material/StarPurple500Outlined
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
 import CopyAllOutlinedIcon from "@mui/icons-material/CopyAllOutlined";
+import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
+import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
+import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 
 import * as dataList from "../data";
 
@@ -42,8 +45,8 @@ const UserProfile = ({ currentUser }) => {
     document.getElementById("userRecipes").style.display = "flex";
     document.getElementById("userBookmarked").style.display = "none";
     document.getElementById("userReviews").style.display = "none";
-    document.getElementById("usersFollowers").style.display = "none";
-    document.getElementById("usersFollowing").style.display = "none";
+    document.getElementById("userFollowers").style.display = "none";
+    document.getElementById("userFollowing").style.display = "none";
   };
 
   const myFavorite = () => {
@@ -51,9 +54,9 @@ const UserProfile = ({ currentUser }) => {
 
     document.getElementById("userRecipes").style.display = "none";
     document.getElementById("userBookmarked").style.display = "flex";
-    document.getElementById("userReviews").style.display = "nopne";
-    document.getElementById("usersFollowers").style.display = "none";
-    document.getElementById("usersFollowing").style.display = "none";
+    document.getElementById("userReviews").style.display = "none";
+    document.getElementById("userFollowers").style.display = "none";
+    document.getElementById("userFollowing").style.display = "none";
   };
 
   const myReviews = () => {
@@ -62,8 +65,8 @@ const UserProfile = ({ currentUser }) => {
     document.getElementById("userRecipes").style.display = "none";
     document.getElementById("userBookmarked").style.display = "none";
     document.getElementById("userReviews").style.display = "flex";
-    document.getElementById("usersFollowers").style.display = "none";
-    document.getElementById("usersFollowing").style.display = "none";
+    document.getElementById("userFollowers").style.display = "none";
+    document.getElementById("userFollowing").style.display = "none";
   };
 
   const myFollowers = () => {
@@ -72,8 +75,8 @@ const UserProfile = ({ currentUser }) => {
     document.getElementById("userRecipes").style.display = "none";
     document.getElementById("userBookmarked").style.display = "none";
     document.getElementById("userReviews").style.display = "none";
-    document.getElementById("usersFollowers").style.display = "flex";
-    document.getElementById("usersFollowing").style.display = "none";
+    document.getElementById("userFollowers").style.display = "flex";
+    document.getElementById("userFollowing").style.display = "none";
   };
 
   const imFollowing = () => {
@@ -82,8 +85,8 @@ const UserProfile = ({ currentUser }) => {
     document.getElementById("userRecipes").style.display = "none";
     document.getElementById("userBookmarked").style.display = "none";
     document.getElementById("userReviews").style.display = "none";
-    document.getElementById("usersFollowers").style.display = "none";
-    document.getElementById("usersFollowing").style.display = "flex";
+    document.getElementById("userFollowers").style.display = "none";
+    document.getElementById("userFollowing").style.display = "flex";
   };
 
   const flipSide = (event, recipeCard) => {
@@ -432,11 +435,17 @@ const UserProfile = ({ currentUser }) => {
                       className="recipeCardA"
                       id={`recipeCard${recipe.recipeID}a`}
                     >
-                      <div className="recipeCardAB">
-                        <div className="recipeImage"></div>
+                      <div className="recipeCardMainInfo">
+                        <Link
+                          key={recipe.recipeID}
+                          to={`/recipe/${recipe.recipeID}`}
+                        >
+                          <div className="recipeImage"></div>
+                        </Link>
                         <div className="recipeInfo">
                           <div className="recipeInfoA">
-                            <h2>{recipe.name}</h2>
+                            <h3>{recipe.name}</h3>
+                            <p>Posted by: {recipe.username} on "date"</p>
                             <p>
                               Description: {recipe.description.slice(0, 180)}
                             </p>
@@ -463,7 +472,7 @@ const UserProfile = ({ currentUser }) => {
                       className="recipeCardB"
                       id={`recipeCard${recipe.recipeID}b`}
                     >
-                      <div className="recipeCardBA">
+                      <div className="recipeCardIngIns">
                         <div className="recipeCardIng">
                           <h3>Ingredients</h3>
                           <div>
@@ -488,21 +497,67 @@ const UserProfile = ({ currentUser }) => {
                         <p>{recipe.addNotes}</p>
                       </div>
                     </div>
-                    <div className="recipeCardC">
+                    {/* <div className="recipeCardC">
                       <button
+                        style={{ cursor: "pointer" }}
                         onClick={(event) =>
                           flipSide(event, `recipeCard${recipe.recipeID}`)
                         }
+                        className="seeInsIngBtn"
                       >
                         <FeaturedPlayListOutlinedIcon />
                       </button>
-                      <button>
-                        <FavoriteBorderOutlinedIcon />
+                      <button
+                        style={{ cursor: "pointer" }}
+                        className="chefProfileBtn"
+                      >
+                        <Link to={`/profile/${recipe.userID}`}>
+                          <AccountBoxOutlinedIcon />
+                        </Link>
                       </button>
-                      <button>
+
+                      {isLoggedIn === true ? (
+                        <>
+                          <button
+                            style={{ cursor: "pointer" }}
+                            onClick={(event) =>
+                              addFavorite(event, recipe.recipeID)
+                            }
+                            className="bookmarkBtn"
+                          >
+                            <FavoriteBorderOutlinedIcon />
+                          </button>
+
+                          <button
+                            style={{ cursor: "pointer" }}
+                            onClick={(event) => addLike(event, recipe.recipeID)}
+                            className="likeBtn"
+                          >
+                            {recipe.likeID !== null && recipe.likeID !== "" ? (
+                              <>
+                                <StarOutlinedIcon />
+                              </>
+                            ) : (
+                              <>
+                                <StarOutlineOutlinedIcon />
+                              </>
+                            )}
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <button className="bookmarkBtn">
+                            <FavoriteBorderOutlinedIcon />
+                          </button>
+                          <button className="likeBtn">
+                            <StarOutlineOutlinedIcon />
+                          </button>
+                        </>
+                      )}
+                      <button className="reviewBtn">
                         <ChatBubbleOutlineOutlinedIcon />
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                   {/* </Link> */}
                 </div>
@@ -616,19 +671,17 @@ const UserProfile = ({ currentUser }) => {
             <>
               {userReviews.map((review) => (
                 <div className="userRatingCont">
-                  <div className="userRating">
-                    <div className="profileIcon">
-                      <div className="profileImg" />
-                    </div>
-                    <div className="userReview">
-                      <h3>{review.username} Posted on: (date)</h3>
-                      {review.rating === 1 ? <>{ratingStar(1)}</> : <></>}
-                      {review.rating === 2 ? <>{ratingStar(2)}</> : <></>}
-                      {review.rating === 3 ? <>{ratingStar(3)}</> : <></>}
-                      {review.rating === 4 ? <>{ratingStar(4)}</> : <></>}
-                      {review.rating === 5 ? <>{ratingStar(5)}</> : <></>}
-                      <p>{review.review}</p>
-                    </div>
+                  <div className="profileIcon">
+                    <div className="profileImg" />
+                  </div>
+                  <div className="userReview">
+                    <h3>{review.username} Posted on: (date)</h3>
+                    {review.rating === 1 ? <>{ratingStar(1)}</> : <></>}
+                    {review.rating === 2 ? <>{ratingStar(2)}</> : <></>}
+                    {review.rating === 3 ? <>{ratingStar(3)}</> : <></>}
+                    {review.rating === 4 ? <>{ratingStar(4)}</> : <></>}
+                    {review.rating === 5 ? <>{ratingStar(5)}</> : <></>}
+                    <p>{review.review}</p>
                   </div>
                 </div>
               ))}
@@ -644,14 +697,12 @@ const UserProfile = ({ currentUser }) => {
         </div>
 
         {/* ALL FOLLOWERS */}
-        <div className="usersFollowers" id="usersFollowers">
+        <div className="userFollowers" id="userFollowers">
           {chefFollowers.length > 0 ? (
             <>
               {chefFollowers.map((chef) => (
                 <div className="followingProfile">
-                  <div className="followingIcon">
-                    <div className="followingImg" />
-                  </div>
+                  <div className="followingIcon"></div>
                   <Link to={`/profile/${chef.chefUserID}`}>
                     <h3>{chef.username}</h3>
                   </Link>
@@ -666,14 +717,12 @@ const UserProfile = ({ currentUser }) => {
         </div>
 
         {/* ALL CHEFS USER IS FOLLOWING */}
-        <div className="usersFollowing" id="usersFollowing">
+        <div className="userFollowing" id="userFollowing">
           {chefsFollowing.length > 0 ? (
             <>
               {chefsFollowing.map((chef) => (
                 <div className="followingProfile">
-                  <div className="followingIcon">
-                    <div className="followingImg" />
-                  </div>
+                  <div className="followingIcon"></div>
                   <Link to={`/profile/${chef.chefUserID}`}>
                     <h3>{chef.chefUsername}</h3>
                   </Link>
@@ -687,6 +736,15 @@ const UserProfile = ({ currentUser }) => {
           )}
         </div>
       </div>
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 };

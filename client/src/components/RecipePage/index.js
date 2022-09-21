@@ -201,99 +201,97 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
           </div>
         </div>
         <div className="recipePageCardB">
-          <div className="recipePageCardInfoC">
-            <div className="recipePageCardInfoCa">
-              <div className="recipePageCardIng">
-                <h3>Ingredients</h3>
-                <div className="recipePageCardIngA">
-                  {recipeIng.map((ingredient) => (
-                    <p key={ingredient.slice(5, 15)}>{ingredient}</p>
-                  ))}
-                </div>
-              </div>
-              <div className="recipePageCardIns">
-                <h3>Instructions</h3>
-                <div className="recipePageCardInsA">
-                  {recipeIns.map((instruction) => (
-                    <p key={instruction.slice(5, 15)}>{instruction}</p>
-                  ))}
-                </div>
+          {/* <div className="recipePageCardInfoC"> */}
+          <div className="recipePageCardInfoBb">
+            <div className="recipePageCardIng">
+              <h3>Ingredients</h3>
+              <div className="recipePageCardIngA">
+                {recipeIng.map((ingredient) => (
+                  <p key={ingredient.slice(5, 15)}>{ingredient}</p>
+                ))}
               </div>
             </div>
-            <div className="recipePageCardInfoCb">
-              <h3>Additional Notes:</h3>
-              <p>{recipeInfo.addNotes}</p>
+            <div className="recipePageCardIns">
+              <h3>Instructions</h3>
+              <div className="recipePageCardInsA">
+                {recipeIns.map((instruction) => (
+                  <p key={instruction.slice(5, 15)}>{instruction}</p>
+                ))}
+              </div>
             </div>
           </div>
+          <div className="recipePageCardInfoCb">
+            <h3>Additional Notes:</h3>
+            <p>{recipeInfo.addNotes}</p>
+          </div>
+          {/* </div> */}
         </div>
       </div>
 
       {isLoggedIn === false ? (
         <></>
       ) : (
-        <div className="reviewFormSection">
-          <div className="reviewFormCont">
-            <div className="profileIcon">
-              <div className="profileImg" />
-              <p>{currentUser.username}</p>
-            </div>
-            <div className="reviewForm">
-              <textarea
-                placeholder="Write your Review"
-                value={review}
-                onChange={(e) => setReview(e.target.value)}
-                rows={6}
-              />
-              <div className="reviewBtnCont">
-                <div className="ratingForm">
-                  <p>Your Rating:</p>
-                  <div id="star1">
-                    <StarPurple500OutlinedIcon
-                      onClick={() => setRate(1)}
-                      onMouseOver={() => rate(1)}
-                      onMouseLeave={() => reset()}
-                      style={{ cursor: "pointer" }}
-                    />
-                  </div>
-                  <div id="star2">
-                    <StarPurple500OutlinedIcon
-                      onClick={() => setRate(2)}
-                      onMouseOver={() => rate(2)}
-                      onMouseLeave={() => reset()}
-                      style={{ cursor: "pointer" }}
-                    />
-                  </div>
-                  <div id="star3">
-                    <StarPurple500OutlinedIcon
-                      onClick={() => setRate(3)}
-                      onMouseOver={() => rate(3)}
-                      onMouseLeave={() => reset()}
-                      style={{ cursor: "pointer" }}
-                    />
-                  </div>
-                  <div id="star4">
-                    <StarPurple500OutlinedIcon
-                      onClick={() => setRate(4)}
-                      onMouseOver={() => rate(4)}
-                      onMouseLeave={() => reset()}
-                      style={{ cursor: "pointer" }}
-                    />
-                  </div>
-                  <div id="star5">
-                    <StarPurple500OutlinedIcon
-                      onClick={() => setRate(5)}
-                      onMouseOver={() => rate(5)}
-                      onMouseLeave={() => reset()}
-                      style={{ cursor: "pointer" }}
-                    />
-                  </div>
+        <div className="reviewFormCont">
+          <div className="profileIcon">
+            <div className="profileImg" />
+            <p>{currentUser.username}</p>
+          </div>
+          <div className="reviewForm">
+            <textarea
+              placeholder="Write your Review"
+              value={review}
+              onChange={(e) => setReview(e.target.value)}
+              rows={6}
+            />
+            <div className="reviewBtnCont">
+              <div className="ratingForm">
+                <p>Your Rating:</p>
+                <div id="star1">
+                  <StarPurple500OutlinedIcon
+                    onClick={() => setRate(1)}
+                    onMouseOver={() => rate(1)}
+                    onMouseLeave={() => reset()}
+                    style={{ cursor: "pointer" }}
+                  />
                 </div>
-                {rating === 0 || review === "" ? (
-                  <button disabled={true}>Post Review</button>
-                ) : (
-                  <button onClick={() => postReview()}>Post Review</button>
-                )}
+                <div id="star2">
+                  <StarPurple500OutlinedIcon
+                    onClick={() => setRate(2)}
+                    onMouseOver={() => rate(2)}
+                    onMouseLeave={() => reset()}
+                    style={{ cursor: "pointer" }}
+                  />
+                </div>
+                <div id="star3">
+                  <StarPurple500OutlinedIcon
+                    onClick={() => setRate(3)}
+                    onMouseOver={() => rate(3)}
+                    onMouseLeave={() => reset()}
+                    style={{ cursor: "pointer" }}
+                  />
+                </div>
+                <div id="star4">
+                  <StarPurple500OutlinedIcon
+                    onClick={() => setRate(4)}
+                    onMouseOver={() => rate(4)}
+                    onMouseLeave={() => reset()}
+                    style={{ cursor: "pointer" }}
+                  />
+                </div>
+                <div id="star5">
+                  <StarPurple500OutlinedIcon
+                    onClick={() => setRate(5)}
+                    onMouseOver={() => rate(5)}
+                    onMouseLeave={() => reset()}
+                    style={{ cursor: "pointer" }}
+                  />
+                </div>
               </div>
+              {rating === 0 || review === "" ? (
+                <button disabled={true}>Post Review</button>
+              ) : (
+                <button onClick={() => postReview()}>Post Review</button>
+              )}
             </div>
           </div>
         </div>
@@ -303,19 +301,17 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
         <div className="reviewsSectionCont">
           {reviews.map((review) => (
             <div className="userRatingCont">
-              <div className="userRating">
-                <div className="profileIcon">
-                  <div className="profileImg" />
-                </div>
-                <div className="userReview">
-                  <h3>{review.username} Posted on: (date)</h3>
-                  {review.rating === 1 ? <>{ratingStar(1)}</> : <></>}
-                  {review.rating === 2 ? <>{ratingStar(2)}</> : <></>}
-                  {review.rating === 3 ? <>{ratingStar(3)}</> : <></>}
-                  {review.rating === 4 ? <>{ratingStar(4)}</> : <></>}
-                  {review.rating === 5 ? <>{ratingStar(5)}</> : <></>}
-                  <p>{review.review}</p>
-                </div>
+              <div className="profileIcon">
+                <div className="profileImg" />
+              </div>
+              <div className="userReview">
+                <h3>{review.username} Posted on: (date)</h3>
+                {review.rating === 1 ? <>{ratingStar(1)}</> : <></>}
+                {review.rating === 2 ? <>{ratingStar(2)}</> : <></>}
+                {review.rating === 3 ? <>{ratingStar(3)}</> : <></>}
+                {review.rating === 4 ? <>{ratingStar(4)}</> : <></>}
+                {review.rating === 5 ? <>{ratingStar(5)}</> : <></>}
+                <p>{review.review}</p>
               </div>
             </div>
           ))}
