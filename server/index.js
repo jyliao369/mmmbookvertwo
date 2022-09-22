@@ -524,8 +524,6 @@ app.post(`/createBookmark`, (req, res) => {
   const username = req.body.username;
   const recipeID = req.body.recipeID;
 
-  // console.log(userID + " " + username + " " + recipeID);
-
   db.query(
     `SELECT * FROM heroku_289aeecd4cbfb0f.bookmark_table
     WHERE userID = ${userID} AND recipeID = ${recipeID}`,

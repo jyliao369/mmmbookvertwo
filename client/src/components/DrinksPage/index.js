@@ -135,7 +135,9 @@ const DrinksPage = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                 </div>
                 <div className="recipeCardAdd">
                   <h3>Additional Notes:</h3>
-                  <p>{drink.addNotes}</p>
+                  <div>
+                    <p>{drink.addNotes}</p>
+                  </div>
                 </div>
               </div>
               <div className="recipeCardC">

@@ -173,7 +173,9 @@ const DishesPage = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                 </div>
                 <div className="recipeCardAdd">
                   <h3>Additional Notes:</h3>
-                  <p>{dish.addNotes}</p>
+                  <div>
+                    <p>{dish.addNotes}</p>
+                  </div>
                 </div>
               </div>
               <div className="recipeCardC">

@@ -30,19 +30,15 @@ const Navbar = ({ setIsLoggedIn, isLoggedIn, currentUser }) => {
       <div className="navBarBtn">
         <Link to="/" className="homeButton">
           <HouseIcon />
-          {/* <p>Home</p> */}
         </Link>
         <Link to="/explore" className="exploreButton">
           <SearchIcon />
-          {/* <p>Explore</p> */}
         </Link>
         <Link to="/drinks" className="drinkButton">
           <LocalBarIcon />
-          {/* <p>Drinks</p> */}
         </Link>
         <Link to="/dishes" className="entreeButton">
           <RestaurantIcon />
-          {/* <p>Entree Only</p> */}
         </Link>
         {isLoggedIn === false ? (
           <></>
@@ -53,18 +49,15 @@ const Navbar = ({ setIsLoggedIn, isLoggedIn, currentUser }) => {
               className="userButton"
             >
               <PersonIcon />
-              {/* <p>My Profile</p> */}
             </Link>
             <Link to="/create" className="createButton">
               <KitchenIcon />
-              {/* <p>Create</p> */}
             </Link>
           </>
         )}
         {isLoggedIn === false ? (
           <Link to="/login" className="loginButton">
             <LoginIcon />
-            {/* <p>Login</p> */}
           </Link>
         ) : (
           <>
@@ -74,10 +67,6 @@ const Navbar = ({ setIsLoggedIn, isLoggedIn, currentUser }) => {
                 style={{ cursor: "pointer" }}
               />
             </div>
-
-            {/* <p onClick={() => logout()} style={{ cursor: "pointer" }}>
-              Logout
-            </p> */}
           </>
         )}
       </div>

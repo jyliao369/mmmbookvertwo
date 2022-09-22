@@ -7,11 +7,9 @@ import * as dataList from "../data";
 
 import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
 import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
-import LibraryAddOutlinedIcon from "@mui/icons-material/LibraryAddOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FeaturedPlayListOutlinedIcon from "@mui/icons-material/FeaturedPlayListOutlined";
-import RestartAltRoundedIcon from "@mui/icons-material/RestartAltRounded";
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 
 const Explore = ({ isLoggedIn, currentUser }) => {
@@ -223,7 +221,9 @@ const Explore = ({ isLoggedIn, currentUser }) => {
                 </div>
                 <div className="recipeCardAdd">
                   <h3>Additional Notes:</h3>
-                  <p>{recipe.addNotes}</p>
+                  <div>
+                    <p>{recipe.addNotes}</p>
+                  </div>
                 </div>
               </div>
               <div className="recipeCardC">

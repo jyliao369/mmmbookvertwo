@@ -40,8 +40,9 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
     return ingre.split("\n");
   };
 
-  const addFavorite = (event, recipeID) => {
-    event.preventDefault();
+  const bookmarkRecipe = (event, recipeID) => {
+    // console.log("bookmarking this recipe");
+    // console.log(recipeID);
 
     Axios.post(`http://localhost:3001/createBookmark`, {
       userID: currentUser.userID,
@@ -53,7 +54,8 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
   };
 
   const addLike = (event, recipeID) => {
-    event.preventDefault();
+    // console.log("i like this recipe");
+    // console.log(recipeID);
 
     Axios.post(`http://localhost:3001/createLikes`, {
       userID: currentUser.userID,
@@ -78,7 +80,7 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
     );
 
     Axios.get(`http://localhost:3001/getAllRecipes`, {}).then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       setAllRecipes(response.data);
     });
   }, []);
@@ -98,9 +100,11 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                     <div className="recipeImage"></div>
                   </Link>
                   <div className="recipeInfo">
-                    <div className="recipeInfoA">
-                      <h3>{recipe.name}</h3>
+                    <h3>{recipe.name}</h3>
+                    <div className="recipeInfoPoster">
                       <p>Posted by: {recipe.username} on "date"</p>
+                    </div>
+                    <div className="recipeInfoDesc">
                       <p>Description: {recipe.description.slice(0, 180)}</p>
                     </div>
                     <div className="recipeInfoB">
@@ -142,7 +146,9 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                 </div>
                 <div className="recipeCardAdd">
                   <h3>Additional Notes:</h3>
-                  <p>{recipe.addNotes}</p>
+                  <div>
+                    <p>{recipe.addNotes}</p>
+                  </div>
                 </div>
               </div>
               <div className="recipeCardC">
@@ -168,26 +174,19 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                   <>
                     <button
                       style={{ cursor: "pointer" }}
-                      onClick={(event) => addFavorite(event, recipe.recipeID)}
+                      onClick={(event) =>
+                        bookmarkRecipe(event, recipe.recipeID)
+                      }
                       className="bookmarkBtn"
                     >
                       <FavoriteBorderOutlinedIcon />
                     </button>
-
                     <button
                       style={{ cursor: "pointer" }}
                       onClick={(event) => addLike(event, recipe.recipeID)}
                       className="likeBtn"
                     >
-                      {recipe.likeID !== null && recipe.likeID !== "" ? (
-                        <>
-                          <StarOutlinedIcon />
-                        </>
-                      ) : (
-                        <>
-                          <StarOutlineOutlinedIcon />
-                        </>
-                      )}
+                      <StarOutlineOutlinedIcon />
                     </button>
                   </>
                 ) : (
@@ -200,6 +199,7 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                     </button>
                   </>
                 )}
+
                 <button className="reviewBtn">
                   <ChatBubbleOutlineOutlinedIcon />
                 </button>
