@@ -327,7 +327,9 @@ const Profile = ({ isLoggedIn, currentUser }) => {
                       </div>
                       <div className="recipeCardAdd">
                         <h3>Additional Notes:</h3>
-                        <p>{recipe.addNotes}</p>
+                        <div>
+                          <p>{recipe.addNotes}</p>
+                        </div>
                       </div>
                     </div>
                     <div className="recipeCardC">

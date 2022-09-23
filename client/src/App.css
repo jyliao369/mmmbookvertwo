@@ -104,8 +104,8 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 60%;
+  height: 100%;
+  background: rgb(2, 62, 138, 0.1);
 }
 /* #USERPROFILE */
 .chefProfileNavBar {
@@ -118,6 +118,11 @@ a {
   border-top: solid;
   border-width: 2px;
   border-color: black;
+
+  background: rgb(69, 123, 157, 0.9);
+}
+.userProfilePageMain {
+  background: rgb(33, 158, 188, 0.2);
 }
 .userRecipes {
   display: flex;
@@ -449,10 +454,31 @@ a {
   flex-direction: column;
   align-items: center;
   width: 35%;
+  margin: 100px 0px 0px 0px;
+  padding: 30px 0px 45px 0px;
 
   border-style: solid;
   border-width: 2px;
   border-color: black;
+
+  background: rgb(255, 254, 230);
+}
+.loginForm h2,
+.registerForm h2 {
+  margin: 0px 0px 15px 0px;
+}
+.loginForm input,
+.registerForm input {
+  padding: 10px;
+  margin: 0px 0px 25px 0px;
+}
+.loginForm button,
+.registerForm button {
+  padding: 5px;
+}
+.loginForm p,
+.registerForm p {
+  margin: 15px 0px 0px 0px;
 }
 /* #CREATERECIPEFORM */
 .createRecipeCont {
@@ -530,6 +556,8 @@ a {
 .chefProfileCardCont {
   display: flex;
   justify-content: center;
+
+  background: rgb(142, 202, 230, 0.8);
 }
 .chefProfileCard {
   display: flex;
@@ -541,14 +569,16 @@ a {
   border-style: solid;
   border-width: 2px;
   border-color: black;
+
+  background: rgb(200, 18, 37, 0.7);
 }
 .chefProfileIcon {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 45%;
-  height: 100%;
   background: lightgoldenrodyellow;
+  margin: 12px;
 }
 .userIconCont {
   display: flex;
@@ -566,10 +596,14 @@ a {
   flex-direction: column;
   justify-content: space-between;
   width: 55%;
+  margin: 12px 12px 12px 0px;
 }
 .chefProfileInfoA {
   display: flex;
   flex-direction: column;
+}
+.chefProfileInfoA div {
+  margin: 0px 0px 12px 0px;
 }
 .chefProfileInfoAb {
   display: flex;

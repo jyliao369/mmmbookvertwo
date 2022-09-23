@@ -16,7 +16,7 @@ import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 
 import * as dataList from "../data";
 
-const UserProfile = ({ currentUser }) => {
+const UserProfile = ({ isLoggedIn, currentUser }) => {
   let { userID } = useParams();
 
   const [profileUser, setProfileUser] = useState([]);
@@ -104,6 +104,34 @@ const UserProfile = ({ currentUser }) => {
       document.getElementById(`${recipeCard}a`).style.display = "flex";
       document.getElementById(`${recipeCard}b`).style.display = "none";
     }
+  };
+
+  const addFavorite = (event, recipeID) => {
+    event.preventDefault();
+
+    Axios.post(`http://localhost:3001/createBookmark`, {
+      userID: currentUser.userID,
+      username: currentUser.username,
+      recipeID: recipeID,
+    }).then((response) => {
+      console.log(response);
+    });
+  };
+
+  const addLike = (event, recipeID) => {
+    event.preventDefault();
+
+    Axios.post(`http://localhost:3001/createLikes`, {
+      userID: currentUser.userID,
+      username: currentUser.username,
+      recipeID: recipeID,
+    }).then((response) => {
+      console.log(response);
+      Axios.get(`http://localhost:3001/getAllRecipes`, {}).then((response) => {
+        // console.log(response.data);
+        // setAllRecipes(response.data);
+      });
+    });
   };
 
   const instrSplit = (instr) => {
@@ -494,10 +522,12 @@ const UserProfile = ({ currentUser }) => {
                       </div>
                       <div className="recipeCardAdd">
                         <h3>Additional Notes:</h3>
-                        <p>{recipe.addNotes}</p>
+                        <div>
+                          <p>{recipe.addNotes}</p>
+                        </div>
                       </div>
                     </div>
-                    {/* <div className="recipeCardC">
+                    <div className="recipeCardC">
                       <button
                         style={{ cursor: "pointer" }}
                         onClick={(event) =>
@@ -557,9 +587,8 @@ const UserProfile = ({ currentUser }) => {
                       <button className="reviewBtn">
                         <ChatBubbleOutlineOutlinedIcon />
                       </button>
-                    </div> */}
+                    </div>
                   </div>
-                  {/* </Link> */}
                 </div>
               ))}
             </>

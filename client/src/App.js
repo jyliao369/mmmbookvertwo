@@ -61,7 +61,12 @@ function App() {
             <Route path="/dishes" element={<DishesPage />} />
             <Route
               path="/userProfile/:userID"
-              element={<UserProfile currentUser={currentUser} />}
+              element={
+                <UserProfile
+                  isLoggedIn={isLoggedIn}
+                  currentUser={currentUser}
+                />
+              }
             />
             <Route
               path="/profile/:userID"
