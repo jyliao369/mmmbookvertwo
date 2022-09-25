@@ -93,8 +93,12 @@ const DrinksPage = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                   <div className="recipeInfo">
                     <div className="recipeInfoA">
                       <h3>{drink.name}</h3>
-                      <p>Posted by: {drink.username} on "date"</p>
-                      <p>Description: {drink.description.slice(0, 180)}</p>
+                      <div className="recipeInfoPoster">
+                        <p>Posted by: {drink.username} on "date"</p>
+                      </div>
+                      <div className="recipeInfoDesc">
+                        <p>Description: {drink.description.slice(0, 180)}</p>
+                      </div>
                     </div>
                     <div className="recipeInfoB">
                       <div className="recipeInfoBA">

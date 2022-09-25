@@ -10,7 +10,6 @@ import FeaturedPlayListOutlinedIcon from "@mui/icons-material/FeaturedPlayListOu
 import StarPurple500OutlinedIcon from "@mui/icons-material/StarPurple500Outlined";
 import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
 import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
-import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 
 const Profile = ({ isLoggedIn, currentUser }) => {
   let { userID } = useParams();
@@ -276,9 +275,11 @@ const Profile = ({ isLoggedIn, currentUser }) => {
                           <div className="recipeImage"></div>
                         </Link>
                         <div className="recipeInfo">
-                          <div className="recipeInfoA">
-                            <h3>{recipe.name}</h3>
+                          <h3>{recipe.name}</h3>
+                          <div className="recipeInfoPoster">
                             <p>Posted by: {recipe.username} on "date"</p>
+                          </div>
+                          <div className="recipeInfoDesc">
                             <p>
                               Description: {recipe.description.slice(0, 180)}
                             </p>
@@ -342,15 +343,6 @@ const Profile = ({ isLoggedIn, currentUser }) => {
                       >
                         <FeaturedPlayListOutlinedIcon />
                       </button>
-                      <button
-                        style={{ cursor: "pointer" }}
-                        className="chefProfileBtn"
-                      >
-                        <Link to={`/profile/${recipe.userID}`}>
-                          <AccountBoxOutlinedIcon />
-                        </Link>
-                      </button>
-
                       {isLoggedIn === true ? (
                         <>
                           <button

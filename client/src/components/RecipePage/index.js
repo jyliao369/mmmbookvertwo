@@ -1,14 +1,14 @@
 import React from "react";
 import Axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
 import LibraryAddOutlinedIcon from "@mui/icons-material/LibraryAddOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import StarPurple500OutlinedIcon from "@mui/icons-material/StarPurple500Outlined";
-import StarHalfOutlinedIcon from "@mui/icons-material/StarHalfOutlined";
+import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 
 const RecipePage = ({ isLoggedIn, currentUser }) => {
   let { recipeID } = useParams();
@@ -134,6 +134,36 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
     }
   };
 
+  const bookmarkRecipe = (event, recipeID) => {
+    // console.log("bookmarking this recipe");
+    // console.log(recipeID);
+
+    Axios.post(`http://localhost:3001/createBookmark`, {
+      userID: currentUser.userID,
+      username: currentUser.username,
+      recipeID: recipeID,
+    }).then((response) => {
+      console.log(response);
+    });
+  };
+
+  const addLike = (event, recipeID) => {
+    // console.log("i like this recipe");
+    // console.log(recipeID);
+
+    Axios.post(`http://localhost:3001/createLikes`, {
+      userID: currentUser.userID,
+      username: currentUser.username,
+      recipeID: recipeID,
+    }).then((response) => {
+      console.log(response);
+      Axios.get(`http://localhost:3001/getAllRecipes`, {}).then((response) => {
+        // console.log(response.data);
+        // setAllRecipes(response.data);
+      });
+    });
+  };
+
   useEffect(() => {
     Axios.get(`http://localhost:3001/getRecipe/${recipeID}`, {}).then(
       (response) => {
@@ -161,9 +191,13 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
             <div className="recipePageCardImg" />
             <div className="recipePageCardInfo">
               <div className="recipePageCardInfoA">
-                <h2>{recipeInfo.name}</h2>
-                <p>Posted by: {recipeInfo.username}</p>
-                <p>Description: {recipeDesc}</p>
+                <h3>{recipeInfo.name}</h3>
+                <div className="recipeInfoPoster">
+                  <p>Posted by: {recipeInfo.username}</p>
+                </div>
+                <div className="recipeInfoDesc">
+                  <p>Description: {recipeDesc}</p>
+                </div>
               </div>
               <div className="recipePageCardInfoB">
                 <div className="recipePageCardInfoBa">
@@ -183,25 +217,48 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
             </div>
           </div>
           <div className="recipeCardC">
-            <button>
-              <LibraryAddOutlinedIcon />
+            <button style={{ cursor: "pointer" }} className="chefProfileBtn">
+              <Link to={`/profile/${recipeInfo.userID}`}>
+                <AccountBoxOutlinedIcon />
+              </Link>
             </button>
-            <button>
-              <FavoriteBorderOutlinedIcon />
-              <p>#</p>
-            </button>
-            <button>
-              <StarOutlineOutlinedIcon />
-              <p>#</p>
-            </button>
-            <button>
+
+            {isLoggedIn === true ? (
+              <>
+                <button
+                  style={{ cursor: "pointer" }}
+                  onClick={(event) =>
+                    bookmarkRecipe(event, recipeInfo.recipeID)
+                  }
+                  className="bookmarkBtn"
+                >
+                  <FavoriteBorderOutlinedIcon />
+                </button>
+                <button
+                  style={{ cursor: "pointer" }}
+                  onClick={(event) => addLike(event, recipeInfo.recipeID)}
+                  className="likeBtn"
+                >
+                  <StarOutlineOutlinedIcon />
+                </button>
+              </>
+            ) : (
+              <>
+                <button className="bookmarkBtn">
+                  <FavoriteBorderOutlinedIcon />
+                </button>
+                <button className="likeBtn">
+                  <StarOutlineOutlinedIcon />
+                </button>
+              </>
+            )}
+
+            <button className="reviewBtn">
               <ChatBubbleOutlineOutlinedIcon />
-              <p>#</p>
             </button>
           </div>
         </div>
         <div className="recipePageCardB">
-          {/* <div className="recipePageCardInfoC"> */}
           <div className="recipePageCardInfoBb">
             <div className="recipePageCardIng">
               <h3>Ingredients</h3>
@@ -222,9 +279,10 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
           </div>
           <div className="recipePageCardInfoCb">
             <h3>Additional Notes:</h3>
-            <p>{recipeInfo.addNotes}</p>
+            <div>
+              <p>{recipeInfo.addNotes}</p>
+            </div>
           </div>
-          {/* </div> */}
         </div>
       </div>
 

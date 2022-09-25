@@ -73,104 +73,111 @@ const Create = ({ currentUser }) => {
             </div>
             <div className="createNewRecipeAc">
               <div className="createNewRecipeInfoAc">
-                <input
-                  placeholder="Prep Time (min)"
-                  type={"number"}
-                  value={prepTime}
-                  onChange={(e) => setPrepTime(e.target.value)}
-                />
-                <input
-                  placeholder="Cook Time (min)"
-                  type={"number"}
-                  value={cookTime}
-                  onChange={(e) => setCookTime(e.target.value)}
-                />
-                <input
-                  placeholder="# of Yield"
-                  type={"number"}
-                  value={yieldNum}
-                  onChange={(e) => setYieldNum(e.target.value)}
-                />
-                <input
-                  placeholder="# of Servings"
-                  type={"number"}
-                  value={servingsNum}
-                  onChange={(e) => setServingsNum(e.target.value)}
-                />
+                <div className="createNewRecipeInfoAcb">
+                  <input
+                    placeholder="Prep Time (min)"
+                    type={"number"}
+                    value={prepTime}
+                    onChange={(e) => setPrepTime(e.target.value)}
+                  />
+                  <input
+                    placeholder="Cook Time (min)"
+                    type={"number"}
+                    value={cookTime}
+                    onChange={(e) => setCookTime(e.target.value)}
+                  />
+                </div>
+                <div className="createNewRecipeInfoAcb">
+                  <input
+                    placeholder="# of Yield"
+                    type={"number"}
+                    value={yieldNum}
+                    onChange={(e) => setYieldNum(e.target.value)}
+                  />
+                  <input
+                    placeholder="# of Servings"
+                    type={"number"}
+                    value={servingsNum}
+                    onChange={(e) => setServingsNum(e.target.value)}
+                  />
+                </div>
               </div>
               <div className="createNewRecipeInfoAc">
-                <select
-                  placeholder="Category"
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                >
-                  <option value={""}>Select Category</option>
-                  {dataList.category.map((category) => (
-                    <option key={category}>{category}</option>
-                  ))}
-                </select>
-                <select
-                  value={course}
-                  onChange={(e) => SetCourse(e.target.value)}
-                >
-                  <option value={""}>Select Course</option>
-                  {dataList.course.map((course) => (
-                    <option key={course} value={course}>
-                      {course}
-                    </option>
-                  ))}
-                </select>
-                <select
-                  value={cuisine}
-                  onChange={(e) => setCuisine(e.target.value)}
-                >
-                  <option value={""}>Select Cuisine</option>
-                  {dataList.cuisine.map((cuisine) => (
-                    <option key={cuisine} value={cuisine}>
-                      {cuisine}
-                    </option>
-                  ))}
-                </select>
-                <select value={diet} onChange={(e) => setDiet(e.target.value)}>
-                  <option value={""}>Select Diet</option>
-                  {dataList.diet.map((diet) => (
-                    <option key={diet} value={diet}>
-                      {diet}
-                    </option>
-                  ))}
-                </select>
+                <div className="createNewRecipeInfoAcb">
+                  <select
+                    placeholder="Category"
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                  >
+                    <option value={""}>Select Category</option>
+                    {dataList.category.map((category) => (
+                      <option key={category}>{category}</option>
+                    ))}
+                  </select>
+                  <select
+                    value={course}
+                    onChange={(e) => SetCourse(e.target.value)}
+                  >
+                    <option value={""}>Select Course</option>
+                    {dataList.course.map((course) => (
+                      <option key={course} value={course}>
+                        {course}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="createNewRecipeInfoAcb">
+                  <select
+                    value={cuisine}
+                    onChange={(e) => setCuisine(e.target.value)}
+                  >
+                    <option value={""}>Select Cuisine</option>
+                    {dataList.cuisine.map((cuisine) => (
+                      <option key={cuisine} value={cuisine}>
+                        {cuisine}
+                      </option>
+                    ))}
+                  </select>
+                  <select
+                    value={diet}
+                    onChange={(e) => setDiet(e.target.value)}
+                  >
+                    <option value={""}>Select Diet</option>
+                    {dataList.diet.map((diet) => (
+                      <option key={diet} value={diet}>
+                        {diet}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         <div className="createRecipeFormB">
-          {/* <div className="createNewRecipeB"> */}
-          <div className="createNewRecipeBa">
-            {/* <div className="createRecipeIng"> */}
-            <textarea
-              placeholder="Ingredients"
-              value={ingredients}
-              onChange={(e) => setIngredients(e.target.value)}
-            />
-            {/* </div> */}
-            {/* <div className="createRecipeIns"> */}
-            <textarea
-              placeholder="Instructions"
-              value={instructions}
-              onChange={(e) => setInstructions(e.target.value)}
-            />
-            {/* </div> */}
+          <div className="createRecipeFormBa">
+            <div className="createNewRecipeBa">
+              <textarea
+                placeholder="Ingredients"
+                value={ingredients}
+                onChange={(e) => setIngredients(e.target.value)}
+              />
+              <textarea
+                placeholder="Instructions"
+                value={instructions}
+                onChange={(e) => setInstructions(e.target.value)}
+              />
+            </div>
+            <div className="createNewRecipeBb">
+              <textarea
+                placeholder="Additional Notes"
+                value={addNotes}
+                onChange={(e) => setAddNotes(e.target.value)}
+                rows={4}
+              />
+            </div>
           </div>
-          {/* <div className="createRecipeAdd"> */}
-          <textarea
-            placeholder="Additional Notes"
-            value={addNotes}
-            onChange={(e) => setAddNotes(e.target.value)}
-            rows={4}
-          />
-          {/* </div> */}
-          {/* </div> */}
         </div>
         <div className="createRecipeBtn">
           {recipeName === "" ||

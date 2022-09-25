@@ -33,8 +33,12 @@ a {
 .navBarBtn a,
 .logOutButton {
   display: flex;
+  width: 40px;
+  height: 40px;
   padding: 5px;
   border-radius: 10px;
+  justify-content: center;
+  align-items: center;
 }
 .navBarBtn a svg {
   font-size: 30px;
@@ -98,6 +102,16 @@ a {
 #filteredSection {
   display: none;
 }
+/* #PROFILEPAGE */
+.profilePage {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+/* #CREATERECIPE */
+.createRecipePage {
+  background: rgb(142, 202, 230, 0.8);
+}
 /* LOGIN/REGISTER */
 .loginPage,
 .registerPage {
@@ -122,22 +136,34 @@ a {
   background: rgb(69, 123, 157, 0.9);
 }
 .userProfilePageMain {
-  background: rgb(33, 158, 188, 0.2);
+  height: 100%;
 }
 .userRecipes {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: rgb(33, 158, 188, 0.2);
 }
 .userReviews {
   display: flex;
   flex-direction: column;
+}
+.userBookmarked {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 #userBookmarked,
 #userReviews,
 #userFollowers,
 #userFollowing {
   display: none;
+  background: rgb(33, 158, 188, 0.2);
+}
+#userReviews,
+#userFollowers,
+#userFollowing {
+  height: 100%;
 }
 .notification {
   display: flex;
@@ -161,6 +187,10 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-bottom: solid;
+  border-width: 2px;
+
+  background: rgb(0, 180, 216, 0.2);
 }
 .recipePageCardA {
   display: flex;
@@ -173,6 +203,8 @@ a {
   border-style: solid;
   border-width: 2px;
   border-color: black;
+
+  background: rgb(241, 250, 238, 0.8);
 }
 .recipePageCardAa {
   display: flex;
@@ -182,9 +214,23 @@ a {
 .recipePageCardImg {
   width: 45%;
   background: lightgoldenrodyellow;
+  margin: 12px;
 }
 .recipePageCardInfo {
   width: 55%;
+}
+.recipePageCardInfoA h3 {
+  margin: 12px 0px 0px 0px;
+}
+.recipePageCardInfoB {
+  display: flex;
+  flex-direction: row;
+}
+.recipePageCardInfoBa {
+  width: 100%;
+}
+.recipePageCardInfoBa p {
+  margin: 12px 0px 0px 0px;
 }
 .recipePageCardB {
   display: flex;
@@ -196,16 +242,34 @@ a {
   border-style: solid;
   border-width: 2px;
   border-color: black;
+
+  background: rgb(241, 250, 238, 0.8);
 }
 .recipePageCardInfoBb {
   display: flex;
   flex-direction: row;
 }
+.recipePageCardIng h3,
+.recipePageCardIns h3,
+.recipePageCardInfoCb h3 {
+  margin: 12px 12px 12px 14px;
+}
+.recipePageCardIngA,
+.recipePageCardInsA,
+.recipePageCardInfoCb div {
+  padding: 8px;
+  margin: 0px 12px 12px 12px;
+  border-radius: 10px;
+}
+.recipePageCardIngA p,
+.recipePageCardInsA p {
+  margin: 0px 0px 3.5% 0px;
+}
 .reviewFormCont {
   display: flex;
   flex-direction: row;
   padding: 2% 0px 2% 0px;
-  border-top: solid;
+  border-bottom: solid;
   border-width: 2px;
 }
 .profileIcon,
@@ -228,6 +292,10 @@ a {
   flex-direction: column;
   width: 100%;
 }
+.reviewForm textarea {
+  padding: 1%;
+  margin: 0% 0% 2% 0%;
+}
 .reviewBtnCont {
   display: flex;
   flex-direction: row;
@@ -243,6 +311,14 @@ a {
   padding: 2% 0px 2% 0px;
   border-bottom: solid;
   border-width: 2px;
+}
+.reviewFormCont,
+.userRatingCont {
+  background: rgb(241, 250, 238, 0.4);
+}
+.userRating {
+  display: flex;
+  flex-direction: row;
 }
 /* DRINKSONLYPAGE/DISHESONLYPAGE*/
 .onlyDrinksCont,
@@ -268,6 +344,7 @@ a {
   position: fixed;
   overflow: auto;
   right: 0px;
+  background: rgb(2, 62, 138, 0.6);
 }
 .newRecipes::-webkit-scrollbar {
   display: none;
@@ -433,19 +510,33 @@ a {
 /* #NEWRECIPECARDDESIGN */
 .newRecipeCard {
   margin: 3%;
+  padding: 2%;
 
   border-style: solid;
   border-width: 2px;
   border-color: black;
+
+  background: rgb(241, 250, 238, 0.5);
+}
+.newRecipeCard h3 {
+  margin: 0px 0px 12px 0px;
+}
+.newRecipeDesc {
+  margin: 0px 0px 12px 0px;
 }
 .newRecipeInfo {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: 0px 0px 12px 0px;
 }
 .buttonBar {
   display: flex;
   flex-direction: row;
+}
+.buttonBar div {
+  display: flex;
+  align-items: center;
 }
 /* LOGIN/REGISTERFORM */
 .loginForm,
@@ -486,12 +577,16 @@ a {
   flex-direction: column;
   align-items: center;
 }
+.createRecipeFormA,
+.createRecipeFormB {
+  background: rgb(241, 250, 238, 1);
+}
 .createRecipeFormA {
   display: flex;
   flex-direction: row;
   width: 90%;
   height: 400px;
-  margin: 2.5%;
+  margin: 2%;
 
   border-style: solid;
   border-width: 2px;
@@ -499,7 +594,8 @@ a {
 }
 .createNewRecipeImg {
   width: 45%;
-  background: lightgoldenrodyellow;
+  background: lightgray;
+  margin: 12px;
 }
 .createNewRecipeA {
   display: flex;
@@ -514,6 +610,7 @@ a {
 }
 .createNewRecipeAb input,
 .createNewRecipeAb textarea {
+  margin: 12px;
   padding: 1%;
 }
 .createNewRecipeAb textarea {
@@ -528,9 +625,15 @@ a {
   flex-direction: column;
   width: 100%;
 }
-.createNewRecipeInfoAc input,
-.createNewRecipeInfoAc select {
-  padding: 1%;
+.createNewRecipeInfoAcb {
+  display: flex;
+}
+.createNewRecipeInfoAcb select,
+.createNewRecipeInfoAcb input {
+  width: 100%;
+  margin: 12px;
+  padding: 7px;
+  font-size: 16px;
 }
 .createRecipeFormB {
   display: flex;
@@ -538,20 +641,33 @@ a {
   justify-content: space-between;
   width: 90%;
   height: 400px;
-  margin: 2.5%;
+  margin: 2%;
 
   border-style: solid;
   border-width: 2px;
   border-color: black;
+}
+.createRecipeFormBa {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 .createNewRecipeBa {
   display: flex;
   flex-direction: row;
   height: 100%;
 }
-.createNewRecipeBa textarea {
-  width: 100%;
+.createNewRecipeBb {
+  display: flex;
+  height: 35%;
 }
+.createNewRecipeBa textarea,
+.createNewRecipeBb textarea {
+  width: 100%;
+  margin: 12px;
+  padding: 1%;
+}
+
 /* #USERPROFILECARD */
 .chefProfileCardCont {
   display: flex;
@@ -623,10 +739,36 @@ a {
 #chefProfileSettings {
   display: none;
 }
+.chefProfileUpdate {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 .chefProfileUpdateA {
   display: flex;
+  flex-direction: column;
+  width: 100%;
 }
+.chefProfileUpdateA select,
 .chefProfileUpdateA input,
+.chefProfileUpdateA textarea {
+  padding: 1%;
+  margin: 0px 0px 12px 0px;
+}
 .chefProfileUpdateA select {
   width: 100%;
+}
+.chefProfileUpdateB {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+}
+.chefProfileUpdateB input,
+.chefProfileUpdateB select {
+  padding: 1%;
+  margin: 0px 0px 12px 0px;
+}
+.chefProfileSub {
+  display: flex;
+  justify-content: center;
 }
