@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/mmmbookvertwo/static/css/main.515768ca.css",
-    "main.js": "/mmmbookvertwo/static/js/main.cbd32244.js",
+    "main.js": "/mmmbookvertwo/static/js/main.296971a5.js",
     "static/js/787.72a9101e.chunk.js": "/mmmbookvertwo/static/js/787.72a9101e.chunk.js",
     "index.html": "/mmmbookvertwo/index.html",
     "main.515768ca.css.map": "/mmmbookvertwo/static/css/main.515768ca.css.map",
-    "main.cbd32244.js.map": "/mmmbookvertwo/static/js/main.cbd32244.js.map",
+    "main.296971a5.js.map": "/mmmbookvertwo/static/js/main.296971a5.js.map",
     "787.72a9101e.chunk.js.map": "/mmmbookvertwo/static/js/787.72a9101e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.515768ca.css",
-    "static/js/main.cbd32244.js"
+    "static/js/main.296971a5.js"
   ]
 }
