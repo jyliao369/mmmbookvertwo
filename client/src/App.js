@@ -37,7 +37,7 @@ function App() {
   }, []);
 
   return (
-    <Router>
+    <Router basename="/mmmbookvertwo">
       <div className="appCont">
         <Navbar
           setIsLoggedIn={setIsLoggedIn}
