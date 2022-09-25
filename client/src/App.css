@@ -218,6 +218,7 @@ a {
 }
 .recipePageCardInfo {
   width: 55%;
+  margin: 0px 12px 0px 0px;
 }
 .recipePageCardInfoA h3 {
   margin: 12px 0px 0px 0px;

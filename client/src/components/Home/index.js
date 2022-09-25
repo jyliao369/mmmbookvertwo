@@ -43,7 +43,7 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
     // console.log("bookmarking this recipe");
     // console.log(recipeID);
 
-    Axios.post(`http://localhost:3001/createBookmark`, {
+    Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/createBookmark`, {
       userID: currentUser.userID,
       username: currentUser.username,
       recipeID: recipeID,
@@ -56,13 +56,16 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
     // console.log("i like this recipe");
     // console.log(recipeID);
 
-    Axios.post(`http://localhost:3001/createLikes`, {
+    Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/createLikes`, {
       userID: currentUser.userID,
       username: currentUser.username,
       recipeID: recipeID,
     }).then((response) => {
       console.log(response);
-      Axios.get(`http://localhost:3001/getAllRecipes`, {}).then((response) => {
+      Axios.get(
+        `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipes`,
+        {}
+      ).then((response) => {
         // console.log(response.data);
         setAllRecipes(response.data);
       });
@@ -78,7 +81,10 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
       }
     );
 
-    Axios.get(`http://localhost:3001/getAllRecipes`, {}).then((response) => {
+    Axios.get(
+      `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipes`,
+      {}
+    ).then((response) => {
       // console.log(response.data);
       setAllRecipes(response.data);
     });

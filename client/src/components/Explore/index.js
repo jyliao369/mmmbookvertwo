@@ -65,7 +65,7 @@ const Explore = ({ isLoggedIn, currentUser }) => {
   const addFavorite = (event, recipeID) => {
     event.preventDefault();
 
-    Axios.post(`http://localhost:3001/createBookmark`, {
+    Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/createBookmark`, {
       userID: currentUser.userID,
       username: currentUser.username,
       recipeID: recipeID,
@@ -77,13 +77,16 @@ const Explore = ({ isLoggedIn, currentUser }) => {
   const addLike = (event, recipeID) => {
     event.preventDefault();
 
-    Axios.post(`http://localhost:3001/createLikes`, {
+    Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/createLikes`, {
       userID: currentUser.userID,
       username: currentUser.username,
       recipeID: recipeID,
     }).then((response) => {
       console.log(response);
-      Axios.get(`http://localhost:3001/getAllRecipes`, {}).then((response) => {
+      Axios.get(
+        `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipes`,
+        {}
+      ).then((response) => {
         // console.log(response.data);
         setAllRecipes(response.data);
       });
@@ -101,7 +104,10 @@ const Explore = ({ isLoggedIn, currentUser }) => {
   };
 
   useEffect(() => {
-    Axios.get(`http://localhost:3001/getAllRecipes`, {}).then((response) => {
+    Axios.get(
+      `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipes`,
+      {}
+    ).then((response) => {
       // console.log(response.data);
       setAllRecipes(response.data);
       setShowRecipes(response.data);

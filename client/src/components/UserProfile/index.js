@@ -107,7 +107,7 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
   const addFavorite = (event, recipeID) => {
     event.preventDefault();
 
-    Axios.post(`http://localhost:3001/createBookmark`, {
+    Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/createBookmark`, {
       userID: currentUser.userID,
       username: currentUser.username,
       recipeID: recipeID,
@@ -119,13 +119,16 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
   const addLike = (event, recipeID) => {
     event.preventDefault();
 
-    Axios.post(`http://localhost:3001/createLikes`, {
+    Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/createLikes`, {
       userID: currentUser.userID,
       username: currentUser.username,
       recipeID: recipeID,
     }).then((response) => {
       console.log(response);
-      Axios.get(`http://localhost:3001/getAllRecipes`, {}).then((response) => {
+      Axios.get(
+        `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipes`,
+        {}
+      ).then((response) => {
         // console.log(response.data);
         // setAllRecipes(response.data);
       });
@@ -200,69 +203,78 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
   };
 
   const updateProfile = () => {
-    Axios.put(`http://localhost:3001/updateUser/${userID}`, {
-      firstName: updateFirst,
-      lastName: updateLast,
-      username: updateUser,
-      email: updateEmail,
-      favRecipe: updateFavRec,
-      favBeverage: updateFavBev,
-      favDessert: updateFavDes,
-      favCuisine: updateFavCui,
-      chefDesc: updateDesc,
-    }).then((response) => {
+    Axios.put(
+      `https://mmmbook-vertwo-server.herokuapp.com/updateUser/${userID}`,
+      {
+        firstName: updateFirst,
+        lastName: updateLast,
+        username: updateUser,
+        email: updateEmail,
+        favRecipe: updateFavRec,
+        favBeverage: updateFavBev,
+        favDessert: updateFavDes,
+        favCuisine: updateFavCui,
+        chefDesc: updateDesc,
+      }
+    ).then((response) => {
       console.log(response);
     });
   };
 
   useEffect(() => {
-    Axios.get(`http://localhost:3001/getUser/${userID}`, {}).then(
-      (response) => {
-        // console.log(response.data[0]);
-        setProfileUser(response.data[0]);
+    Axios.get(
+      `https://mmmbook-vertwo-server.herokuapp.com/getUser/${userID}`,
+      {}
+    ).then((response) => {
+      // console.log(response.data[0]);
+      setProfileUser(response.data[0]);
 
-        setUpdateUser(response.data[0].username);
-        setUpdateDesc(response.data[0].chefDesc);
-        setUpdateFirst(response.data[0].firstName);
-        setUpdateLast(response.data[0].lastName);
-        setUpdateEmail(response.data[0].email);
-        setUpdateFavRec(response.data[0].favRecipe);
-        setUpdateFavBev(response.data[0].favBeverage);
-        setUpdateFavDes(response.data[0].favDessert);
-        setUpdateFavCui(response.data[0].favCuisine);
-      }
-    );
+      setUpdateUser(response.data[0].username);
+      setUpdateDesc(response.data[0].chefDesc);
+      setUpdateFirst(response.data[0].firstName);
+      setUpdateLast(response.data[0].lastName);
+      setUpdateEmail(response.data[0].email);
+      setUpdateFavRec(response.data[0].favRecipe);
+      setUpdateFavBev(response.data[0].favBeverage);
+      setUpdateFavDes(response.data[0].favDessert);
+      setUpdateFavCui(response.data[0].favCuisine);
+    });
 
-    Axios.get(`http://localhost:3001/getAllRecipesID/${userID}`, {}).then(
-      (response) => {
-        // console.log(response.data);
-        setUserRecipes(response.data.reverse());
-      }
-    );
-    Axios.get(`http://localhost:3001/getAllReviewsID/${userID}`, {}).then(
-      (response) => {
-        // console.log(response.data);
-        setUserReviews(response.data.reverse());
-      }
-    );
-    Axios.get(`http://localhost:3001/getBookmarked/${userID}`, {}).then(
-      (response) => {
-        // console.log(response.data);
-        setUserBookmarked(response.data.reverse());
-      }
-    );
-    Axios.get(`http://localhost:3001/allFollowing/${userID}`, {}).then(
-      (response) => {
-        // console.log(response.data);
-        setChefsFollowing(response.data.reverse());
-      }
-    );
-    Axios.get(`http://localhost:3001/allFollowers/${userID}`, {}).then(
-      (response) => {
-        // console.log(response);
-        setChefFollowers(response.data.reverse());
-      }
-    );
+    Axios.get(
+      `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipesID/${userID}`,
+      {}
+    ).then((response) => {
+      // console.log(response.data);
+      setUserRecipes(response.data.reverse());
+    });
+    Axios.get(
+      `https://mmmbook-vertwo-server.herokuapp.com/getAllReviewsID/${userID}`,
+      {}
+    ).then((response) => {
+      // console.log(response.data);
+      setUserReviews(response.data.reverse());
+    });
+    Axios.get(
+      `https://mmmbook-vertwo-server.herokuapp.com/getBookmarked/${userID}`,
+      {}
+    ).then((response) => {
+      // console.log(response.data);
+      setUserBookmarked(response.data.reverse());
+    });
+    Axios.get(
+      `https://mmmbook-vertwo-server.herokuapp.com/allFollowing/${userID}`,
+      {}
+    ).then((response) => {
+      // console.log(response.data);
+      setChefsFollowing(response.data.reverse());
+    });
+    Axios.get(
+      `https://mmmbook-vertwo-server.herokuapp.com/allFollowers/${userID}`,
+      {}
+    ).then((response) => {
+      // console.log(response);
+      setChefFollowers(response.data.reverse());
+    });
   }, []);
 
   return (

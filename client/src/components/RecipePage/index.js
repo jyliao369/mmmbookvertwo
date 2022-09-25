@@ -32,7 +32,7 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
   };
 
   const postReview = () => {
-    Axios.post(`http://localhost:3001/postReview`, {
+    Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/postReview`, {
       recipeID: recipeID,
       userID: currentUser.userID,
       username: currentUser.username,
@@ -47,11 +47,12 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
           "lightgray";
       }
 
-      Axios.get(`http://localhost:3001/getReview/${recipeID}`, {}).then(
-        (response) => {
-          setReviews(response.data.reverse());
-        }
-      );
+      Axios.get(
+        `https://mmmbook-vertwo-server.herokuapp.com/getReview/${recipeID}`,
+        {}
+      ).then((response) => {
+        setReviews(response.data.reverse());
+      });
     });
   };
 
@@ -138,7 +139,7 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
     // console.log("bookmarking this recipe");
     // console.log(recipeID);
 
-    Axios.post(`http://localhost:3001/createBookmark`, {
+    Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/createBookmark`, {
       userID: currentUser.userID,
       username: currentUser.username,
       recipeID: recipeID,
@@ -151,13 +152,16 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
     // console.log("i like this recipe");
     // console.log(recipeID);
 
-    Axios.post(`http://localhost:3001/createLikes`, {
+    Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/createLikes`, {
       userID: currentUser.userID,
       username: currentUser.username,
       recipeID: recipeID,
     }).then((response) => {
       console.log(response);
-      Axios.get(`http://localhost:3001/getAllRecipes`, {}).then((response) => {
+      Axios.get(
+        `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipes`,
+        {}
+      ).then((response) => {
         // console.log(response.data);
         // setAllRecipes(response.data);
       });
@@ -165,22 +169,24 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
   };
 
   useEffect(() => {
-    Axios.get(`http://localhost:3001/getRecipe/${recipeID}`, {}).then(
-      (response) => {
-        // console.log(response.data[0].ingredients);
-        setRecipeInfo(response.data[0]);
-        setRecipeDesc(response.data[0].description);
-        instrSplit(response.data[0].instructions);
-        ingrSplit(response.data[0].ingredients);
-      }
-    );
+    Axios.get(
+      `https://mmmbook-vertwo-server.herokuapp.com/getRecipe/${recipeID}`,
+      {}
+    ).then((response) => {
+      // console.log(response.data[0].ingredients);
+      setRecipeInfo(response.data[0]);
+      setRecipeDesc(response.data[0].description);
+      instrSplit(response.data[0].instructions);
+      ingrSplit(response.data[0].ingredients);
+    });
 
-    Axios.get(`http://localhost:3001/getReview/${recipeID}`, {}).then(
-      (response) => {
-        // console.log(response.data);
-        setReviews(response.data.reverse());
-      }
-    );
+    Axios.get(
+      `https://mmmbook-vertwo-server.herokuapp.com/getReview/${recipeID}`,
+      {}
+    ).then((response) => {
+      // console.log(response.data);
+      setReviews(response.data.reverse());
+    });
   }, []);
 
   return (

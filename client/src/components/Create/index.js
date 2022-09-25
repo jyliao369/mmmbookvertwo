@@ -23,7 +23,7 @@ const Create = ({ currentUser }) => {
   const navToRecipe = useNavigate();
 
   const createRecipe = () => {
-    Axios.post("http://localhost:3001/createRecipe", {
+    Axios.post("https://mmmbook-vertwo-server.herokuapp.com/createRecipe", {
       userID: currentUser.userID,
       username: currentUser.username,
       recipeName: recipeName,
@@ -41,12 +41,13 @@ const Create = ({ currentUser }) => {
       addNotes: addNotes,
     }).then((response) => {
       console.log(recipeName);
-      Axios.get(`http://localhost:3001/getRecipeName/${recipeName}`, {}).then(
-        (response) => {
-          // console.log(response);
-          navToRecipe(`/recipe/${response.data[0].recipeID}`);
-        }
-      );
+      Axios.get(
+        `https://mmmbook-vertwo-server.herokuapp.com/getRecipeName/${recipeName}`,
+        {}
+      ).then((response) => {
+        // console.log(response);
+        navToRecipe(`/recipe/${response.data[0].recipeID}`);
+      });
     });
   };
 
