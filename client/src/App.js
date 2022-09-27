@@ -3,6 +3,7 @@ import Axios from "axios";
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
+import TitleBanner from "./components/TitleBanner";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Explore from "./components/Explore";
@@ -39,74 +40,82 @@ function App() {
   return (
     <Router basename="/mmmbookvertwo">
       <div className="appCont">
-        <Navbar
-          setIsLoggedIn={setIsLoggedIn}
-          isLoggedIn={isLoggedIn}
-          currentUser={currentUser}
-        />
-        <div className="mainPage">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Home
-                  isLoggedIn={isLoggedIn}
-                  setCurrentUser={setCurrentUser}
-                  currentUser={currentUser}
-                />
-              }
-            />
-            <Route path="/explore" element={<Explore />} />
-            <Route path="/drinks" element={<DrinksPage />} />
-            <Route path="/dishes" element={<DishesPage />} />
-            <Route
-              path="/userProfile/:userID"
-              element={
-                <UserProfile
-                  isLoggedIn={isLoggedIn}
-                  currentUser={currentUser}
-                />
-              }
-            />
-            <Route
-              path="/profile/:userID"
-              element={
-                <Profile isLoggedIn={isLoggedIn} currentUser={currentUser} />
-              }
-            />
-            <Route
-              path="/create"
-              element={<Create currentUser={currentUser} />}
-            />
-            <Route
-              path="/recipe/:recipeID"
-              element={
-                <RecipePage isLoggedIn={isLoggedIn} currentUser={currentUser} />
-              }
-            />
-            <Route
-              path="/register"
-              element={
-                <Register
-                  setIsLoggedIn={setIsLoggedIn}
-                  isLoggedIn={isLoggedIn}
-                  setCurrentUser={setCurrentUser}
-                />
-              }
-            />
-            <Route
-              path="/login"
-              element={
-                <Login
-                  setIsLoggedIn={setIsLoggedIn}
-                  isLoggedIn={isLoggedIn}
-                  setCurrentUser={setCurrentUser}
-                />
-              }
-            />
-          </Routes>
+        <TitleBanner />
+        <div className="appContTwo">
+          <Navbar
+            setIsLoggedIn={setIsLoggedIn}
+            isLoggedIn={isLoggedIn}
+            currentUser={currentUser}
+          />
+          <div className="mainPage" id="mainPage">
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Home
+                    isLoggedIn={isLoggedIn}
+                    setCurrentUser={setCurrentUser}
+                    currentUser={currentUser}
+                  />
+                }
+              />
+              {/*
+              <Route path="/explore" element={<Explore />} />
+              <Route path="/drinks" element={<DrinksPage />} />
+              <Route path="/dishes" element={<DishesPage />} />
+              <Route
+                path="/userProfile/:userID"
+                element={
+                  <UserProfile
+                    isLoggedIn={isLoggedIn}
+                    currentUser={currentUser}
+                  />
+                }
+              />
+              <Route
+                path="/profile/:userID"
+                element={
+                  <Profile isLoggedIn={isLoggedIn} currentUser={currentUser} />
+                }
+              />
+              <Route
+                path="/create"
+                element={<Create currentUser={currentUser} />}
+              />
+              <Route
+                path="/recipe/:recipeID"
+                element={
+                  <RecipePage
+                    isLoggedIn={isLoggedIn}
+                    currentUser={currentUser}
+                  />
+                }
+              /> */}
+              <Route
+                path="/register"
+                element={
+                  <Register
+                    setIsLoggedIn={setIsLoggedIn}
+                    isLoggedIn={isLoggedIn}
+                    setCurrentUser={setCurrentUser}
+                  />
+                }
+              />
+              <Route
+                path="/login"
+                element={
+                  <Login
+                    setIsLoggedIn={setIsLoggedIn}
+                    isLoggedIn={isLoggedIn}
+                    setCurrentUser={setCurrentUser}
+                  />
+                }
+              />
+            </Routes>
+          </div>
         </div>
-        <NewRecipes />
+
+        {/* <NewRecipes /> */}
       </div>
     </Router>
   );

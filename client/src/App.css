@@ -7,12 +7,71 @@ a {
   color: inherit;
   text-decoration: none;
 }
-.appCont {
+.appContTwo {
   display: flex;
   flex-direction: row;
 }
+
+/* #TITLEBANNER */
+.titleBanner {
+  width: 100%;
+  position: fixed;
+}
+.titleBannerCont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+  padding: 0rem 2rem 0rem 2rem;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: black;
+  background: white;
+}
+.titleBannerOne,
+.titleBannerTwo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 /* #NAVBAR */
 .navBar {
+  height: 100vh;
+  margin: 4rem 0px 0px 0px;
+  border-right: solid;
+  border-width: thin;
+  position: fixed;
+}
+#navBar {
+  width: 4rem;
+}
+.navBarBtn {
+  display: flex;
+  flex-direction: column;
+}
+#homeButton,
+#exploreButton,
+#drinkButton,
+#entreeButton,
+#userButton,
+#createButton,
+#logInButton,
+#logOutButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.6rem;
+}
+.navBarBtn svg {
+  font-size: 2rem;
+}
+/* #MAINPAGE */
+#mainPage {
+  margin: 4rem 0rem 0rem 4rem;
+}
+
+/* .navBar {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,7 +127,7 @@ a {
 .logOutButton {
   background: rgb(166, 30, 43);
 }
-/* #MAINPAGE */
+
 .mainPage {
   display: flex;
   flex-direction: column;
@@ -77,7 +136,7 @@ a {
 
   margin: 0% 30% 0% 17%;
 }
-/* #HOMEPAGE */
+
 .homePage {
   width: 100%;
 }
@@ -88,7 +147,7 @@ a {
 
   background: rgb(69, 123, 157, 0.3);
 }
-/* #EXPLOREPAGE */
+
 .filteredSection {
   display: flex;
   flex-direction: row;
@@ -102,17 +161,17 @@ a {
 #filteredSection {
   display: none;
 }
-/* #PROFILEPAGE */
+
 .profilePage {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
-/* #CREATERECIPE */
+
 .createRecipePage {
   background: rgb(142, 202, 230, 0.8);
 }
-/* LOGIN/REGISTER */
+
 .loginPage,
 .registerPage {
   display: flex;
@@ -121,7 +180,7 @@ a {
   height: 100%;
   background: rgb(2, 62, 138, 0.1);
 }
-/* #USERPROFILE */
+
 .chefProfileNavBar {
   display: flex;
   flex-direction: row;
@@ -182,7 +241,7 @@ a {
   background: lightgray;
   border-radius: 60px;
 }
-/* #RECIPEPAGE */
+
 .recipePageCard {
   display: flex;
   flex-direction: column;
@@ -321,7 +380,7 @@ a {
   display: flex;
   flex-direction: row;
 }
-/* DRINKSONLYPAGE/DISHESONLYPAGE*/
+
 .onlyDrinksCont,
 .dishesOnlyCont {
   display: flex;
@@ -330,7 +389,7 @@ a {
 
   background: rgb(69, 123, 157, 0.3);
 }
-/* #NEWRECIPES */
+
 .newRecipes {
   display: flex;
   flex-direction: column;
@@ -351,8 +410,7 @@ a {
   display: none;
 }
 
-/* --------------------------------------------------------------------- */
-/* #PAGEBANNER */
+
 .pageBanner {
   display: flex;
   flex-direction: row;
@@ -365,7 +423,7 @@ a {
 
   background: rgb(69, 123, 157);
 }
-/* #RECIPECARDDESIGN */
+
 .recipeCard {
   width: 90%;
   height: 430px;
@@ -508,7 +566,7 @@ a {
 .recipeCardC button svg {
   font-size: 20px;
 }
-/* #NEWRECIPECARDDESIGN */
+
 .newRecipeCard {
   margin: 3%;
   padding: 2%;
@@ -539,7 +597,7 @@ a {
   display: flex;
   align-items: center;
 }
-/* LOGIN/REGISTERFORM */
+
 .loginForm,
 .registerForm {
   display: flex;
@@ -572,7 +630,7 @@ a {
 .registerForm p {
   margin: 15px 0px 0px 0px;
 }
-/* #CREATERECIPEFORM */
+
 .createRecipeCont {
   display: flex;
   flex-direction: column;
@@ -669,7 +727,7 @@ a {
   padding: 1%;
 }
 
-/* #USERPROFILECARD */
+
 .chefProfileCardCont {
   display: flex;
   justify-content: center;
@@ -772,4 +830,4 @@ a {
 .chefProfileSub {
   display: flex;
   justify-content: center;
-}
+} */

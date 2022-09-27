@@ -25,20 +25,23 @@ const Navbar = ({ setIsLoggedIn, isLoggedIn, currentUser }) => {
   };
 
   return (
-    <div className="navBar">
-      <h2>mmmbookver2</h2>
-      <div className="navBarBtn">
-        <Link to="/" className="homeButton">
+    <div className="navBar" id="navBar">
+      <div className="navBarBtn" id="navBarBtn">
+        <Link to="/" className="homeButton" id="homeButton">
           <HouseIcon />
+          <p>Home</p>
         </Link>
-        <Link to="/explore" className="exploreButton">
+        <Link to="/explore" className="exploreButton" id="exploreButton">
           <SearchIcon />
+          <p>Search</p>
         </Link>
-        <Link to="/drinks" className="drinkButton">
+        <Link to="/drinks" className="drinkButton" id="drinkButton">
           <LocalBarIcon />
+          <p>Search</p>
         </Link>
-        <Link to="/dishes" className="entreeButton">
+        <Link to="/dishes" className="entreeButton" id="entreeButton">
           <RestaurantIcon />
+          <p>Entrees</p>
         </Link>
         {isLoggedIn === false ? (
           <></>
@@ -47,25 +50,30 @@ const Navbar = ({ setIsLoggedIn, isLoggedIn, currentUser }) => {
             <Link
               to={`/userProfile/${currentUser.userID}`}
               className="userButton"
+              id="userButton"
             >
               <PersonIcon />
+              <p>Profile</p>
             </Link>
-            <Link to="/create" className="createButton">
+            <Link to="/create" className="createButton" id="createButton">
               <KitchenIcon />
+              <p>Create</p>
             </Link>
           </>
         )}
         {isLoggedIn === false ? (
-          <Link to="/login" className="loginButton">
+          <Link to="/login" className="logInButton" id="logInButton">
             <LoginIcon />
+            <p>login</p>
           </Link>
         ) : (
           <>
-            <div className="logOutButton">
+            <div className="logOutButton" id="logOutButton">
               <LogoutIcon
                 onClick={() => logout()}
                 style={{ cursor: "pointer" }}
               />
+              <p>logout</p>
             </div>
           </>
         )}

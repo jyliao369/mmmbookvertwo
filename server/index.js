@@ -18,8 +18,8 @@ app.use(express.urlencoded({ extended: true }));
 // CORS SETUP
 app.use(
   cors({
-    // origin: ["http://localhost:3000"],
-    origin: ["https://jyliao369.github.io"],
+    origin: ["http://localhost:3000"],
+    // origin: ["https://jyliao369.github.io"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })

@@ -92,9 +92,6 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
 
   return (
     <div className="homePage">
-      <div className="pageBanner">
-        <p>Home</p>
-      </div>
       <div className="allRecipesCont">
         {allRecipes.map((recipe) => (
           <div key={recipe.recipeID} className="recipeCard">
