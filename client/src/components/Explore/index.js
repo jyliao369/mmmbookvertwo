@@ -116,27 +116,6 @@ const Explore = ({ isLoggedIn, currentUser }) => {
 
   return (
     <div className="explorePage">
-      <div className="pageBanner">
-        <p>Explore</p>
-        <div className="searchBar">
-          <input
-            placeholder="Search..."
-            value={searchWord}
-            onChange={(e) => setSearchWord(e.target.value)}
-          />
-          {searchWord === "" ? (
-            <button disabled={true}>Search</button>
-          ) : (
-            <button onClick={() => searchRecipe()}>Search</button>
-          )}
-          <button onClick={() => setShowRecipes(allRecipes)}>
-            {/* <RestartAltRoundedIcon /> */}
-            Reset
-          </button>
-          <button onClick={() => openAdvSearch()}>Filters</button>
-        </div>
-      </div>
-
       <div className="filteredSection" id="filteredSection">
         {/* <input placeholder="Category" /> */}
         <select>
@@ -170,7 +149,6 @@ const Explore = ({ isLoggedIn, currentUser }) => {
         <select>
           <option>Ingredients</option>
         </select>
-        <button>Search</button>
       </div>
 
       <div className="allRecipesCont">

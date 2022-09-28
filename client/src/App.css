@@ -68,7 +68,82 @@ a {
 }
 /* #MAINPAGE */
 #mainPage {
+  width: 100%;
   margin: 4rem 0rem 0rem 4rem;
+}
+/* #HOMEPAGE */
+.homePage {
+  display: flex;
+}
+.homePageCont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.allRecipesCont {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 1rem 0rem 0rem 0rem;
+}
+/* #EXPLOREPAGE */
+.filteredSection {
+  display: flex;
+  border-bottom: solid;
+  border-width: thin;
+  justify-content: space-around;
+  padding: 0.75rem 0rem 0.75rem 0rem;
+}
+/* #LOGIN/REGISTER */
+
+/* -------------------------------------------------------------------------------- */
+/* #RECIPECARDDESIGN */
+.recipeCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 20rem;
+  height: 37.5rem;
+  margin: 0.75rem;
+  padding: 1rem;
+  border-style: solid;
+  border-width: thin;
+}
+.recipeImage {
+  aspect-ratio: 1/1;
+  background: lightgray;
+}
+.recipeInfoB {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.recipeCardB {
+  display: none;
+  height: 100%;
+}
+.recipeCardIngIns {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.recipeCardIng,
+.recipeCardIns {
+  margin: 0rem 0rem 1rem 0rem;
+}
+.recipeCardIng div,
+.recipeCardIns div {
+  height: 15rem;
+  overflow: auto;
+}
+.recipeCardIng div p,
+.recipeCardIns div p {
+  margin: 0rem 0rem 0.5rem 0rem;
+}
+.recipeCardIng div::-webkit-scrollbar,
+.recipeCardIns div::-webkit-scrollbar {
+  display: none;
 }
 
 /* .navBar {

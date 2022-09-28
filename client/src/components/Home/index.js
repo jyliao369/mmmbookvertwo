@@ -92,10 +92,10 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
 
   return (
     <div className="homePage">
-      <div className="allRecipesCont">
-        {allRecipes.map((recipe) => (
-          <div key={recipe.recipeID} className="recipeCard">
-            <div className="recipeCardIn">
+      <div className="homePageCont">
+        <div className="allRecipesCont">
+          {allRecipes.map((recipe) => (
+            <div key={recipe.recipeID} className="recipeCard">
               <div className="recipeCardA" id={`recipeCard${recipe.recipeID}a`}>
                 <div className="recipeCardMainInfo">
                   <Link key={recipe.recipeID} to={`/recipe/${recipe.recipeID}`}>
@@ -146,12 +146,12 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                     </div>
                   </div>
                 </div>
-                <div className="recipeCardAdd">
-                  <h3>Additional Notes:</h3>
-                  <div>
-                    <p>{recipe.addNotes}</p>
-                  </div>
+                {/* <div className="recipeCardAdd">
+                <h3>Additional Notes:</h3>
+                <div>
+                  <p>{recipe.addNotes}</p>
                 </div>
+              </div> */}
               </div>
               <div className="recipeCardC">
                 <button
@@ -207,8 +207,8 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                 </button>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

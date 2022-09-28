@@ -37,7 +37,7 @@ const Navbar = ({ setIsLoggedIn, isLoggedIn, currentUser }) => {
         </Link>
         <Link to="/drinks" className="drinkButton" id="drinkButton">
           <LocalBarIcon />
-          <p>Search</p>
+          <p>Drinks</p>
         </Link>
         <Link to="/dishes" className="entreeButton" id="entreeButton">
           <RestaurantIcon />
