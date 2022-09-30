@@ -10,6 +10,16 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import StarPurple500OutlinedIcon from "@mui/icons-material/StarPurple500Outlined";
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 
+import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
+import AccessAlarmsIcon from "@mui/icons-material/AccessAlarms";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import DinnerDiningIcon from "@mui/icons-material/DinnerDining";
+import LocalDiningIcon from "@mui/icons-material/LocalDining";
+import RoomServiceIcon from "@mui/icons-material/RoomService";
+import RamenDiningIcon from "@mui/icons-material/RamenDining";
+import BrunchDiningIcon from "@mui/icons-material/BrunchDining";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
+
 const RecipePage = ({ isLoggedIn, currentUser }) => {
   let { recipeID } = useParams();
 
@@ -194,97 +204,128 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
       <div className="recipePageCard">
         <div className="recipePageCardA">
           <div className="recipePageCardAa">
-            <div className="recipePageCardImg" />
             <div className="recipePageCardInfo">
               <div className="recipePageCardInfoA">
-                <h3>{recipeInfo.name}</h3>
-                <div className="recipeInfoPoster">
+                <h1>{recipeInfo.name}</h1>
+                <div className="recipePageCardPoster">
                   <p>Posted by: {recipeInfo.username}</p>
                 </div>
-                <div className="recipeInfoDesc">
+                <div className="recipePageCardDesc">
                   <p>Description: {recipeDesc}</p>
                 </div>
+                <div className="recipeInfoBasic">
+                  <div className="recipePageCardBasic">
+                    <HourglassEmptyIcon />
+                    <p>Prep Time: {recipeInfo.prepTime} min</p>
+                  </div>
+                  <div className="recipePageCardBasic">
+                    <AccessAlarmsIcon />
+                    <p>Cook Time: {recipeInfo.cookTime} min</p>
+                  </div>
+                  <div className="recipePageCardBasic">
+                    <AccessTimeIcon />
+                    <p>Total Time: {recipeInfo.totalTime} min</p>
+                  </div>
+                </div>
+                <div className="recipeInfoBasic">
+                  <div className="recipePageCardBasic">
+                    <LocalDiningIcon />
+                    <p>Yield: {recipeInfo.yield}</p>
+                  </div>
+                  <div className="recipePageCardBasic">
+                    <RoomServiceIcon />
+                    <p>Servings: {recipeInfo.servings}</p>
+                  </div>
+                  <div className="recipePageCardBasic">
+                    <MenuBookIcon />
+                    <p>Diet: {recipeInfo.diet}</p>
+                  </div>
+                </div>
+                <div className="recipeInfoBasic">
+                  <div className="recipePageCardBasic">
+                    <BrunchDiningIcon />
+                    <p>Category: {recipeInfo.category}</p>
+                  </div>
+                  <div className="recipePageCardBasic">
+                    <DinnerDiningIcon />
+                    <p>Course: {recipeInfo.course}</p>
+                  </div>
+                  <div className="recipePageCardBasic">
+                    <RamenDiningIcon />
+                    <p>Cuisine: {recipeInfo.cuisine}</p>
+                  </div>
+                </div>
               </div>
-              <div className="recipePageCardInfoB">
-                <div className="recipePageCardInfoBa">
-                  <p>Prep Time: {recipeInfo.prepTime} min</p>
-                  <p>Cook Time: {recipeInfo.cookTime} min</p>
-                  <p>Total Time: {recipeInfo.totalTime} min</p>
-                  <p>Yield: {recipeInfo.yield}</p>
-                  <p>Servings: {recipeInfo.servings}</p>
-                </div>
-                <div className="recipePageCardInfoBa">
-                  <p>Category: {recipeInfo.category}</p>
-                  <p>Course: {recipeInfo.course}</p>
-                  <p>Cuisine: {recipeInfo.cuisine}</p>
-                  <p>Diet: {recipeInfo.diet}</p>
-                </div>
+              <div className="recipeCardButton">
+                <button
+                  style={{ cursor: "pointer" }}
+                  className="chefProfileBtn"
+                >
+                  <Link to={`/profile/${recipeInfo.userID}`}>
+                    <AccountBoxOutlinedIcon />
+                  </Link>
+                </button>
+
+                {isLoggedIn === true ? (
+                  <>
+                    <button
+                      style={{ cursor: "pointer" }}
+                      onClick={(event) =>
+                        bookmarkRecipe(event, recipeInfo.recipeID)
+                      }
+                      className="bookmarkBtn"
+                    >
+                      <FavoriteBorderOutlinedIcon />
+                    </button>
+                    <button
+                      style={{ cursor: "pointer" }}
+                      onClick={(event) => addLike(event, recipeInfo.recipeID)}
+                      className="likeBtn"
+                    >
+                      <StarOutlineOutlinedIcon />
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button className="bookmarkBtn">
+                      <FavoriteBorderOutlinedIcon />
+                    </button>
+                    <button className="likeBtn">
+                      <StarOutlineOutlinedIcon />
+                    </button>
+                  </>
+                )}
+
+                <button className="reviewBtn">
+                  <ChatBubbleOutlineOutlinedIcon />
+                </button>
               </div>
             </div>
-          </div>
-          <div className="recipeCardC">
-            <button style={{ cursor: "pointer" }} className="chefProfileBtn">
-              <Link to={`/profile/${recipeInfo.userID}`}>
-                <AccountBoxOutlinedIcon />
-              </Link>
-            </button>
-
-            {isLoggedIn === true ? (
-              <>
-                <button
-                  style={{ cursor: "pointer" }}
-                  onClick={(event) =>
-                    bookmarkRecipe(event, recipeInfo.recipeID)
-                  }
-                  className="bookmarkBtn"
-                >
-                  <FavoriteBorderOutlinedIcon />
-                </button>
-                <button
-                  style={{ cursor: "pointer" }}
-                  onClick={(event) => addLike(event, recipeInfo.recipeID)}
-                  className="likeBtn"
-                >
-                  <StarOutlineOutlinedIcon />
-                </button>
-              </>
-            ) : (
-              <>
-                <button className="bookmarkBtn">
-                  <FavoriteBorderOutlinedIcon />
-                </button>
-                <button className="likeBtn">
-                  <StarOutlineOutlinedIcon />
-                </button>
-              </>
-            )}
-
-            <button className="reviewBtn">
-              <ChatBubbleOutlineOutlinedIcon />
-            </button>
+            <div className="recipePageCardImg" />
           </div>
         </div>
         <div className="recipePageCardB">
           <div className="recipePageCardInfoBb">
             <div className="recipePageCardIng">
-              <h3>Ingredients</h3>
+              <h1>Ingredients</h1>
               <div className="recipePageCardIngA">
                 {recipeIng.map((ingredient) => (
                   <p key={ingredient.slice(5, 15)}>{ingredient}</p>
                 ))}
               </div>
             </div>
+            <div className="verticalDivide" />
             <div className="recipePageCardIns">
-              <h3>Instructions</h3>
-              <div className="recipePageCardInsA">
+              <h1>Instructions</h1>
+              <ol className="recipePageCardInsA">
                 {recipeIns.map((instruction) => (
-                  <p key={instruction.slice(5, 15)}>{instruction}</p>
+                  <li key={instruction.slice(5, 15)}>{instruction}</li>
                 ))}
-              </div>
+              </ol>
             </div>
           </div>
           <div className="recipePageCardInfoCb">
-            <h3>Additional Notes:</h3>
+            <h2>Additional Notes:</h2>
             <div>
               <p>{recipeInfo.addNotes}</p>
             </div>
@@ -381,6 +422,12 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
           ))}
         </div>
       </div>
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 };

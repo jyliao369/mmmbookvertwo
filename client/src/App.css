@@ -64,7 +64,7 @@ a {
   margin: 0.6rem;
 }
 .navBarBtn svg {
-  font-size: 2rem;
+  font-size: 1.25rem;
 }
 /* #MAINPAGE */
 #mainPage {
@@ -95,7 +95,59 @@ a {
   justify-content: space-around;
   padding: 0.75rem 0rem 0.75rem 0rem;
 }
+/* #RECIPEPAGE */
+.recipePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.reviewsSections {
+  display: flex;
+}
+.reviewsSectionCont {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 /* #LOGIN/REGISTER */
+.loginPage,
+.registerPage {
+  display: flex;
+  justify-content: center;
+}
+.loginForm,
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20rem;
+  padding: 2em;
+  margin: 5em 0em 0em 0em;
+  border-style: solid;
+  border-width: thin;
+}
+.loginForm input,
+.registerForm input {
+  width: 100%;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+.loginForm button,
+.registerForm button {
+  width: 30%;
+  padding: 0.4rem;
+}
+.loginForm h2,
+.loginForm input,
+.loginForm button,
+.loginForm p,
+.registerForm h2,
+.registerForm input,
+.registerForm button,
+.registerForm p {
+  margin: 0rem 0rem 1.5rem 0rem;
+}
 
 /* -------------------------------------------------------------------------------- */
 /* #RECIPECARDDESIGN */
@@ -145,7 +197,174 @@ a {
 .recipeCardIns div::-webkit-scrollbar {
   display: none;
 }
-
+/* #RECIPEPAGEPAGE */
+.recipePageCard {
+  width: 85rem;
+  margin: 4rem 0rem 4rem 0rem;
+  border-style: solid;
+  border-width: thin;
+}
+.recipePageCardA,
+.recipePageCardB {
+  padding: 2rem;
+}
+.recipePageCardInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 50%;
+}
+.recipePageCardInfoA h1,
+.recipePageCardPoster,
+.recipePageCardDesc {
+  margin: 0rem 0rem 2rem 0.5rem;
+}
+.recipePageCardPoster p,
+.recipePageCardDesc p {
+  font-size: 1.2rem;
+}
+.recipeInfoBasic,
+.recipePageCardBasic {
+  display: flex;
+  flex-direction: row;
+}
+.recipePageCardBasic {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0rem 0rem 1rem 0rem;
+}
+.recipePageCardBasic p {
+  font-size: 1.1rem;
+}
+.recipePageCardBasic svg {
+  font-size: 35px;
+  margin: 0rem 0.5rem 0rem 0rem;
+}
+.recipeCardButton {
+  display: flex;
+}
+.recipeCardButton button,
+.recipeCardButton a {
+  display: flex;
+}
+.recipeCardButton button {
+  margin: 0rem 0.75rem 0rem 0rem;
+  border: none;
+  background: white;
+}
+.recipeCardButton svg {
+  font-size: 2.5em;
+}
+.recipePageCardB {
+  background: #4c4c4c;
+  color: #d0d0d0;
+}
+.recipePageCardIngA p,
+.recipePageCardB li {
+  font-size: 1.15em;
+  margin: 0rem 0rem 1rem 0rem;
+}
+.recipePageCardAa {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.recipePageCardImg {
+  aspect-ratio: 1/1;
+  width: 600px;
+  background: gray;
+}
+.recipePageCardInfoBb {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.recipePageCardIng,
+.recipePageCardIns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.recipePageCardIng h1,
+.recipePageCardIns h1 {
+  margin: 0rem 0rem 3rem 0rem;
+}
+.verticalDivide {
+  border-style: solid;
+  border-radius: 5px;
+}
+.recipePageCardIng {
+  width: 30%;
+}
+.recipePageCardIns {
+  width: 50%;
+}
+.recipePageCardInfoCb {
+  margin: 1rem 0rem 0rem 0rem;
+}
+.recipePageCardInfoCb h2 {
+  margin: 0rem 0rem 0.75rem 0rem;
+}
+.recipePageCardInfoCb div p {
+  font-size: 1.15em;
+}
+/* #USERATINGSONRECIPEPAGE */
+.userRatingCont {
+  display: flex;
+  align-items: flex-start;
+  margin: 1rem;
+}
+.reviewFormCont {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  margin: 2rem 0rem 3rem 0rem;
+}
+.reviewForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.reviewForm textarea {
+  padding: 1em;
+  margin: 0rem 0rem 1rem 0rem;
+}
+.profileIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profileImg {
+  aspect-ratio: 1/1;
+  width: 7rem;
+  border-radius: 60px;
+  background: gray;
+  margin: 0rem 1rem 0rem 1rem;
+}
+.reviewBtnCont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.ratingForm {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.ratingForm textarea {
+  width: 100%;
+}
+.ratingForm div {
+  display: flex;
+}
+.userReview {
+  width: 40rem;
+  max-height: 10rem;
+  border-style: solid;
+  border-width: thin;
+  padding: 0.75em;
+}
 /* .navBar {
   display: flex;
   flex-direction: column;

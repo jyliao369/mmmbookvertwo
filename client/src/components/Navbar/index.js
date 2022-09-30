@@ -67,15 +67,13 @@ const Navbar = ({ setIsLoggedIn, isLoggedIn, currentUser }) => {
             <p>login</p>
           </Link>
         ) : (
-          <>
-            <div className="logOutButton" id="logOutButton">
-              <LogoutIcon
-                onClick={() => logout()}
-                style={{ cursor: "pointer" }}
-              />
-              <p>logout</p>
-            </div>
-          </>
+          <div className="logOutButton" id="logOutButton">
+            <LogoutIcon
+              onClick={() => logout()}
+              style={{ cursor: "pointer" }}
+            />
+            <p>logout</p>
+          </div>
         )}
       </div>
     </div>
