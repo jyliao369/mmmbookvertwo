@@ -43,10 +43,11 @@ const Navbar = ({ setIsLoggedIn, isLoggedIn, currentUser }) => {
           <RestaurantIcon />
           <p>Entrees</p>
         </Link>
+
         {isLoggedIn === false ? (
           <></>
         ) : (
-          <>
+          <div>
             <Link
               to={`/userProfile/${currentUser.userID}`}
               className="userButton"
@@ -59,8 +60,9 @@ const Navbar = ({ setIsLoggedIn, isLoggedIn, currentUser }) => {
               <KitchenIcon />
               <p>Create</p>
             </Link>
-          </>
+          </div>
         )}
+
         {isLoggedIn === false ? (
           <Link to="/login" className="logInButton" id="logInButton">
             <LoginIcon />

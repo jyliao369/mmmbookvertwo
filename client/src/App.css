@@ -110,6 +110,29 @@ a {
   flex-wrap: wrap;
   justify-content: center;
 }
+/* #USERSPROFILEPAGE */
+.profilePage {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.userProfilePageMain {
+  display: flex;
+  margin: 3rem 0rem 3rem 0rem;
+}
+.usersRecipes {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
+#userBookmarked,
+#userReviews,
+#userFollowers,
+#userFollowing {
+  display: none;
+}
 /* #LOGIN/REGISTER */
 .loginPage,
 .registerPage {
@@ -486,6 +509,110 @@ a {
   height: 15%;
   width: 100%;
   margin: 2rem 0rem 0rem 0rem;
+}
+/* #CHEFPROFILECARD */
+.chefProfileCardCont {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  background: #f3f7f9;
+  border-bottom: solid;
+  border-width: 1px;
+  border-color: #e6eff2;
+}
+.chefProfileCard {
+  display: flex;
+  justify-content: center;
+  /* width: 65%; */
+  width: 75rem;
+  border-style: solid;
+  border-width: thin;
+  border-radius: 15px;
+  margin: 3rem 0rem 3rem 0rem;
+  background: #ededed;
+}
+.chefProfileCardA {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  margin: 2rem 1rem 2rem 2rem;
+  border-style: solid;
+  border-width: thin;
+  border-radius: 15px;
+  background: white;
+}
+.chefProfileCardAHead,
+.chefProfileCardBHead {
+  display: flex;
+  justify-content: center;
+  margin: 0rem 0rem 1rem 0rem;
+}
+.chefProfileInfo h3 {
+  margin: 0rem 0rem 1.5rem 0rem;
+}
+.chefProfileImage {
+  width: 100%;
+  aspect-ratio: 2.75/2;
+  margin: 0rem 0rem 1.5rem 0rem;
+  background: gray;
+  border-radius: 15px;
+}
+.chefProfileCardB {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 50%;
+  margin: 2rem 2rem 2rem 1rem;
+}
+.chefProfileCardBOne,
+.chefProfileNavBar {
+  padding: 2em;
+  border-style: solid;
+  border-width: thin;
+  border-radius: 15px;
+  background: white;
+}
+.chefProfileCardBOne {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  margin: 0rem 0rem 2rem 0rem;
+}
+.chefProfileCardBDesc {
+  margin: 0rem 0rem 1rem 0rem;
+}
+.chefProfileCardBInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0rem 0rem 1rem 0rem;
+}
+.chefProfileCardBInfo div {
+  width: 45%;
+}
+.chefProfileCardBStats {
+  display: flex;
+  justify-content: space-between;
+}
+.chefProfileNavBar {
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+}
+/* #FOLLOWING/FOLLOWER */
+.followingProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.followingIcon {
+  width: 170px;
+  aspect-ratio: 1/1;
+  border-radius: 85px;
+  background: gray;
+  margin: 0rem 1rem 0rem 1rem;
 }
 
 /* .navBar {

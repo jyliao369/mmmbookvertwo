@@ -38,6 +38,10 @@ const TitleBanner = () => {
     }
   };
 
+  const goToProfile = () => {
+    console.log("hello");
+  };
+
   return (
     <div className="titleBanner">
       <div className="titleBannerCont">
@@ -52,7 +56,9 @@ const TitleBanner = () => {
           <input placeholder="Search" />
           <SearchIcon />
         </div>
-        <AccountCircleIcon />
+        <div>
+          <AccountCircleIcon onClick={() => goToProfile()} />
+        </div>
       </div>
     </div>
   );

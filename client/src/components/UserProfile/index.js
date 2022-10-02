@@ -281,190 +281,88 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
     <div className="profilePage">
       <div className="chefProfileCardCont">
         <div className="chefProfileCard">
-          <div className="chefProfileIcon">
-            <div class="userIconCont">
-              <div className="userIcon"></div>
-              <h3>{profileUser.username}</h3>
+          <div className="chefProfileCardA">
+            <div className="chefProfileCardAHead">
+              <h2>My Profile</h2>
+            </div>
+            <div className="chefProfileImage" />
+            <div className="chefProfileInfo">
+              <h3>{profileUser.username} joined on 'date'</h3>
+              <h3>
+                {profileUser.firstName} {profileUser.lastName}
+              </h3>
+              <h3>{profileUser.email}</h3>
+              <h3>"Rating"</h3>
             </div>
           </div>
-          <div className="chefProfileInfo">
-            <div className="chefProfileInfoA" id="chefProfileInfoA">
-              <div className="chefProfileInfoAb">
-                <h3>
-                  {profileUser.firstName} {profileUser.lastName}
-                </h3>
-                <h3>Rating: "Star"</h3>
+          <div className="chefProfileCardB">
+            <div className="chefProfileCardBOne">
+              <div>
+                <div className="chefProfileCardBHead">
+                  <h2>About Me</h2>
+                </div>
+                <div className="chefProfileCardBDesc">
+                  <h3>{profileUser.chefDesc}</h3>
+                </div>
+                <div className="chefProfileCardBInfo">
+                  <div>
+                    <h3>Favorite Recipe: </h3>
+                    <p>{profileUser.favRecipe}</p>
+                  </div>
+                  <div>
+                    <h3>Favorite Beverage: </h3>
+                    <p>{profileUser.favBeverage}</p>
+                  </div>
+                </div>
+                <div className="chefProfileCardBInfo">
+                  <div>
+                    <h3>Favorite Dessert: </h3>
+                    <p>{profileUser.favDessert}</p>
+                  </div>
+                  <div>
+                    <h3>Favorite Cuisine: </h3>
+                    <p>{profileUser.favCuisine}</p>
+                  </div>
+                </div>
               </div>
-              <div className="chefProfileInfoAc">
-                <h3>{profileUser.chefDesc}</h3>
-              </div>
-              {/* <div>
-                <p>Number of Recipes: </p>
-                <p>{userRecipes.length}</p>
-              </div> */}
-              <div className="chefProfileInfoAd">
+              <div className="chefProfileCardBStats">
                 <div>
-                  <h3>Favorite Recipe: </h3>
-                  <p>{profileUser.favRecipe}</p>
+                  <h3>Dishes Created:</h3>
+                  <p>{userRecipes.length}</p>
                 </div>
                 <div>
-                  <h3>Favorite Beverage: </h3>
-                  <p>{profileUser.favBeverage}</p>
-                </div>
-              </div>
-              <div className="chefProfileInfoAd">
-                <div>
-                  <h3>Favorite Dessert: </h3>
-                  <p>{profileUser.favDessert}</p>
+                  <h3>Drinks Created:</h3>
+                  <p>"Number"</p>
                 </div>
                 <div>
-                  <h3>Favorite Cuisine: </h3>
-                  <p>{profileUser.favCuisine}</p>
+                  <h3>Recipes Cooked:</h3>
+                  <p>"Number"</p>
                 </div>
               </div>
             </div>
-            <div className="chefProfileSettings" id="chefProfileSettings">
-              <div className="chefProfileUpdateA">
-                <input
-                  placeholder="Username"
-                  value={updateUser}
-                  onChange={(e) => setUpdateUser(e.target.value)}
-                />
-                <textarea
-                  placeholder="Describe yourself"
-                  rows={3}
-                  value={updateDesc}
-                  onChange={(e) => setUpdateDesc(e.target.value)}
-                />
-                <input
-                  placeholder="Email"
-                  value={updateEmail}
-                  onChange={(e) => setUpdateEmail(e.target.value)}
-                />
+            <div className="chefProfileNavBar">
+              <div onClick={() => myRecipes()} style={{ cursor: "pointer" }}>
+                My Recipes
               </div>
-              <div className="chefProfileUpdate">
-                <div className="chefProfileUpdateB">
-                  <input
-                    placeholder="First Name"
-                    value={updateFirst}
-                    onChange={(e) => setUpdateFirst(e.target.value)}
-                  />
-                  <input
-                    placeholder="Last Name"
-                    value={updateLast}
-                    onChange={(e) => setUpdateLast(e.target.value)}
-                  />
-                </div>
-                <div className="chefProfileUpdateB">
-                  <input
-                    placeholder="New Password"
-                    value={updatePass}
-                    onChange={(e) => setUpdatePass(e.target.value)}
-                  />
-                  <input
-                    placeholder="Re-Type Password"
-                    value={updateRePass}
-                    onChange={(e) => setUpdateRePass(e.target.value)}
-                  />
-                </div>
+              <div onClick={() => myFavorite()} style={{ cursor: "pointer" }}>
+                My Favorites
               </div>
-              <div className="chefProfileUpdate">
-                <div className="chefProfileUpdateB">
-                  <select
-                    value={updateFavRec}
-                    onChange={(e) => setUpdateFavRec(e.target.value)}
-                  >
-                    <option value="" disabled={true} selected>
-                      Favorite Recipe
-                    </option>
-                    {userRecipes.map((recipe) => (
-                      <option>{recipe.name}</option>
-                    ))}
-                  </select>
-                  <select
-                    value={updateFavBev}
-                    onChange={(e) => setUpdateFavBev(e.target.value)}
-                  >
-                    <option value="" disabled={true} selected>
-                      Favorite Beverage
-                    </option>
-                    {userRecipes.map((recipe) =>
-                      recipe.category === "Drinks" ||
-                      recipe.category === "Beverage" ? (
-                        <option>{recipe.name}</option>
-                      ) : (
-                        <></>
-                      )
-                    )}
-                  </select>
-                </div>
-                <div className="chefProfileUpdateB">
-                  <select
-                    value={updateFavDes}
-                    onChange={(e) => setUpdateFavDes(e.target.value)}
-                  >
-                    <option value="" disabled={true} selected>
-                      Favorite Dessert
-                    </option>
-                    {userRecipes.map((recipe) =>
-                      recipe.category === "Dessert" ? (
-                        <option>{recipe.name}</option>
-                      ) : (
-                        <></>
-                      )
-                    )}
-                  </select>
-                  <select
-                    value={updateFavCui}
-                    onChange={(e) => setUpdateFavCui(e.target.value)}
-                  >
-                    <option value="" disabled={true} selected>
-                      Favorite Cuisine
-                    </option>
-                    {dataList.cuisine.map((cuisine) => (
-                      <option>{cuisine}</option>
-                    ))}
-                  </select>
-                </div>
+              <div onClick={() => myReviews()} style={{ cursor: "pointer" }}>
+                My Reviews
               </div>
-              <div className="chefProfileSub">
-                <button onClick={() => updateProfile()}>Update</button>
+              <div onClick={() => myFollowers()} style={{ cursor: "pointer" }}>
+                Followers
               </div>
-            </div>
-            <div>
-              {currentUser.userID === profileUser.userID ? (
-                <button onClick={() => settingsFlip()}>
-                  <EditOutlinedIcon />
-                </button>
-              ) : (
-                <></>
-              )}
+              <div onClick={() => imFollowing()} style={{ cursor: "pointer" }}>
+                Following
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="chefProfileNavBar">
-        <div onClick={() => myRecipes()} style={{ cursor: "pointer" }}>
-          My Recipes
-        </div>
-        <div onClick={() => myFavorite()} style={{ cursor: "pointer" }}>
-          My Favorites
-        </div>
-        <div onClick={() => myReviews()} style={{ cursor: "pointer" }}>
-          My Reviews
-        </div>
-        <div onClick={() => myFollowers()} style={{ cursor: "pointer" }}>
-          Followers
-        </div>
-        <div onClick={() => imFollowing()} style={{ cursor: "pointer" }}>
-          Following
         </div>
       </div>
 
       <div className="userProfilePageMain">
-        {/* ALL USER RECIPES */}
-        <div className="userRecipes" id="userRecipes">
+        <div className="usersRecipes" id="userRecipes">
           {userRecipes.length > 0 ? (
             <>
               {userRecipes.map((recipe) => (
@@ -603,7 +501,6 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
           )}
         </div>
 
-        {/* USERS BOOKMARKED */}
         <div className="userBookmarked" id="userBookmarked">
           {userBookmarked.length > 0 ? (
             <>
@@ -741,7 +638,6 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
           )}
         </div>
 
-        {/* ALL USER REVIEWS */}
         <div className="userReviews" id="userReviews">
           {userReviews.length > 0 ? (
             <>
@@ -772,13 +668,12 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
           )}
         </div>
 
-        {/* ALL FOLLOWERS */}
         <div className="userFollowers" id="userFollowers">
           {chefFollowers.length > 0 ? (
             <>
               {chefFollowers.map((chef) => (
                 <div className="followingProfile">
-                  <div className="followingIcon"></div>
+                  <div className="followingIcon" />
                   <Link to={`/profile/${chef.chefUserID}`}>
                     <h3>{chef.username}</h3>
                   </Link>
@@ -792,13 +687,12 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
           )}
         </div>
 
-        {/* ALL CHEFS USER IS FOLLOWING */}
         <div className="userFollowing" id="userFollowing">
           {chefsFollowing.length > 0 ? (
             <>
               {chefsFollowing.map((chef) => (
                 <div className="followingProfile">
-                  <div className="followingIcon"></div>
+                  <div className="followingIcon" />
                   <Link to={`/profile/${chef.chefUserID}`}>
                     <h3>{chef.chefUsername}</h3>
                   </Link>
@@ -812,6 +706,130 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
           )}
         </div>
       </div>
+
+      {/* <div className="chefProfileCardCont">
+        <div className="chefProfileCard">
+          <div className="chefProfileInfo">
+            <div className="chefProfileSettings" id="chefProfileSettings">
+              <div className="chefProfileUpdateA">
+                <input
+                  placeholder="Username"
+                  value={updateUser}
+                  onChange={(e) => setUpdateUser(e.target.value)}
+                />
+                <textarea
+                  placeholder="Describe yourself"
+                  rows={3}
+                  value={updateDesc}
+                  onChange={(e) => setUpdateDesc(e.target.value)}
+                />
+                <input
+                  placeholder="Email"
+                  value={updateEmail}
+                  onChange={(e) => setUpdateEmail(e.target.value)}
+                />
+              </div>
+              <div className="chefProfileUpdate">
+                <div className="chefProfileUpdateB">
+                  <input
+                    placeholder="First Name"
+                    value={updateFirst}
+                    onChange={(e) => setUpdateFirst(e.target.value)}
+                  />
+                  <input
+                    placeholder="Last Name"
+                    value={updateLast}
+                    onChange={(e) => setUpdateLast(e.target.value)}
+                  />
+                </div>
+                <div className="chefProfileUpdateB">
+                  <input
+                    placeholder="New Password"
+                    value={updatePass}
+                    onChange={(e) => setUpdatePass(e.target.value)}
+                  />
+                  <input
+                    placeholder="Re-Type Password"
+                    value={updateRePass}
+                    onChange={(e) => setUpdateRePass(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="chefProfileUpdate">
+                <div className="chefProfileUpdateB">
+                  <select
+                    value={updateFavRec}
+                    onChange={(e) => setUpdateFavRec(e.target.value)}
+                  >
+                    <option value="" disabled={true} selected>
+                      Favorite Recipe
+                    </option>
+                    {userRecipes.map((recipe) => (
+                      <option>{recipe.name}</option>
+                    ))}
+                  </select>
+                  <select
+                    value={updateFavBev}
+                    onChange={(e) => setUpdateFavBev(e.target.value)}
+                  >
+                    <option value="" disabled={true} selected>
+                      Favorite Beverage
+                    </option>
+                    {userRecipes.map((recipe) =>
+                      recipe.category === "Drinks" ||
+                      recipe.category === "Beverage" ? (
+                        <option>{recipe.name}</option>
+                      ) : (
+                        <></>
+                      )
+                    )}
+                  </select>
+                </div>
+                <div className="chefProfileUpdateB">
+                  <select
+                    value={updateFavDes}
+                    onChange={(e) => setUpdateFavDes(e.target.value)}
+                  >
+                    <option value="" disabled={true} selected>
+                      Favorite Dessert
+                    </option>
+                    {userRecipes.map((recipe) =>
+                      recipe.category === "Dessert" ? (
+                        <option>{recipe.name}</option>
+                      ) : (
+                        <></>
+                      )
+                    )}
+                  </select>
+                  <select
+                    value={updateFavCui}
+                    onChange={(e) => setUpdateFavCui(e.target.value)}
+                  >
+                    <option value="" disabled={true} selected>
+                      Favorite Cuisine
+                    </option>
+                    {dataList.cuisine.map((cuisine) => (
+                      <option>{cuisine}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div className="chefProfileSub">
+                <button onClick={() => updateProfile()}>Update</button>
+              </div>
+            </div>
+            <div>
+              {currentUser.userID === profileUser.userID ? (
+                <button onClick={() => settingsFlip()}>
+                  <EditOutlinedIcon />
+                </button>
+              ) : (
+                <></>
+              )}
+            </div>
+          </div>
+        </div>
+      </div> */}
     </div>
   );
 };
