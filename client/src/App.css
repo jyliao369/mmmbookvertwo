@@ -288,7 +288,7 @@ a {
 }
 .recipePageCardIng h1,
 .recipePageCardIns h1 {
-  margin: 0rem 0rem 3rem 0rem;
+  margin: 0rem 0rem 1.5rem 0rem;
 }
 .verticalDivide {
   border-style: solid;
@@ -298,7 +298,7 @@ a {
   width: 30%;
 }
 .recipePageCardIns {
-  width: 50%;
+  width: 55%;
 }
 .recipePageCardInfoCb {
   margin: 1rem 0rem 0rem 0rem;
@@ -365,6 +365,129 @@ a {
   border-width: thin;
   padding: 0.75em;
 }
+/* #CREATERECIPEPAGE */
+.createRecipePage {
+  display: flex;
+  justify-content: center;
+}
+.createRecipeCont {
+  width: 85rem;
+  margin: 4rem 0rem 4rem 0rem;
+  border-style: solid;
+  border-width: thin;
+}
+.createRecipeFormA,
+.createRecipeFormB {
+  padding: 2rem;
+}
+.createRecipeFormA {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.createRecipeFormAb {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 50%;
+}
+.createRecipeHeader {
+  display: flex;
+  justify-content: center;
+  margin: 0rem 0rem 1.5rem 0rem;
+}
+.createNewRecipeAb {
+  display: flex;
+  flex-direction: column;
+}
+.createNewRecipeAb input,
+.createNewRecipeAb textarea {
+  padding: 0.5em;
+  font-size: 1rem;
+  margin: 0rem 0rem 1.5rem 0rem;
+}
+.createNewRecipeAc {
+  display: flex;
+  justify-content: space-between;
+}
+.createNewRecipeAc input,
+.createNewRecipeAc select {
+  width: 24%;
+  padding: 0.5em;
+  margin: 0rem 0rem 1.5rem 0rem;
+  box-sizing: border-box;
+}
+.createRecipeBtn {
+  display: flex;
+  justify-content: center;
+}
+.createRecipeBtn button {
+  padding: 0.5em;
+}
+.createNewRecipeImg {
+  aspect-ratio: 1/1;
+  width: 600px;
+  background: gray;
+}
+.createRecipeFormB {
+  display: flex;
+  flex-direction: column;
+  height: 50em;
+  background: #4c4c4c;
+  color: #dbdbdb;
+}
+.createNewRecipeBa {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+}
+.createNewRecipeBa textarea {
+  height: 100%;
+}
+.createNewRecipeBb {
+  display: flex;
+  flex-direction: column;
+}
+.createNewRecipeBb h2 {
+  margin: 0rem 0rem 0.75rem 0.7rem;
+}
+.createNewRecipeBa textarea,
+.createNewRecipeBb textarea {
+  padding: 0.75rem;
+  border: none;
+  outline: none;
+  background: #676767;
+  color: #dbdbdb;
+  font-size: 20px;
+}
+.createNewRecipeBa textarea::placeholder,
+.createNewRecipeBb textarea::placeholder {
+  color: #dbdbdb;
+}
+.ingCreateRecipe div,
+.insCreateRecipe div {
+  display: flex;
+  justify-content: center;
+  margin: 0rem 0rem 1.5rem 0rem;
+}
+.ingCreateRecipe {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+.insCreateRecipe {
+  display: flex;
+  flex-direction: column;
+  width: 55%;
+}
+.createNewRecipeBb {
+  display: flex;
+  height: 15%;
+  width: 100%;
+  margin: 2rem 0rem 0rem 0rem;
+}
+
 /* .navBar {
   display: flex;
   flex-direction: column;

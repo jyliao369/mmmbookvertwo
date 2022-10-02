@@ -76,11 +76,11 @@ function App() {
                 element={
                   <Profile isLoggedIn={isLoggedIn} currentUser={currentUser} />
                 }
-              />
+              />*/}
               <Route
                 path="/create"
                 element={<Create currentUser={currentUser} />}
-              /> */}
+              />
               <Route
                 path="/recipe/:recipeID"
                 element={
