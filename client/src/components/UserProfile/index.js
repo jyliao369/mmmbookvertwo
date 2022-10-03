@@ -362,348 +362,366 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
       </div>
 
       <div className="userProfilePageMain">
-        <div className="usersRecipes" id="userRecipes">
-          {userRecipes.length > 0 ? (
-            <>
-              {userRecipes.map((recipe) => (
-                <div key={recipe.recipeID} className="recipeCard">
-                  <div className="recipeCardIn">
-                    <div
-                      className="recipeCardA"
-                      id={`recipeCard${recipe.recipeID}a`}
-                    >
-                      <div className="recipeCardMainInfo">
-                        <Link
-                          key={recipe.recipeID}
-                          to={`/recipe/${recipe.recipeID}`}
-                        >
-                          <div className="recipeImage"></div>
-                        </Link>
-                        <div className="recipeInfo">
-                          <h3>{recipe.name}</h3>
-                          <div className="recipeInfoPoster">
-                            <p>Posted by: {recipe.username} on "date"</p>
-                          </div>
-                          <div className="recipeInfoDesc">
-                            <p>
-                              Description: {recipe.description.slice(0, 180)}
-                            </p>
-                          </div>
-                          <div className="recipeInfoB">
-                            <div className="recipeInfoBA">
-                              <p>Prep Time: {recipe.prepTime} min</p>
-                              <p>Cook Time: {recipe.cookTime} min</p>
-                              <p>Total Time: {recipe.totalTime} min</p>
-                              <p>Yield: {recipe.yield}</p>
-                              <p>Servings: {recipe.servings}</p>
-                            </div>
-                            <div className="recipeInfoBA">
-                              <p>Category: {recipe.category}</p>
-                              <p>Course: {recipe.course}</p>
-                              <p>Cuisine: {recipe.cuisine}</p>
-                              <p>Diet: {recipe.diet}</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className="recipeCardB"
-                      id={`recipeCard${recipe.recipeID}b`}
-                    >
-                      <div className="recipeCardIngIns">
-                        <div className="recipeCardIng">
-                          <h3>Ingredients</h3>
-                          <div>
-                            {ingrSplit(recipe.ingredients).map((ingredient) => (
-                              <p key={ingredient.slice(5, 100)}>{ingredient}</p>
-                            ))}
-                          </div>
-                        </div>
-                        <div className="recipeCardIns">
-                          <h3>Instructions</h3>
-                          <div>
-                            {instrSplit(recipe.instructions).map(
-                              (instruction) => (
-                                <p>{instruction}</p>
-                              )
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="recipeCardAdd">
-                        <h3>Additional Notes:</h3>
-                        <div>
-                          <p>{recipe.addNotes}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="recipeCardC">
-                      <button
-                        style={{ cursor: "pointer" }}
-                        onClick={(event) =>
-                          flipSide(event, `recipeCard${recipe.recipeID}`)
-                        }
-                        className="seeInsIngBtn"
+        <div className="userProfilePageMainCont">
+          <div className="usersRecipes" id="userRecipes">
+            {userRecipes.length > 0 ? (
+              <>
+                {userRecipes.map((recipe) => (
+                  <div key={recipe.recipeID} className="recipeCard">
+                    <div className="recipeCardIn">
+                      <div
+                        className="recipeCardA"
+                        id={`recipeCard${recipe.recipeID}a`}
                       >
-                        <FeaturedPlayListOutlinedIcon />
-                      </button>
-                      {isLoggedIn === true ? (
-                        <>
-                          <button
-                            style={{ cursor: "pointer" }}
-                            onClick={(event) =>
-                              addFavorite(event, recipe.recipeID)
-                            }
-                            className="bookmarkBtn"
+                        <div className="recipeCardMainInfo">
+                          <Link
+                            key={recipe.recipeID}
+                            to={`/recipe/${recipe.recipeID}`}
                           >
-                            <FavoriteBorderOutlinedIcon />
-                          </button>
-
-                          <button
-                            style={{ cursor: "pointer" }}
-                            onClick={(event) => addLike(event, recipe.recipeID)}
-                            className="likeBtn"
-                          >
-                            {recipe.likeID !== null && recipe.likeID !== "" ? (
-                              <>
-                                <StarOutlinedIcon />
-                              </>
-                            ) : (
-                              <>
-                                <StarOutlineOutlinedIcon />
-                              </>
-                            )}
-                          </button>
-                        </>
-                      ) : (
-                        <>
-                          <button className="bookmarkBtn">
-                            <FavoriteBorderOutlinedIcon />
-                          </button>
-                          <button className="likeBtn">
-                            <StarOutlineOutlinedIcon />
-                          </button>
-                        </>
-                      )}
-                      <button className="reviewBtn">
-                        <ChatBubbleOutlineOutlinedIcon />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </>
-          ) : (
-            <div className="notification">
-              <h2>You have no Recipes. Add and share some of your recipes!!</h2>
-            </div>
-          )}
-        </div>
-
-        <div className="userBookmarked" id="userBookmarked">
-          {userBookmarked.length > 0 ? (
-            <>
-              {userBookmarked.map((recipe) => (
-                <div key={recipe.recipeID} className="recipeCard">
-                  <div className="recipeCardIn">
-                    <div
-                      className="recipeCardA"
-                      id={`recipeCard${recipe.recipeID}a`}
-                    >
-                      <div className="recipeCardMainInfo">
-                        <Link
-                          key={recipe.recipeID}
-                          to={`/recipe/${recipe.recipeID}`}
-                        >
-                          <div className="recipeImage"></div>
-                        </Link>
-                        <div className="recipeInfo">
-                          <div className="recipeInfoA">
+                            <div className="recipeImage"></div>
+                          </Link>
+                          <div className="recipeInfo">
                             <h3>{recipe.name}</h3>
-                            <p>Posted by: {recipe.username} on "date"</p>
-                            <p>
-                              Description: {recipe.description.slice(0, 180)}
-                            </p>
-                          </div>
-                          <div className="recipeInfoB">
-                            <div className="recipeInfoBA">
-                              <p>Prep Time: {recipe.prepTime} min</p>
-                              <p>Cook Time: {recipe.cookTime} min</p>
-                              <p>Total Time: {recipe.totalTime} min</p>
-                              <p>Yield: {recipe.yield}</p>
-                              <p>Servings: {recipe.servings}</p>
+                            <div className="recipeInfoPoster">
+                              <p>Posted by: {recipe.username} on "date"</p>
                             </div>
-                            <div className="recipeInfoBA">
-                              <p>Category: {recipe.category}</p>
-                              <p>Course: {recipe.course}</p>
-                              <p>Cuisine: {recipe.cuisine}</p>
-                              <p>Diet: {recipe.diet}</p>
+                            <div className="recipeInfoDesc">
+                              <p>
+                                Description: {recipe.description.slice(0, 180)}
+                              </p>
+                            </div>
+                            <div className="recipeInfoB">
+                              <div className="recipeInfoBA">
+                                <p>Prep Time: {recipe.prepTime} min</p>
+                                <p>Cook Time: {recipe.cookTime} min</p>
+                                <p>Total Time: {recipe.totalTime} min</p>
+                                <p>Yield: {recipe.yield}</p>
+                                <p>Servings: {recipe.servings}</p>
+                              </div>
+                              <div className="recipeInfoBA">
+                                <p>Category: {recipe.category}</p>
+                                <p>Course: {recipe.course}</p>
+                                <p>Cuisine: {recipe.cuisine}</p>
+                                <p>Diet: {recipe.diet}</p>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div
-                      className="recipeCardB"
-                      id={`recipeCard${recipe.recipeID}b`}
-                    >
-                      <div className="recipeCardIngIns">
-                        <div className="recipeCardIng">
-                          <h3>Ingredients</h3>
-                          <div>
-                            {ingrSplit(recipe.ingredients).map((ingredient) => (
-                              <p key={ingredient.slice(5, 100)}>{ingredient}</p>
-                            ))}
-                          </div>
-                        </div>
-                        <div className="recipeCardIns">
-                          <h3>Instructions</h3>
-                          <div>
-                            {instrSplit(recipe.instructions).map(
-                              (instruction) => (
-                                <p>{instruction}</p>
-                              )
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="recipeCardAdd">
-                        <h3>Additional Notes:</h3>
-                        <div>
-                          <p>{recipe.addNotes}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="recipeCardC">
-                      <button
-                        style={{ cursor: "pointer" }}
-                        onClick={(event) =>
-                          flipSide(event, `recipeCard${recipe.recipeID}`)
-                        }
-                        className="seeInsIngBtn"
+                      <div
+                        className="recipeCardB"
+                        id={`recipeCard${recipe.recipeID}b`}
                       >
-                        <FeaturedPlayListOutlinedIcon />
-                      </button>
-                      {isLoggedIn === true ? (
-                        <>
-                          <button
-                            style={{ cursor: "pointer" }}
-                            onClick={(event) =>
-                              addFavorite(event, recipe.recipeID)
-                            }
-                            className="bookmarkBtn"
-                          >
-                            <FavoriteBorderOutlinedIcon />
-                          </button>
+                        <div className="recipeCardIngIns">
+                          <div className="recipeCardIng">
+                            <h3>Ingredients</h3>
+                            <div>
+                              {ingrSplit(recipe.ingredients).map(
+                                (ingredient) => (
+                                  <p key={ingredient.slice(5, 100)}>
+                                    {ingredient}
+                                  </p>
+                                )
+                              )}
+                            </div>
+                          </div>
+                          <div className="recipeCardIns">
+                            <h3>Instructions</h3>
+                            <div>
+                              {instrSplit(recipe.instructions).map(
+                                (instruction) => (
+                                  <p>{instruction}</p>
+                                )
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="recipeCardAdd">
+                          <h3>Additional Notes:</h3>
+                          <div>
+                            <p>{recipe.addNotes}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="recipeCardC">
+                        <button
+                          style={{ cursor: "pointer" }}
+                          onClick={(event) =>
+                            flipSide(event, `recipeCard${recipe.recipeID}`)
+                          }
+                          className="seeInsIngBtn"
+                        >
+                          <FeaturedPlayListOutlinedIcon />
+                        </button>
+                        {isLoggedIn === true ? (
+                          <>
+                            <button
+                              style={{ cursor: "pointer" }}
+                              onClick={(event) =>
+                                addFavorite(event, recipe.recipeID)
+                              }
+                              className="bookmarkBtn"
+                            >
+                              <FavoriteBorderOutlinedIcon />
+                            </button>
 
-                          <button
-                            style={{ cursor: "pointer" }}
-                            onClick={(event) => addLike(event, recipe.recipeID)}
-                            className="likeBtn"
-                          >
-                            {recipe.likeID !== null && recipe.likeID !== "" ? (
-                              <>
-                                <StarOutlinedIcon />
-                              </>
-                            ) : (
-                              <>
-                                <StarOutlineOutlinedIcon />
-                              </>
-                            )}
-                          </button>
-                        </>
-                      ) : (
-                        <>
-                          <button className="bookmarkBtn">
-                            <FavoriteBorderOutlinedIcon />
-                          </button>
-                          <button className="likeBtn">
-                            <StarOutlineOutlinedIcon />
-                          </button>
-                        </>
-                      )}
-                      <button className="reviewBtn">
-                        <ChatBubbleOutlineOutlinedIcon />
-                      </button>
+                            <button
+                              style={{ cursor: "pointer" }}
+                              onClick={(event) =>
+                                addLike(event, recipe.recipeID)
+                              }
+                              className="likeBtn"
+                            >
+                              {recipe.likeID !== null &&
+                              recipe.likeID !== "" ? (
+                                <>
+                                  <StarOutlinedIcon />
+                                </>
+                              ) : (
+                                <>
+                                  <StarOutlineOutlinedIcon />
+                                </>
+                              )}
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            <button className="bookmarkBtn">
+                              <FavoriteBorderOutlinedIcon />
+                            </button>
+                            <button className="likeBtn">
+                              <StarOutlineOutlinedIcon />
+                            </button>
+                          </>
+                        )}
+                        <button className="reviewBtn">
+                          <ChatBubbleOutlineOutlinedIcon />
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </>
-          ) : (
-            <div className="notification">
-              <h2>You don't have any recipes bookmarked.</h2>
-            </div>
-          )}
-        </div>
+                ))}
+              </>
+            ) : (
+              <div className="notification">
+                <h2>
+                  You have no Recipes. Add and share some of your recipes!!
+                </h2>
+              </div>
+            )}
+          </div>
 
-        <div className="userReviews" id="userReviews">
-          {userReviews.length > 0 ? (
-            <>
-              {userReviews.map((review) => (
-                <div className="userRatingCont">
-                  <div className="profileIcon">
-                    <div className="profileImg" />
+          <div className="userBookmarked" id="userBookmarked">
+            {userBookmarked.length > 0 ? (
+              <>
+                {userBookmarked.map((recipe) => (
+                  <div key={recipe.recipeID} className="recipeCard">
+                    <div className="recipeCardIn">
+                      <div
+                        className="recipeCardA"
+                        id={`recipeCard${recipe.recipeID}a`}
+                      >
+                        <div className="recipeCardMainInfo">
+                          <Link
+                            key={recipe.recipeID}
+                            to={`/recipe/${recipe.recipeID}`}
+                          >
+                            <div className="recipeImage"></div>
+                          </Link>
+                          <div className="recipeInfo">
+                            <div className="recipeInfoA">
+                              <h3>{recipe.name}</h3>
+                              <p>Posted by: {recipe.username} on "date"</p>
+                              <p>
+                                Description: {recipe.description.slice(0, 180)}
+                              </p>
+                            </div>
+                            <div className="recipeInfoB">
+                              <div className="recipeInfoBA">
+                                <p>Prep Time: {recipe.prepTime} min</p>
+                                <p>Cook Time: {recipe.cookTime} min</p>
+                                <p>Total Time: {recipe.totalTime} min</p>
+                                <p>Yield: {recipe.yield}</p>
+                                <p>Servings: {recipe.servings}</p>
+                              </div>
+                              <div className="recipeInfoBA">
+                                <p>Category: {recipe.category}</p>
+                                <p>Course: {recipe.course}</p>
+                                <p>Cuisine: {recipe.cuisine}</p>
+                                <p>Diet: {recipe.diet}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className="recipeCardB"
+                        id={`recipeCard${recipe.recipeID}b`}
+                      >
+                        <div className="recipeCardIngIns">
+                          <div className="recipeCardIng">
+                            <h3>Ingredients</h3>
+                            <div>
+                              {ingrSplit(recipe.ingredients).map(
+                                (ingredient) => (
+                                  <p key={ingredient.slice(5, 100)}>
+                                    {ingredient}
+                                  </p>
+                                )
+                              )}
+                            </div>
+                          </div>
+                          <div className="recipeCardIns">
+                            <h3>Instructions</h3>
+                            <div>
+                              {instrSplit(recipe.instructions).map(
+                                (instruction) => (
+                                  <p>{instruction}</p>
+                                )
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="recipeCardAdd">
+                          <h3>Additional Notes:</h3>
+                          <div>
+                            <p>{recipe.addNotes}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="recipeCardC">
+                        <button
+                          style={{ cursor: "pointer" }}
+                          onClick={(event) =>
+                            flipSide(event, `recipeCard${recipe.recipeID}`)
+                          }
+                          className="seeInsIngBtn"
+                        >
+                          <FeaturedPlayListOutlinedIcon />
+                        </button>
+                        {isLoggedIn === true ? (
+                          <>
+                            <button
+                              style={{ cursor: "pointer" }}
+                              onClick={(event) =>
+                                addFavorite(event, recipe.recipeID)
+                              }
+                              className="bookmarkBtn"
+                            >
+                              <FavoriteBorderOutlinedIcon />
+                            </button>
+
+                            <button
+                              style={{ cursor: "pointer" }}
+                              onClick={(event) =>
+                                addLike(event, recipe.recipeID)
+                              }
+                              className="likeBtn"
+                            >
+                              {recipe.likeID !== null &&
+                              recipe.likeID !== "" ? (
+                                <>
+                                  <StarOutlinedIcon />
+                                </>
+                              ) : (
+                                <>
+                                  <StarOutlineOutlinedIcon />
+                                </>
+                              )}
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            <button className="bookmarkBtn">
+                              <FavoriteBorderOutlinedIcon />
+                            </button>
+                            <button className="likeBtn">
+                              <StarOutlineOutlinedIcon />
+                            </button>
+                          </>
+                        )}
+                        <button className="reviewBtn">
+                          <ChatBubbleOutlineOutlinedIcon />
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <div className="userReview">
-                    <h3>{review.username} Posted on: (date)</h3>
-                    {review.rating === 1 ? <>{ratingStar(1)}</> : <></>}
-                    {review.rating === 2 ? <>{ratingStar(2)}</> : <></>}
-                    {review.rating === 3 ? <>{ratingStar(3)}</> : <></>}
-                    {review.rating === 4 ? <>{ratingStar(4)}</> : <></>}
-                    {review.rating === 5 ? <>{ratingStar(5)}</> : <></>}
-                    <p>{review.review}</p>
+                ))}
+              </>
+            ) : (
+              <div className="notification">
+                <h2>You don't have any recipes bookmarked.</h2>
+              </div>
+            )}
+          </div>
+
+          <div className="userReviews" id="userReviews">
+            {userReviews.length > 0 ? (
+              <>
+                {userReviews.map((review) => (
+                  <div className="userRatingCont">
+                    <div className="profileIcon">
+                      <div className="profileImg" />
+                    </div>
+                    <div className="userReview">
+                      <h3>{review.username} Posted on: (date)</h3>
+                      {review.rating === 1 ? <>{ratingStar(1)}</> : <></>}
+                      {review.rating === 2 ? <>{ratingStar(2)}</> : <></>}
+                      {review.rating === 3 ? <>{ratingStar(3)}</> : <></>}
+                      {review.rating === 4 ? <>{ratingStar(4)}</> : <></>}
+                      {review.rating === 5 ? <>{ratingStar(5)}</> : <></>}
+                      <p>{review.review}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </>
-          ) : (
-            <div className="notification">
-              <h2>
-                You have no reviews!! Check out some recipes and share you
-                thoughts!!
-              </h2>
-            </div>
-          )}
-        </div>
+                ))}
+              </>
+            ) : (
+              <div className="notification">
+                <h2>
+                  You have no reviews!! Check out some recipes and share you
+                  thoughts!!
+                </h2>
+              </div>
+            )}
+          </div>
 
-        <div className="userFollowers" id="userFollowers">
-          {chefFollowers.length > 0 ? (
-            <>
-              {chefFollowers.map((chef) => (
-                <div className="followingProfile">
-                  <div className="followingIcon" />
-                  <Link to={`/profile/${chef.chefUserID}`}>
-                    <h3>{chef.username}</h3>
-                  </Link>
-                </div>
-              ))}
-            </>
-          ) : (
-            <div className="notification">
-              <h2>You don't have any followers!!</h2>
-            </div>
-          )}
-        </div>
+          <div className="userFollowers" id="userFollowers">
+            {chefFollowers.length > 0 ? (
+              <>
+                {chefFollowers.map((chef) => (
+                  <div className="followingProfile">
+                    <div className="followingIcon" />
+                    <Link to={`/profile/${chef.chefUserID}`}>
+                      <h3>{chef.username}</h3>
+                    </Link>
+                  </div>
+                ))}
+              </>
+            ) : (
+              <div className="notification">
+                <h2>You don't have any followers!!</h2>
+              </div>
+            )}
+          </div>
 
-        <div className="userFollowing" id="userFollowing">
-          {chefsFollowing.length > 0 ? (
-            <>
-              {chefsFollowing.map((chef) => (
-                <div className="followingProfile">
-                  <div className="followingIcon" />
-                  <Link to={`/profile/${chef.chefUserID}`}>
-                    <h3>{chef.chefUsername}</h3>
-                  </Link>
-                </div>
-              ))}
-            </>
-          ) : (
-            <div className="notification">
-              <h2>You are not following anybody !!</h2>
-            </div>
-          )}
+          <div className="userFollowing" id="userFollowing">
+            {chefsFollowing.length > 0 ? (
+              <>
+                {chefsFollowing.map((chef) => (
+                  <div className="followingProfile">
+                    <div className="followingIcon" />
+                    <Link to={`/profile/${chef.chefUserID}`}>
+                      <h3>{chef.chefUsername}</h3>
+                    </Link>
+                  </div>
+                ))}
+              </>
+            ) : (
+              <div className="notification">
+                <h2>You are not following anybody !!</h2>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 

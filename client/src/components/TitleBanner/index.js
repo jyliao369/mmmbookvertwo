@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -50,7 +51,9 @@ const TitleBanner = () => {
             onClick={(e) => expandNavBar()}
             style={{ cursor: "pointer" }}
           />
-          <h2>mmm!!!Book</h2>
+          <Link to={`/`}>
+            <h2>mmm!!!Book</h2>
+          </Link>
         </div>
         <div className="titleBannerTwo">
           <input placeholder="Search" />

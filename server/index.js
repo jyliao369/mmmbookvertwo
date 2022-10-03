@@ -231,8 +231,9 @@ app.get("/drinksOnly", (req, res) => {
 // #GETALLRECIPENOTDRINKSORBEVERAGE
 app.get("/dishesOnly", (req, res) => {
   db.query(
-    `SELECT * FROM heroku_289aeecd4cbfb0f.recipes_table 
-    WHERE category != "Drinks" OR category != "Beverage"`,
+    `SELECT * FROM heroku_289aeecd4cbfb0f.recipes_table
+    WHERE heroku_289aeecd4cbfb0f.recipes_table.category != "Drinks"
+    AND heroku_289aeecd4cbfb0f.recipes_table.category != "Beverage"`,
     (err, result) => {
       if (err) {
         console.log(err);

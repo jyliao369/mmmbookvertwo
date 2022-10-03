@@ -78,52 +78,44 @@ const DishesPage = ({ isLoggedIn, setCurrentUser, currentUser }) => {
       `https://mmmbook-vertwo-server.herokuapp.com/dishesOnly`,
       {}
     ).then((response) => {
-      console.log("ehllo");
-      console.log(response);
+      // console.log("hello");
+      // console.log(response);
       setDishesOnly(response.data.reverse());
     });
   }, []);
 
   return (
-    <div>
-      <div className="pageBanner">
-        <p>Entrees and Dishes only</p>
-      </div>
-      <div className="filteredSection" id="filteredSection">
-        {/* <input placeholder="Category" /> */}
+    <div className="dishesPage">
+      {/* <div className="filteredSection" id="filteredSection">
         <select>
           <option>Category</option>
           {dataList.category.map((category) => (
             <option value={category}>{category}</option>
           ))}
         </select>
-        {/* <input placeholder="Course" /> */}
         <select>
           <option>Course</option>
           {dataList.course.map((course) => (
             <option>{course}</option>
           ))}
         </select>
-        {/* <input placeholder="Cuisine" /> */}
         <select>
           <option>Cuisine</option>
           {dataList.cuisine.map((cuisine) => (
             <option>{cuisine}</option>
           ))}
         </select>
-        {/* <input placeholder="Diet" /> */}
         <select>
           <option>Diet</option>
           {dataList.diet.map((diet) => (
             <option>{diet}</option>
           ))}
         </select>
-        {/* <input placeholder="Ingredients" /> */}
         <select>
           <option>Ingredients</option>
         </select>
         <button>Search</button>
-      </div>
+      </div> */}
 
       <div className="dishesOnlyCont">
         {dishesOnly.map((dish) => (

@@ -76,17 +76,14 @@ const DrinksPage = ({ isLoggedIn, setCurrentUser, currentUser }) => {
       `https://mmmbook-vertwo-server.herokuapp.com/drinksOnly`,
       {}
     ).then((response) => {
-      console.log("ehllo");
-      console.log(response);
+      // console.log("hello");
+      // console.log(response);
       setAllDrinks(response.data.reverse());
     });
   }, []);
 
   return (
     <div className="drinksPage">
-      <div className="pageBanner">
-        <p>Drinks and Beverages</p>
-      </div>
       <div className="onlyDrinksCont">
         {allDrinks.map((drink) => (
           <div key={drink.recipeID} className="recipeCard">

@@ -60,8 +60,8 @@ function App() {
                 }
               />
               <Route path="/explore" element={<Explore />} />
-              {/* <Route path="/drinks" element={<DrinksPage />} />
-              <Route path="/dishes" element={<DishesPage />} />*/}
+              <Route path="/drinks" element={<DrinksPage />} />
+              <Route path="/dishes" element={<DishesPage />} />
               <Route
                 path="/userProfile/:userID"
                 element={
