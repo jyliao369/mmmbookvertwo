@@ -71,13 +71,12 @@ function App() {
                   />
                 }
               />
-              {/* 
               <Route
                 path="/profile/:userID"
                 element={
                   <Profile isLoggedIn={isLoggedIn} currentUser={currentUser} />
                 }
-              />*/}
+              />
               <Route
                 path="/create"
                 element={<Create currentUser={currentUser} />}

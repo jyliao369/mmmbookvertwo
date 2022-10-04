@@ -130,6 +130,7 @@ a {
   display: flex;
   justify-content: center;
   width: 100%;
+  flex: 6.9vh;
   padding: 3rem 0rem 3rem 0rem;
   background: #e9edf0;
 }
@@ -191,21 +192,80 @@ a {
   flex-direction: column;
   justify-content: space-between;
   width: 20rem;
-  height: 37.5rem;
+  /* height: 37.5rem; */
   margin: 0.75rem;
   padding: 1rem;
   border-style: solid;
   border-width: thin;
   background: white;
 }
+.recipeCardMainInfo {
+  height: 100%;
+}
+.recipeCardMainInfo a {
+  border-radius: 10em;
+}
 .recipeImage {
   aspect-ratio: 1/1;
   background: lightgray;
+  margin: 0em 0em 1em 0em;
 }
-.recipeInfoB {
+.recipeInfoTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding: 0.5em;
+  height: 2.75em;
+  background: rgb(15, 17, 18, 0.15);
+}
+.recipeInfoStatsCont {
+  height: 81%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#recipeInfoStatsCont {
+  display: none;
+  background: rgb(15, 17, 18, 0.05);
+}
+.recipeImage:hover #recipeInfoStatsCont {
+  display: flex;
+}
+.recipeInfoStats {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+}
+.recipeInfoStats div svg {
+  font-size: 2.15em;
+}
+.recipeInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 15em;
+}
+.recipeInfoA {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
+}
+.recipeInfoA div {
+  display: flex;
+  flex-direction: row;
+  width: 47%;
+  margin: 0rem 0rem 0.75rem 0rem;
+  align-items: center;
+}
+.recipeInfoA div h3 {
+  margin: 0em 0.5em 0em 0em;
+}
+.recipeInfoB {
+  display: none;
 }
 .recipeCardB {
   display: none;
@@ -215,6 +275,7 @@ a {
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 .recipeCardIng,
 .recipeCardIns {
@@ -232,6 +293,33 @@ a {
 .recipeCardIng div::-webkit-scrollbar,
 .recipeCardIns div::-webkit-scrollbar {
   display: none;
+}
+.recipeCardC {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.recipeInfoPoster {
+  display: flex;
+  align-items: center;
+}
+.recipeInfoPoster svg {
+  padding: 0.15rem;
+  margin: 0em 0.15em 0em 0em;
+  background: lightgray;
+  font-size: 2em;
+  border-radius: 25px;
+}
+.recipeInfoMore {
+  display: flex;
+  align-items: center;
+}
+.recipeInfoMore button {
+  aspect-ratio: 1/1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0.15em;
 }
 /* #RECIPEPAGEPAGE */
 .recipePageCard {

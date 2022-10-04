@@ -6,8 +6,9 @@ import { Link } from "react-router-dom";
 import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import FeaturedPlayListOutlinedIcon from "@mui/icons-material/FeaturedPlayListOutlined";
-import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
   const [allRecipes, setAllRecipes] = useState([]);
@@ -26,6 +27,24 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
     ) {
       document.getElementById(`${recipeCard}a`).style.display = "flex";
       document.getElementById(`${recipeCard}b`).style.display = "none";
+    }
+  };
+
+  const flipSideTwo = (event, recipeInfo) => {
+    event.preventDefault();
+    // console.log("hello");
+
+    if (
+      document.getElementById(`${recipeInfo}A`).style.display === "" ||
+      document.getElementById(`${recipeInfo}A`).style.display === "flex"
+    ) {
+      document.getElementById(`${recipeInfo}A`).style.display = "none";
+      document.getElementById(`${recipeInfo}B`).style.display = "flex";
+    } else if (
+      document.getElementById(`${recipeInfo}A`).style.display === "none"
+    ) {
+      document.getElementById(`${recipeInfo}A`).style.display = "flex";
+      document.getElementById(`${recipeInfo}B`).style.display = "none";
     }
   };
 
@@ -99,30 +118,75 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
               <div className="recipeCardA" id={`recipeCard${recipe.recipeID}a`}>
                 <div className="recipeCardMainInfo">
                   <Link key={recipe.recipeID} to={`/recipe/${recipe.recipeID}`}>
-                    <div className="recipeImage"></div>
+                    <div className="recipeImage">
+                      <div className="recipeInfoTitle">
+                        <h3>{recipe.name}</h3>
+                      </div>
+                      <div
+                        className="recipeInfoStatsCont"
+                        id="recipeInfoStatsCont"
+                      >
+                        <div className="recipeInfoStats">
+                          <div>
+                            <FavoriteBorderOutlinedIcon />
+                          </div>
+                          <div>
+                            <StarOutlineOutlinedIcon />
+                          </div>
+                          <div>
+                            <ChatBubbleOutlineOutlinedIcon />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </Link>
                   <div className="recipeInfo">
-                    <h3>{recipe.name}</h3>
-                    <div className="recipeInfoPoster">
-                      <p>Posted by: {recipe.username} on "date"</p>
-                    </div>
-                    <div className="recipeInfoDesc">
-                      <p>Description: {recipe.description.slice(0, 180)}</p>
-                    </div>
-                    <div className="recipeInfoB">
-                      <div className="recipeInfoBA">
-                        <p>Prep Time: {recipe.prepTime} min</p>
-                        <p>Cook Time: {recipe.cookTime} min</p>
-                        <p>Total Time: {recipe.totalTime} min</p>
-                        <p>Yield: {recipe.yield}</p>
-                        <p>Servings: {recipe.servings}</p>
+                    <div
+                      className="recipeInfoA"
+                      id={`recipeInfo${recipe.recipeID}A`}
+                    >
+                      <div>
+                        <h3>Prep Time: </h3>
+                        <p>{recipe.prepTime} min</p>
                       </div>
-                      <div className="recipeInfoBA">
-                        <p>Category: {recipe.category}</p>
-                        <p>Course: {recipe.course}</p>
-                        <p>Cuisine: {recipe.cuisine}</p>
-                        <p>Diet: {recipe.diet}</p>
+                      <div>
+                        <h3>Cook Time: </h3>
+                        <p>{recipe.cookTime} min</p>
                       </div>
+                      <div>
+                        <h3>Total Time: </h3>
+                        <p>{recipe.totalTime} min</p>
+                      </div>
+                      <div>
+                        <h3>Yield: </h3>
+                        <p>{recipe.yield}</p>
+                      </div>
+                      <div>
+                        <h3>Servings: </h3>
+                        <p>{recipe.servings}</p>
+                      </div>
+                      <div>
+                        <h3>Category: </h3>
+                        <p>{recipe.category}</p>
+                      </div>
+                      <div>
+                        <h3>Course: </h3>
+                        <p>{recipe.course}</p>
+                      </div>
+                      <div>
+                        <h3>Cuisine: </h3>
+                        <p>{recipe.cuisine}</p>
+                      </div>
+                      <div>
+                        <h3>Diet: </h3>
+                        <p>{recipe.diet}</p>
+                      </div>
+                    </div>
+                    <div
+                      className="recipeInfoB"
+                      id={`recipeInfo${recipe.recipeID}B`}
+                    >
+                      <p>{recipe.description}</p>
                     </div>
                   </div>
                 </div>
@@ -150,19 +214,11 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                 <h3>Additional Notes:</h3>
                 <div>
                   <p>{recipe.addNotes}</p>
-                </div>
-              </div> */}
+                </div>*/}
               </div>
+
               <div className="recipeCardC">
-                <button
-                  style={{ cursor: "pointer" }}
-                  onClick={(event) =>
-                    flipSide(event, `recipeCard${recipe.recipeID}`)
-                  }
-                  className="seeInsIngBtn"
-                >
-                  <FeaturedPlayListOutlinedIcon />
-                </button>
+                {/*
                 <button
                   style={{ cursor: "pointer" }}
                   className="chefProfileBtn"
@@ -201,10 +257,33 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                     </button>
                   </>
                 )}
-
                 <button className="reviewBtn">
                   <ChatBubbleOutlineOutlinedIcon />
-                </button>
+                </button>*/}
+                <div className="recipeInfoPoster">
+                  <Link to={`/userProfile/${recipe.userID}`}>
+                    <PersonOutlineOutlinedIcon />
+                  </Link>{" "}
+                  <p>{recipe.username}on "date"</p>
+                </div>
+                <div className="recipeInfoMore">
+                  <button
+                    style={{ cursor: "pointer" }}
+                    onClick={(event) =>
+                      flipSide(event, `recipeCard${recipe.recipeID}`)
+                    }
+                  >
+                    <FeedOutlinedIcon />
+                  </button>
+                  <button
+                    style={{ cursor: "pointer" }}
+                    onClick={(event) =>
+                      flipSideTwo(event, `recipeInfo${recipe.recipeID}`)
+                    }
+                  >
+                    <InfoOutlinedIcon />
+                  </button>
+                </div>
               </div>
             </div>
           ))}
