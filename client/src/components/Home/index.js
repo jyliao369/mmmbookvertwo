@@ -107,7 +107,7 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
       `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipes`,
       {}
     ).then((response) => {
-      // console.log(response.data);
+      console.log(response.data);
       setAllRecipes(response.data);
     });
   }, []);
@@ -123,13 +123,20 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                   <Link key={recipe.recipeID} to={`/recipe/${recipe.recipeID}`}>
                     <div className="recipeImage">
                       <div className="recipeImageCont">
-                        <Image
-                          cloudName="du119g90a"
-                          public_id="https://res.cloudinary.com/du119g90a/image/upload/v1664897573/cld-sample-4.jpg"
-                        ></Image>
+                        {recipe.recipeImageID === "" ||
+                        recipe.recipeImageID === null ? (
+                          <Image
+                            cloudName="du119g90a"
+                            public_id="https://res.cloudinary.com/du119g90a/image/upload/v1664897573/cld-sample-4.jpg"
+                          ></Image>
+                        ) : (
+                          <Image
+                            cloudName="du119g90a"
+                            public_id={recipe.recipeImageID}
+                          ></Image>
+                        )}
                       </div>
-
-                      <div className="test">
+                      <div className="recipeInfoCont">
                         <div className="recipeInfoTitle">
                           <h3>{recipe.name}</h3>
                         </div>

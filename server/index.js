@@ -300,6 +300,7 @@ app.get("/getRecipeName/:recipeName", (req, res) => {
 app.post("/createRecipe", (req, res) => {
   const userID = req.body.userID;
   const username = req.body.username;
+  const recipeImageID = req.body.recipeImageID;
   const recipeName = req.body.recipeName;
   const recipeDesc = req.body.recipeDesc;
   const prepTime = req.body.prepTime;
@@ -317,13 +318,14 @@ app.post("/createRecipe", (req, res) => {
 
   db.query(
     `INSERT INTO heroku_289aeecd4cbfb0f.recipes_table
-    (userID, username, name, description, prepTime, cookTime,
+    (userID, username, recipeImageID, name, description, prepTime, cookTime,
     totalTime, category, yield, servings, course, cuisine,
     diet, ingredients, instructions, addNotes)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
     [
       userID,
       username,
+      recipeImageID,
       recipeName,
       recipeDesc,
       prepTime,

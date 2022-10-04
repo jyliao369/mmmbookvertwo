@@ -2,10 +2,12 @@ import React from "react";
 import Axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Image } from "cloudinary-react";
 
 import * as dataList from "../data";
 
 const Create = ({ currentUser }) => {
+  const [recipeImage, setRecipeImage] = useState("");
   const [recipeName, setRecipeName] = useState("");
   const [recipeDesc, setrecipeDesc] = useState("");
   const [prepTime, setPrepTime] = useState("");
@@ -23,9 +25,12 @@ const Create = ({ currentUser }) => {
   const navToRecipe = useNavigate();
 
   const createRecipe = () => {
+    console.log(recipeImage);
+
     Axios.post("https://mmmbook-vertwo-server.herokuapp.com/createRecipe", {
       userID: currentUser.userID,
       username: currentUser.username,
+      recipeImageID: recipeImage,
       recipeName: recipeName,
       recipeDesc: recipeDesc,
       prepTime: prepTime,
@@ -71,7 +76,8 @@ const Create = ({ currentUser }) => {
       }
     ).then((r) => r.json());
 
-    console.log(data);
+    // console.log(data.public_id);
+    setRecipeImage(data.public_id);
   };
 
   return (
@@ -185,14 +191,23 @@ const Create = ({ currentUser }) => {
             </div>
           </div>
           <div className="createNewRecipeImg">
-            <input
-              type={"file"}
-              accept="image/*"
-              className="addImage"
-              onChange={(event) => {
-                uploadImage(event.target.files[0]);
-              }}
-            />
+            <div className="createNewRecipeImgCont">
+              {recipeImage === "" ? (
+                <></>
+              ) : (
+                <Image cloudName="du119g90a" public_id={recipeImage} />
+              )}
+            </div>
+            <div className="uploadImg">
+              <input
+                type={"file"}
+                accept="image/*"
+                className="addImage"
+                onChange={(event) => {
+                  uploadImage(event.target.files[0]);
+                }}
+              />
+            </div>
           </div>
         </div>
 

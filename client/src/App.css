@@ -222,7 +222,7 @@ a {
 .recipeImageCont {
   display: flex;
 }
-.test {
+.recipeInfoCont {
   aspect-ratio: 1/1;
   width: 100%;
   position: relative;
@@ -583,15 +583,27 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   aspect-ratio: 1/1;
   width: 600px;
-  background: gray;
 }
-.addImage {
+.createNewRecipeImg img {
+  aspect-ratio: 1/1;
+  width: 100%;
+}
+.uploadImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1/1;
+  width: 600px;
+  background: rgb(13, 13, 13, 0.25);
+  position: absolute;
+}
+.uploadImg {
   display: none;
-  width: 31%;
 }
-.createNewRecipeImg:hover .addImage {
+.createNewRecipeImg:hover .uploadImg {
   display: flex;
 }
 .createRecipeFormB {
