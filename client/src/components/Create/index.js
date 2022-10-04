@@ -51,6 +51,29 @@ const Create = ({ currentUser }) => {
     });
   };
 
+  const uploadImage = async (image) => {
+    const formData = new FormData();
+    formData.append("file", image);
+    formData.append("upload_preset", "yun8815z");
+
+    // Axios.post(
+    //   `https://api.cloudinary.com/v1_1/du119g90a/image/upload`,
+    //   formData
+    // ).then((response) => {
+    //   console.log(response);
+    // });
+
+    const data = await fetch(
+      `https://api.cloudinary.com/v1_1/du119g90a/image/upload`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    ).then((r) => r.json());
+
+    console.log(data);
+  };
+
   return (
     <div className="createRecipePage">
       <div className="createRecipeCont">
@@ -161,7 +184,16 @@ const Create = ({ currentUser }) => {
               )}
             </div>
           </div>
-          <div className="createNewRecipeImg" />
+          <div className="createNewRecipeImg">
+            <input
+              type={"file"}
+              accept="image/*"
+              className="addImage"
+              onChange={(event) => {
+                uploadImage(event.target.files[0]);
+              }}
+            />
+          </div>
         </div>
 
         <div className="createRecipeFormB">

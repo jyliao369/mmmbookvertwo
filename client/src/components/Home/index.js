@@ -2,6 +2,7 @@ import React from "react";
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Image } from "cloudinary-react";
 
 import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
@@ -59,36 +60,38 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
   };
 
   const bookmarkRecipe = (event, recipeID) => {
-    // console.log("bookmarking this recipe");
-    // console.log(recipeID);
+    event.preventDefault();
+    console.log("bookmarking this recipe");
+    console.log(recipeID);
 
-    Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/createBookmark`, {
-      userID: currentUser.userID,
-      username: currentUser.username,
-      recipeID: recipeID,
-    }).then((response) => {
-      console.log(response);
-    });
+    // Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/createBookmark`, {
+    //   userID: currentUser.userID,
+    //   username: currentUser.username,
+    //   recipeID: recipeID,
+    // }).then((response) => {
+    //   console.log(response);
+    // });
   };
 
   const addLike = (event, recipeID) => {
-    // console.log("i like this recipe");
-    // console.log(recipeID);
+    event.preventDefault();
+    console.log("i like this recipe");
+    console.log(recipeID);
 
-    Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/createLikes`, {
-      userID: currentUser.userID,
-      username: currentUser.username,
-      recipeID: recipeID,
-    }).then((response) => {
-      console.log(response);
-      Axios.get(
-        `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipes`,
-        {}
-      ).then((response) => {
-        // console.log(response.data);
-        setAllRecipes(response.data);
-      });
-    });
+    // Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/createLikes`, {
+    //   userID: currentUser.userID,
+    //   username: currentUser.username,
+    //   recipeID: recipeID,
+    // }).then((response) => {
+    //   console.log(response);
+    //   Axios.get(
+    //     `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipes`,
+    //     {}
+    //   ).then((response) => {
+    //     // console.log(response.data);
+    //     setAllRecipes(response.data);
+    //   });
+    // });
   };
 
   useEffect(() => {
@@ -119,22 +122,42 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                 <div className="recipeCardMainInfo">
                   <Link key={recipe.recipeID} to={`/recipe/${recipe.recipeID}`}>
                     <div className="recipeImage">
-                      <div className="recipeInfoTitle">
-                        <h3>{recipe.name}</h3>
+                      <div className="recipeImageCont">
+                        <Image
+                          cloudName="du119g90a"
+                          public_id="https://res.cloudinary.com/du119g90a/image/upload/v1664897573/cld-sample-4.jpg"
+                        ></Image>
                       </div>
-                      <div
-                        className="recipeInfoStatsCont"
-                        id="recipeInfoStatsCont"
-                      >
-                        <div className="recipeInfoStats">
-                          <div>
-                            <FavoriteBorderOutlinedIcon />
-                          </div>
-                          <div>
-                            <StarOutlineOutlinedIcon />
-                          </div>
-                          <div>
-                            <ChatBubbleOutlineOutlinedIcon />
+
+                      <div className="test">
+                        <div className="recipeInfoTitle">
+                          <h3>{recipe.name}</h3>
+                        </div>
+                        <div
+                          className="recipeInfoStatsCont"
+                          id="recipeInfoStatsCont"
+                        >
+                          <div className="recipeInfoStats">
+                            <div
+                              onClick={(event) =>
+                                bookmarkRecipe(event, recipe.recipeID)
+                              }
+                            >
+                              <FavoriteBorderOutlinedIcon />
+                              <p>#</p>
+                            </div>
+                            <div
+                              onClick={(event) =>
+                                addLike(event, recipe.recipeID)
+                              }
+                            >
+                              <StarOutlineOutlinedIcon />
+                              <p>#</p>
+                            </div>
+                            <div>
+                              <ChatBubbleOutlineOutlinedIcon />
+                              <p>#</p>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -263,8 +286,8 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                 <div className="recipeInfoPoster">
                   <Link to={`/userProfile/${recipe.userID}`}>
                     <PersonOutlineOutlinedIcon />
-                  </Link>{" "}
-                  <p>{recipe.username}on "date"</p>
+                  </Link>
+                  <p>{recipe.username} on "date"</p>
                 </div>
                 <div className="recipeInfoMore">
                   <button
