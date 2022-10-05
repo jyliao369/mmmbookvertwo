@@ -15,7 +15,6 @@ import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 const Explore = ({ isLoggedIn, currentUser }) => {
   const [allRecipes, setAllRecipes] = useState([]);
   const [showRecipes, setShowRecipes] = useState([]);
-  const [searchWord, setSearchWord] = useState("");
 
   const flipSide = (event, recipeCard) => {
     event.preventDefault();
@@ -42,24 +41,6 @@ const Explore = ({ isLoggedIn, currentUser }) => {
   const ingrSplit = (ingre) => {
     // console.log(ingre.split("\n"));
     return ingre.split("\n");
-  };
-
-  const searchRecipe = () => {
-    let searchedList = [];
-
-    for (let a = 0; a < allRecipes.length; a++) {
-      if (
-        allRecipes[a].name.includes(searchWord) ||
-        allRecipes[a].ingredients.includes(searchWord) ||
-        allRecipes[a].description.includes(searchWord)
-      ) {
-        searchedList.push(allRecipes[a]);
-      }
-    }
-
-    // console.log(searchedList);
-    setShowRecipes(searchedList);
-    setSearchWord("");
   };
 
   const addFavorite = (event, recipeID) => {
@@ -93,14 +74,25 @@ const Explore = ({ isLoggedIn, currentUser }) => {
     });
   };
 
-  const openAdvSearch = () => {
-    if (document.getElementById("filteredSection").style.display === "") {
-      document.getElementById("filteredSection").style.display = "flex";
-    } else if (
-      document.getElementById("filteredSection").style.display === "flex"
-    ) {
-      document.getElementById("filteredSection").style.display = "";
+  const filteredSearch = (search) => {
+    console.log(search);
+
+    let filteredSearch = [];
+
+    for (let a = 0; a < allRecipes.length; a++) {
+      if (
+        allRecipes[a].category === search ||
+        allRecipes[a].diet === search ||
+        allRecipes[a].course === search ||
+        allRecipes[a].cuisine === search
+      ) {
+        // console.log(true);
+        filteredSearch.push(allRecipes[a]);
+      }
     }
+
+    // console.log(filteredSearch);
+    setShowRecipes(filteredSearch);
   };
 
   useEffect(() => {
@@ -117,38 +109,34 @@ const Explore = ({ isLoggedIn, currentUser }) => {
   return (
     <div className="explorePage">
       <div className="filteredSection" id="filteredSection">
-        {/* <input placeholder="Category" /> */}
-        <select>
-          <option>Category</option>
+        <select onChange={(e) => filteredSearch(e.target.value)}>
+          <option value={""}>Category</option>
           {dataList.category.map((category) => (
             <option value={category}>{category}</option>
           ))}
         </select>
-        {/* <input placeholder="Course" /> */}
-        <select>
-          <option>Course</option>
+        <select onChange={(e) => filteredSearch(e.target.value)}>
+          <option value={""}>Course</option>
           {dataList.course.map((course) => (
-            <option>{course}</option>
+            <option value={course}>{course}</option>
           ))}
         </select>
-        {/* <input placeholder="Cuisine" /> */}
-        <select>
-          <option>Cuisine</option>
+        <select onChange={(e) => filteredSearch(e.target.value)}>
+          <option value={""}>Cuisine</option>
           {dataList.cuisine.map((cuisine) => (
-            <option>{cuisine}</option>
+            <option value={cuisine}>{cuisine}</option>
           ))}
         </select>
-        {/* <input placeholder="Diet" /> */}
-        <select>
-          <option>Diet</option>
+        <select onChange={(e) => filteredSearch(e.target.value)}>
+          <option value={""}>Diet</option>
           {dataList.diet.map((diet) => (
-            <option>{diet}</option>
+            <option value={diet}>{diet}</option>
           ))}
         </select>
-        {/* <input placeholder="Ingredients" /> */}
-        <select>
-          <option>Ingredients</option>
+        <select onChange={(e) => filteredSearch(e.target.value)}>
+          <option value={""}>Ingredients</option>
         </select>
+        <button onClick={() => setShowRecipes(allRecipes)}>Reset</button>
       </div>
 
       <div className="allRecipesCont">

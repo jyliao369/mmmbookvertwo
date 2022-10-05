@@ -108,7 +108,7 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
       {}
     ).then((response) => {
       console.log(response.data);
-      setAllRecipes(response.data);
+      setAllRecipes(response.data.reverse());
     });
   }, []);
 
@@ -216,7 +216,8 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                       className="recipeInfoB"
                       id={`recipeInfo${recipe.recipeID}B`}
                     >
-                      <p>{recipe.description}</p>
+                      <h3>Description:</h3>
+                      <p className="recipeInfoDesc">{recipe.description}</p>
                     </div>
                   </div>
                 </div>
@@ -240,15 +241,46 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                     </div>
                   </div>
                 </div>
-                {/* <div className="recipeCardAdd">
-                <h3>Additional Notes:</h3>
-                <div>
-                  <p>{recipe.addNotes}</p>
-                </div>*/}
               </div>
 
               <div className="recipeCardC">
-                {/*
+                <div className="recipeInfoPoster">
+                  <Link to={`/userProfile/${recipe.userID}`}>
+                    <PersonOutlineOutlinedIcon />
+                  </Link>
+                  <p>{recipe.username} on "date"</p>
+                </div>
+                <div className="recipeInfoMore">
+                  <button
+                    style={{ cursor: "pointer" }}
+                    onClick={(event) =>
+                      flipSide(event, `recipeCard${recipe.recipeID}`)
+                    }
+                  >
+                    <FeedOutlinedIcon />
+                  </button>
+                  <button
+                    style={{ cursor: "pointer" }}
+                    onClick={(event) =>
+                      flipSideTwo(event, `recipeInfo${recipe.recipeID}`)
+                    }
+                  >
+                    <InfoOutlinedIcon />
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Home;
+
+{
+  /*
                 <button
                   style={{ cursor: "pointer" }}
                   className="chefProfileBtn"
@@ -289,38 +321,12 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                 )}
                 <button className="reviewBtn">
                   <ChatBubbleOutlineOutlinedIcon />
-                </button>*/}
-                <div className="recipeInfoPoster">
-                  <Link to={`/userProfile/${recipe.userID}`}>
-                    <PersonOutlineOutlinedIcon />
-                  </Link>
-                  <p>{recipe.username} on "date"</p>
-                </div>
-                <div className="recipeInfoMore">
-                  <button
-                    style={{ cursor: "pointer" }}
-                    onClick={(event) =>
-                      flipSide(event, `recipeCard${recipe.recipeID}`)
-                    }
-                  >
-                    <FeedOutlinedIcon />
-                  </button>
-                  <button
-                    style={{ cursor: "pointer" }}
-                    onClick={(event) =>
-                      flipSideTwo(event, `recipeInfo${recipe.recipeID}`)
-                    }
-                  >
-                    <InfoOutlinedIcon />
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Home;
+                </button>*/
+}
+{
+  /* <div className="recipeCardAdd">
+<h3>Additional Notes:</h3>
+<div>
+  <p>{recipe.addNotes}</p>
+</div>*/
+}

@@ -43,6 +43,24 @@ const TitleBanner = () => {
     console.log("hello");
   };
 
+  // const searchRecipe = () => {
+  //   let searchedList = [];
+
+  //   for (let a = 0; a < allRecipes.length; a++) {
+  //     if (
+  //       allRecipes[a].name.includes(searchWord) ||
+  //       allRecipes[a].ingredients.includes(searchWord) ||
+  //       allRecipes[a].description.includes(searchWord)
+  //     ) {
+  //       searchedList.push(allRecipes[a]);
+  //     }
+  //   }
+
+  //   // console.log(searchedList);
+  //   setShowRecipes(searchedList);
+  //   setSearchWord("");
+  // };
+
   return (
     <div className="titleBanner">
       <div className="titleBannerCont">
