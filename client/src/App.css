@@ -542,6 +542,7 @@ a {
   border-style: solid;
   border-width: thin;
   padding: 0.75em;
+  background: white;
 }
 /* #CREATERECIPEPAGE */
 .createRecipePage {
