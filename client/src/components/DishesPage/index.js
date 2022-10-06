@@ -51,6 +51,11 @@ const DishesPage = ({ isLoggedIn, setCurrentUser, currentUser }) => {
     }
   };
 
+  const moreInfo = (event, type, recipeInfo) => {
+    event.preventDefault();
+    console.log(type);
+  };
+
   const instrSplit = (instr) => {
     // console.log(test.split("."));
     return instr.split(".");
@@ -277,7 +282,7 @@ const DishesPage = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                 <button
                   style={{ cursor: "pointer" }}
                   onClick={(event) =>
-                    flipSide(event, `recipeCard${dish.recipeID}`)
+                    moreInfo(event, "ingIns", `recipeCard${dish.recipeID}`)
                   }
                 >
                   <FeedOutlinedIcon />
@@ -285,7 +290,7 @@ const DishesPage = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                 <button
                   style={{ cursor: "pointer" }}
                   onClick={(event) =>
-                    flipSideTwo(event, `recipeInfo${dish.recipeID}`)
+                    moreInfo(event, "moreInfo", `recipeInfo${dish.recipeID}`)
                   }
                 >
                   <InfoOutlinedIcon />

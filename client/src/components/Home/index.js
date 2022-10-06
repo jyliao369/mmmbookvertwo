@@ -14,38 +14,37 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
   const [allRecipes, setAllRecipes] = useState([]);
 
-  const flipSide = (event, recipeCard) => {
+  const moreInfo = (event, type, recipeInfo) => {
     event.preventDefault();
+    console.log(type);
+    console.log(recipeInfo);
 
-    if (
-      document.getElementById(`${recipeCard}a`).style.display === "" ||
-      document.getElementById(`${recipeCard}a`).style.display === "flex"
-    ) {
-      document.getElementById(`${recipeCard}a`).style.display = "none";
-      document.getElementById(`${recipeCard}b`).style.display = "flex";
-    } else if (
-      document.getElementById(`${recipeCard}a`).style.display === "none"
-    ) {
-      document.getElementById(`${recipeCard}a`).style.display = "flex";
-      document.getElementById(`${recipeCard}b`).style.display = "none";
-    }
-  };
-
-  const flipSideTwo = (event, recipeInfo) => {
-    event.preventDefault();
-    // console.log("hello");
-
-    if (
-      document.getElementById(`${recipeInfo}A`).style.display === "" ||
-      document.getElementById(`${recipeInfo}A`).style.display === "flex"
-    ) {
-      document.getElementById(`${recipeInfo}A`).style.display = "none";
-      document.getElementById(`${recipeInfo}B`).style.display = "flex";
-    } else if (
-      document.getElementById(`${recipeInfo}A`).style.display === "none"
-    ) {
-      document.getElementById(`${recipeInfo}A`).style.display = "flex";
-      document.getElementById(`${recipeInfo}B`).style.display = "none";
+    if (type === "ingIns") {
+      if (
+        document.getElementById(`${recipeInfo}a`).style.display === "" ||
+        document.getElementById(`${recipeInfo}a`).style.display === "flex"
+      ) {
+        document.getElementById(`${recipeInfo}a`).style.display = "none";
+        document.getElementById(`${recipeInfo}b`).style.display = "flex";
+      } else if (
+        document.getElementById(`${recipeInfo}a`).style.display === "none"
+      ) {
+        document.getElementById(`${recipeInfo}a`).style.display = "flex";
+        document.getElementById(`${recipeInfo}b`).style.display = "none";
+      }
+    } else if (type === "recipeDesc") {
+      if (
+        document.getElementById(`${recipeInfo}A`).style.display === "" ||
+        document.getElementById(`${recipeInfo}A`).style.display === "flex"
+      ) {
+        document.getElementById(`${recipeInfo}A`).style.display = "none";
+        document.getElementById(`${recipeInfo}B`).style.display = "flex";
+      } else if (
+        document.getElementById(`${recipeInfo}A`).style.display === "none"
+      ) {
+        document.getElementById(`${recipeInfo}A`).style.display = "flex";
+        document.getElementById(`${recipeInfo}B`).style.display = "none";
+      }
     }
   };
 
@@ -254,7 +253,7 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                   <button
                     style={{ cursor: "pointer" }}
                     onClick={(event) =>
-                      flipSide(event, `recipeCard${recipe.recipeID}`)
+                      moreInfo(event, "ingIns", `recipeCard${recipe.recipeID}`)
                     }
                   >
                     <FeedOutlinedIcon />
@@ -262,7 +261,11 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
                   <button
                     style={{ cursor: "pointer" }}
                     onClick={(event) =>
-                      flipSideTwo(event, `recipeInfo${recipe.recipeID}`)
+                      moreInfo(
+                        event,
+                        "recipeDesc",
+                        `recipeInfo${recipe.recipeID}`
+                      )
                     }
                   >
                     <InfoOutlinedIcon />
