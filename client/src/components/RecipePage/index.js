@@ -2,12 +2,12 @@ import React from "react";
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { Image } from "cloudinary-react";
 
-import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
+import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import LibraryAddOutlinedIcon from "@mui/icons-material/LibraryAddOutlined";
-import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import StarPurple500OutlinedIcon from "@mui/icons-material/StarPurple500Outlined";
+import ForumRoundedIcon from "@mui/icons-material/ForumRounded";
+import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
@@ -27,6 +27,9 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
   const [recipeDesc, setRecipeDesc] = useState("");
   const [recipeIng, setRecipeIng] = useState([]);
   const [recipeIns, setRecipeIns] = useState([]);
+  const [recipeTotalLikes, setRecipeTotalLikes] = useState("");
+  const [recipeTotalBookmark, setRecipeTotalBookmark] = useState("");
+  const [recipeTotalReviews, setRecipeTotalReviews] = useState("");
 
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(0);
@@ -105,90 +108,102 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
     if (rating === 1) {
       return (
         <>
-          <StarPurple500OutlinedIcon />
+          <StarRoundedIcon />
         </>
       );
     } else if (rating === 2) {
       return (
         <>
-          <StarPurple500OutlinedIcon />
-          <StarPurple500OutlinedIcon />
+          <StarRoundedIcon />
+          <StarRoundedIcon />
         </>
       );
     } else if (rating === 3) {
       return (
         <>
-          <StarPurple500OutlinedIcon />
-          <StarPurple500OutlinedIcon />
-          <StarPurple500OutlinedIcon />
+          <StarRoundedIcon />
+          <StarRoundedIcon />
+          <StarRoundedIcon />
         </>
       );
     } else if (rating === 4) {
       return (
         <>
-          <StarPurple500OutlinedIcon />
-          <StarPurple500OutlinedIcon />
-          <StarPurple500OutlinedIcon />
-          <StarPurple500OutlinedIcon />
+          <StarRoundedIcon />
+          <StarRoundedIcon />
+          <StarRoundedIcon />
+          <StarRoundedIcon />
         </>
       );
     } else if (rating === 5) {
       return (
         <>
-          <StarPurple500OutlinedIcon />
-          <StarPurple500OutlinedIcon />
-          <StarPurple500OutlinedIcon />
-          <StarPurple500OutlinedIcon />
-          <StarPurple500OutlinedIcon />
+          <StarRoundedIcon />
+          <StarRoundedIcon />
+          <StarRoundedIcon />
+          <StarRoundedIcon />
+          <StarRoundedIcon />
         </>
       );
     }
   };
 
   const bookmarkRecipe = (event, recipeID) => {
-    // console.log("bookmarking this recipe");
-    // console.log(recipeID);
+    event.preventDefault();
 
-    Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/createBookmark`, {
+    Axios.post(`http://localhost:3001/createBookmark`, {
       userID: currentUser.userID,
       username: currentUser.username,
       recipeID: recipeID,
     }).then((response) => {
-      console.log(response);
+      if (response.data.message === "bookmarked") {
+        setRecipeTotalBookmark(recipeTotalBookmark + 1);
+        document.getElementById("bookmarkBtn").children[0].style.color =
+          "#E1528E";
+      } else if (response.data.message === "unbookmarked") {
+        setRecipeTotalBookmark(recipeTotalBookmark - 1);
+        document.getElementById("bookmarkBtn").children[0].style.color =
+          "lightgray";
+      }
     });
   };
 
   const addLike = (event, recipeID) => {
-    // console.log("i like this recipe");
-    // console.log(recipeID);
+    event.preventDefault();
 
-    Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/createLikes`, {
+    Axios.post(`http://localhost:3001/createLikes`, {
       userID: currentUser.userID,
       username: currentUser.username,
       recipeID: recipeID,
     }).then((response) => {
-      console.log(response);
-      Axios.get(
-        `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipes`,
-        {}
-      ).then((response) => {
-        // console.log(response.data);
-        // setAllRecipes(response.data);
-      });
+      if (response.data.message === "liked") {
+        setRecipeTotalLikes(recipeTotalLikes + 1);
+        document.getElementById("likeBtn").children[0].style.color = "gold";
+      } else if (response.data.message === "unliked") {
+        setRecipeTotalLikes(recipeTotalLikes - 1);
+        document.getElementById("likeBtn").children[0].style.color =
+          "lightgray";
+      }
     });
   };
 
+  const scrollToReview = () => {
+    document.getElementById("reviewsSections").scrollIntoView();
+  };
+
   useEffect(() => {
-    Axios.get(
-      `https://mmmbook-vertwo-server.herokuapp.com/getRecipe/${recipeID}`,
-      {}
-    ).then((response) => {
-      // console.log(response.data[0].ingredients);
-      setRecipeInfo(response.data[0]);
-      setRecipeDesc(response.data[0].description);
-      instrSplit(response.data[0].instructions);
-      ingrSplit(response.data[0].ingredients);
-    });
+    Axios.get(`http://localhost:3001/getRecipe/${recipeID}`, {}).then(
+      (response) => {
+        // console.log(response.data[0]);
+        setRecipeInfo(response.data[0]);
+        setRecipeDesc(response.data[0].description);
+        instrSplit(response.data[0].instructions);
+        ingrSplit(response.data[0].ingredients);
+        setRecipeTotalLikes(response.data[0].totalLike);
+        setRecipeTotalBookmark(response.data[0].totalBook);
+        setRecipeTotalReviews(response.data[0].totalReview);
+      }
+    );
 
     Axios.get(
       `https://mmmbook-vertwo-server.herokuapp.com/getReview/${recipeID}`,
@@ -197,6 +212,53 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
       // console.log(response.data);
       setReviews(response.data.reverse());
     });
+
+    Axios.get(`http://localhost:3001/getAllLikes/${recipeID}`, {}).then(
+      (response) => {
+        // console.log(response.data);
+        let allLikes = response.data;
+        Axios.get(`https://mmmbook-vertwo-server.herokuapp.com/login`, {}).then(
+          (response) => {
+            if (response.data.loggedIn === true) {
+              for (let a = 0; a < allLikes.length; a++) {
+                if (
+                  response.data.user[0].username === allLikes[a].username &&
+                  response.data.user[0].userID === allLikes[a].userID
+                ) {
+                  // console.log(true);
+                  document.getElementById("likeBtn").children[0].style.color =
+                    "gold";
+                }
+              }
+            }
+          }
+        );
+      }
+    );
+
+    Axios.get(`http://localhost:3001/getAllBookmarked/${recipeID}`, {}).then(
+      (response) => {
+        // console.log(response.data);
+        let allBookmarks = response.data;
+        Axios.get(`https://mmmbook-vertwo-server.herokuapp.com/login`, {}).then(
+          (response) => {
+            if (response.data.loggedIn === true) {
+              for (let a = 0; a < allBookmarks.length; a++) {
+                if (
+                  response.data.user[0].username === allBookmarks[a].username &&
+                  response.data.user[0].userID === allBookmarks[a].userID
+                ) {
+                  // console.log(true);
+                  document.getElementById(
+                    "bookmarkBtn"
+                  ).children[0].style.color = "#E1528E";
+                }
+              }
+            }
+          }
+        );
+      }
+    );
   }, []);
 
   return (
@@ -274,34 +336,61 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
                         bookmarkRecipe(event, recipeInfo.recipeID)
                       }
                       className="bookmarkBtn"
+                      id="bookmarkBtn"
                     >
-                      <FavoriteBorderOutlinedIcon />
+                      <FavoriteOutlinedIcon />
+                      <p>{recipeTotalBookmark}</p>
                     </button>
                     <button
                       style={{ cursor: "pointer" }}
                       onClick={(event) => addLike(event, recipeInfo.recipeID)}
                       className="likeBtn"
+                      id="likeBtn"
                     >
-                      <StarOutlineOutlinedIcon />
+                      <StarRoundedIcon />
+                      <p>{recipeTotalLikes}</p>
                     </button>
                   </>
                 ) : (
                   <>
                     <button className="bookmarkBtn">
-                      <FavoriteBorderOutlinedIcon />
+                      <FavoriteOutlinedIcon />
+                      <p>{recipeTotalBookmark}</p>
                     </button>
                     <button className="likeBtn">
-                      <StarOutlineOutlinedIcon />
+                      <StarRoundedIcon />
+                      <p>{recipeTotalLikes}</p>
                     </button>
                   </>
                 )}
 
-                <button className="reviewBtn">
-                  <ChatBubbleOutlineOutlinedIcon />
+                <button
+                  className="reviewBtn"
+                  onClick={() => scrollToReview()}
+                  style={{ cursor: "pointer" }}
+                >
+                  <ForumRoundedIcon />
+                  <p>{recipeTotalReviews}</p>
                 </button>
               </div>
             </div>
-            <div className="recipePageCardImg" />
+            <div className="recipePageCardImg">
+              {recipeInfo.recipeImageID === "" ||
+              recipeInfo.recipeImageID === null ? (
+                <Image
+                  width="100%"
+                  height="100%"
+                  cloudName="du119g90a"
+                  public_id="https://res.cloudinary.com/du119g90a/image/upload/v1664897573/cld-sample-4.jpg"
+                ></Image>
+              ) : (
+                <Image
+                  width="100%"
+                  cloudName="du119g90a"
+                  public_id={recipeInfo.recipeImageID}
+                ></Image>
+              )}
+            </div>
           </div>
         </div>
         <div className="recipePageCardB">
@@ -352,7 +441,7 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
               <div className="ratingForm">
                 <p>Your Rating:</p>
                 <div id="star1">
-                  <StarPurple500OutlinedIcon
+                  <StarRoundedIcon
                     onClick={() => setRate(1)}
                     onMouseOver={() => rate(1)}
                     onMouseLeave={() => reset()}
@@ -360,7 +449,7 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
                   />
                 </div>
                 <div id="star2">
-                  <StarPurple500OutlinedIcon
+                  <StarRoundedIcon
                     onClick={() => setRate(2)}
                     onMouseOver={() => rate(2)}
                     onMouseLeave={() => reset()}
@@ -368,7 +457,7 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
                   />
                 </div>
                 <div id="star3">
-                  <StarPurple500OutlinedIcon
+                  <StarRoundedIcon
                     onClick={() => setRate(3)}
                     onMouseOver={() => rate(3)}
                     onMouseLeave={() => reset()}
@@ -376,7 +465,7 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
                   />
                 </div>
                 <div id="star4">
-                  <StarPurple500OutlinedIcon
+                  <StarRoundedIcon
                     onClick={() => setRate(4)}
                     onMouseOver={() => rate(4)}
                     onMouseLeave={() => reset()}
@@ -384,7 +473,7 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
                   />
                 </div>
                 <div id="star5">
-                  <StarPurple500OutlinedIcon
+                  <StarRoundedIcon
                     onClick={() => setRate(5)}
                     onMouseOver={() => rate(5)}
                     onMouseLeave={() => reset()}
@@ -402,7 +491,7 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
         </div>
       )}
 
-      <div className="reviewsSections">
+      <div className="reviewsSections" id="reviewsSections">
         <div className="reviewsSectionCont">
           {reviews.map((review) => (
             <div className="userRatingCont">

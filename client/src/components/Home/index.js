@@ -30,7 +30,7 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
       <div className="homePageCont">
         <div className="allRecipesCont">
           {allRecipes.map((recipe) => (
-            <RecipeCard recipe={recipe} />
+            <RecipeCard recipe={recipe} currentUser={currentUser} />
           ))}
         </div>
       </div>

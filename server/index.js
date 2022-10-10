@@ -196,11 +196,6 @@ app.put(`/updateUser/:userID`, (req, res) => {
 // #GETALLRECIPES
 app.get("/getAllRecipes", (req, res) => {
   db.query(
-    // `SELECT heroku_289aeecd4cbfb0f.recipes_table.*, heroku_289aeecd4cbfb0f.likes_table.likeID, heroku_289aeecd4cbfb0f.likes_table.userID
-    // FROM heroku_289aeecd4cbfb0f.recipes_table
-    // LEFT JOIN heroku_289aeecd4cbfb0f.likes_table
-    // ON heroku_289aeecd4cbfb0f.likes_table.recipeID = heroku_289aeecd4cbfb0f.recipes_table.recipeID
-    // ORDER BY heroku_289aeecd4cbfb0f.recipes_table.recipeID ASC`,
     `SELECT * FROM heroku_289aeecd4cbfb0f.recipes_table
     ORDER BY heroku_289aeecd4cbfb0f.recipes_table.recipeID ASC`,
     (err, result) => {
@@ -266,8 +261,22 @@ app.get("/getRecipe/:recipeID", (req, res) => {
   const recipeID = req.params.recipeID;
 
   db.query(
-    `SELECT * FROM heroku_289aeecd4cbfb0f.recipes_table WHERE recipeID = ?`,
-    [recipeID],
+    // `SELECT * FROM heroku_289aeecd4cbfb0f.recipes_table WHERE recipeID = ?`,
+    `SELECT * FROM heroku_289aeecd4cbfb0f.recipes_table,
+      (SELECT COUNT(heroku_289aeecd4cbfb0f.likes_table.recipeID) as totalLike
+        FROM heroku_289aeecd4cbfb0f.likes_table
+        WHERE heroku_289aeecd4cbfb0f.likes_table.recipeID = ${recipeID}
+      ) stat1,
+      (SELECT COUNT(heroku_289aeecd4cbfb0f.bookmark_table.recipeID) as totalBook
+        FROM heroku_289aeecd4cbfb0f.bookmark_table
+        WHERE heroku_289aeecd4cbfb0f.bookmark_table.recipeID = ${recipeID}
+      ) stat2,
+        (SELECT COUNT(heroku_289aeecd4cbfb0f.reviews_table.recipeID) as totalReview
+        FROM heroku_289aeecd4cbfb0f.reviews_table
+        WHERE heroku_289aeecd4cbfb0f.reviews_table.recipeID = ${recipeID}
+      ) stat3
+    WHERE heroku_289aeecd4cbfb0f.recipes_table.recipeID = ${recipeID}`,
+    [],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -536,7 +545,7 @@ app.post(`/createBookmark`, (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        console.log(result.length);
+        // console.log(result.length);
       }
 
       if (result.length <= 0) {
@@ -548,7 +557,7 @@ app.post(`/createBookmark`, (req, res) => {
             if (err) {
               console.log(err);
             } else {
-              res.send(result);
+              res.send({ message: "bookmarked", result });
             }
           }
         );
@@ -561,7 +570,7 @@ app.post(`/createBookmark`, (req, res) => {
             if (err) {
               console.log(err);
             } else {
-              res.send(result);
+              res.send({ message: "unbookmarked", result });
             }
           }
         );
@@ -570,7 +579,7 @@ app.post(`/createBookmark`, (req, res) => {
   );
 });
 
-// #GETBOOKMARKEDRECIPES
+// #GETBOOKMARKEDRECIPESFORUSERS
 app.get(`/getBookmarked/:userID`, (req, res) => {
   const userID = req.params.userID;
   // console.log(userID);
@@ -580,6 +589,32 @@ app.get(`/getBookmarked/:userID`, (req, res) => {
     LEFT JOIN heroku_289aeecd4cbfb0f.recipes_table 
     ON heroku_289aeecd4cbfb0f.bookmark_table.recipeID = heroku_289aeecd4cbfb0f.recipes_table.recipeID
     WHERE heroku_289aeecd4cbfb0f.bookmark_table.userID = ${userID}`,
+    [],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+// #GETALLUSERSWHOBOOKEDMARKEDARECIPE
+app.get("/getAllBookmarked/:recipeID", (req, res) => {
+  const recipeID = req.params.recipeID;
+  // console.log(recipeID);
+
+  db.query(
+    `SELECT 
+      heroku_289aeecd4cbfb0f.recipes_table.*, 
+      heroku_289aeecd4cbfb0f.bookmark_table.bookmarkID, 
+      heroku_289aeecd4cbfb0f.bookmark_table.userID, 
+      heroku_289aeecd4cbfb0f.bookmark_table.username
+    FROM heroku_289aeecd4cbfb0f.recipes_table
+    LEFT JOIN heroku_289aeecd4cbfb0f.bookmark_table
+      ON heroku_289aeecd4cbfb0f.bookmark_table.recipeID = heroku_289aeecd4cbfb0f.recipes_table.recipeID
+    WHERE heroku_289aeecd4cbfb0f.recipes_table.recipeID = ${recipeID}`,
     [],
     (err, result) => {
       if (err) {
@@ -618,7 +653,7 @@ app.post(`/createLikes`, (req, res) => {
             if (err) {
               console.log(err);
             } else {
-              res.send(result);
+              res.send({ message: "liked", result });
             }
           }
         );
@@ -631,10 +666,35 @@ app.post(`/createLikes`, (req, res) => {
             if (err) {
               console.log(err);
             } else {
-              res.send(result);
+              res.send({ message: "unliked", result });
             }
           }
         );
+      }
+    }
+  );
+});
+
+// #GETALLLIKESFORSINGLERECIPE
+app.get("/getAllLikes/:recipeID", (req, res) => {
+  const recipeID = req.params.recipeID;
+  // console.log(recipeID);
+
+  db.query(
+    `SELECT 
+	    heroku_289aeecd4cbfb0f.recipes_table.*, 
+	    heroku_289aeecd4cbfb0f.likes_table.likeID, 
+      heroku_289aeecd4cbfb0f.likes_table.userID, 
+      heroku_289aeecd4cbfb0f.likes_table.username
+    FROM heroku_289aeecd4cbfb0f.recipes_table
+    LEFT JOIN heroku_289aeecd4cbfb0f.likes_table 
+    ON heroku_289aeecd4cbfb0f.likes_table.recipeID = heroku_289aeecd4cbfb0f.recipes_table.recipeID
+    WHERE heroku_289aeecd4cbfb0f.recipes_table.recipeID = ${recipeID}`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
       }
     }
   );

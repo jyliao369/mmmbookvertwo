@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Image } from "cloudinary-react";
+import Axios from "axios";
 
 import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
@@ -9,7 +10,9 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
-const RecipeCard = (recipe) => {
+const RecipeCard = (recipe, currentUser) => {
+  console.log(currentUser);
+
   const moreInfo = (event, type, recipeInfo) => {
     event.preventDefault();
     // console.log(type);
@@ -54,41 +57,6 @@ const RecipeCard = (recipe) => {
     return ingre.split("\n");
   };
 
-  const bookmarkRecipe = (event, recipeID) => {
-    event.preventDefault();
-    console.log("bookmarking this recipe");
-    console.log(recipeID);
-
-    // Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/createBookmark`, {
-    //   userID: currentUser.userID,
-    //   username: currentUser.username,
-    //   recipeID: recipeID,
-    // }).then((response) => {
-    //   console.log(response);
-    // });
-  };
-
-  const addLike = (event, recipeID) => {
-    event.preventDefault();
-    console.log("i like this recipe");
-    console.log(recipeID);
-
-    // Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/createLikes`, {
-    //   userID: currentUser.userID,
-    //   username: currentUser.username,
-    //   recipeID: recipeID,
-    // }).then((response) => {
-    //   console.log(response);
-    //   Axios.get(
-    //     `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipes`,
-    //     {}
-    //   ).then((response) => {
-    //     // console.log(response.data);
-    //     setAllRecipes(response.data);
-    //   });
-    // });
-  };
-
   return (
     <div className="recipeCard">
       <div className="recipeCardA" id={`recipeCard${recipe.recipe.recipeID}a`}>
@@ -115,19 +83,11 @@ const RecipeCard = (recipe) => {
                 </div>
                 <div className="recipeInfoStatsCont" id="recipeInfoStatsCont">
                   <div className="recipeInfoStats">
-                    <div
-                      onClick={(event) =>
-                        bookmarkRecipe(event, recipe.recipe.recipeID)
-                      }
-                    >
+                    <div>
                       <FavoriteBorderOutlinedIcon />
                       <p>#</p>
                     </div>
-                    <div
-                      onClick={(event) =>
-                        addLike(event, recipe.recipe.recipeID)
-                      }
-                    >
+                    <div>
                       <StarOutlineOutlinedIcon />
                       <p>#</p>
                     </div>
@@ -215,7 +175,7 @@ const RecipeCard = (recipe) => {
 
       <div className="recipeCardC">
         <div className="recipeInfoPoster">
-          <Link to={`/userProfile/${recipe.recipe.userID}`}>
+          <Link to={`/profile/${recipe.recipe.userID}`}>
             <PersonOutlineOutlinedIcon />
           </Link>
           <p>{recipe.recipe.username} on "date"</p>

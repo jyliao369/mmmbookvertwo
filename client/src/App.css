@@ -11,6 +11,9 @@ a {
   display: flex;
   flex-direction: row;
 }
+html {
+  scroll-behavior: smooth;
+}
 
 /* #TITLEBANNER */
 .titleBanner {
@@ -174,6 +177,7 @@ a {
   margin: 5em 0em 0em 0em;
   border-style: solid;
   border-width: thin;
+  background: white;
 }
 .loginForm input,
 .registerForm input {
@@ -366,7 +370,10 @@ a {
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 0.15em;
+  padding: 0.25em;
+  margin: 0em 0.5em 0em 0.5em;
+  border: none;
+  border-radius: 10px;
 }
 /* #RECIPEPAGEPAGE */
 .recipePageCard {
@@ -417,18 +424,27 @@ a {
 }
 .recipeCardButton {
   display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .recipeCardButton button,
 .recipeCardButton a {
   display: flex;
 }
 .recipeCardButton button {
+  display: flex;
+  align-items: center;
   margin: 0rem 0.75rem 0rem 0rem;
   border: none;
   background: white;
 }
+.recipeCardButton p {
+  font-size: 1.15rem;
+}
 .recipeCardButton svg {
   font-size: 2.5em;
+  margin: 0rem 0.2rem 0rem 0rem;
+  color: lightgray;
 }
 .recipePageCardB {
   background: #4c4c4c;
@@ -447,7 +463,7 @@ a {
 .recipePageCardImg {
   aspect-ratio: 1/1;
   width: 600px;
-  background: gray;
+  /* background: gray; */
 }
 .recipePageCardInfoBb {
   display: flex;
@@ -507,6 +523,9 @@ a {
 .reviewForm textarea {
   padding: 1em;
   margin: 0rem 0rem 1rem 0rem;
+}
+.reviewForm svg {
+  color: lightgray;
 }
 .profileIcon {
   display: flex;
