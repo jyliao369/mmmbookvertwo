@@ -32,13 +32,30 @@ html {
   border-width: thin;
   border-color: black; */
   background: white;
-  box-shadow: 0 0px 4px rgb(0 0 0 / 25%);
+  box-shadow: 0 0px 4px rgb(0 0 0 / 35%);
 }
 .titleBannerOne,
 .titleBannerTwo {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+.titleBannerTwo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 35%;
+}
+.titleBannerTwo div {
+  display: flex;
+  border-style: solid;
+  border-width: thin;
+  padding: 0.25em 1em 0.25em 1em;
+}
+.titleBannerTwo input {
+  width: 100%;
+  padding: 0.5em 0em 0.5em 0.4em;
+  outline: none;
 }
 /* #NAVBAR */
 .navBar {
@@ -97,15 +114,13 @@ html {
 /* #EXPLOREPAGE */
 .filteredSection {
   display: flex;
-  /* border-bottom: solid;
-  border-width: thin; */
   justify-content: space-around;
-  padding: 1.25em 0rem 1.25em 0rem;
+  padding: 0.75em 0rem 0.75em 0rem;
   background: white;
   box-shadow: 2px 0px 4px rgb(0 0 0 / 25%);
 }
 .filteredSection select {
-  padding: 0.5em;
+  padding: 0.3em;
   font-size: 1em;
   border-radius: 5px;
 }
@@ -215,7 +230,7 @@ html {
   border-width: thin; */
   border-radius: 5px;
   background: white;
-  box-shadow: 0 2px 5px rgb(0 0 0 / 25%);
+  box-shadow: 0 2px 5px rgb(0 0 0 / 50%);
 }
 .recipeCardMainInfo {
   height: 100%;
@@ -284,6 +299,15 @@ html {
 }
 .recipeInfoStats div svg {
   font-size: 2.15em;
+}
+.recipeBookmarks svg {
+  color: #e1528e;
+}
+.recipeLikes svg {
+  color: gold;
+}
+.recipeReviews svg {
+  color: silver;
 }
 .recipeInfo {
   display: flex;
@@ -733,6 +757,7 @@ html {
   border-radius: 15px;
   margin: 3rem 0rem 3rem 0rem;
   background: #ededed;
+  box-shadow: 0px 0px 4px rgb(0 0 0 / 25%);
 }
 .chefProfileCardA {
   width: 35%;

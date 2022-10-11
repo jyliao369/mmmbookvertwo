@@ -1,11 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Image } from "cloudinary-react";
-import Axios from "axios";
 
-import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
-import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import StarRoundedIcon from "@mui/icons-material/StarRounded";
+import ForumRoundedIcon from "@mui/icons-material/ForumRounded";
+import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
@@ -15,8 +14,6 @@ const RecipeCard = (recipe, currentUser) => {
 
   const moreInfo = (event, type, recipeInfo) => {
     event.preventDefault();
-    // console.log(type);
-    // console.log(recipeInfo);
 
     if (type === "ingIns") {
       if (
@@ -83,16 +80,16 @@ const RecipeCard = (recipe, currentUser) => {
                 </div>
                 <div className="recipeInfoStatsCont" id="recipeInfoStatsCont">
                   <div className="recipeInfoStats">
-                    <div>
-                      <FavoriteBorderOutlinedIcon />
+                    <div className="recipeBookmarks">
+                      <FavoriteOutlinedIcon />
                       <p>#</p>
                     </div>
-                    <div>
-                      <StarOutlineOutlinedIcon />
+                    <div className="recipeLikes">
+                      <StarRoundedIcon />
                       <p>#</p>
                     </div>
-                    <div>
-                      <ChatBubbleOutlineOutlinedIcon />
+                    <div className="recipeReviews">
+                      <ForumRoundedIcon />
                       <p>#</p>
                     </div>
                   </div>

@@ -75,7 +75,9 @@ const TitleBanner = () => {
         </div>
         <div className="titleBannerTwo">
           <input placeholder="Search" />
-          <SearchIcon />
+          <div style={{ cursor: "pointer" }}>
+            <SearchIcon />
+          </div>
         </div>
         <div>
           <AccountCircleIcon onClick={() => goToProfile()} />

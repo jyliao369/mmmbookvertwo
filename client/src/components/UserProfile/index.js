@@ -33,53 +33,53 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
   const [updateFavCui, setUpdateFavCui] = useState("");
 
   const myRecipes = () => {
-    // console.log("getting my recipes");
-
     document.getElementById("userRecipes").style.display = "flex";
     document.getElementById("userBookmarked").style.display = "none";
     document.getElementById("userReviews").style.display = "none";
     document.getElementById("userFollowers").style.display = "none";
     document.getElementById("userFollowing").style.display = "none";
+
+    document.getElementById("userRecipes").scrollIntoView();
   };
 
   const myFavorite = () => {
-    // console.log("getting my bookmark");
-
     document.getElementById("userRecipes").style.display = "none";
     document.getElementById("userBookmarked").style.display = "flex";
     document.getElementById("userReviews").style.display = "none";
     document.getElementById("userFollowers").style.display = "none";
     document.getElementById("userFollowing").style.display = "none";
+
+    document.getElementById("userBookmarked").scrollIntoView();
   };
 
   const myReviews = () => {
-    // console.log("getting my reviews");
-
     document.getElementById("userRecipes").style.display = "none";
     document.getElementById("userBookmarked").style.display = "none";
     document.getElementById("userReviews").style.display = "flex";
     document.getElementById("userFollowers").style.display = "none";
     document.getElementById("userFollowing").style.display = "none";
+
+    document.getElementById("userReviews").scrollIntoView();
   };
 
   const myFollowers = () => {
-    // console.log("getting my followers");
-
     document.getElementById("userRecipes").style.display = "none";
     document.getElementById("userBookmarked").style.display = "none";
     document.getElementById("userReviews").style.display = "none";
     document.getElementById("userFollowers").style.display = "flex";
     document.getElementById("userFollowing").style.display = "none";
+
+    document.getElementById("userFollowers").scrollIntoView();
   };
 
   const imFollowing = () => {
-    // console.log("who am i following");
-
     document.getElementById("userRecipes").style.display = "none";
     document.getElementById("userBookmarked").style.display = "none";
     document.getElementById("userReviews").style.display = "none";
     document.getElementById("userFollowers").style.display = "none";
     document.getElementById("userFollowing").style.display = "flex";
+
+    document.getElementById("userFollowing").scrollIntoView();
   };
 
   const ratingStar = (rating) => {
