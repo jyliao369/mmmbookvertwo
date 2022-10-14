@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SearchIcon from "@mui/icons-material/Search";
+import LoginIcon from "@mui/icons-material/Login";
 
-const TitleBanner = () => {
+const TitleBanner = (isLoggedIn) => {
   const expandNavBar = () => {
     if (
       document.getElementById("navBar").style.width === "" ||
@@ -79,9 +80,12 @@ const TitleBanner = () => {
             <SearchIcon />
           </div>
         </div>
-        <div>
+
+        {isLoggedIn === true ? (
           <AccountCircleIcon onClick={() => goToProfile()} />
-        </div>
+        ) : (
+          <LoginIcon />
+        )}
       </div>
     </div>
   );

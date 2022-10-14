@@ -193,6 +193,22 @@ app.put(`/updateUser/:userID`, (req, res) => {
 });
 
 // #RECIPES
+app.get(`/recipe/:recipeID`, (req, res) => {
+  const recipeID = req.params.recipeID;
+
+  db.query(
+    `SELECT * FROM heroku_289aeecd4cbfb0f.recipes_table WHERE recipeID = ${recipeID}`,
+    [recipeID],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 // #GETALLRECIPES
 app.get("/getAllRecipes", (req, res) => {
   db.query(

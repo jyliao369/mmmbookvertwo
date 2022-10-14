@@ -4,85 +4,15 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Image } from "cloudinary-react";
 
+import RecipeForm from "../RecipeForm";
+
 import * as dataList from "../data";
 
-const Create = ({ currentUser }) => {
-  const [recipeImage, setRecipeImage] = useState("");
-  const [recipeName, setRecipeName] = useState("");
-  const [recipeDesc, setrecipeDesc] = useState("");
-  const [prepTime, setPrepTime] = useState("");
-  const [cookTime, setCookTime] = useState("");
-  const [yieldNum, setYieldNum] = useState("");
-  const [servingsNum, setServingsNum] = useState("");
-  const [category, setCategory] = useState("");
-  const [course, SetCourse] = useState("");
-  const [cuisine, setCuisine] = useState("");
-  const [diet, setDiet] = useState("");
-  const [ingredients, setIngredients] = useState("");
-  const [instructions, setInstructions] = useState("");
-  const [addNotes, setAddNotes] = useState("");
-
-  const navToRecipe = useNavigate();
-
-  const createRecipe = () => {
-    console.log(recipeImage);
-
-    Axios.post("https://mmmbook-vertwo-server.herokuapp.com/createRecipe", {
-      userID: currentUser.userID,
-      username: currentUser.username,
-      recipeImageID: recipeImage,
-      recipeName: recipeName,
-      recipeDesc: recipeDesc,
-      prepTime: prepTime,
-      cookTime: cookTime,
-      yieldNum: yieldNum,
-      servingsNum: servingsNum,
-      category: category,
-      course: course,
-      cuisine: cuisine,
-      diet: diet,
-      ingredients: ingredients,
-      instructions: instructions,
-      addNotes: addNotes,
-    }).then((response) => {
-      console.log(recipeName);
-      Axios.get(
-        `https://mmmbook-vertwo-server.herokuapp.com/getRecipeName/${recipeName}`,
-        {}
-      ).then((response) => {
-        // console.log(response);
-        navToRecipe(`/recipe/${response.data[0].recipeID}`);
-      });
-    });
-  };
-
-  const uploadImage = async (image) => {
-    const formData = new FormData();
-    formData.append("file", image);
-    formData.append("upload_preset", "yun8815z");
-
-    // Axios.post(
-    //   `https://api.cloudinary.com/v1_1/du119g90a/image/upload`,
-    //   formData
-    // ).then((response) => {
-    //   console.log(response);
-    // });
-
-    const data = await fetch(
-      `https://api.cloudinary.com/v1_1/du119g90a/image/upload`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    ).then((r) => r.json());
-
-    // console.log(data.public_id);
-    setRecipeImage(data.public_id);
-  };
-
+const CreatePage = ({ currentUser }) => {
   return (
     <div className="createRecipePage">
-      <div className="createRecipeCont">
+      <RecipeForm currentUser={currentUser} />
+      {/* <div className="createRecipeCont">
         <div className="createRecipeFormA">
           <div className="createRecipeFormAb">
             <div>
@@ -246,9 +176,9 @@ const Create = ({ currentUser }) => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
 
-export default Create;
+export default CreatePage;

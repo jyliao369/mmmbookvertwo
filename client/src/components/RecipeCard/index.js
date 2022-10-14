@@ -8,10 +8,9 @@ import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
 
 const RecipeCard = (recipe, currentUser) => {
-  console.log(currentUser);
-
   const moreInfo = (event, type, recipeInfo) => {
     event.preventDefault();
 
@@ -197,6 +196,11 @@ const RecipeCard = (recipe, currentUser) => {
             }
           >
             <InfoOutlinedIcon />
+          </button>
+          <button>
+            <Link to={`/update/${recipe.recipe.recipeID}`}>
+              <EditRoundedIcon />
+            </Link>
           </button>
         </div>
       </div>

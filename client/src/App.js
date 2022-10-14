@@ -12,10 +12,11 @@ import DishesPage from "./components/DishesPage";
 import UserProfile from "./components/UserProfile";
 import NewRecipes from "./components/NewRecipes";
 import Profile from "./components/Profile";
-import Create from "./components/Create";
+import CreatePage from "./components/CreatePage";
 import RecipePage from "./components/RecipePage";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import UpdatePage from "./components/UpdatePage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -40,7 +41,7 @@ function App() {
   return (
     <Router basename="/mmmbookvertwo">
       <div className="appCont">
-        <TitleBanner />
+        <TitleBanner isLoggedIn={isLoggedIn} />
         <div className="appContTwo">
           <Navbar
             setIsLoggedIn={setIsLoggedIn}
@@ -79,8 +80,9 @@ function App() {
               />
               <Route
                 path="/create"
-                element={<Create currentUser={currentUser} />}
+                element={<CreatePage currentUser={currentUser} />}
               />
+              <Route path="/update/:recipeID" element={<UpdatePage />} />
               <Route
                 path="/recipe/:recipeID"
                 element={
