@@ -304,7 +304,7 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
             {userRecipes.length > 0 ? (
               <>
                 {userRecipes.map((recipe) => (
-                  <RecipeCard recipe={recipe} />
+                  <RecipeCard recipe={recipe} type={"update"} />
                 ))}
               </>
             ) : (
@@ -320,7 +320,7 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
             {userBookmarked.length > 0 ? (
               <>
                 {userBookmarked.map((recipe) => (
-                  <RecipeCard recipe={recipe} />
+                  <RecipeCard recipe={recipe} type={"customize"} />
                 ))}
               </>
             ) : (

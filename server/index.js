@@ -177,10 +177,17 @@ app.put(`/updateUser/:userID`, (req, res) => {
   const chefDesc = req.body.chefDesc;
 
   db.query(
-    `UPDATE heroku_289aeecd4cbfb0f.users_table SET 
-    firstName = "${firstName}", lastName = "${lastName}", username = "${username}", 
-    email = "${email}", favRecipe = "${favRecipe}", favBeverage = "${favBeverage}", 
-    favDessert = "${favDessert}", favCuisine = "${favCuisine}", chefDesc = "${chefDesc}" 
+    `UPDATE heroku_289aeecd4cbfb0f.users_table 
+    SET 
+      firstName = "${firstName}", 
+      lastName = "${lastName}", 
+      username = "${username}", 
+      email = "${email}", 
+      favRecipe = "${favRecipe}", 
+      favBeverage = "${favBeverage}", 
+      favDessert = "${favDessert}", 
+      favCuisine = "${favCuisine}", 
+      chefDesc = "${chefDesc}" 
     WHERE userID = ${userID}`,
     (err, result) => {
       if (err) {
@@ -193,12 +200,61 @@ app.put(`/updateUser/:userID`, (req, res) => {
 });
 
 // #RECIPES
+// #GETRECIPEBYID
 app.get(`/recipe/:recipeID`, (req, res) => {
   const recipeID = req.params.recipeID;
 
   db.query(
     `SELECT * FROM heroku_289aeecd4cbfb0f.recipes_table WHERE recipeID = ${recipeID}`,
     [recipeID],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+// #UPDATERECIPEBYID
+app.put("/updateRecipe/:recipeID", (req, res) => {
+  const recipeID = req.params.recipeID;
+  const updateName = req.body.updateName;
+  const updateDesc = req.body.updateDesc;
+  const updateCategory = req.body.updateCategory;
+  const updateCourse = req.body.updateCourse;
+  const updateCuisine = req.body.updateCuisine;
+  const updateDiet = req.body.updateDiet;
+  const updatePrep = req.body.updatePrep;
+  const updateCook = req.body.updateCook;
+  const updateYield = req.body.updateYield;
+  const updateServings = req.body.updateServings;
+  const updateIng = req.body.updateIng;
+  const updateIns = req.body.updateIns;
+  const updateAdd = req.body.updateAdd;
+
+  db.query(
+    `UPDATE heroku_289aeecd4cbfb0f.recipes_table
+    SET 
+      heroku_289aeecd4cbfb0f.recipes_table.name = "${updateName}",
+      heroku_289aeecd4cbfb0f.recipes_table.description = "${updateDesc}",
+      heroku_289aeecd4cbfb0f.recipes_table.prepTime = "${updatePrep}",
+      heroku_289aeecd4cbfb0f.recipes_table.cookTime = "${updateCook}",
+      heroku_289aeecd4cbfb0f.recipes_table.totalTime= "${
+        parseInt(updatePrep) + parseInt(updateCook)
+      }",
+      heroku_289aeecd4cbfb0f.recipes_table.category = "${updateCategory}",
+      heroku_289aeecd4cbfb0f.recipes_table.yield = "${updateYield}",
+      heroku_289aeecd4cbfb0f.recipes_table.servings = "${updateServings}",
+      heroku_289aeecd4cbfb0f.recipes_table.course = "${updateCourse}",
+      heroku_289aeecd4cbfb0f.recipes_table.cuisine = "${updateCuisine}",
+      heroku_289aeecd4cbfb0f.recipes_table.diet = "${updateDiet}",
+      heroku_289aeecd4cbfb0f.recipes_table.ingredients = "${updateIng}",
+      heroku_289aeecd4cbfb0f.recipes_table.instructions = "${updateIns}",
+      heroku_289aeecd4cbfb0f.recipes_table.addNotes = "${updateAdd}"
+    WHERE heroku_289aeecd4cbfb0f.recipes_table.recipeID = ${recipeID}`,
+    [],
     (err, result) => {
       if (err) {
         console.log(err);

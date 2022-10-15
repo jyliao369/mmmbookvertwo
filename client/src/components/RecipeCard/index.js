@@ -9,6 +9,7 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import AutoFixHighRoundedIcon from "@mui/icons-material/AutoFixHighRounded";
 
 const RecipeCard = (recipe, currentUser) => {
   const moreInfo = (event, type, recipeInfo) => {
@@ -197,11 +198,25 @@ const RecipeCard = (recipe, currentUser) => {
           >
             <InfoOutlinedIcon />
           </button>
-          <button>
-            <Link to={`/update/${recipe.recipe.recipeID}`}>
-              <EditRoundedIcon />
-            </Link>
-          </button>
+          {recipe.type === "update" ? (
+            <button>
+              <Link to={`/update/${recipe.recipe.recipeID}`}>
+                <EditRoundedIcon />
+              </Link>
+            </button>
+          ) : (
+            <>
+              {recipe.type === "customize" ? (
+                <>
+                  <button>
+                    <AutoFixHighRoundedIcon />
+                  </button>
+                </>
+              ) : (
+                <></>
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>
