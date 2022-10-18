@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Axios from "axios";
 
@@ -22,6 +23,8 @@ const UpdatePage = () => {
   const [updateIns, setupdateIns] = useState("");
   const [updateAdd, setUpdateAdd] = useState("");
 
+  const navToRecipe = useNavigate();
+
   const updateRecipe = () => {
     Axios.put(`http://localhost:3001/updateRecipe/${recipeID}`, {
       updateName: updateName,
@@ -39,6 +42,7 @@ const UpdatePage = () => {
       updateAdd: updateAdd,
     }).then((response) => {
       console.log(response);
+      navToRecipe(`/recipe/${recipeID}`)
     });
   };
 

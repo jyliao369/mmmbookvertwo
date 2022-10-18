@@ -7,7 +7,6 @@ import * as dataList from "../data";
 
 const RecipeForm = ({
   recipeID,
-  currentUser,
   updateRecipe,
   updateName,
   setUpdateName,
@@ -35,81 +34,41 @@ const RecipeForm = ({
   setupdateIns,
   updateAdd,
   setUpdateAdd,
+  createRecipe,
+  uploadImage,
+  recipeImage,
+  setRecipeImage,
+  recipeName,
+  setRecipeName,
+  recipeDesc,
+  setrecipeDesc,
+  prepTime,
+  setPrepTime,
+  cookTime,
+  setCookTime,
+  yieldNum,
+  setYieldNum,
+  servingsNum,
+  setServingsNum,
+  category,
+  setCategory,
+  course,
+  setCourse,
+  cuisine,
+  setCuisine,
+  diet,
+  setDiet,
+  ingredients,
+  setIngredients,
+  instructions,
+  setInstructions,
+  addNotes,
+  setAddNotes,
 }) => {
-  const [recipeImage, setRecipeImage] = useState("");
-  const [recipeName, setRecipeName] = useState("");
-  const [recipeDesc, setrecipeDesc] = useState("");
-  const [prepTime, setPrepTime] = useState("");
-  const [cookTime, setCookTime] = useState("");
-  const [yieldNum, setYieldNum] = useState("");
-  const [servingsNum, setServingsNum] = useState("");
-  const [category, setCategory] = useState("");
-  const [course, SetCourse] = useState("");
-  const [cuisine, setCuisine] = useState("");
-  const [diet, setDiet] = useState("");
-  const [ingredients, setIngredients] = useState("");
-  const [instructions, setInstructions] = useState("");
-  const [addNotes, setAddNotes] = useState("");
-
-  const navToRecipe = useNavigate();
-
-  const createRecipe = () => {
-    // console.log(recipeImage);
-    // Axios.post("https://mmmbook-vertwo-server.herokuapp.com/createRecipe", {
-    //   //   userID: currentUser.userID,
-    //   //   username: currentUser.username,
-    //   recipeImageID: recipeImage,
-    //   recipeName: recipeName,
-    //   recipeDesc: recipeDesc,
-    //   prepTime: prepTime,
-    //   cookTime: cookTime,
-    //   yieldNum: yieldNum,
-    //   servingsNum: servingsNum,
-    //   category: category,
-    //   course: course,
-    //   cuisine: cuisine,
-    //   diet: diet,
-    //   ingredients: ingredients,
-    //   instructions: instructions,
-    //   addNotes: addNotes,
-    // }).then((response) => {
-    //   console.log(recipeName);
-    //   Axios.get(
-    //     `https://mmmbook-vertwo-server.herokuapp.com/getRecipeName/${recipeName}`,
-    //     {}
-    //   ).then((response) => {
-    //     // console.log(response);
-    //     navToRecipe(`/recipe/${response.data[0].recipeID}`);
-    //   });
-    // });
-  };
-
-  const uploadImage = async (image) => {
-    const formData = new FormData();
-    formData.append("file", image);
-    formData.append("upload_preset", "yun8815z");
-
-    // Axios.post(
-    //   `https://api.cloudinary.com/v1_1/du119g90a/image/upload`,
-    //   formData
-    // ).then((response) => {
-    //   console.log(response);
-    // });
-
-    const data = await fetch(
-      `https://api.cloudinary.com/v1_1/du119g90a/image/upload`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    ).then((r) => r.json());
-
-    // console.log(data.public_id);
-    setRecipeImage(data.public_id);
-  };
-
   useEffect(() => {
     if (recipeID) {
+      document.documentElement.scrollTop = 0;
+
       Axios.get(`http://localhost:3001/recipe/${recipeID}`, {}).then(
         (response) => {
           console.log(response.data[0]);
@@ -184,7 +143,7 @@ const RecipeForm = ({
                 </select>
                 <select
                   value={updateCourse}
-                  onChange={(e) => SetCourse(e.target.value)}
+                  onChange={(e) => setCourse(e.target.value)}
                 >
                   <option value={""}>Select Course</option>
                   {dataList.course.map((course) => (
@@ -207,7 +166,7 @@ const RecipeForm = ({
                 </select>
                 <select
                   value={course}
-                  onChange={(e) => SetCourse(e.target.value)}
+                  onChange={(e) => setCourse(e.target.value)}
                 >
                   <option value={""}>Select Course</option>
                   {dataList.course.map((course) => (
