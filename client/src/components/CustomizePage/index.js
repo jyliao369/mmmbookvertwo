@@ -5,8 +5,9 @@ import { useState } from "react";
 import Axios from "axios";
 import RecipeForm from "../RecipeForm";
 
-const CustomizePage = () => {
+const CustomizePage = ({ currentUser }) => {
   let { recipeID } = useParams();
+  const [originName, setOriginName] = useState("");
 
   const [customImage, setCustomImage] = useState("");
   const [customName, setCustomName] = useState("");
@@ -25,14 +26,21 @@ const CustomizePage = () => {
 
   const navToRecipe = useNavigate();
 
-  const CustomizeRecipe = ({ currentUser }) => {
-    console.log("Customizing Recipe");
+  const CustomizeRecipe = () => {
+    // console.log("Customizing Recipe");
 
-    Axios.post("https://mmmbook-vertwo-server.herokuapp.com/createRecipe", {
+    // console.log("delete bookmark");
+    // console.log(recipeID);
+    // console.log(currentUser.userID);
+    // console.log(currentUser.username);
+
+    // console.log(originName);
+
+    Axios.post("http://localhost:3001/createRecipe", {
       userID: currentUser.userID,
       username: currentUser.username,
       origRecipeID: recipeID,
-      origRecipeName: customName,
+      origRecipeName: originName,
       recipeImageID: customImage,
       recipeName: customName,
       recipeDesc: customDesc,
@@ -49,17 +57,22 @@ const CustomizePage = () => {
       addNotes: customAdd,
     }).then((response) => {
       console.log(customName);
-      Axios.delete(``, {}).then((response) => {
-        console.log("deleted");
+
+      // THIS DELETES THE BOOKMARK FROM USERS LIST
+      Axios.delete(
+        `http://localhost:3001/deleteBookmark/${recipeID}_${currentUser.userID}_${currentUser.username}`,
+        {}
+      ).then((response) => {
+        console.log(response);
       });
 
-      // Axios.get(
-      //   `https://mmmbook-vertwo-server.herokuapp.com/getRecipeName/${customName}`,
-      //   {}
-      // ).then((response) => {
-      //   // console.log(response);
-      //   navToRecipe(`/recipe/${response.data[0].recipeID}`);
-      // });
+      Axios.get(
+        `https://mmmbook-vertwo-server.herokuapp.com/getRecipeName/${customName}`,
+        {}
+      ).then((response) => {
+        // console.log(response);
+        navToRecipe(`/recipe/${response.data[0].recipeID}`);
+      });
     });
   };
 
@@ -87,6 +100,8 @@ const CustomizePage = () => {
         customImage={customImage}
         setCustomImage={setCustomImage}
         customizingImage={customizingImage}
+        originName={originName}
+        setOriginName={setOriginName}
         customName={customName}
         setCustomName={setCustomName}
         customDesc={customDesc}

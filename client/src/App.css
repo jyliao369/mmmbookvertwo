@@ -17,6 +17,11 @@ html {
 body {
   background: rgb(231, 239, 248, 0.5);
 }
+:root {
+  /* --navBarWidth: 5vw;
+  --mainPageWidth: 95vw; */
+  /* --cardWidth:  */
+}
 
 /* #TITLEBANNER */
 .titleBanner {
@@ -71,7 +76,7 @@ body {
   background: white;
 }
 #navBar {
-  width: 4rem;
+  width: var(--navBarWidth);
 }
 .navBarBtn {
   display: flex;
@@ -95,7 +100,7 @@ body {
 }
 /* #MAINPAGE */
 #mainPage {
-  width: 100%;
+  width: var(--mainPageWidth);
   margin: 4rem 0rem 0rem 4rem;
 }
 /* #HOMEPAGE */

@@ -71,6 +71,8 @@ const RecipeForm = ({
   customImage,
   setCustomImage,
   customizingImage,
+  originName,
+  setOriginName,
   customName,
   setCustomName,
   customDesc,
@@ -105,10 +107,11 @@ const RecipeForm = ({
     if (recipeID) {
       Axios.get(`http://localhost:3001/recipe/${recipeID}`, {}).then(
         (response) => {
-          // console.log(response.data[0]);
+          console.log(response.data[0]);
 
           if (test === "Customize") {
             setCustomImage(response.data[0].recipeImageID);
+            setOriginName(response.data[0].name);
             setCustomName(response.data[0].name);
             setCustomDesc(response.data[0].description);
             setCustomCategory(response.data[0].category);

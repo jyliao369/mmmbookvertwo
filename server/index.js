@@ -381,10 +381,10 @@ app.get("/getRecipeName/:recipeName", (req, res) => {
 
 // #CREATERECIPES
 app.post("/createRecipe", (req, res) => {
-  const origRecipeID = req.body;
-  const origRecipeName = req.body;
   const userID = req.body.userID;
   const username = req.body.username;
+  const origRecipeID = req.body.origRecipeID;
+  const origRecipeName = req.body.origRecipeName;
   const recipeImageID = req.body.recipeImageID;
   const recipeName = req.body.recipeName;
   const recipeDesc = req.body.recipeDesc;
@@ -403,7 +403,7 @@ app.post("/createRecipe", (req, res) => {
 
   db.query(
     `INSERT INTO heroku_289aeecd4cbfb0f.recipes_table
-    (origRecipeID, origRecipeName, userID, username, 
+    (origRecipeID, origRecipeName, userID, username,
     recipeImageID, name, description, prepTime, cookTime,
     totalTime, category, yield, servings, course, cuisine,
     diet, ingredients, instructions, addNotes)
@@ -658,10 +658,47 @@ app.post(`/createBookmark`, (req, res) => {
   );
 });
 
-// #DELETINGSPECIFICBOOKMARK
-// app.delete(`/deleteBookmark/:ID`, (req, res) => {
+// #DELETINGSPECIFICBOOKMARKBASEDONUSERNAMEUSERIDRECIPENAME
+app.delete(`/deleteBookmark/:bookmarkInfo`, (req, res) => {
+  const bookmarkInfo = req.params.bookmarkInfo.split("_");
+  const recipeID = bookmarkInfo[0];
+  const userID = bookmarkInfo[1];
+  const username = bookmarkInfo[2];
 
-// })
+  db.query(
+    `SELECT 
+      * 
+    FROM 
+      heroku_289aeecd4cbfb0f.bookmark_table
+    WHERE 
+      heroku_289aeecd4cbfb0f.bookmark_table.recipeID = ${recipeID} AND
+      heroku_289aeecd4cbfb0f.bookmark_table.userID = ${userID} AND
+      heroku_289aeecd4cbfb0f.bookmark_table.username = "${username}"`,
+    [],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result[0].bookmarkID);
+        // res.send(result);
+
+        db.query(
+          `DELETE FROM heroku_289aeecd4cbfb0f.bookmark_table
+          WHERE heroku_289aeecd4cbfb0f.bookmark_table.bookmarkID = ${result[0].bookmarkID}`,
+          [],
+          (err, result) => {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log(result);
+              res.send(result);
+            }
+          }
+        );
+      }
+    }
+  );
+});
 
 // #GETBOOKMARKEDRECIPESFORUSERS
 app.get(`/getBookmarked/:userID`, (req, res) => {
