@@ -209,7 +209,9 @@ const RecipeCard = (recipe, currentUser) => {
               {recipe.type === "customize" ? (
                 <>
                   <button>
-                    <AutoFixHighRoundedIcon />
+                    <Link to={`/customize/${recipe.recipe.recipeID}`}>
+                      <AutoFixHighRoundedIcon />
+                    </Link>
                   </button>
                 </>
               ) : (

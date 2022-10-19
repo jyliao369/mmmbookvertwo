@@ -17,6 +17,7 @@ import RecipePage from "./components/RecipePage";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import UpdatePage from "./components/UpdatePage";
+import CustomizePage from "./components/CustomizePage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -83,6 +84,10 @@ function App() {
                 element={<CreatePage currentUser={currentUser} />}
               />
               <Route path="/update/:recipeID" element={<UpdatePage />} />
+              <Route
+                path="/customize/:recipeID"
+                element={<CustomizePage currentUser={currentUser} />}
+              />
               <Route
                 path="/recipe/:recipeID"
                 element={

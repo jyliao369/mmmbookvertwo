@@ -220,6 +220,7 @@ app.get(`/recipe/:recipeID`, (req, res) => {
 // #UPDATERECIPEBYID
 app.put("/updateRecipe/:recipeID", (req, res) => {
   const recipeID = req.params.recipeID;
+  const updateImage = req.body.updateImage;
   const updateName = req.body.updateName;
   const updateDesc = req.body.updateDesc;
   const updateCategory = req.body.updateCategory;
@@ -237,6 +238,7 @@ app.put("/updateRecipe/:recipeID", (req, res) => {
   db.query(
     `UPDATE heroku_289aeecd4cbfb0f.recipes_table
     SET 
+      heroku_289aeecd4cbfb0f.recipes_table.recipeImageID = "${updateImage}",
       heroku_289aeecd4cbfb0f.recipes_table.name = "${updateName}",
       heroku_289aeecd4cbfb0f.recipes_table.description = "${updateDesc}",
       heroku_289aeecd4cbfb0f.recipes_table.prepTime = "${updatePrep}",
@@ -379,6 +381,8 @@ app.get("/getRecipeName/:recipeName", (req, res) => {
 
 // #CREATERECIPES
 app.post("/createRecipe", (req, res) => {
+  const origRecipeID = req.body;
+  const origRecipeName = req.body;
   const userID = req.body.userID;
   const username = req.body.username;
   const recipeImageID = req.body.recipeImageID;
@@ -399,11 +403,14 @@ app.post("/createRecipe", (req, res) => {
 
   db.query(
     `INSERT INTO heroku_289aeecd4cbfb0f.recipes_table
-    (userID, username, recipeImageID, name, description, prepTime, cookTime,
+    (origRecipeID, origRecipeName, userID, username, 
+    recipeImageID, name, description, prepTime, cookTime,
     totalTime, category, yield, servings, course, cuisine,
     diet, ingredients, instructions, addNotes)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
     [
+      origRecipeID,
+      origRecipeName,
       userID,
       username,
       recipeImageID,
@@ -650,6 +657,11 @@ app.post(`/createBookmark`, (req, res) => {
     }
   );
 });
+
+// #DELETINGSPECIFICBOOKMARK
+// app.delete(`/deleteBookmark/:ID`, (req, res) => {
+
+// })
 
 // #GETBOOKMARKEDRECIPESFORUSERS
 app.get(`/getBookmarked/:userID`, (req, res) => {

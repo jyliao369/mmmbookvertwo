@@ -27,21 +27,6 @@ const CreatePage = ({ currentUser }) => {
   const navToRecipe = useNavigate();
 
   const createRecipe = () => {
-    // console.log(recipeImage);
-    // console.log(recipeName);
-    // console.log(recipeDesc);
-    // console.log(prepTime);
-    // console.log(cookTime);
-    // console.log(yieldNum);
-    // console.log(servingsNum);
-    // console.log(category);
-    // console.log(course);
-    // console.log(cuisine);
-    // console.log(diet);
-    // console.log(ingredients);
-    // console.log(instructions);
-    // console.log(addNotes);
-
     Axios.post("https://mmmbook-vertwo-server.herokuapp.com/createRecipe", {
       userID: currentUser.userID,
       username: currentUser.username,
@@ -92,8 +77,8 @@ const CreatePage = ({ currentUser }) => {
     <div className="createRecipePage">
       <RecipeForm
         createRecipe={createRecipe}
-        uploadImage={uploadImage}
         recipeImage={recipeImage}
+        uploadImage={uploadImage}
         setRecipeImage={setRecipeImage}
         recipeName={recipeName}
         setRecipeName={setRecipeName}

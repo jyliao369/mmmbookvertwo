@@ -8,6 +8,9 @@ import * as dataList from "../data";
 const RecipeForm = ({
   recipeID,
   updateRecipe,
+  updateImage,
+  setUpdateImage,
+  updatingImage,
   updateName,
   setUpdateName,
   updateDesc,
@@ -35,8 +38,8 @@ const RecipeForm = ({
   updateAdd,
   setUpdateAdd,
   createRecipe,
-  uploadImage,
   recipeImage,
+  uploadImage,
   setRecipeImage,
   recipeName,
   setRecipeName,
@@ -64,28 +67,77 @@ const RecipeForm = ({
   setInstructions,
   addNotes,
   setAddNotes,
+  test,
+  customImage,
+  setCustomImage,
+  customizingImage,
+  customName,
+  setCustomName,
+  customDesc,
+  setCustomDesc,
+  customCategory,
+  setCustomCategory,
+  customCourse,
+  setCustomCourse,
+  customCuisine,
+  setCustomCuisine,
+  customDiet,
+  setCustomDiet,
+  customPrep,
+  setCustomPrep,
+  customCook,
+  setCustomCook,
+  customYield,
+  setCustomYield,
+  customServings,
+  setCustomServings,
+  customIng,
+  setCustomIng,
+  customIns,
+  setCustomIns,
+  customAdd,
+  setCustomAdd,
+  CustomizeRecipe,
 }) => {
   useEffect(() => {
-    if (recipeID) {
-      document.documentElement.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
 
+    if (recipeID) {
       Axios.get(`http://localhost:3001/recipe/${recipeID}`, {}).then(
         (response) => {
-          console.log(response.data[0]);
+          // console.log(response.data[0]);
 
-          setUpdateName(response.data[0].name);
-          setUpdateDesc(response.data[0].description);
-          setUpdateCategory(response.data[0].category);
-          setUpdateCourse(response.data[0].course);
-          setUpdateCuisine(response.data[0].cuisine);
-          setUpdateDiet(response.data[0].diet);
-          setUpdatePrep(response.data[0].prepTime);
-          setUpdateCook(response.data[0].cookTime);
-          setUpdateYield(response.data[0].yield);
-          setUpdateServings(response.data[0].servings);
-          setUpdateIng(response.data[0].ingredients);
-          setupdateIns(response.data[0].instructions);
-          setUpdateAdd(response.data[0].addNotes);
+          if (test === "Customize") {
+            setCustomImage(response.data[0].recipeImageID);
+            setCustomName(response.data[0].name);
+            setCustomDesc(response.data[0].description);
+            setCustomCategory(response.data[0].category);
+            setCustomCourse(response.data[0].course);
+            setCustomCuisine(response.data[0].cuisine);
+            setCustomDiet(response.data[0].diet);
+            setCustomPrep(response.data[0].prepTime);
+            setCustomCook(response.data[0].cookTime);
+            setCustomYield(response.data[0].yield);
+            setCustomServings(response.data[0].servings);
+            setCustomIng(response.data[0].ingredients);
+            setCustomIns(response.data[0].instructions);
+            setCustomAdd(response.data[0].addNotes);
+          } else {
+            setUpdateImage(response.data[0].recipeImageID);
+            setUpdateName(response.data[0].name);
+            setUpdateDesc(response.data[0].description);
+            setUpdateCategory(response.data[0].category);
+            setUpdateCourse(response.data[0].course);
+            setUpdateCuisine(response.data[0].cuisine);
+            setUpdateDiet(response.data[0].diet);
+            setUpdatePrep(response.data[0].prepTime);
+            setUpdateCook(response.data[0].cookTime);
+            setUpdateYield(response.data[0].yield);
+            setUpdateServings(response.data[0].servings);
+            setUpdateIng(response.data[0].ingredients);
+            setupdateIns(response.data[0].instructions);
+            setUpdateAdd(response.data[0].addNotes);
+          }
         }
       );
     }
@@ -96,45 +148,69 @@ const RecipeForm = ({
       <div className="recipeFormPartOne">
         <div className="recipeFormInfo">
           <div className="recipeFormHeader">
-            {recipeID ? <h1>Update Recipe</h1> : <h1>Create A Recipe</h1>}
+            {recipeID && test === "Customize" ? (
+              <h1>Customize Recipe</h1>
+            ) : (
+              <>
+                {recipeID ? <h1>Update Recipe</h1> : <h1>Create A Recipe</h1>}
+              </>
+            )}
           </div>
           <div className="recipeFormInfoA">
-            {recipeID ? (
+            {recipeID && test === "Customize" ? (
               <>
                 <input
                   placeholder="Recipe Name"
-                  value={updateName}
-                  onChange={(e) => setUpdateName(e.target.value)}
+                  value={customName}
+                  onChange={(e) => setCustomName(e.target.value)}
                 />
                 <textarea
                   placeholder="Recipe Description"
-                  value={updateDesc}
+                  value={customDesc}
                   onChange={(e) => setUpdateDesc(e.target.value)}
                   rows={7}
                 />
               </>
             ) : (
               <>
-                <input
-                  placeholder="Recipe Name"
-                  value={recipeName}
-                  onChange={(e) => setRecipeName(e.target.value)}
-                />
-                <textarea
-                  placeholder="Recipe Description"
-                  value={recipeDesc}
-                  onChange={(e) => setrecipeDesc(e.target.value)}
-                  rows={7}
-                />
+                {recipeID ? (
+                  <>
+                    <input
+                      placeholder="Recipe Name"
+                      value={updateName}
+                      onChange={(e) => setUpdateName(e.target.value)}
+                    />
+                    <textarea
+                      placeholder="Recipe Description"
+                      value={updateDesc}
+                      onChange={(e) => setUpdateDesc(e.target.value)}
+                      rows={7}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <input
+                      placeholder="Recipe Name"
+                      value={recipeName}
+                      onChange={(e) => setRecipeName(e.target.value)}
+                    />
+                    <textarea
+                      placeholder="Recipe Description"
+                      value={recipeDesc}
+                      onChange={(e) => setrecipeDesc(e.target.value)}
+                      rows={7}
+                    />
+                  </>
+                )}
               </>
             )}
           </div>
           <div className="recipeFormInfoB">
-            {recipeID ? (
+            {recipeID && test === "Customize" ? (
               <>
                 <select
-                  value={updateCategory}
-                  onChange={(e) => setCategory(e.target.value)}
+                  value={customCategory}
+                  onChange={(e) => setCustomCategory(e.target.value)}
                 >
                   <option value={""}>Select Category</option>
                   {dataList.category.map((category) => (
@@ -142,8 +218,8 @@ const RecipeForm = ({
                   ))}
                 </select>
                 <select
-                  value={updateCourse}
-                  onChange={(e) => setCourse(e.target.value)}
+                  value={customCourse}
+                  onChange={(e) => setCustomCourse(e.target.value)}
                 >
                   <option value={""}>Select Course</option>
                   {dataList.course.map((course) => (
@@ -155,33 +231,60 @@ const RecipeForm = ({
               </>
             ) : (
               <>
-                <select
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                >
-                  <option value={""}>Select Category</option>
-                  {dataList.category.map((category) => (
-                    <option key={category}>{category}</option>
-                  ))}
-                </select>
-                <select
-                  value={course}
-                  onChange={(e) => setCourse(e.target.value)}
-                >
-                  <option value={""}>Select Course</option>
-                  {dataList.course.map((course) => (
-                    <option key={course} value={course}>
-                      {course}
-                    </option>
-                  ))}
-                </select>
+                {recipeID ? (
+                  <>
+                    <select
+                      value={updateCategory}
+                      onChange={(e) => setCategory(e.target.value)}
+                    >
+                      <option value={""}>Select Category</option>
+                      {dataList.category.map((category) => (
+                        <option key={category}>{category}</option>
+                      ))}
+                    </select>
+                    <select
+                      value={updateCourse}
+                      onChange={(e) => setCourse(e.target.value)}
+                    >
+                      <option value={""}>Select Course</option>
+                      {dataList.course.map((course) => (
+                        <option key={course} value={course}>
+                          {course}
+                        </option>
+                      ))}
+                    </select>
+                  </>
+                ) : (
+                  <>
+                    <select
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                    >
+                      <option value={""}>Select Category</option>
+                      {dataList.category.map((category) => (
+                        <option key={category}>{category}</option>
+                      ))}
+                    </select>
+                    <select
+                      value={course}
+                      onChange={(e) => setCourse(e.target.value)}
+                    >
+                      <option value={""}>Select Course</option>
+                      {dataList.course.map((course) => (
+                        <option key={course} value={course}>
+                          {course}
+                        </option>
+                      ))}
+                    </select>
+                  </>
+                )}
               </>
             )}
-            {recipeID ? (
+            {recipeID && test === "Customize" ? (
               <>
                 <select
-                  value={updateCuisine}
-                  onChange={(e) => setUpdateCuisine(e.target.value)}
+                  value={customCuisine}
+                  onChange={(e) => setCustomCuisine(e.target.value)}
                 >
                   <option value={""}>Select Cuisine</option>
                   {dataList.cuisine.map((cuisine) => (
@@ -191,8 +294,8 @@ const RecipeForm = ({
                   ))}
                 </select>
                 <select
-                  value={updateDiet}
-                  onChange={(e) => setUpdateDiet(e.target.value)}
+                  value={customDiet}
+                  onChange={(e) => setCustomDiet(e.target.value)}
                 >
                   <option value={""}>Select Diet</option>
                   {dataList.diet.map((diet) => (
@@ -204,156 +307,304 @@ const RecipeForm = ({
               </>
             ) : (
               <>
-                <select
-                  value={cuisine}
-                  onChange={(e) => setCuisine(e.target.value)}
-                >
-                  <option value={""}>Select Cuisine</option>
-                  {dataList.cuisine.map((cuisine) => (
-                    <option key={cuisine} value={cuisine}>
-                      {cuisine}
-                    </option>
-                  ))}
-                </select>
-                <select value={diet} onChange={(e) => setDiet(e.target.value)}>
-                  <option value={""}>Select Diet</option>
-                  {dataList.diet.map((diet) => (
-                    <option key={diet} value={diet}>
-                      {diet}
-                    </option>
-                  ))}
-                </select>
+                {recipeID ? (
+                  <>
+                    <select
+                      value={updateCuisine}
+                      onChange={(e) => setUpdateCuisine(e.target.value)}
+                    >
+                      <option value={""}>Select Cuisine</option>
+                      {dataList.cuisine.map((cuisine) => (
+                        <option key={cuisine} value={cuisine}>
+                          {cuisine}
+                        </option>
+                      ))}
+                    </select>
+                    <select
+                      value={updateDiet}
+                      onChange={(e) => setUpdateDiet(e.target.value)}
+                    >
+                      <option value={""}>Select Diet</option>
+                      {dataList.diet.map((diet) => (
+                        <option key={diet} value={diet}>
+                          {diet}
+                        </option>
+                      ))}
+                    </select>
+                  </>
+                ) : (
+                  <>
+                    <select
+                      value={cuisine}
+                      onChange={(e) => setCuisine(e.target.value)}
+                    >
+                      <option value={""}>Select Cuisine</option>
+                      {dataList.cuisine.map((cuisine) => (
+                        <option key={cuisine} value={cuisine}>
+                          {cuisine}
+                        </option>
+                      ))}
+                    </select>
+                    <select
+                      value={diet}
+                      onChange={(e) => setDiet(e.target.value)}
+                    >
+                      <option value={""}>Select Diet</option>
+                      {dataList.diet.map((diet) => (
+                        <option key={diet} value={diet}>
+                          {diet}
+                        </option>
+                      ))}
+                    </select>
+                  </>
+                )}
               </>
             )}
           </div>
           <div className="recipeFormInfoC">
-            {recipeID ? (
+            {recipeID && test === "Customize" ? (
               <>
                 <input
                   placeholder="Prep Time (min)"
                   type={"number"}
-                  value={updatePrep}
-                  onChange={(e) => setUpdatePrep(e.target.value)}
+                  value={customPrep}
+                  onChange={(e) => setCustomPrep(e.target.value)}
                 />
                 <input
                   placeholder="Cook Time (min)"
                   type={"number"}
-                  value={updateCook}
-                  onChange={(e) => setUpdateCook(e.target.value)}
+                  value={customCook}
+                  onChange={(e) => setCustomCook(e.target.value)}
                 />
                 <input
                   placeholder="# of Yield"
                   type={"number"}
-                  value={updateYield}
-                  onChange={(e) => setUpdateYield(e.target.value)}
+                  value={customYield}
+                  onChange={(e) => setCustomYield(e.target.value)}
                 />
                 <input
                   placeholder="# of Servings"
                   type={"number"}
-                  value={updateServings}
-                  onChange={(e) => setUpdateServings(e.target.value)}
+                  value={customServings}
+                  onChange={(e) => setCustomServings(e.target.value)}
                 />
               </>
             ) : (
               <>
-                <input
-                  placeholder="Prep Time (min)"
-                  type={"number"}
-                  value={prepTime}
-                  onChange={(e) => setPrepTime(e.target.value)}
-                />
-                <input
-                  placeholder="Cook Time (min)"
-                  type={"number"}
-                  value={cookTime}
-                  onChange={(e) => setCookTime(e.target.value)}
-                />
-                <input
-                  placeholder="# of Yield"
-                  type={"number"}
-                  value={yieldNum}
-                  onChange={(e) => setYieldNum(e.target.value)}
-                />
-                <input
-                  placeholder="# of Servings"
-                  type={"number"}
-                  value={servingsNum}
-                  onChange={(e) => setServingsNum(e.target.value)}
-                />
+                {recipeID ? (
+                  <>
+                    <input
+                      placeholder="Prep Time (min)"
+                      type={"number"}
+                      value={updatePrep}
+                      onChange={(e) => setUpdatePrep(e.target.value)}
+                    />
+                    <input
+                      placeholder="Cook Time (min)"
+                      type={"number"}
+                      value={updateCook}
+                      onChange={(e) => setUpdateCook(e.target.value)}
+                    />
+                    <input
+                      placeholder="# of Yield"
+                      type={"number"}
+                      value={updateYield}
+                      onChange={(e) => setUpdateYield(e.target.value)}
+                    />
+                    <input
+                      placeholder="# of Servings"
+                      type={"number"}
+                      value={updateServings}
+                      onChange={(e) => setUpdateServings(e.target.value)}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <input
+                      placeholder="Prep Time (min)"
+                      type={"number"}
+                      value={prepTime}
+                      onChange={(e) => setPrepTime(e.target.value)}
+                    />
+                    <input
+                      placeholder="Cook Time (min)"
+                      type={"number"}
+                      value={cookTime}
+                      onChange={(e) => setCookTime(e.target.value)}
+                    />
+                    <input
+                      placeholder="# of Yield"
+                      type={"number"}
+                      value={yieldNum}
+                      onChange={(e) => setYieldNum(e.target.value)}
+                    />
+                    <input
+                      placeholder="# of Servings"
+                      type={"number"}
+                      value={servingsNum}
+                      onChange={(e) => setServingsNum(e.target.value)}
+                    />
+                  </>
+                )}
               </>
             )}
           </div>
-          {recipeID ? (
-            <div className="createRecipeBtn">
-              {updateName === "" ||
-              updateDesc === "" ||
-              updateCategory === "" ||
-              updateCook === "" ||
-              updateYield === "" ||
-              updateServings === "" ||
-              updateCategory === "" ||
-              updateCourse === "" ||
-              updateCuisine === "" ||
-              updateDiet === "" ||
-              updateIng === "" ||
-              updateIns === "" ||
-              updateAdd === "" ? (
-                <button disabled="true">Update</button>
-              ) : (
-                <button onClick={() => updateRecipe()}>Update</button>
-              )}
-            </div>
+          {recipeID && test === "Customize" ? (
+            <>
+              <div className="createRecipeBtn">
+                {customName === "" ||
+                customDesc === "" ||
+                customCategory === "" ||
+                customCook === "" ||
+                customPrep === "" ||
+                customYield === "" ||
+                customServings === "" ||
+                customCategory === "" ||
+                customCourse === "" ||
+                customCuisine === "" ||
+                customDiet === "" ||
+                customIng === "" ||
+                customIns === "" ||
+                customAdd === "" ? (
+                  <button disabled="true">Customize</button>
+                ) : (
+                  <button onClick={() => CustomizeRecipe()}>Customize</button>
+                )}
+              </div>
+            </>
           ) : (
-            <div className="createRecipeBtn">
-              {recipeName === "" ||
-              recipeDesc === "" ||
-              prepTime === "" ||
-              cookTime === "" ||
-              yieldNum === "" ||
-              servingsNum === "" ||
-              category === "" ||
-              course === "" ||
-              cuisine === "" ||
-              diet === "" ||
-              ingredients === "" ||
-              instructions === "" ||
-              addNotes === "" ? (
-                <>
-                  {recipeID ? (
+            <>
+              {recipeID ? (
+                <div className="createRecipeBtn">
+                  {updateName === "" ||
+                  updateDesc === "" ||
+                  updateCategory === "" ||
+                  updatePrep === "" ||
+                  updateCook === "" ||
+                  updateYield === "" ||
+                  updateServings === "" ||
+                  updateCategory === "" ||
+                  updateCourse === "" ||
+                  updateCuisine === "" ||
+                  updateDiet === "" ||
+                  updateIng === "" ||
+                  updateIns === "" ||
+                  updateAdd === "" ? (
                     <button disabled="true">Update</button>
                   ) : (
-                    <button disabled="true">Create</button>
-                  )}
-                </>
-              ) : (
-                <>
-                  {recipeID ? (
                     <button onClick={() => updateRecipe()}>Update</button>
-                  ) : (
-                    <button onClick={() => createRecipe()}>Create</button>
                   )}
-                </>
+                </div>
+              ) : (
+                <div className="createRecipeBtn">
+                  {recipeName === "" ||
+                  recipeDesc === "" ||
+                  prepTime === "" ||
+                  cookTime === "" ||
+                  yieldNum === "" ||
+                  servingsNum === "" ||
+                  category === "" ||
+                  course === "" ||
+                  cuisine === "" ||
+                  diet === "" ||
+                  ingredients === "" ||
+                  instructions === "" ||
+                  addNotes === "" ? (
+                    <>
+                      {recipeID ? (
+                        <button disabled="true">Update</button>
+                      ) : (
+                        <button disabled="true">Create</button>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {recipeID ? (
+                        <button onClick={() => updateRecipe()}>Update</button>
+                      ) : (
+                        <button onClick={() => createRecipe()}>Create</button>
+                      )}
+                    </>
+                  )}
+                </div>
               )}
-            </div>
+            </>
           )}
+          <div>
+            {recipeID && test === "Customize" ? (
+              <>
+                <>Based On another recipe </>
+                <>Bookmark ID</>
+              </>
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
         <div className="recipeFormImg">
           <div className="createNewRecipeImgCont">
-            {recipeImage === "" ? (
-              <></>
+            {recipeID && test === "Customize" ? (
+              <>
+                {customImage === "" ? (
+                  <></>
+                ) : (
+                  <Image cloudName="du119g90a" public_id={customImage} />
+                )}
+                <div className="uploadImg">
+                  <input
+                    type={"file"}
+                    accept="image/*"
+                    className="addImage"
+                    onChange={(event) => {
+                      customizingImage(event.target.files[0]);
+                    }}
+                  />
+                </div>
+              </>
             ) : (
-              <Image cloudName="du119g90a" public_id={recipeImage} />
+              <>
+                {recipeID ? (
+                  <>
+                    {updateImage === "" ? (
+                      <Image
+                        cloudName="du119g90a"
+                        public_id="https://res.cloudinary.com/du119g90a/image/upload/v1664897573/cld-sample-4.jpg"
+                      />
+                    ) : (
+                      <Image cloudName="du119g90a" public_id={updateImage} />
+                    )}
+                    <div className="uploadImg">
+                      <input
+                        type={"file"}
+                        accept="image/*"
+                        className="addImage"
+                        onChange={(event) => {
+                          updatingImage(event.target.files[0]);
+                        }}
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {recipeImage === "" ? (
+                      <Image />
+                    ) : (
+                      <Image cloudName="du119g90a" public_id={recipeImage} />
+                    )}
+                    <div className="uploadImg">
+                      <input
+                        type={"file"}
+                        accept="image/*"
+                        className="addImage"
+                        onChange={(event) => {
+                          uploadImage(event.target.files[0]);
+                        }}
+                      />
+                    </div>
+                  </>
+                )}
+              </>
             )}
-            <div className="uploadImg">
-              <input
-                type={"file"}
-                accept="image/*"
-                className="addImage"
-                onChange={(event) => {
-                  uploadImage(event.target.files[0]);
-                }}
-              />
-            </div>
           </div>
         </div>
       </div>
@@ -363,18 +614,28 @@ const RecipeForm = ({
             <div>
               <h1>Ingredients</h1>
             </div>
-            {recipeID ? (
+            {recipeID && test === "Customize" ? (
               <textarea
                 placeholder="Ingredients"
-                value={updateIng}
-                onChange={(e) => setUpdateIng(e.target.value)}
+                value={customIng}
+                onChange={(e) => setCustomIng(e.target.value)}
               />
             ) : (
-              <textarea
-                placeholder="Ingredients"
-                value={ingredients}
-                onChange={(e) => setIngredients(e.target.value)}
-              />
+              <>
+                {recipeID ? (
+                  <textarea
+                    placeholder="Ingredients"
+                    value={updateIng}
+                    onChange={(e) => setUpdateIng(e.target.value)}
+                  />
+                ) : (
+                  <textarea
+                    placeholder="Ingredients"
+                    value={ingredients}
+                    onChange={(e) => setIngredients(e.target.value)}
+                  />
+                )}
+              </>
             )}
           </div>
           <div className="verticalLine" />
@@ -382,18 +643,28 @@ const RecipeForm = ({
             <div>
               <h1>Instructions</h1>
             </div>
-            {recipeID ? (
+            {recipeID && test === "Customize" ? (
               <textarea
                 placeholder="Instructions"
-                value={updateIns}
-                onChange={(e) => setupdateIns(e.target.value)}
+                value={customIns}
+                onChange={(e) => setCustomIns(e.target.value)}
               />
             ) : (
-              <textarea
-                placeholder="Instructions"
-                value={instructions}
-                onChange={(e) => setInstructions(e.target.value)}
-              />
+              <>
+                {recipeID ? (
+                  <textarea
+                    placeholder="Instructions"
+                    value={updateIns}
+                    onChange={(e) => setupdateIns(e.target.value)}
+                  />
+                ) : (
+                  <textarea
+                    placeholder="Instructions"
+                    value={instructions}
+                    onChange={(e) => setInstructions(e.target.value)}
+                  />
+                )}
+              </>
             )}
           </div>
         </div>
@@ -401,18 +672,30 @@ const RecipeForm = ({
           <div>
             <h2>Additional Notes</h2>
           </div>
-          {recipeID ? (
-            <textarea
-              placeholder="Additional Notes"
-              value={updateAdd}
-              onChange={(e) => setUpdateAdd(e.target.value)}
-            />
+          {recipeID && test === "Customize" ? (
+            <>
+              <textarea
+                placeholder="Additional Notes"
+                value={customAdd}
+                onChange={(e) => setCustomAdd(e.target.value)}
+              />
+            </>
           ) : (
-            <textarea
-              placeholder="Additional Notes"
-              value={addNotes}
-              onChange={(e) => setAddNotes(e.target.value)}
-            />
+            <>
+              {recipeID ? (
+                <textarea
+                  placeholder="Additional Notes"
+                  value={updateAdd}
+                  onChange={(e) => setUpdateAdd(e.target.value)}
+                />
+              ) : (
+                <textarea
+                  placeholder="Additional Notes"
+                  value={addNotes}
+                  onChange={(e) => setAddNotes(e.target.value)}
+                />
+              )}
+            </>
           )}
         </div>
       </div>

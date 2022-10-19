@@ -9,6 +9,7 @@ import RecipeForm from "../RecipeForm";
 const UpdatePage = () => {
   let { recipeID } = useParams();
 
+  const [updateImage, setUpdateImage] = useState("");
   const [updateName, setUpdateName] = useState("");
   const [updateDesc, setUpdateDesc] = useState("");
   const [updateCategory, setUpdateCategory] = useState("");
@@ -27,6 +28,7 @@ const UpdatePage = () => {
 
   const updateRecipe = () => {
     Axios.put(`http://localhost:3001/updateRecipe/${recipeID}`, {
+      updateImage: updateImage,
       updateName: updateName,
       updateDesc: updateDesc,
       updateCategory: updateCategory,
@@ -42,8 +44,25 @@ const UpdatePage = () => {
       updateAdd: updateAdd,
     }).then((response) => {
       console.log(response);
-      navToRecipe(`/recipe/${recipeID}`)
+      navToRecipe(`/recipe/${recipeID}`);
     });
+  };
+
+  const updatingImage = async (image) => {
+    const formData = new FormData();
+    formData.append("file", image);
+    formData.append("upload_preset", "yun8815z");
+
+    const data = await fetch(
+      `https://api.cloudinary.com/v1_1/du119g90a/image/upload`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    ).then((r) => r.json());
+
+    console.log(data.public_id);
+    setUpdateImage(data.public_id);
   };
 
   return (
@@ -51,6 +70,9 @@ const UpdatePage = () => {
       <RecipeForm
         recipeID={recipeID}
         updateRecipe={updateRecipe}
+        updateImage={updateImage}
+        setUpdateImage={setUpdateImage}
+        updatingImage={updatingImage}
         updateName={updateName}
         setUpdateName={setUpdateName}
         updateDesc={updateDesc}
