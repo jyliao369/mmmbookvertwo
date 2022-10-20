@@ -4,16 +4,13 @@ import { useState, useEffect } from "react";
 
 import RecipeCard from "../RecipeCard";
 
-const DrinksPage = ({ isLoggedIn, setCurrentUser, currentUser }) => {
+const DrinksPage = () => {
   const [allDrinks, setAllDrinks] = useState([]);
 
   useEffect(() => {
-    Axios.get(
-      `https://mmmbook-vertwo-server.herokuapp.com/drinksOnly`,
-      {}
-    ).then((response) => {
+    Axios.get(`http://localhost:3001/drinksOnly`, {}).then((response) => {
       // console.log("hello");
-      // console.log(response);
+      console.log(response);
       setAllDrinks(response.data.reverse());
     });
   }, []);

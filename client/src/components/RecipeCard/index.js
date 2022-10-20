@@ -12,7 +12,7 @@ import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import AutoFixHighRoundedIcon from "@mui/icons-material/AutoFixHighRounded";
 
 const RecipeCard = ({ recipe }) => {
-  console.log(recipe.name);
+  // console.log(recipe);
   // console.log(recipe[1]);
   // console.log(recipe[2][recipe[1]].totalLikes);
   // console.log(recipe[3][recipe[1]].totalBookmarks);

@@ -25,7 +25,7 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
     });
 
     Axios.get(`http://localhost:3001/getAllRecipes`, {}).then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       setAllRecipes(response.data.reverse());
     });
   }, []);

@@ -6,7 +6,7 @@ import RecipeCard from "../RecipeCard";
 
 import * as dataList from "../data";
 
-const Explore = ({ isLoggedIn, currentUser }) => {
+const Explore = () => {
   const [allRecipes, setAllRecipes] = useState([]);
   const [showRecipes, setShowRecipes] = useState([]);
 
@@ -32,10 +32,7 @@ const Explore = ({ isLoggedIn, currentUser }) => {
   };
 
   useEffect(() => {
-    Axios.get(
-      `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipes`,
-      {}
-    ).then((response) => {
+    Axios.get(`http://localhost:3001/getAllRecipes`, {}).then((response) => {
       // console.log(response.data);
       setAllRecipes(response.data.reverse());
       setShowRecipes(response.data);
