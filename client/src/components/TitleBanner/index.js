@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -7,6 +8,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import LoginIcon from "@mui/icons-material/Login";
 
 const TitleBanner = (isLoggedIn) => {
+  const [isNavBarEx, setIsNavBarEx] = useState(false);
+
   const expandNavBar = () => {
     if (
       document.getElementById("navBar").style.width === "" ||
@@ -40,6 +43,24 @@ const TitleBanner = (isLoggedIn) => {
     }
   };
 
+  const test = () => {
+    if (isNavBarEx === false) {
+      document
+        .querySelector(":root")
+        .style.setProperty("--navBarWidth", "10rem");
+      document.getElementById("mainPage").style.marginLeft = "10rem";
+
+      setIsNavBarEx(true);
+    } else if (isNavBarEx === true) {
+      document
+        .querySelector(":root")
+        .style.setProperty("--navBarWidth", "5rem");
+      document.getElementById("mainPage").style.marginLeft = "5rem";
+
+      setIsNavBarEx(false);
+    }
+  };
+
   const goToProfile = () => {
     console.log("hello");
   };
@@ -66,10 +87,7 @@ const TitleBanner = (isLoggedIn) => {
     <div className="titleBanner">
       <div className="titleBannerCont">
         <div className="titleBannerOne">
-          <MenuIcon
-            onClick={(e) => expandNavBar()}
-            style={{ cursor: "pointer" }}
-          />
+          <MenuIcon onClick={(e) => test()} style={{ cursor: "pointer" }} />
           <Link to={`/`}>
             <h2>mmm!!!Book</h2>
           </Link>

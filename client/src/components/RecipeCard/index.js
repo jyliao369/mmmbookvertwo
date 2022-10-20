@@ -11,7 +11,12 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import AutoFixHighRoundedIcon from "@mui/icons-material/AutoFixHighRounded";
 
-const RecipeCard = (recipe, currentUser) => {
+const RecipeCard = ({ recipe }) => {
+  console.log(recipe.name);
+  // console.log(recipe[1]);
+  // console.log(recipe[2][recipe[1]].totalLikes);
+  // console.log(recipe[3][recipe[1]].totalBookmarks);
+
   const moreInfo = (event, type, recipeInfo) => {
     event.preventDefault();
 
@@ -56,13 +61,13 @@ const RecipeCard = (recipe, currentUser) => {
 
   return (
     <div className="recipeCard">
-      <div className="recipeCardA" id={`recipeCard${recipe.recipe.recipeID}a`}>
+      <div className="recipeCardA" id={`recipeCard${recipe.recipeID}a`}>
         <div className="recipeCardMainInfo">
-          <Link to={`/recipe/${recipe.recipe.recipeID}`}>
+          <Link to={`/recipe/${recipe.recipeID}`}>
             <div className="recipeImage">
               <div className="recipeImageCont">
-                {recipe.recipe.recipeImageID === "" ||
-                recipe.recipe.recipeImageID === null ? (
+                {recipe.recipeImageID === "" ||
+                recipe.recipeImageID === null ? (
                   <Image
                     cloudName="du119g90a"
                     public_id="https://res.cloudinary.com/du119g90a/image/upload/v1664897573/cld-sample-4.jpg"
@@ -70,27 +75,27 @@ const RecipeCard = (recipe, currentUser) => {
                 ) : (
                   <Image
                     cloudName="du119g90a"
-                    public_id={recipe.recipe.recipeImageID}
+                    public_id={recipe.recipeImageID}
                   ></Image>
                 )}
               </div>
               <div className="recipeInfoCont">
                 <div className="recipeInfoTitle">
-                  <h3>{recipe.recipe.name}</h3>
+                  <h3>{recipe.name}</h3>
                 </div>
                 <div className="recipeInfoStatsCont" id="recipeInfoStatsCont">
                   <div className="recipeInfoStats">
                     <div className="recipeBookmarks">
                       <FavoriteOutlinedIcon />
-                      <p>#</p>
+                      <p>{recipe.totalBookmarks}</p>
                     </div>
                     <div className="recipeLikes">
                       <StarRoundedIcon />
-                      <p>#</p>
+                      <p>{recipe.totalLikes}</p>
                     </div>
                     <div className="recipeReviews">
                       <ForumRoundedIcon />
-                      <p>#</p>
+                      <p>{recipe.totalReviews}</p>
                     </div>
                   </div>
                 </div>
@@ -98,63 +103,57 @@ const RecipeCard = (recipe, currentUser) => {
             </div>
           </Link>
           <div className="recipeInfo">
-            <div
-              className="recipeInfoA"
-              id={`recipeInfo${recipe.recipe.recipeID}A`}
-            >
+            <div className="recipeInfoA" id={`recipeInfo${recipe.recipeID}A`}>
               <div>
                 <h3>Prep Time: </h3>
-                <p>{recipe.recipe.prepTime} min</p>
+                <p>{recipe.prepTime} min</p>
               </div>
               <div>
                 <h3>Cook Time: </h3>
-                <p>{recipe.recipe.cookTime} min</p>
+                <p>{recipe.cookTime} min</p>
               </div>
               <div>
                 <h3>Total Time: </h3>
-                <p>{recipe.recipe.totalTime} min</p>
+                <p>{recipe.totalTime} min</p>
               </div>
               <div>
                 <h3>Yield: </h3>
-                <p>{recipe.recipe.yield}</p>
+                <p>{recipe.yield}</p>
               </div>
               <div>
                 <h3>Servings: </h3>
-                <p>{recipe.recipe.servings}</p>
+                <p>{recipe.servings}</p>
               </div>
               <div>
                 <h3>Category: </h3>
-                <p>{recipe.recipe.category}</p>
+                <p>{recipe.category}</p>
               </div>
               <div>
                 <h3>Course: </h3>
-                <p>{recipe.recipe.course}</p>
+                <p>{recipe.course}</p>
               </div>
               <div>
                 <h3>Cuisine: </h3>
-                <p>{recipe.recipe.cuisine}</p>
+                <p>{recipe.cuisine}</p>
               </div>
               <div>
                 <h3>Diet: </h3>
-                <p>{recipe.recipe.diet}</p>
+                <p>{recipe.diet}</p>
               </div>
             </div>
-            <div
-              className="recipeInfoB"
-              id={`recipeInfo${recipe.recipe.recipeID}B`}
-            >
+            <div className="recipeInfoB" id={`recipeInfo${recipe.recipeID}B`}>
               <h3>Description:</h3>
-              <p className="recipeInfoDesc">{recipe.recipe.description}</p>
+              <p className="recipeInfoDesc">{recipe.description}</p>
             </div>
           </div>
         </div>
       </div>
-      <div className="recipeCardB" id={`recipeCard${recipe.recipe.recipeID}b`}>
+      <div className="recipeCardB" id={`recipeCard${recipe.recipeID}b`}>
         <div className="recipeCardIngIns">
           <div className="recipeCardIng">
             <h3>Ingredients</h3>
             <div>
-              {ingrSplit(recipe.recipe.ingredients).map((ingredient) => (
+              {ingrSplit(recipe.ingredients).map((ingredient) => (
                 <p key={ingredient}>{ingredient}</p>
               ))}
             </div>
@@ -162,7 +161,7 @@ const RecipeCard = (recipe, currentUser) => {
           <div className="recipeCardIns">
             <h3>Instructions</h3>
             <div>
-              {instrSplit(recipe.recipe.instructions).map((instruction) => (
+              {instrSplit(recipe.instructions).map((instruction) => (
                 <p key={instruction}>{instruction}</p>
               ))}
             </div>
@@ -172,16 +171,16 @@ const RecipeCard = (recipe, currentUser) => {
 
       <div className="recipeCardC">
         <div className="recipeInfoPoster">
-          <Link to={`/profile/${recipe.recipe.userID}`}>
+          <Link to={`/profile/${recipe.userID}`}>
             <PersonOutlineOutlinedIcon />
           </Link>
-          <p>{recipe.recipe.username} on "date"</p>
+          <p>{recipe.username} on "date"</p>
         </div>
         <div className="recipeInfoMore">
           <button
             style={{ cursor: "pointer" }}
             onClick={(event) =>
-              moreInfo(event, "ingIns", `recipeCard${recipe.recipe.recipeID}`)
+              moreInfo(event, "ingIns", `recipeCard${recipe.recipeID}`)
             }
           >
             <FeedOutlinedIcon />
@@ -189,18 +188,14 @@ const RecipeCard = (recipe, currentUser) => {
           <button
             style={{ cursor: "pointer" }}
             onClick={(event) =>
-              moreInfo(
-                event,
-                "recipeDesc",
-                `recipeInfo${recipe.recipe.recipeID}`
-              )
+              moreInfo(event, "recipeDesc", `recipeInfo${recipe.recipeID}`)
             }
           >
             <InfoOutlinedIcon />
           </button>
           {recipe.type === "update" ? (
             <button>
-              <Link to={`/update/${recipe.recipe.recipeID}`}>
+              <Link to={`/update/${recipe.recipeID}`}>
                 <EditRoundedIcon />
               </Link>
             </button>
@@ -209,7 +204,7 @@ const RecipeCard = (recipe, currentUser) => {
               {recipe.type === "customize" ? (
                 <>
                   <button>
-                    <Link to={`/customize/${recipe.recipe.recipeID}`}>
+                    <Link to={`/customize/${recipe.recipeID}`}>
                       <AutoFixHighRoundedIcon />
                     </Link>
                   </button>

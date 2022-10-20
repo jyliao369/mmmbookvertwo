@@ -21,18 +21,23 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
       {}
     ).then((response) => {
       // console.log(response.data);
+      // setAllRecipes(response.data.reverse());
+    });
+
+    Axios.get(`http://localhost:3001/getAllRecipes`, {}).then((response) => {
+      console.log(response.data);
       setAllRecipes(response.data.reverse());
     });
   }, []);
 
   return (
     <div className="homePage">
-      <div className="homePageCont">
-        <div className="allRecipesCont">
-          {allRecipes.map((recipe) => (
-            <RecipeCard recipe={recipe} currentUser={currentUser} />
-          ))}
-        </div>
+      <div className="allRecipesCont">
+        {allRecipes.map((recipe, index) => (
+          <div>
+            <RecipeCard recipe={recipe} />
+          </div>
+        ))}
       </div>
     </div>
   );

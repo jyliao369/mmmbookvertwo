@@ -270,8 +270,18 @@ app.put("/updateRecipe/:recipeID", (req, res) => {
 // #GETALLRECIPES
 app.get("/getAllRecipes", (req, res) => {
   db.query(
-    `SELECT * FROM heroku_289aeecd4cbfb0f.recipes_table
-    ORDER BY heroku_289aeecd4cbfb0f.recipes_table.recipeID ASC`,
+    `SELECT
+    heroku_289aeecd4cbfb0f.recipes_table.*,
+      COUNT(DISTINCT heroku_289aeecd4cbfb0f.likes_table.likeID) AS totalLikes,
+      COUNT(DISTINCT heroku_289aeecd4cbfb0f.reviews_table.reviewID) AS totalReviews,
+      COUNT(DISTINCT heroku_289aeecd4cbfb0f.bookmark_table.bookmarkID) AS totalBookmarks
+    FROM 
+      heroku_289aeecd4cbfb0f.recipes_table
+    LEFT JOIN heroku_289aeecd4cbfb0f.likes_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.likes_table.recipeID
+    LEFT JOIN heroku_289aeecd4cbfb0f.reviews_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.reviews_table.recipeID
+    LEFT JOIN heroku_289aeecd4cbfb0f.bookmark_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.bookmark_table.recipeID
+    GROUP BY heroku_289aeecd4cbfb0f.recipes_table.recipeID`,
+    [],
     (err, result) => {
       if (err) {
         console.log(err);
