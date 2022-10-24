@@ -64,25 +64,35 @@ app.post("/register", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  bcrypt.hash(password, saltRounds, (err, hash) => {
-    if (err) {
-      console.log(err);
-    }
-    db.query(
-      `INSERT INTO heroku_289aeecd4cbfb0f.users_table 
-      (firstName, lastName, username, email, password) 
-      VALUES (?,?,?,?,?)`,
-      [firstName, lastName, username, email, hash],
-      (err, result) => {
-        if (err) {
-          console.log(err);
-        } else {
-          req.session.user = result;
-          res.send(result);
-        }
+  db.query(
+    `SELECT * FROM heroku_289aeecd4cbfb0f.users_table WHERE email = ?`,
+    [email],
+    (err, result) => {
+      if (result.length > 0) {
+        res.send({ message: "This email has been taken" });
+      } else {
+        bcrypt.hash(password, saltRounds, (err, hash) => {
+          if (err) {
+            console.log(err);
+          }
+          db.query(
+            `INSERT INTO heroku_289aeecd4cbfb0f.users_table
+              (firstName, lastName, username, email, password)
+              VALUES (?,?,?,?,?)`,
+            [firstName, lastName, username, email, hash],
+            (err, result) => {
+              if (err) {
+                console.log(err);
+              } else {
+                req.session.user = result;
+                res.send(result);
+              }
+            }
+          );
+        });
       }
-    );
-  });
+    }
+  );
 });
 
 // #LOGIN
@@ -97,16 +107,19 @@ app.post("/login", (req, res) => {
     (err, result) => {
       if (err) {
         console.log(err);
-      } else if (result.length > 0) {
+      }
+      if (result.length > 0) {
         bcrypt.compare(loginPass, result[0].password, (err, response) => {
-          if (response) {
+          if (response === true) {
             req.session.user = result;
-            console.log("Identification match!! Logging in");
+            // res.send({ message: "Identification match!! Logging in" });
             res.send(result);
-          } else {
-            console.log("Incorrect password!! Try again");
+          } else if (response === false) {
+            res.send({ message: "Incorrect password!! Try again" });
           }
         });
+      } else {
+        res.send({ message: "No User Found" });
       }
     }
   );

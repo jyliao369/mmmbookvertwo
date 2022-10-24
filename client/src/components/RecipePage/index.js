@@ -190,6 +190,8 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
   };
 
   useEffect(() => {
+    document.documentElement.scrollTop = 0;
+
     Axios.get(`http://localhost:3001/getRecipe/${recipeID}`, {}).then(
       (response) => {
         // console.log(response.data[0]);

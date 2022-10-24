@@ -7,17 +7,22 @@ const Login = ({ setIsLoggedIn, isLoggedIn, setCurrentUser }) => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPass, setLoginPass] = useState("");
 
+  const [loginNote, setLoginNote] = useState("");
+
   const navToHome = useNavigate();
 
   const login = () => {
-    Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/login`, {
+    Axios.post(`http://localhost:3001/login`, {
       loginEmail: loginEmail,
       loginPass: loginPass,
     }).then((response) => {
-      // console.log(response);
-      setIsLoggedIn(true);
-      setCurrentUser(response.data[0]);
-      navToHome("/");
+      if (response.data.message) {
+        setLoginNote(response.data.message);
+      } else {
+        setIsLoggedIn(true);
+        setCurrentUser(response.data[0]);
+        navToHome("/");
+      }
     });
   };
 
@@ -50,6 +55,7 @@ const Login = ({ setIsLoggedIn, isLoggedIn, setCurrentUser }) => {
         ) : (
           <button onClick={() => logout()}>Logout</button>
         )}
+        <p>{loginNote}</p>
         <p>Don't have an account?</p>
         <Link to="/register">
           <p>Click here to Register</p>
