@@ -7,8 +7,6 @@ import RecipeCard from "../RecipeCard";
 
 import StarPurple500OutlinedIcon from "@mui/icons-material/StarPurple500Outlined";
 
-import * as dataList from "../data";
-
 const UserProfile = ({ isLoggedIn, currentUser }) => {
   let { userID } = useParams();
 
@@ -156,6 +154,21 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
     ).then((response) => {
       console.log(response);
     });
+  };
+
+  const deleteRecipe = (recipeID) => {
+    Axios.delete(`http://localhost:3001/deleteRecipes/${recipeID}`, {}).then(
+      (response) => {
+        // console.log(response);
+        Axios.get(`http://localhost:3001/getAllRecipesID/${userID}`, {}).then(
+          (response) => {
+            // console.log("hello");
+            // console.log(response.data);
+            setUserRecipes(response.data.reverse());
+          }
+        );
+      }
+    );
   };
 
   useEffect(() => {
@@ -306,7 +319,13 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
             {userRecipes.length > 0 ? (
               <>
                 {userRecipes.map((recipe) => (
-                  <RecipeCard recipe={recipe} type={"update"} />
+                  <>
+                    <RecipeCard
+                      userRecipe={recipe}
+                      type={"update"}
+                      deleteRecipe={deleteRecipe}
+                    />
+                  </>
                 ))}
               </>
             ) : (
@@ -321,8 +340,8 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
           <div className="userBookmarked" id="userBookmarked">
             {userBookmarked.length > 0 ? (
               <>
-                {userBookmarked.map((recipe) => (
-                  <RecipeCard recipe={recipe} type={"customize"} />
+                {userBookmarked.map((favRecipe) => (
+                  <RecipeCard favRecipe={favRecipe} />
                 ))}
               </>
             ) : (

@@ -16,14 +16,6 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
       }
     );
 
-    Axios.get(
-      `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipes`,
-      {}
-    ).then((response) => {
-      // console.log(response.data);
-      // setAllRecipes(response.data.reverse());
-    });
-
     Axios.get(`http://localhost:3001/getAllRecipes`, {}).then((response) => {
       // console.log(response.data);
       setAllRecipes(response.data.reverse());
@@ -35,7 +27,11 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
       <div className="allRecipesCont">
         {allRecipes.map((recipe, index) => (
           <div>
-            <RecipeCard recipe={recipe} />
+            <RecipeCard
+              recipe={recipe}
+              recipeIng={recipe.ingredients}
+              recipeIns={recipe.instructions}
+            />
           </div>
         ))}
       </div>

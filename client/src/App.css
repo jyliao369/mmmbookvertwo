@@ -99,7 +99,7 @@ body {
 /* #MAINPAGE */
 #mainPage {
   width: 100%;
-  margin: 4rem 0rem 0rem 4rem;
+  margin: 4rem 0rem 0rem 5rem;
 }
 /* #HOMEPAGE */
 .homePage {
@@ -237,11 +237,9 @@ body {
   flex-direction: column;
   justify-content: space-between;
   width: 20rem;
-  /* height: 37.5rem; */
+  height: 38rem;
   margin: 0.75rem;
   padding: 1rem;
-  /* border-style: solid;
-  border-width: thin; */
   border-radius: 5px;
   background: white;
   box-shadow: 0 2px 5px rgb(0 0 0 / 50%);
@@ -363,27 +361,28 @@ body {
   height: 100%;
 }
 .recipeCardIngIns {
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+.recipeCardIngCont,
+.recipeCardInsCont {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 .recipeCardIng,
 .recipeCardIns {
-  margin: 0rem 0rem 1rem 0rem;
+  overflow: scroll;
+  height: 16rem;
 }
-.recipeCardIng div,
-.recipeCardIns div {
-  height: 15rem;
-  overflow: auto;
-}
-.recipeCardIng div p,
-.recipeCardIns div p {
-  margin: 0rem 0rem 0.5rem 0rem;
-}
-.recipeCardIng div::-webkit-scrollbar,
-.recipeCardIns div::-webkit-scrollbar {
+.recipeCardIng::-webkit-scrollbar,
+.recipeCardIns::-webkit-scrollbar {
   display: none;
+}
+.recipeCardIng p,
+.recipeCardIns p {
+  margin: 0rem 0rem 0.5rem 0rem;
 }
 .recipeCardC {
   display: flex;
@@ -404,14 +403,23 @@ body {
 .recipeInfoMore {
   display: flex;
   align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+.recipeInfoMore div {
+  display: flex;
+}
+.recipeInfoMoreEdit,
+.recipeInfoMoreFlip {
+  display: flex;
+  flex-direction: row;
 }
 .recipeInfoMore button {
-  aspect-ratio: 1/1;
-  width: 100%;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  padding: 0.25em;
-  margin: 0em 0.5em 0em 0.5em;
+  justify-content: center;
+  padding: 0.5em;
   border: none;
   border-radius: 10px;
 }

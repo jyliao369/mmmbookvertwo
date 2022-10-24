@@ -267,6 +267,24 @@ app.put("/updateRecipe/:recipeID", (req, res) => {
   );
 });
 
+// #DELETERECIPEID
+app.delete(`/deleteRecipes/:recipeID`, (req, res) => {
+  const recipeID = req.params.recipeID;
+  // console.log(recipeID);
+
+  db.query(
+    `DELETE FROM heroku_289aeecd4cbfb0f.recipes_table WHERE recipeID = ${recipeID}`,
+    [],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 // #GETALLRECIPES
 app.get("/getAllRecipes", (req, res) => {
   db.query(
