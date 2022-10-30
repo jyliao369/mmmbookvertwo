@@ -13,9 +13,23 @@ import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import AutoFixHighRoundedIcon from "@mui/icons-material/AutoFixHighRounded";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 
+import BreakfastDiningRoundedIcon from "@mui/icons-material/BreakfastDiningRounded";
+import CookieRoundedIcon from "@mui/icons-material/CookieRounded";
+import LocalBarRoundedIcon from "@mui/icons-material/LocalBarRounded";
+import LocalFireDepartmentRoundedIcon from "@mui/icons-material/LocalFireDepartmentRounded";
+import RamenDiningRoundedIcon from "@mui/icons-material/RamenDiningRounded";
+import RoomServiceRoundedIcon from "@mui/icons-material/RoomServiceRounded";
+import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
+import AccessAlarmsIcon from "@mui/icons-material/AccessAlarms";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import DinnerDiningIcon from "@mui/icons-material/DinnerDining";
+import LocalDiningIcon from "@mui/icons-material/LocalDining";
+import RoomServiceIcon from "@mui/icons-material/RoomService";
+import RamenDiningIcon from "@mui/icons-material/RamenDining";
+import BrunchDiningIcon from "@mui/icons-material/BrunchDining";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
+
 const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
-  console.log("I walk alone");
-  console.log(favRecipe);
   const moreInfo = (event, type, recipeInfo) => {
     if (type === "ingIns") {
       if (
@@ -46,9 +60,22 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
     }
   };
 
-  const ingrSplit = (ingre) => {};
+  const showInfo = (event, type) => {
+    // console.log(event.currentTarget.parentElement.children[1]);
 
-  const instrSplit = (instr) => {};
+    // if (type === "close") {
+    //   event.currentTarget.parentElement.children[1].style.visibility = "hidden";
+    // } else {
+    //   event.currentTarget.parentElement.children[1].style.visibility =
+    //     "visible";
+    // }
+
+    if (type === "close") {
+      event.currentTarget.parentElement.children[1].style.opacity = 0;
+    } else {
+      event.currentTarget.parentElement.children[1].style.opacity = 1;
+    }
+  };
 
   return (
     <div className="recipeCard">
@@ -103,49 +130,107 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
                   className="recipeInfoA"
                   id={`recipeInfo${favRecipe.recipeID}A`}
                 >
-                  <div>
-                    <h3>Prep Time: </h3>
-                    <p>{favRecipe.prepTime} min</p>
-                  </div>
-                  <div>
-                    <h3>Cook Time: </h3>
-                    <p>{favRecipe.cookTime} min</p>
-                  </div>
-                  <div>
-                    <h3>Total Time: </h3>
-                    <p>{favRecipe.totalTime} min</p>
-                  </div>
-                  <div>
-                    <h3>Yield: </h3>
-                    <p>{favRecipe.yield}</p>
-                  </div>
-                  <div>
-                    <h3>Servings: </h3>
-                    <p>{favRecipe.servings}</p>
-                  </div>
-                  <div>
-                    <h3>Category: </h3>
-                    <p>{favRecipe.category}</p>
-                  </div>
-                  <div>
-                    <h3>Course: </h3>
-                    <p>{favRecipe.course}</p>
-                  </div>
-                  <div>
-                    <h3>Cuisine: </h3>
-                    <p>{favRecipe.cuisine}</p>
-                  </div>
-                  <div>
-                    <h3>Diet: </h3>
-                    <p>{favRecipe.diet}</p>
+                  <div className="recipeInfoAb">
+                    <div className="recipeInfoAc">
+                      <div
+                        onMouseEnter={(event) => showInfo(event, "open")}
+                        onMouseLeave={(event) => showInfo(event, "close")}
+                      >
+                        <BrunchDiningIcon />
+                        <h5>Category: </h5>
+                      </div>
+                      <p>{favRecipe.category}</p>
+                    </div>
+                    <div className="recipeInfoAc">
+                      <div
+                        onMouseEnter={(event) => showInfo(event, "open")}
+                        onMouseLeave={(event) => showInfo(event, "close")}
+                      >
+                        <DinnerDiningIcon />
+                        <h5>Course: </h5>
+                      </div>
+                      <p>{favRecipe.course}</p>
+                    </div>
+                    <div className="recipeInfoAc">
+                      <div
+                        onMouseEnter={(event) => showInfo(event, "open")}
+                        onMouseLeave={(event) => showInfo(event, "close")}
+                      >
+                        <RamenDiningIcon />
+                        <h5>Cuisine: </h5>
+                      </div>
+                      <p>{favRecipe.cuisine}</p>
+                    </div>
+                    <div className="recipeInfoAc">
+                      <div
+                        onMouseEnter={(event) => showInfo(event, "open")}
+                        onMouseLeave={(event) => showInfo(event, "close")}
+                      >
+                        <MenuBookIcon />
+                        <h5>Diet: </h5>
+                      </div>
+                      <p>{favRecipe.diet}</p>
+                    </div>
+                    <div className="recipeInfoAc">
+                      <div
+                        onMouseEnter={(event) => showInfo(event, "open")}
+                        onMouseLeave={(event) => showInfo(event, "close")}
+                      >
+                        <LocalDiningIcon />
+                        <h5>Yield: </h5>
+                      </div>
+                      <p>{favRecipe.yield}</p>
+                    </div>
+                    <div className="recipeInfoAc">
+                      <div
+                        onMouseEnter={(event) => showInfo(event, "open")}
+                        onMouseLeave={(event) => showInfo(event, "close")}
+                      >
+                        <RoomServiceIcon />
+                        <h5>Servings: </h5>
+                      </div>
+                      <p>{favRecipe.servings}</p>
+                    </div>
+                    <div className="recipeInfoAc">
+                      <div
+                        onMouseEnter={(event) => showInfo(event, "open")}
+                        onMouseLeave={(event) => showInfo(event, "close")}
+                      >
+                        <HourglassEmptyIcon />
+                        <h5>Prep: </h5>
+                      </div>
+                      <p>{favRecipe.prepTime} min</p>
+                    </div>
+                    <div className="recipeInfoAc">
+                      <div
+                        onMouseEnter={(event) => showInfo(event, "open")}
+                        onMouseLeave={(event) => showInfo(event, "close")}
+                      >
+                        <AccessAlarmsIcon />
+                        <h5>Cook: </h5>
+                      </div>
+                      <p>{favRecipe.cookTime} min</p>
+                    </div>
+                    <div className="recipeInfoAc">
+                      <div
+                        onMouseEnter={(event) => showInfo(event, "open")}
+                        onMouseLeave={(event) => showInfo(event, "close")}
+                      >
+                        <AccessTimeIcon />
+                        <h5>Total: </h5>
+                      </div>
+                      <p>{favRecipe.totalTime} min</p>
+                    </div>
                   </div>
                 </div>
                 <div
                   className="recipeInfoB"
                   id={`recipeInfo${favRecipe.recipeID}B`}
                 >
-                  <h3>Description:</h3>
-                  <p className="recipeInfoDesc">{favRecipe.description}</p>
+                  <div className="recipeInfoDesc">
+                    <h3>Description:</h3>
+                    <p>{favRecipe.description}</p>
+                  </div>
                   <div className="recipeInfoPoster">
                     <Link to={`/profile/${favRecipe.userID}`}>
                       <PersonOutlineOutlinedIcon />
@@ -177,7 +262,7 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
             </div>
           </div>
           <div className="recipeCardC">
-            <div>
+            <div className="recipeInfoMore">
               <button
                 style={{ cursor: "pointer" }}
                 onClick={(event) =>
@@ -198,8 +283,6 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
               >
                 <InfoOutlinedIcon />
               </button>
-            </div>
-            <div>
               <button>
                 <Link to={`/customize/${favRecipe.recipeID}`}>
                   <AutoFixHighRoundedIcon />
@@ -264,41 +347,97 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
                       className="recipeInfoA"
                       id={`recipeInfo${userRecipe.recipeID}A`}
                     >
-                      <div>
-                        <h3>Prep Time: </h3>
-                        <p>{userRecipe.prepTime} min</p>
-                      </div>
-                      <div>
-                        <h3>Cook Time: </h3>
-                        <p>{userRecipe.cookTime} min</p>
-                      </div>
-                      <div>
-                        <h3>Total Time: </h3>
-                        <p>{userRecipe.totalTime} min</p>
-                      </div>
-                      <div>
-                        <h3>Yield: </h3>
-                        <p>{userRecipe.yield}</p>
-                      </div>
-                      <div>
-                        <h3>Servings: </h3>
-                        <p>{userRecipe.servings}</p>
-                      </div>
-                      <div>
-                        <h3>Category: </h3>
-                        <p>{userRecipe.category}</p>
-                      </div>
-                      <div>
-                        <h3>Course: </h3>
-                        <p>{userRecipe.course}</p>
-                      </div>
-                      <div>
-                        <h3>Cuisine: </h3>
-                        <p>{userRecipe.cuisine}</p>
-                      </div>
-                      <div>
-                        <h3>Diet: </h3>
-                        <p>{userRecipe.diet}</p>
+                      <div className="recipeInfoAb">
+                        <div className="recipeInfoAc">
+                          <div
+                            onMouseEnter={(event) => showInfo(event, "open")}
+                            onMouseLeave={(event) => showInfo(event, "close")}
+                          >
+                            <BrunchDiningIcon />
+                            <h5>Category: </h5>
+                          </div>
+                          <p>{userRecipe.category}</p>
+                        </div>
+                        <div className="recipeInfoAc">
+                          <div
+                            onMouseEnter={(event) => showInfo(event, "open")}
+                            onMouseLeave={(event) => showInfo(event, "close")}
+                          >
+                            <DinnerDiningIcon />
+                            <h5>Course: </h5>
+                          </div>
+                          <p>{userRecipe.course}</p>
+                        </div>
+                        <div className="recipeInfoAc">
+                          <div
+                            onMouseEnter={(event) => showInfo(event, "open")}
+                            onMouseLeave={(event) => showInfo(event, "close")}
+                          >
+                            <RamenDiningIcon />
+                            <h5>Cuisine: </h5>
+                          </div>
+                          <p>{userRecipe.cuisine}</p>
+                        </div>
+                        <div className="recipeInfoAc">
+                          <div
+                            onMouseEnter={(event) => showInfo(event, "open")}
+                            onMouseLeave={(event) => showInfo(event, "close")}
+                          >
+                            <MenuBookIcon />
+                            <h5>Diet: </h5>
+                          </div>
+                          <p>{userRecipe.diet}</p>
+                        </div>
+                        <div className="recipeInfoAc">
+                          <div
+                            onMouseEnter={(event) => showInfo(event, "open")}
+                            onMouseLeave={(event) => showInfo(event, "close")}
+                          >
+                            <LocalDiningIcon />
+                            <h5>Yield: </h5>
+                          </div>
+                          <p>{userRecipe.yield}</p>
+                        </div>
+                        <div className="recipeInfoAc">
+                          <div
+                            onMouseEnter={(event) => showInfo(event, "open")}
+                            onMouseLeave={(event) => showInfo(event, "close")}
+                          >
+                            <RoomServiceIcon />
+                            <h5>Servings: </h5>
+                          </div>
+                          <p>{userRecipe.servings}</p>
+                        </div>
+                        <div className="recipeInfoAc">
+                          <div
+                            onMouseEnter={(event) => showInfo(event, "open")}
+                            onMouseLeave={(event) => showInfo(event, "close")}
+                          >
+                            <HourglassEmptyIcon />
+                            <h5>Prep: </h5>
+                          </div>
+                          <p>{userRecipe.prepTime} min</p>
+                        </div>
+                        <div className="recipeInfoAc">
+                          <div
+                            onMouseEnter={(event) => showInfo(event, "open")}
+                            onMouseLeave={(event) => showInfo(event, "close")}
+                          >
+                            <AccessAlarmsIcon />
+                            <h5>Cook: </h5>
+                          </div>
+                          <p>{userRecipe.cookTime} min</p>
+                        </div>
+                        <div className="recipeInfoAc">
+                          <div
+                            onMouseEnter={(event) => showInfo(event, "open")}
+                            onMouseLeave={(event) => showInfo(event, "close")}
+                          >
+                            <AccessTimeIcon />
+                            <h5>Total: </h5>
+                          </div>
+                          <p>{userRecipe.totalTime} min</p>
+                        </div>
                       </div>
                     </div>
                     <div
@@ -391,20 +530,18 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
                     <div className="recipeCardMainInfo">
                       <Link to={`/recipe/${recipe.recipeID}`}>
                         <div className="recipeImage">
-                          <div className="recipeImageCont">
-                            {recipe.recipeImageID === "" ||
-                            recipe.recipeImageID === null ? (
-                              <Image
-                                cloudName="du119g90a"
-                                public_id="https://res.cloudinary.com/du119g90a/image/upload/v1664897573/cld-sample-4.jpg"
-                              ></Image>
-                            ) : (
-                              <Image
-                                cloudName="du119g90a"
-                                public_id={recipe.recipeImageID}
-                              ></Image>
-                            )}
-                          </div>
+                          {recipe.recipeImageID === "" ||
+                          recipe.recipeImageID === null ? (
+                            <Image
+                              cloudName="du119g90a"
+                              public_id="https://res.cloudinary.com/du119g90a/image/upload/v1664897573/cld-sample-4.jpg"
+                            ></Image>
+                          ) : (
+                            <Image
+                              cloudName="du119g90a"
+                              public_id={recipe.recipeImageID}
+                            ></Image>
+                          )}
                           <div className="recipeInfoCont">
                             <div className="recipeInfoTitle">
                               <h3>{recipe.name}</h3>
@@ -413,19 +550,17 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
                               className="recipeInfoStatsCont"
                               id="recipeInfoStatsCont"
                             >
-                              <div className="recipeInfoStats">
-                                <div className="recipeBookmarks">
-                                  <FavoriteOutlinedIcon />
-                                  <p>{recipe.totalBookmarks}</p>
-                                </div>
-                                <div className="recipeLikes">
-                                  <StarRoundedIcon />
-                                  <p>{recipe.totalLikes}</p>
-                                </div>
-                                <div className="recipeReviews">
-                                  <ForumRoundedIcon />
-                                  <p>{recipe.totalReviews}</p>
-                                </div>
+                              <div className="recipeBookmarks">
+                                <FavoriteOutlinedIcon />
+                                <p>{recipe.totalBookmarks}</p>
+                              </div>
+                              <div className="recipeLikes">
+                                <StarRoundedIcon />
+                                <p>{recipe.totalLikes}</p>
+                              </div>
+                              <div className="recipeReviews">
+                                <ForumRoundedIcon />
+                                <p>{recipe.totalReviews}</p>
                               </div>
                             </div>
                           </div>
@@ -436,49 +571,143 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
                           className="recipeInfoA"
                           id={`recipeInfo${recipe.recipeID}A`}
                         >
-                          <div>
-                            <h3>Prep Time: </h3>
-                            <p>{recipe.prepTime} min</p>
-                          </div>
-                          <div>
-                            <h3>Cook Time: </h3>
-                            <p>{recipe.cookTime} min</p>
-                          </div>
-                          <div>
-                            <h3>Total Time: </h3>
-                            <p>{recipe.totalTime} min</p>
-                          </div>
-                          <div>
-                            <h3>Yield: </h3>
-                            <p>{recipe.yield}</p>
-                          </div>
-                          <div>
-                            <h3>Servings: </h3>
-                            <p>{recipe.servings}</p>
-                          </div>
-                          <div>
-                            <h3>Category: </h3>
-                            <p>{recipe.category}</p>
-                          </div>
-                          <div>
-                            <h3>Course: </h3>
-                            <p>{recipe.course}</p>
-                          </div>
-                          <div>
-                            <h3>Cuisine: </h3>
-                            <p>{recipe.cuisine}</p>
-                          </div>
-                          <div>
-                            <h3>Diet: </h3>
-                            <p>{recipe.diet}</p>
+                          <div className="recipeInfoAb">
+                            <div className="recipeInfoAc">
+                              <div
+                                onMouseEnter={(event) =>
+                                  showInfo(event, "open")
+                                }
+                                onMouseLeave={(event) =>
+                                  showInfo(event, "close")
+                                }
+                              >
+                                <BrunchDiningIcon />
+                                <h5>Category: </h5>
+                              </div>
+                              <p>{recipe.category}</p>
+                            </div>
+                            <div className="recipeInfoAc">
+                              <div
+                                onMouseEnter={(event) =>
+                                  showInfo(event, "open")
+                                }
+                                onMouseLeave={(event) =>
+                                  showInfo(event, "close")
+                                }
+                              >
+                                <DinnerDiningIcon />
+                                <h5>Course: </h5>
+                              </div>
+                              <p>{recipe.course}</p>
+                            </div>
+                            <div className="recipeInfoAc">
+                              <div
+                                onMouseEnter={(event) =>
+                                  showInfo(event, "open")
+                                }
+                                onMouseLeave={(event) =>
+                                  showInfo(event, "close")
+                                }
+                              >
+                                <RamenDiningIcon />
+                                <h5>Cuisine: </h5>
+                              </div>
+                              <p>{recipe.cuisine}</p>
+                            </div>
+                            <div className="recipeInfoAc">
+                              <div
+                                onMouseEnter={(event) =>
+                                  showInfo(event, "open")
+                                }
+                                onMouseLeave={(event) =>
+                                  showInfo(event, "close")
+                                }
+                              >
+                                <MenuBookIcon />
+                                <h5>Diet: </h5>
+                              </div>
+                              <p>{recipe.diet}</p>
+                            </div>
+                            <div className="recipeInfoAc">
+                              <div
+                                onMouseEnter={(event) =>
+                                  showInfo(event, "open")
+                                }
+                                onMouseLeave={(event) =>
+                                  showInfo(event, "close")
+                                }
+                              >
+                                <LocalDiningIcon />
+                                <h5>Yield: </h5>
+                              </div>
+                              <p>{recipe.yield}</p>
+                            </div>
+                            <div className="recipeInfoAc">
+                              <div
+                                onMouseEnter={(event) =>
+                                  showInfo(event, "open")
+                                }
+                                onMouseLeave={(event) =>
+                                  showInfo(event, "close")
+                                }
+                              >
+                                <RoomServiceIcon />
+                                <h5>Servings: </h5>
+                              </div>
+                              <p>{recipe.servings}</p>
+                            </div>
+                            <div className="recipeInfoAc">
+                              <div
+                                onMouseEnter={(event) =>
+                                  showInfo(event, "open")
+                                }
+                                onMouseLeave={(event) =>
+                                  showInfo(event, "close")
+                                }
+                              >
+                                <HourglassEmptyIcon />
+                                <h5>Prep: </h5>
+                              </div>
+                              <p>{recipe.prepTime} min</p>
+                            </div>
+                            <div className="recipeInfoAc">
+                              <div
+                                onMouseEnter={(event) =>
+                                  showInfo(event, "open")
+                                }
+                                onMouseLeave={(event) =>
+                                  showInfo(event, "close")
+                                }
+                              >
+                                <AccessAlarmsIcon />
+                                <h5>Cook: </h5>
+                              </div>
+                              <p>{recipe.cookTime} min</p>
+                            </div>
+                            <div className="recipeInfoAc">
+                              <div
+                                onMouseEnter={(event) =>
+                                  showInfo(event, "open")
+                                }
+                                onMouseLeave={(event) =>
+                                  showInfo(event, "close")
+                                }
+                              >
+                                <AccessTimeIcon />
+                                <h5>Total: </h5>
+                              </div>
+                              <p>{recipe.totalTime} min</p>
+                            </div>
                           </div>
                         </div>
                         <div
                           className="recipeInfoB"
                           id={`recipeInfo${recipe.recipeID}B`}
                         >
-                          <h3>Description:</h3>
-                          <p className="recipeInfoDesc">{recipe.description}</p>
+                          <div className="recipeInfoDesc">
+                            <h3>Description:</h3>
+                            <p>{recipe.description}</p>
+                          </div>
                           <div className="recipeInfoPoster">
                             <Link to={`/profile/${recipe.userID}`}>
                               <PersonOutlineOutlinedIcon />
@@ -505,9 +734,11 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
                       <div className="recipeCardInsCont">
                         <h3>Instructions</h3>
                         <div className="recipeCardIns">
-                          {recipe.instructions.split(".").map((instruction) => (
-                            <p>{instruction}</p>
-                          ))}
+                          {recipe.instructions
+                            .split("\n")
+                            .map((instruction) => (
+                              <p>{instruction}</p>
+                            ))}
                         </div>
                       </div>
                     </div>

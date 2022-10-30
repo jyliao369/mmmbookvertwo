@@ -27,16 +27,7 @@ const CustomizePage = ({ currentUser }) => {
   const navToRecipe = useNavigate();
 
   const CustomizeRecipe = () => {
-    // console.log("Customizing Recipe");
-
-    // console.log("delete bookmark");
-    // console.log(recipeID);
-    // console.log(currentUser.userID);
-    // console.log(currentUser.username);
-
-    // console.log(originName);
-
-    Axios.post("http://localhost:3001/createRecipe", {
+    Axios.post("http://localhost:3001/customizeRecipe", {
       userID: currentUser.userID,
       username: currentUser.username,
       origRecipeID: recipeID,
@@ -70,7 +61,13 @@ const CustomizePage = ({ currentUser }) => {
         `https://mmmbook-vertwo-server.herokuapp.com/getRecipeName/${customName}`,
         {}
       ).then((response) => {
-        // console.log(response);
+        Axios.post(`http://localhost:3001/createLikes`, {
+          userID: currentUser.userID,
+          username: currentUser.username,
+          recipeID: response.data[0].recipeID,
+        }).then((response) => {
+          console.log(response);
+        });
         navToRecipe(`/recipe/${response.data[0].recipeID}`);
       });
     });

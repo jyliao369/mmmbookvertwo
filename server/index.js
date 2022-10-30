@@ -213,6 +213,123 @@ app.put(`/updateUser/:userID`, (req, res) => {
 });
 
 // #RECIPES
+// #CREATERECIPES
+app.post("/createRecipe", (req, res) => {
+  const userID = req.body.userID;
+  const username = req.body.username;
+  const recipeImageID = req.body.recipeImageID;
+  const recipeName = req.body.recipeName;
+  const recipeDesc = req.body.recipeDesc;
+  const prepTime = req.body.prepTime;
+  const cookTime = req.body.cookTime;
+  const totalTime = parseInt(prepTime) + parseInt(cookTime);
+  const yieldNum = req.body.yieldNum;
+  const servingsNum = req.body.servingsNum;
+  const category = req.body.category;
+  const course = req.body.course;
+  const cuisine = req.body.cuisine;
+  const diet = req.body.diet;
+  const ingredients = req.body.ingredients;
+  const instructions = req.body.instructions;
+  const addNotes = req.body.addNotes;
+
+  db.query(
+    `INSERT INTO heroku_289aeecd4cbfb0f.recipes_table
+    (userID, username,recipeImageID, name, description, 
+    prepTime, cookTime, totalTime, category, yield, 
+    servings, course, cuisine, diet, ingredients, 
+    instructions, addNotes)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+    [
+      userID,
+      username,
+      recipeImageID,
+      recipeName,
+      recipeDesc,
+      prepTime,
+      cookTime,
+      totalTime,
+      category,
+      yieldNum,
+      servingsNum,
+      course,
+      cuisine,
+      diet,
+      ingredients,
+      instructions,
+      addNotes,
+    ],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+        console.log(result);
+      }
+    }
+  );
+});
+
+// #CUSTOMIZERECIPES
+app.post("/customizeRecipe", (req, res) => {
+  const userID = req.body.userID;
+  const username = req.body.username;
+  const origRecipeID = req.body.origRecipeID;
+  const origRecipeName = req.body.origRecipeName;
+  const recipeImageID = req.body.recipeImageID;
+  const recipeName = req.body.recipeName;
+  const recipeDesc = req.body.recipeDesc;
+  const prepTime = req.body.prepTime;
+  const cookTime = req.body.cookTime;
+  const totalTime = parseInt(prepTime) + parseInt(cookTime);
+  const yieldNum = req.body.yieldNum;
+  const servingsNum = req.body.servingsNum;
+  const category = req.body.category;
+  const course = req.body.course;
+  const cuisine = req.body.cuisine;
+  const diet = req.body.diet;
+  const ingredients = req.body.ingredients;
+  const instructions = req.body.instructions;
+  const addNotes = req.body.addNotes;
+
+  db.query(
+    `INSERT INTO heroku_289aeecd4cbfb0f.recipes_table
+    (origRecipeID, origRecipeName, userID, username,
+    recipeImageID, name, description, prepTime, cookTime,
+    totalTime, category, yield, servings, course, cuisine,
+    diet, ingredients, instructions, addNotes)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+    [
+      origRecipeID,
+      origRecipeName,
+      userID,
+      username,
+      recipeImageID,
+      recipeName,
+      recipeDesc,
+      prepTime,
+      cookTime,
+      totalTime,
+      category,
+      yieldNum,
+      servingsNum,
+      course,
+      cuisine,
+      diet,
+      ingredients,
+      instructions,
+      addNotes,
+    ],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 // #GETRECIPEBYID
 app.get(`/recipe/:recipeID`, (req, res) => {
   const recipeID = req.params.recipeID;
@@ -450,66 +567,6 @@ app.get("/getRecipeName/:recipeName", (req, res) => {
   );
 });
 
-// #CREATERECIPES
-app.post("/createRecipe", (req, res) => {
-  const userID = req.body.userID;
-  const username = req.body.username;
-  const origRecipeID = req.body.origRecipeID;
-  const origRecipeName = req.body.origRecipeName;
-  const recipeImageID = req.body.recipeImageID;
-  const recipeName = req.body.recipeName;
-  const recipeDesc = req.body.recipeDesc;
-  const prepTime = req.body.prepTime;
-  const cookTime = req.body.cookTime;
-  const totalTime = parseInt(prepTime) + parseInt(cookTime);
-  const yieldNum = req.body.yieldNum;
-  const servingsNum = req.body.servingsNum;
-  const category = req.body.category;
-  const course = req.body.course;
-  const cuisine = req.body.cuisine;
-  const diet = req.body.diet;
-  const ingredients = req.body.ingredients;
-  const instructions = req.body.instructions;
-  const addNotes = req.body.addNotes;
-
-  db.query(
-    `INSERT INTO heroku_289aeecd4cbfb0f.recipes_table
-    (origRecipeID, origRecipeName, userID, username,
-    recipeImageID, name, description, prepTime, cookTime,
-    totalTime, category, yield, servings, course, cuisine,
-    diet, ingredients, instructions, addNotes)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
-    [
-      origRecipeID,
-      origRecipeName,
-      userID,
-      username,
-      recipeImageID,
-      recipeName,
-      recipeDesc,
-      prepTime,
-      cookTime,
-      totalTime,
-      category,
-      yieldNum,
-      servingsNum,
-      course,
-      cuisine,
-      diet,
-      ingredients,
-      instructions,
-      addNotes,
-    ],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.send(result);
-      }
-    }
-  );
-});
-
 // #REVIEWS
 // #POSTINGREVIEW
 app.post("/postReview", (req, res) => {
@@ -624,9 +681,6 @@ app.get("/test/:userID", (req, res) => {
 
   const userID = info.split(",")[0];
   const chefUserID = info.split(",")[1];
-
-  // console.log(chefUserID);
-  // console.log(userID);
 
   db.query(
     `SELECT * FROM heroku_289aeecd4cbfb0f.followchef_table 

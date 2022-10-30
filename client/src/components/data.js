@@ -21,11 +21,11 @@ let cuisine = [
 ];
 let diet = [
   "Regular",
-  "Keto-Friendly",
+  "Keto",
   "Gluten-Free",
   "Low Carb",
-  "Low Calorie",
-  "Low Cholesterol",
+  "Low Cal",
+  "Low Chol",
   "Low Sodium",
   "Low Fat",
   "Vegan",
