@@ -30,18 +30,36 @@ import BrunchDiningIcon from "@mui/icons-material/BrunchDining";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 
 const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
+  let recipeCont = [];
+
+  if (favRecipe) {
+    console.log("Favorite Recipe");
+
+    console.log(favRecipe);
+  }
+  if (userRecipe) {
+    console.log("User Recipe");
+    console.log(userRecipe);
+    recipeCont = userRecipe;
+  }
+  if (recipe) {
+    console.log("Recipe");
+
+    console.log(recipe);
+  }
+
   const moreInfo = (event, type, recipeInfo) => {
     if (type === "ingIns") {
       if (
         document.getElementById(`${recipeInfo}a`).style.display === "" ||
-        document.getElementById(`${recipeInfo}a`).style.display === "flex"
+        document.getElementById(`${recipeInfo}a`).style.display === "block"
       ) {
         document.getElementById(`${recipeInfo}a`).style.display = "none";
-        document.getElementById(`${recipeInfo}b`).style.display = "flex";
+        document.getElementById(`${recipeInfo}b`).style.display = "block";
       } else if (
         document.getElementById(`${recipeInfo}a`).style.display === "none"
       ) {
-        document.getElementById(`${recipeInfo}a`).style.display = "flex";
+        document.getElementById(`${recipeInfo}a`).style.display = "block";
         document.getElementById(`${recipeInfo}b`).style.display = "none";
       }
     } else if (type === "recipeDesc") {
@@ -61,15 +79,6 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
   };
 
   const showInfo = (event, type) => {
-    // console.log(event.currentTarget.parentElement.children[1]);
-
-    // if (type === "close") {
-    //   event.currentTarget.parentElement.children[1].style.visibility = "hidden";
-    // } else {
-    //   event.currentTarget.parentElement.children[1].style.visibility =
-    //     "visible";
-    // }
-
     if (type === "close") {
       event.currentTarget.parentElement.children[1].style.opacity = 0;
     } else {
@@ -85,20 +94,18 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
             <div className="recipeCardMainInfo">
               <Link to={`/recipe/${favRecipe.recipeID}`}>
                 <div className="recipeImage">
-                  <div className="recipeImageCont">
-                    {favRecipe.recipeImageID === "" ||
-                    favRecipe.recipeImageID === null ? (
-                      <Image
-                        cloudName="du119g90a"
-                        public_id="https://res.cloudinary.com/du119g90a/image/upload/v1664897573/cld-sample-4.jpg"
-                      ></Image>
-                    ) : (
-                      <Image
-                        cloudName="du119g90a"
-                        public_id={favRecipe.recipeImageID}
-                      ></Image>
-                    )}
-                  </div>
+                  {favRecipe.recipeImageID === "" ||
+                  favRecipe.recipeImageID === null ? (
+                    <Image
+                      cloudName="du119g90a"
+                      public_id="https://res.cloudinary.com/du119g90a/image/upload/v1664897573/cld-sample-4.jpg"
+                    ></Image>
+                  ) : (
+                    <Image
+                      cloudName="du119g90a"
+                      public_id={favRecipe.recipeImageID}
+                    ></Image>
+                  )}
                   <div className="recipeInfoCont">
                     <div className="recipeInfoTitle">
                       <h3>{favRecipe.name}</h3>
@@ -107,19 +114,17 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
                       className="recipeInfoStatsCont"
                       id="recipeInfoStatsCont"
                     >
-                      <div className="recipeInfoStats">
-                        <div className="recipeBookmarks">
-                          <FavoriteOutlinedIcon />
-                          <p>{favRecipe.totalBookmarks}</p>
-                        </div>
-                        <div className="recipeLikes">
-                          <StarRoundedIcon />
-                          <p>{favRecipe.totalLikes}</p>
-                        </div>
-                        <div className="recipeReviews">
-                          <ForumRoundedIcon />
-                          <p>{favRecipe.totalReviews}</p>
-                        </div>
+                      <div className="recipeBookmarks">
+                        <FavoriteOutlinedIcon />
+                        <p>{favRecipe.totalBookmarks}</p>
+                      </div>
+                      <div className="recipeLikes">
+                        <StarRoundedIcon />
+                        <p>{favRecipe.totalLikes}</p>
+                      </div>
+                      <div className="recipeReviews">
+                        <ForumRoundedIcon />
+                        <p>{favRecipe.totalReviews}</p>
                       </div>
                     </div>
                   </div>
@@ -254,7 +259,7 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
               <div className="recipeCardInsCont">
                 <h3>Instructions</h3>
                 <div className="recipeCardIns">
-                  {favRecipe.instructions.split(".").map((instruction) => (
+                  {favRecipe.instructions.split("\n").map((instruction) => (
                     <p>{instruction}</p>
                   ))}
                 </div>
@@ -283,11 +288,6 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
               >
                 <InfoOutlinedIcon />
               </button>
-              <button>
-                <Link to={`/customize/${favRecipe.recipeID}`}>
-                  <AutoFixHighRoundedIcon />
-                </Link>
-              </button>
             </div>
           </div>
         </>
@@ -302,20 +302,18 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
                 <div className="recipeCardMainInfo">
                   <Link to={`/recipe/${userRecipe.recipeID}`}>
                     <div className="recipeImage">
-                      <div className="recipeImageCont">
-                        {userRecipe.recipeImageID === "" ||
-                        userRecipe.recipeImageID === null ? (
-                          <Image
-                            cloudName="du119g90a"
-                            public_id="https://res.cloudinary.com/du119g90a/image/upload/v1664897573/cld-sample-4.jpg"
-                          ></Image>
-                        ) : (
-                          <Image
-                            cloudName="du119g90a"
-                            public_id={userRecipe.recipeImageID}
-                          ></Image>
-                        )}
-                      </div>
+                      {userRecipe.recipeImageID === "" ||
+                      userRecipe.recipeImageID === null ? (
+                        <Image
+                          cloudName="du119g90a"
+                          public_id="https://res.cloudinary.com/du119g90a/image/upload/v1664897573/cld-sample-4.jpg"
+                        ></Image>
+                      ) : (
+                        <Image
+                          cloudName="du119g90a"
+                          public_id={userRecipe.recipeImageID}
+                        ></Image>
+                      )}
                       <div className="recipeInfoCont">
                         <div className="recipeInfoTitle">
                           <h3>{userRecipe.name}</h3>
@@ -324,19 +322,17 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
                           className="recipeInfoStatsCont"
                           id="recipeInfoStatsCont"
                         >
-                          <div className="recipeInfoStats">
-                            <div className="recipeBookmarks">
-                              <FavoriteOutlinedIcon />
-                              <p>{userRecipe.totalBookmarks}</p>
-                            </div>
-                            <div className="recipeLikes">
-                              <StarRoundedIcon />
-                              <p>{userRecipe.totalLikes}</p>
-                            </div>
-                            <div className="recipeReviews">
-                              <ForumRoundedIcon />
-                              <p>{userRecipe.totalReviews}</p>
-                            </div>
+                          <div className="recipeBookmarks">
+                            <FavoriteOutlinedIcon />
+                            <p>{userRecipe.totalBookmarks}</p>
+                          </div>
+                          <div className="recipeLikes">
+                            <StarRoundedIcon />
+                            <p>{userRecipe.totalLikes}</p>
+                          </div>
+                          <div className="recipeReviews">
+                            <ForumRoundedIcon />
+                            <p>{userRecipe.totalReviews}</p>
                           </div>
                         </div>
                       </div>
@@ -444,8 +440,10 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
                       className="recipeInfoB"
                       id={`recipeInfo${userRecipe.recipeID}B`}
                     >
-                      <h3>Description:</h3>
-                      <p className="recipeInfoDesc">{userRecipe.description}</p>
+                      <div className="recipeInfoDesc">
+                        <h3>Description:</h3>
+                        <p>{userRecipe.description}</p>
+                      </div>
                       <div className="recipeInfoPoster">
                         <Link to={`/profile/${userRecipe.userID}`}>
                           <PersonOutlineOutlinedIcon />
@@ -472,9 +470,11 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
                   <div className="recipeCardInsCont">
                     <h3>Instructions</h3>
                     <div className="recipeCardIns">
-                      {userRecipe.instructions.split(".").map((instruction) => (
-                        <p>{instruction}</p>
-                      ))}
+                      {userRecipe.instructions
+                        .split("\n")
+                        .map((instruction) => (
+                          <p>{instruction}</p>
+                        ))}
                     </div>
                   </div>
                 </div>
@@ -504,17 +504,6 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
                     }
                   >
                     <InfoOutlinedIcon />
-                  </button>
-                  <button
-                    style={{ cursor: "pointer" }}
-                    onClick={(e) => deleteRecipe(userRecipe.recipeID)}
-                  >
-                    <DeleteForeverRoundedIcon />
-                  </button>
-                  <button>
-                    <Link to={`/update/${userRecipe.recipeID}`}>
-                      <EditRoundedIcon />
-                    </Link>
                   </button>
                 </div>
               </div>
