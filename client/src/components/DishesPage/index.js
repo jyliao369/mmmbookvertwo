@@ -11,8 +11,8 @@ const DishesPage = ({ isLoggedIn, setCurrentUser, currentUser }) => {
 
   useEffect(() => {
     Axios.get(`http://localhost:3001/dishesOnly`, {}).then((response) => {
-      console.log("hello");
-      console.log(response);
+      // console.log("hello");
+      // console.log(response);
       setDishesOnly(response.data.reverse());
     });
   }, []);

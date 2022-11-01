@@ -32,16 +32,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   session({
     key: "userID",
-    secret: "If you're gone",
+    secret: "testingoutsessionishard",
     resave: false,
-    saveUninitialized: true,
-    proxy: true,
-    name: "MyFavoriteCookie",
+    saveUninitialized: false,
     cookie: {
-      secure: true,
-      httpOnly: false,
-      expires: 60 * 60 * 1000 * 2,
-      sameSite: "none",
+      path: "/",
+      secure: false,
+      httpOnly: true,
+      expires: 60 * 60 * 1000 * 24,
     },
   })
 );
@@ -96,6 +94,18 @@ app.post("/register", (req, res) => {
 });
 
 // #LOGIN
+app.get("/login", (req, res) => {
+  if (req.session.user) {
+    res.send({
+      isLoggedIn: true,
+      message: "you are logged in",
+      user: req.session.user,
+    });
+  } else {
+    res.send({ isLoggedIn: false, message: "you are not logged in" });
+  }
+});
+
 app.post("/login", (req, res) => {
   const loginEmail = req.body.loginEmail;
   const loginPass = req.body.loginPass;
@@ -112,8 +122,8 @@ app.post("/login", (req, res) => {
         bcrypt.compare(loginPass, result[0].password, (err, response) => {
           if (response === true) {
             req.session.user = result;
-            // res.send({ message: "Identification match!! Logging in" });
-            res.send(result);
+            console.log(req.session.user);
+            res.send({ isLoggedIn: true, result });
           } else if (response === false) {
             res.send({ message: "Incorrect password!! Try again" });
           }
@@ -123,14 +133,6 @@ app.post("/login", (req, res) => {
       }
     }
   );
-});
-
-app.get("/login", (req, res) => {
-  if (req.session.user) {
-    res.send({ loggedIn: true, user: req.session.user });
-  } else {
-    res.send({ loggedIn: false });
-  }
 });
 
 // #LOGOUT

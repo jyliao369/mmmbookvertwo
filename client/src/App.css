@@ -237,11 +237,12 @@ body {
   flex-direction: column;
   justify-content: space-between;
   width: 22rem;
-  height: 40rem;
+  height: 40.2rem;
   margin: 1em;
   box-shadow: 0 2px 5px rgb(0 0 0 / 50%);
   border-radius: 5px;
   background: white;
+  overflow: hidden;
 }
 .recipeCardA {
   padding: 1em 1em 0em 1em;
@@ -415,6 +416,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   padding: 0.5em;
+  background: rgb(200, 238, 205);
 }
 .recipeInfoPoster {
   display: flex;

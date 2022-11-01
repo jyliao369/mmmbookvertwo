@@ -12,6 +12,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import AutoFixHighRoundedIcon from "@mui/icons-material/AutoFixHighRounded";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
+import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
 
 import BreakfastDiningRoundedIcon from "@mui/icons-material/BreakfastDiningRounded";
 import CookieRoundedIcon from "@mui/icons-material/CookieRounded";
@@ -30,24 +31,6 @@ import BrunchDiningIcon from "@mui/icons-material/BrunchDining";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 
 const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
-  let recipeCont = [];
-
-  if (favRecipe) {
-    console.log("Favorite Recipe");
-
-    console.log(favRecipe);
-  }
-  if (userRecipe) {
-    console.log("User Recipe");
-    console.log(userRecipe);
-    recipeCont = userRecipe;
-  }
-  if (recipe) {
-    console.log("Recipe");
-
-    console.log(recipe);
-  }
-
   const moreInfo = (event, type, recipeInfo) => {
     if (type === "ingIns") {
       if (
@@ -125,6 +108,9 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
                       <div className="recipeReviews">
                         <ForumRoundedIcon />
                         <p>{favRecipe.totalReviews}</p>
+                      </div>
+                      <div className="recipeViews">
+                        <VisibilityRoundedIcon />
                       </div>
                     </div>
                   </div>
@@ -288,6 +274,11 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
               >
                 <InfoOutlinedIcon />
               </button>
+              <button>
+                <Link to={`/customize/${favRecipe.recipeID}`}>
+                  <AutoFixHighRoundedIcon />
+                </Link>
+              </button>
             </div>
           </div>
         </>
@@ -333,6 +324,9 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
                           <div className="recipeReviews">
                             <ForumRoundedIcon />
                             <p>{userRecipe.totalReviews}</p>
+                          </div>
+                          <div className="recipeViews">
+                            <VisibilityRoundedIcon />
                           </div>
                         </div>
                       </div>
@@ -505,6 +499,17 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
                   >
                     <InfoOutlinedIcon />
                   </button>
+                  <button
+                    style={{ cursor: "pointer" }}
+                    onClick={() => deleteRecipe(userRecipe.recipeID)}
+                  >
+                    <DeleteForeverRoundedIcon />
+                  </button>
+                  <button>
+                    <Link to={`/update/${userRecipe.recipeID}`}>
+                      <EditRoundedIcon />
+                    </Link>
+                  </button>
                 </div>
               </div>
             </>
@@ -550,6 +555,9 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
                               <div className="recipeReviews">
                                 <ForumRoundedIcon />
                                 <p>{recipe.totalReviews}</p>
+                              </div>
+                              <div className="recipeViews">
+                                <VisibilityRoundedIcon />
                               </div>
                             </div>
                           </div>

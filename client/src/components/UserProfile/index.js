@@ -157,6 +157,8 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
   };
 
   const deleteRecipe = (recipeID) => {
+    console.log(recipeID);
+
     Axios.delete(`http://localhost:3001/deleteRecipes/${recipeID}`, {}).then(
       (response) => {
         // console.log(response);
@@ -172,6 +174,8 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
   };
 
   useEffect(() => {
+    document.documentElement.scrollTop = 0;
+
     Axios.get(
       `https://mmmbook-vertwo-server.herokuapp.com/getUser/${userID}`,
       {}

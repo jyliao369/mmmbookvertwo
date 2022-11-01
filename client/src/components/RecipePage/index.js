@@ -225,7 +225,7 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
                   response.data.user[0].username === allLikes[a].username &&
                   response.data.user[0].userID === allLikes[a].userID
                 ) {
-                  // console.log(true);
+                  console.log(true);
                   document.getElementById("likeBtn").children[0].style.color =
                     "gold";
                 }

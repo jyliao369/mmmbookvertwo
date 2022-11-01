@@ -26,17 +26,18 @@ function App() {
   Axios.defaults.withCredentials = true;
 
   useEffect(() => {
-    Axios.get(`https://mmmbook-vertwo-server.herokuapp.com/login`, {}).then(
-      (response) => {
-        if (response.data.loggedIn === true) {
-          // console.log(response.data);
-          setIsLoggedIn(response.data.loggedIn);
-          // console.log("hello");
-          // console.log(response.data.user[0]);
-          setCurrentUser(response.data.user[0]);
-        }
+    Axios.get(`http://localhost:3001/login`, {}).then((response) => {
+      console.log(response.data);
+
+      if (response.data.isLoggedIn === true) {
+        // console.log(response.data.isLoggedIn);
+        // console.log(response.data.message);
+        // console.log(response.data.user[0]);
+
+        setIsLoggedIn(response.data.isLoggedIn);
+        setCurrentUser(response.data.user[0]);
       }
-    );
+    });
   }, []);
 
   return (

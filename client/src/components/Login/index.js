@@ -19,8 +19,8 @@ const Login = ({ setIsLoggedIn, isLoggedIn, setCurrentUser }) => {
       if (response.data.message) {
         setLoginNote(response.data.message);
       } else {
-        setIsLoggedIn(true);
-        setCurrentUser(response.data[0]);
+        setIsLoggedIn(response.data.isLoggedIn);
+        setCurrentUser(response.data.result[0]);
         navToHome("/");
       }
     });
