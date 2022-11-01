@@ -4,13 +4,13 @@ import { useState, useEffect } from "react";
 
 import RecipeCard from "../RecipeCard";
 
-const DrinksPage = () => {
+const DrinksPage = ({ isLoggedIn, setCurrentUser, currentUser }) => {
   const [allDrinks, setAllDrinks] = useState([]);
 
   useEffect(() => {
     Axios.get(`http://localhost:3001/drinksOnly`, {}).then((response) => {
       // console.log("hello");
-      console.log(response);
+      // console.log(response.data);
       setAllDrinks(response.data.reverse());
     });
   }, []);
@@ -19,7 +19,11 @@ const DrinksPage = () => {
     <div className="drinksPage">
       <div className="onlyDrinksCont">
         {allDrinks.map((drink) => (
-          <RecipeCard recipe={drink} />
+          <RecipeCard
+            recipe={drink}
+            currentUser={currentUser}
+            isLoggedIn={isLoggedIn}
+          />
         ))}
       </div>
     </div>

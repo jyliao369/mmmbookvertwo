@@ -6,7 +6,7 @@ import RecipeCard from "../RecipeCard";
 
 import * as dataList from "../data";
 
-const Explore = () => {
+const Explore = ({ isLoggedIn, setCurrentUser, currentUser }) => {
   const [allRecipes, setAllRecipes] = useState([]);
   const [showRecipes, setShowRecipes] = useState([]);
 
@@ -71,7 +71,11 @@ const Explore = () => {
 
       <div className="allRecipesCont">
         {showRecipes.map((recipe) => (
-          <RecipeCard recipe={recipe} />
+          <RecipeCard
+            recipe={recipe}
+            currentUser={currentUser}
+            isLoggedIn={isLoggedIn}
+          />
         ))}
       </div>
     </div>

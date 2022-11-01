@@ -197,14 +197,14 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
     Axios.get(`http://localhost:3001/getAllRecipesID/${userID}`, {}).then(
       (response) => {
         // console.log("hello");
-        // console.log(response.data);
+        console.log(response.data);
         setUserRecipes(response.data.reverse());
       }
     );
 
     Axios.get(`http://localhost:3001/getBookmarked/${userID}`, {}).then(
       (response) => {
-        // console.log(response.data);
+        console.log(response.data);
         setUserBookmarked(response.data.reverse());
       }
     );

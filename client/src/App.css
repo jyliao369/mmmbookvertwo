@@ -282,8 +282,11 @@ body {
 .recipeInfoStatsCont {
   height: 75%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+}
+.recipeInfoStatsCont svg {
+  font-size: 2em;
 }
 .recipeInfoStatsCont div {
   display: flex;

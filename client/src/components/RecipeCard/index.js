@@ -79,12 +79,13 @@ const RecipeCard = ({
   };
 
   const createViews = (recipeID) => {
+    // console.log(isLoggedIn);
     if (isLoggedIn) {
       Axios.post(
         `http://localhost:3001/createViews/${recipeID},${currentUser.userID},${currentUser.username}`,
         {}
       ).then((response) => {
-        console.log(response);
+        // console.log(response);
       });
     } else {
       console.log("you are not logged in cant create a view");
@@ -122,10 +123,10 @@ const RecipeCard = ({
                       className="recipeInfoStatsCont"
                       id="recipeInfoStatsCont"
                     >
-                      <div className="recipeBookmarks">
+                      {/* <div className="recipeBookmarks">
                         <FavoriteOutlinedIcon />
                         <p>{favRecipe.totalBookmarks}</p>
-                      </div>
+                      </div> */}
                       <div className="recipeLikes">
                         <StarRoundedIcon />
                         <p>{favRecipe.totalLikes}</p>
@@ -136,6 +137,7 @@ const RecipeCard = ({
                       </div>
                       <div className="recipeViews">
                         <VisibilityRoundedIcon />
+                        <p>{favRecipe.totalViews}</p>
                       </div>
                     </div>
                   </div>
@@ -341,10 +343,10 @@ const RecipeCard = ({
                           className="recipeInfoStatsCont"
                           id="recipeInfoStatsCont"
                         >
-                          <div className="recipeBookmarks">
+                          {/* <div className="recipeBookmarks">
                             <FavoriteOutlinedIcon />
                             <p>{userRecipe.totalBookmarks}</p>
-                          </div>
+                          </div> */}
                           <div className="recipeLikes">
                             <StarRoundedIcon />
                             <p>{userRecipe.totalLikes}</p>
@@ -355,6 +357,7 @@ const RecipeCard = ({
                           </div>
                           <div className="recipeViews">
                             <VisibilityRoundedIcon />
+                            <p>{userRecipe.totalViews}</p>
                           </div>
                         </div>
                       </div>
@@ -575,10 +578,10 @@ const RecipeCard = ({
                               className="recipeInfoStatsCont"
                               id="recipeInfoStatsCont"
                             >
-                              <div className="recipeBookmarks">
+                              {/* <div className="recipeBookmarks">
                                 <FavoriteOutlinedIcon />
                                 <p>{recipe.totalBookmarks}</p>
-                              </div>
+                              </div> */}
                               <div className="recipeLikes">
                                 <StarRoundedIcon />
                                 <p>{recipe.totalLikes}</p>
@@ -589,6 +592,7 @@ const RecipeCard = ({
                               </div>
                               <div className="recipeViews">
                                 <VisibilityRoundedIcon />
+                                <p>{recipe.totalViews}</p>
                               </div>
                             </div>
                           </div>

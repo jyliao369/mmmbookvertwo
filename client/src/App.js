@@ -58,9 +58,36 @@ function App() {
                   />
                 }
               />
-              <Route path="/explore" element={<Explore />} />
-              <Route path="/drinks" element={<DrinksPage />} />
-              <Route path="/dishes" element={<DishesPage />} />
+              <Route
+                path="/explore"
+                element={
+                  <Explore
+                    isLoggedIn={isLoggedIn}
+                    setCurrentUser={setCurrentUser}
+                    currentUser={currentUser}
+                  />
+                }
+              />
+              <Route
+                path="/drinks"
+                element={
+                  <DrinksPage
+                    isLoggedIn={isLoggedIn}
+                    setCurrentUser={setCurrentUser}
+                    currentUser={currentUser}
+                  />
+                }
+              />
+              <Route
+                path="/dishes"
+                element={
+                  <DishesPage
+                    isLoggedIn={isLoggedIn}
+                    setCurrentUser={setCurrentUser}
+                    currentUser={currentUser}
+                  />
+                }
+              />
               <Route
                 path="/userProfile/:userID"
                 element={

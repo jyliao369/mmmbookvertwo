@@ -12,7 +12,7 @@ const DishesPage = ({ isLoggedIn, setCurrentUser, currentUser }) => {
   useEffect(() => {
     Axios.get(`http://localhost:3001/dishesOnly`, {}).then((response) => {
       // console.log("hello");
-      // console.log(response);
+      console.log(response.data);
       setDishesOnly(response.data.reverse());
     });
   }, []);
@@ -21,7 +21,11 @@ const DishesPage = ({ isLoggedIn, setCurrentUser, currentUser }) => {
     <div className="dishesPage">
       <div className="dishesOnlyCont">
         {dishesOnly.map((dish) => (
-          <RecipeCard recipe={dish} />
+          <RecipeCard
+            recipe={dish}
+            currentUser={currentUser}
+            isLoggedIn={isLoggedIn}
+          />
         ))}
       </div>
     </div>

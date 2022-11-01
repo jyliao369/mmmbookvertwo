@@ -421,15 +421,17 @@ app.delete(`/deleteRecipes/:recipeID`, (req, res) => {
 app.get("/getAllRecipes", (req, res) => {
   db.query(
     `SELECT
-    heroku_289aeecd4cbfb0f.recipes_table.*,
+     heroku_289aeecd4cbfb0f.recipes_table.*,
       COUNT(DISTINCT heroku_289aeecd4cbfb0f.likes_table.likeID) AS totalLikes,
       COUNT(DISTINCT heroku_289aeecd4cbfb0f.reviews_table.reviewID) AS totalReviews,
-      COUNT(DISTINCT heroku_289aeecd4cbfb0f.bookmark_table.bookmarkID) AS totalBookmarks
+      COUNT(DISTINCT heroku_289aeecd4cbfb0f.bookmark_table.bookmarkID) AS totalBookmarks,
+      COUNT(DISTINCT heroku_289aeecd4cbfb0f.views_table.viewID) AS totalViews
     FROM 
       heroku_289aeecd4cbfb0f.recipes_table
     LEFT JOIN heroku_289aeecd4cbfb0f.likes_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.likes_table.recipeID
     LEFT JOIN heroku_289aeecd4cbfb0f.reviews_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.reviews_table.recipeID
     LEFT JOIN heroku_289aeecd4cbfb0f.bookmark_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.bookmark_table.recipeID
+    LEFT JOIN heroku_289aeecd4cbfb0f.views_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.views_table.recipeID
     GROUP BY heroku_289aeecd4cbfb0f.recipes_table.recipeID`,
     [],
     (err, result) => {
@@ -446,15 +448,17 @@ app.get("/getAllRecipes", (req, res) => {
 app.get("/drinksOnly", (req, res) => {
   db.query(
     `SELECT
-      heroku_289aeecd4cbfb0f.recipes_table.*,
+     heroku_289aeecd4cbfb0f.recipes_table.*,
       COUNT(DISTINCT heroku_289aeecd4cbfb0f.likes_table.likeID) AS totalLikes,
       COUNT(DISTINCT heroku_289aeecd4cbfb0f.reviews_table.reviewID) AS totalReviews,
-      COUNT(DISTINCT heroku_289aeecd4cbfb0f.bookmark_table.bookmarkID) AS totalBookmarks
+      COUNT(DISTINCT heroku_289aeecd4cbfb0f.bookmark_table.bookmarkID) AS totalBookmarks,
+      COUNT(DISTINCT heroku_289aeecd4cbfb0f.views_table.viewID) AS totalViews
     FROM 
       heroku_289aeecd4cbfb0f.recipes_table
     LEFT JOIN heroku_289aeecd4cbfb0f.likes_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.likes_table.recipeID
     LEFT JOIN heroku_289aeecd4cbfb0f.reviews_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.reviews_table.recipeID
     LEFT JOIN heroku_289aeecd4cbfb0f.bookmark_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.bookmark_table.recipeID
+    LEFT JOIN heroku_289aeecd4cbfb0f.views_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.views_table.recipeID
     WHERE category = "Drinks" OR category = "Beverage"
     GROUP BY heroku_289aeecd4cbfb0f.recipes_table.recipeID`,
     (err, result) => {
@@ -471,17 +475,19 @@ app.get("/drinksOnly", (req, res) => {
 app.get("/dishesOnly", (req, res) => {
   db.query(
     `SELECT
-      heroku_289aeecd4cbfb0f.recipes_table.*,
+     heroku_289aeecd4cbfb0f.recipes_table.*,
       COUNT(DISTINCT heroku_289aeecd4cbfb0f.likes_table.likeID) AS totalLikes,
       COUNT(DISTINCT heroku_289aeecd4cbfb0f.reviews_table.reviewID) AS totalReviews,
-      COUNT(DISTINCT heroku_289aeecd4cbfb0f.bookmark_table.bookmarkID) AS totalBookmarks
-    FROM 
+      COUNT(DISTINCT heroku_289aeecd4cbfb0f.bookmark_table.bookmarkID) AS totalBookmarks,
+      COUNT(DISTINCT heroku_289aeecd4cbfb0f.views_table.viewID) AS totalViews
+     FROM 
       heroku_289aeecd4cbfb0f.recipes_table
-    LEFT JOIN heroku_289aeecd4cbfb0f.likes_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.likes_table.recipeID
-    LEFT JOIN heroku_289aeecd4cbfb0f.reviews_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.reviews_table.recipeID
-    LEFT JOIN heroku_289aeecd4cbfb0f.bookmark_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.bookmark_table.recipeID
-    WHERE category != "Drinks" AND category != "Beverage"
-    GROUP BY heroku_289aeecd4cbfb0f.recipes_table.recipeID`,
+     LEFT JOIN heroku_289aeecd4cbfb0f.likes_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.likes_table.recipeID
+     LEFT JOIN heroku_289aeecd4cbfb0f.reviews_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.reviews_table.recipeID
+     LEFT JOIN heroku_289aeecd4cbfb0f.bookmark_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.bookmark_table.recipeID
+     LEFT JOIN heroku_289aeecd4cbfb0f.views_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.views_table.recipeID
+     WHERE category != "Drinks" AND category != "Beverage"
+     GROUP BY heroku_289aeecd4cbfb0f.recipes_table.recipeID`,
     (err, result) => {
       if (err) {
         console.log(err);
@@ -497,19 +503,20 @@ app.get("/getAllRecipesID/:userID", (req, res) => {
   const userID = req.params.userID;
 
   db.query(
-    // "SELECT * FROM heroku_289aeecd4cbfb0f.recipes_table WHERE userID = ?",
     `SELECT
-      heroku_289aeecd4cbfb0f.recipes_table.*,
+     heroku_289aeecd4cbfb0f.recipes_table.*,
       COUNT(DISTINCT heroku_289aeecd4cbfb0f.likes_table.likeID) AS totalLikes,
       COUNT(DISTINCT heroku_289aeecd4cbfb0f.reviews_table.reviewID) AS totalReviews,
-      COUNT(DISTINCT heroku_289aeecd4cbfb0f.bookmark_table.bookmarkID) AS totalBookmarks
-    FROM 
+      COUNT(DISTINCT heroku_289aeecd4cbfb0f.bookmark_table.bookmarkID) AS totalBookmarks,
+      COUNT(DISTINCT heroku_289aeecd4cbfb0f.views_table.viewID) AS totalViews
+     FROM 
       heroku_289aeecd4cbfb0f.recipes_table
-    LEFT JOIN heroku_289aeecd4cbfb0f.likes_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.likes_table.recipeID
-    LEFT JOIN heroku_289aeecd4cbfb0f.reviews_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.reviews_table.recipeID
-    LEFT JOIN heroku_289aeecd4cbfb0f.bookmark_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.bookmark_table.recipeID
-    WHERE heroku_289aeecd4cbfb0f.recipes_table.userID = ${userID}
-    GROUP BY heroku_289aeecd4cbfb0f.recipes_table.recipeID`,
+     LEFT JOIN heroku_289aeecd4cbfb0f.likes_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.likes_table.recipeID
+     LEFT JOIN heroku_289aeecd4cbfb0f.reviews_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.reviews_table.recipeID
+     LEFT JOIN heroku_289aeecd4cbfb0f.bookmark_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.bookmark_table.recipeID
+     LEFT JOIN heroku_289aeecd4cbfb0f.views_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.views_table.recipeID
+     WHERE heroku_289aeecd4cbfb0f.recipes_table.userID = ${userID}
+     GROUP BY heroku_289aeecd4cbfb0f.recipes_table.recipeID`,
     [],
     (err, result) => {
       if (err) {
@@ -838,12 +845,14 @@ app.get(`/getBookmarked/:userID`, (req, res) => {
       heroku_289aeecd4cbfb0f.recipes_table.*,
       COUNT(DISTINCT heroku_289aeecd4cbfb0f.likes_table.likeID) AS totalLikes,
       COUNT(DISTINCT heroku_289aeecd4cbfb0f.reviews_table.reviewID) AS totalReviews,
-      COUNT(DISTINCT heroku_289aeecd4cbfb0f.bookmark_table.bookmarkID) AS totalBookmarks
+      COUNT(DISTINCT heroku_289aeecd4cbfb0f.bookmark_table.bookmarkID) AS totalBookmarks,
+      COUNT(DISTINCT heroku_289aeecd4cbfb0f.views_table.viewID) AS totalViews
     FROM 
 	    heroku_289aeecd4cbfb0f.bookmark_table
-      LEFT JOIN heroku_289aeecd4cbfb0f.likes_table ON heroku_289aeecd4cbfb0f.bookmark_table.recipeID = heroku_289aeecd4cbfb0f.likes_table.recipeID
-      LEFT JOIN heroku_289aeecd4cbfb0f.reviews_table ON heroku_289aeecd4cbfb0f.bookmark_table.recipeID = heroku_289aeecd4cbfb0f.reviews_table.recipeID
-      LEFT JOIN heroku_289aeecd4cbfb0f.recipes_table ON heroku_289aeecd4cbfb0f.bookmark_table.recipeID = heroku_289aeecd4cbfb0f.recipes_table.recipeID
+    LEFT JOIN heroku_289aeecd4cbfb0f.likes_table ON heroku_289aeecd4cbfb0f.bookmark_table.recipeID = heroku_289aeecd4cbfb0f.likes_table.recipeID
+    LEFT JOIN heroku_289aeecd4cbfb0f.reviews_table ON heroku_289aeecd4cbfb0f.bookmark_table.recipeID = heroku_289aeecd4cbfb0f.reviews_table.recipeID
+    LEFT JOIN heroku_289aeecd4cbfb0f.recipes_table ON heroku_289aeecd4cbfb0f.bookmark_table.recipeID = heroku_289aeecd4cbfb0f.recipes_table.recipeID
+    LEFT JOIN heroku_289aeecd4cbfb0f.views_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.views_table.recipeID
     WHERE heroku_289aeecd4cbfb0f.bookmark_table.userID = ${userID}
     GROUP BY heroku_289aeecd4cbfb0f.bookmark_table.bookmarkID`,
     [],
