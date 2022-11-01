@@ -21,8 +21,8 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
           <>
             <RecipeCard
               recipe={recipe}
-              recipeIng={recipe.ingredients}
-              recipeIns={recipe.instructions}
+              currentUser={currentUser}
+              isLoggedIn={isLoggedIn}
             />
           </>
         ))}

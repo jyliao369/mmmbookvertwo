@@ -328,6 +328,8 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
                       userRecipe={recipe}
                       type={"update"}
                       deleteRecipe={deleteRecipe}
+                      currentUser={currentUser}
+                      isLoggedIn={isLoggedIn}
                     />
                   </>
                 ))}
@@ -345,7 +347,11 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
             {userBookmarked.length > 0 ? (
               <>
                 {userBookmarked.map((favRecipe) => (
-                  <RecipeCard favRecipe={favRecipe} />
+                  <RecipeCard
+                    favRecipe={favRecipe}
+                    currentUser={currentUser}
+                    isLoggedIn={isLoggedIn}
+                  />
                 ))}
               </>
             ) : (

@@ -122,7 +122,7 @@ app.post("/login", (req, res) => {
         bcrypt.compare(loginPass, result[0].password, (err, response) => {
           if (response === true) {
             req.session.user = result;
-            console.log(req.session.user);
+            // console.log(req.session.user);
             res.send({ isLoggedIn: true, result });
           } else if (response === false) {
             res.send({ message: "Incorrect password!! Try again" });
@@ -890,8 +890,6 @@ app.post(`/createLikes`, (req, res) => {
   const username = req.body.username;
   const recipeID = req.body.recipeID;
 
-  // console.log(userID + " " + username + " " + recipeID);
-
   db.query(
     `SELECT * FROM heroku_289aeecd4cbfb0f.likes_table
     WHERE userID = ? AND recipeID = ?`,
@@ -952,6 +950,47 @@ app.get("/getAllLikes/:recipeID", (req, res) => {
         console.log(err);
       } else {
         res.send(result);
+      }
+    }
+  );
+});
+
+// #CREATEVIEWS/UNVIEWS
+app.post("/createViews/:info", (req, res) => {
+  const recipeID = req.params.info.split(",")[0];
+  const userID = req.params.info.split(",")[1];
+  const username = req.params.info.split(",")[2];
+
+  // console.log(recipeID + " " + userID + " " + username);
+
+  db.query(
+    `SELECT * FROM heroku_289aeecd4cbfb0f.views_table 
+     WHERE 
+      heroku_289aeecd4cbfb0f.views_table.recipeID = "${recipeID}" AND 
+      heroku_289aeecd4cbfb0f.views_table.userID = "${userID}" AND
+      heroku_289aeecd4cbfb0f.views_table.username = "${username}"`,
+    [],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      if (result.length > 0) {
+        // console.log(result.length);
+      } else {
+        // console.log(result.length);
+        db.query(
+          `INSERT INTO heroku_289aeecd4cbfb0f.views_table
+           (recipeID, userID, username)
+           VALUES (?,?,?)`,
+          [recipeID, userID, username],
+          (err, result) => {
+            if (err) {
+              console.log(err);
+            } else {
+              res.send(result);
+            }
+          }
+        );
       }
     }
   );

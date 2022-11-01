@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Image } from "cloudinary-react";
 import { useState } from "react";
+import Axios from "axios";
 
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import ForumRoundedIcon from "@mui/icons-material/ForumRounded";
@@ -30,7 +31,15 @@ import RamenDiningIcon from "@mui/icons-material/RamenDining";
 import BrunchDiningIcon from "@mui/icons-material/BrunchDining";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 
-const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
+const RecipeCard = ({
+  recipe,
+  userRecipe,
+  favRecipe,
+  currentUser,
+  type,
+  deleteRecipe,
+  isLoggedIn,
+}) => {
   const moreInfo = (event, type, recipeInfo) => {
     if (type === "ingIns") {
       if (
@@ -69,6 +78,19 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
     }
   };
 
+  const createViews = (recipeID) => {
+    if (isLoggedIn) {
+      Axios.post(
+        `http://localhost:3001/createViews/${recipeID},${currentUser.userID},${currentUser.username}`,
+        {}
+      ).then((response) => {
+        console.log(response);
+      });
+    } else {
+      console.log("you are not logged in cant create a view");
+    }
+  };
+
   return (
     <div className="recipeCard">
       {favRecipe ? (
@@ -76,7 +98,10 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
           <div className="recipeCardA" id={`recipeCard${favRecipe.recipeID}a`}>
             <div className="recipeCardMainInfo">
               <Link to={`/recipe/${favRecipe.recipeID}`}>
-                <div className="recipeImage">
+                <div
+                  onClick={() => createViews(favRecipe.recipeID)}
+                  className="recipeImage"
+                >
                   {favRecipe.recipeImageID === "" ||
                   favRecipe.recipeImageID === null ? (
                     <Image
@@ -292,7 +317,10 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
               >
                 <div className="recipeCardMainInfo">
                   <Link to={`/recipe/${userRecipe.recipeID}`}>
-                    <div className="recipeImage">
+                    <div
+                      onClick={() => createViews(userRecipe.recipeID)}
+                      className="recipeImage"
+                    >
                       {userRecipe.recipeImageID === "" ||
                       userRecipe.recipeImageID === null ? (
                         <Image
@@ -523,7 +551,10 @@ const RecipeCard = ({ recipe, userRecipe, favRecipe, type, deleteRecipe }) => {
                   >
                     <div className="recipeCardMainInfo">
                       <Link to={`/recipe/${recipe.recipeID}`}>
-                        <div className="recipeImage">
+                        <div
+                          onClick={() => createViews(recipe.recipeID)}
+                          className="recipeImage"
+                        >
                           {recipe.recipeImageID === "" ||
                           recipe.recipeImageID === null ? (
                             <Image

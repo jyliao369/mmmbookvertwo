@@ -30,10 +30,6 @@ function App() {
       console.log(response.data);
 
       if (response.data.isLoggedIn === true) {
-        // console.log(response.data.isLoggedIn);
-        // console.log(response.data.message);
-        // console.log(response.data.user[0]);
-
         setIsLoggedIn(response.data.isLoggedIn);
         setCurrentUser(response.data.user[0]);
       }
