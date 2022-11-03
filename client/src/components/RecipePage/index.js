@@ -217,22 +217,24 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
       (response) => {
         // console.log(response.data);
         let allLikes = response.data;
-        Axios.get(`https://mmmbook-vertwo-server.herokuapp.com/login`, {}).then(
-          (response) => {
-            if (response.data.loggedIn === true) {
-              for (let a = 0; a < allLikes.length; a++) {
-                if (
-                  response.data.user[0].username === allLikes[a].username &&
-                  response.data.user[0].userID === allLikes[a].userID
-                ) {
-                  console.log(true);
-                  document.getElementById("likeBtn").children[0].style.color =
-                    "gold";
-                }
+        Axios.get(`http://localhost:3001/login`, {}).then((response) => {
+          // console.log(response.data.isLoggedIn);
+          // console.log(response.data.user[0].userID);
+          if (response.data.isLoggedIn === true) {
+            for (let a = 0; a < allLikes.length; a++) {
+              if (
+                response.data.user[0].username === allLikes[a].username &&
+                response.data.user[0].userID === allLikes[a].userID
+              ) {
+                // console.log(true);
+                document.getElementById("likeBtn").children[0].style.color =
+                  "gold";
+              } else {
+                // console.log(false);
               }
             }
           }
-        );
+        });
       }
     );
 
