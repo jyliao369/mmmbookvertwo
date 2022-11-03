@@ -15,11 +15,13 @@ const Navbar = ({ setIsLoggedIn, isLoggedIn, currentUser }) => {
   const navToHome = useNavigate();
 
   const logout = () => {
-    Axios.get("http://localhost:3001/logout", {}).then((response) => {
-      // console.log(response);
-      setIsLoggedIn(false);
-      navToHome("/");
-    });
+    Axios.get("https://mmmbook-vertwo-server.herokuapp.com/logout", {}).then(
+      (response) => {
+        // console.log(response);
+        setIsLoggedIn(false);
+        navToHome("/");
+      }
+    );
   };
 
   return (

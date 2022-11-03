@@ -8,7 +8,10 @@ const DrinksPage = ({ isLoggedIn, setCurrentUser, currentUser }) => {
   const [allDrinks, setAllDrinks] = useState([]);
 
   useEffect(() => {
-    Axios.get(`http://localhost:3001/drinksOnly`, {}).then((response) => {
+    Axios.get(
+      `https://mmmbook-vertwo-server.herokuapp.com/drinksOnly`,
+      {}
+    ).then((response) => {
       // console.log("hello");
       // console.log(response.data);
       setAllDrinks(response.data.reverse());

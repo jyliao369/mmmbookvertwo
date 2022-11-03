@@ -18,7 +18,7 @@ const Register = ({ setIsLoggedIn, isLoggedIn, setCurrentUser }) => {
   const register = () => {
     if (email !== "" && firstName !== "" && lastName !== "" && username) {
       if (password === rePassword && password !== "" && rePassword !== "") {
-        Axios.post("http://localhost:3001/register", {
+        Axios.post("https://mmmbook-vertwo-server.herokuapp.com/register", {
           firstName: firstName,
           lastName: lastName,
           username: username,

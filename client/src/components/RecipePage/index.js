@@ -149,7 +149,7 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
   const bookmarkRecipe = (event, recipeID) => {
     event.preventDefault();
 
-    Axios.post(`http://localhost:3001/createBookmark`, {
+    Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/createBookmark`, {
       userID: currentUser.userID,
       username: currentUser.username,
       recipeID: recipeID,
@@ -169,7 +169,7 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
   const addLike = (event, recipeID) => {
     event.preventDefault();
 
-    Axios.post(`http://localhost:3001/createLikes`, {
+    Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/createLikes`, {
       userID: currentUser.userID,
       username: currentUser.username,
       recipeID: recipeID,
@@ -192,18 +192,19 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
   useEffect(() => {
     document.documentElement.scrollTop = 0;
 
-    Axios.get(`http://localhost:3001/getRecipe/${recipeID}`, {}).then(
-      (response) => {
-        // console.log(response.data[0]);
-        setRecipeInfo(response.data[0]);
-        setRecipeDesc(response.data[0].description);
-        instrSplit(response.data[0].instructions);
-        ingrSplit(response.data[0].ingredients);
-        setRecipeTotalLikes(response.data[0].totalLike);
-        setRecipeTotalBookmark(response.data[0].totalBook);
-        setRecipeTotalReviews(response.data[0].totalReview);
-      }
-    );
+    Axios.get(
+      `https://mmmbook-vertwo-server.herokuapp.com/getRecipe/${recipeID}`,
+      {}
+    ).then((response) => {
+      // console.log(response.data[0]);
+      setRecipeInfo(response.data[0]);
+      setRecipeDesc(response.data[0].description);
+      instrSplit(response.data[0].instructions);
+      ingrSplit(response.data[0].ingredients);
+      setRecipeTotalLikes(response.data[0].totalLike);
+      setRecipeTotalBookmark(response.data[0].totalBook);
+      setRecipeTotalReviews(response.data[0].totalReview);
+    });
 
     Axios.get(
       `https://mmmbook-vertwo-server.herokuapp.com/getReview/${recipeID}`,
@@ -213,11 +214,14 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
       setReviews(response.data.reverse());
     });
 
-    Axios.get(`http://localhost:3001/getAllLikes/${recipeID}`, {}).then(
-      (response) => {
-        // console.log(response.data);
-        let allLikes = response.data;
-        Axios.get(`http://localhost:3001/login`, {}).then((response) => {
+    Axios.get(
+      `https://mmmbook-vertwo-server.herokuapp.com/getAllLikes/${recipeID}`,
+      {}
+    ).then((response) => {
+      // console.log(response.data);
+      let allLikes = response.data;
+      Axios.get(`https://mmmbook-vertwo-server.herokuapp.com/login`, {}).then(
+        (response) => {
           // console.log(response.data.isLoggedIn);
           // console.log(response.data.user[0].userID);
           if (response.data.isLoggedIn === true) {
@@ -234,33 +238,33 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
               }
             }
           }
-        });
-      }
-    );
+        }
+      );
+    });
 
-    Axios.get(`http://localhost:3001/getAllBookmarked/${recipeID}`, {}).then(
-      (response) => {
-        // console.log(response.data);
-        let allBookmarks = response.data;
-        Axios.get(`https://mmmbook-vertwo-server.herokuapp.com/login`, {}).then(
-          (response) => {
-            if (response.data.loggedIn === true) {
-              for (let a = 0; a < allBookmarks.length; a++) {
-                if (
-                  response.data.user[0].username === allBookmarks[a].username &&
-                  response.data.user[0].userID === allBookmarks[a].userID
-                ) {
-                  // console.log(true);
-                  document.getElementById(
-                    "bookmarkBtn"
-                  ).children[0].style.color = "#E1528E";
-                }
+    Axios.get(
+      `https://mmmbook-vertwo-server.herokuapp.com/getAllBookmarked/${recipeID}`,
+      {}
+    ).then((response) => {
+      // console.log(response.data);
+      let allBookmarks = response.data;
+      Axios.get(`https://mmmbook-vertwo-server.herokuapp.com/login`, {}).then(
+        (response) => {
+          if (response.data.loggedIn === true) {
+            for (let a = 0; a < allBookmarks.length; a++) {
+              if (
+                response.data.user[0].username === allBookmarks[a].username &&
+                response.data.user[0].userID === allBookmarks[a].userID
+              ) {
+                // console.log(true);
+                document.getElementById("bookmarkBtn").children[0].style.color =
+                  "#E1528E";
               }
             }
           }
-        );
-      }
-    );
+        }
+      );
+    });
   }, []);
 
   return (

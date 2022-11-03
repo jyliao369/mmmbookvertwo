@@ -8,7 +8,10 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
   const [allRecipes, setAllRecipes] = useState([]);
 
   useEffect(() => {
-    Axios.get(`http://localhost:3001/getAllRecipes`, {}).then((response) => {
+    Axios.get(
+      `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipes`,
+      {}
+    ).then((response) => {
       // console.log(response.data);
       setAllRecipes(response.data.reverse());
     });

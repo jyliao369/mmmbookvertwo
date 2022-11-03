@@ -105,44 +105,45 @@ const RecipeForm = ({
     document.documentElement.scrollTop = 0;
 
     if (recipeID) {
-      Axios.get(`http://localhost:3001/recipe/${recipeID}`, {}).then(
-        (response) => {
-          console.log(response.data[0]);
+      Axios.get(
+        `https://mmmbook-vertwo-server.herokuapp.com/recipe/${recipeID}`,
+        {}
+      ).then((response) => {
+        console.log(response.data[0]);
 
-          if (test === "Customize") {
-            setCustomImage(response.data[0].recipeImageID);
-            setOriginName(response.data[0].name);
-            setCustomName(response.data[0].name);
-            setCustomDesc(response.data[0].description);
-            setCustomCategory(response.data[0].category);
-            setCustomCourse(response.data[0].course);
-            setCustomCuisine(response.data[0].cuisine);
-            setCustomDiet(response.data[0].diet);
-            setCustomPrep(response.data[0].prepTime);
-            setCustomCook(response.data[0].cookTime);
-            setCustomYield(response.data[0].yield);
-            setCustomServings(response.data[0].servings);
-            setCustomIng(response.data[0].ingredients);
-            setCustomIns(response.data[0].instructions);
-            setCustomAdd(response.data[0].addNotes);
-          } else {
-            setUpdateImage(response.data[0].recipeImageID);
-            setUpdateName(response.data[0].name);
-            setUpdateDesc(response.data[0].description);
-            setUpdateCategory(response.data[0].category);
-            setUpdateCourse(response.data[0].course);
-            setUpdateCuisine(response.data[0].cuisine);
-            setUpdateDiet(response.data[0].diet);
-            setUpdatePrep(response.data[0].prepTime);
-            setUpdateCook(response.data[0].cookTime);
-            setUpdateYield(response.data[0].yield);
-            setUpdateServings(response.data[0].servings);
-            setUpdateIng(response.data[0].ingredients);
-            setupdateIns(response.data[0].instructions);
-            setUpdateAdd(response.data[0].addNotes);
-          }
+        if (test === "Customize") {
+          setCustomImage(response.data[0].recipeImageID);
+          setOriginName(response.data[0].name);
+          setCustomName(response.data[0].name);
+          setCustomDesc(response.data[0].description);
+          setCustomCategory(response.data[0].category);
+          setCustomCourse(response.data[0].course);
+          setCustomCuisine(response.data[0].cuisine);
+          setCustomDiet(response.data[0].diet);
+          setCustomPrep(response.data[0].prepTime);
+          setCustomCook(response.data[0].cookTime);
+          setCustomYield(response.data[0].yield);
+          setCustomServings(response.data[0].servings);
+          setCustomIng(response.data[0].ingredients);
+          setCustomIns(response.data[0].instructions);
+          setCustomAdd(response.data[0].addNotes);
+        } else {
+          setUpdateImage(response.data[0].recipeImageID);
+          setUpdateName(response.data[0].name);
+          setUpdateDesc(response.data[0].description);
+          setUpdateCategory(response.data[0].category);
+          setUpdateCourse(response.data[0].course);
+          setUpdateCuisine(response.data[0].cuisine);
+          setUpdateDiet(response.data[0].diet);
+          setUpdatePrep(response.data[0].prepTime);
+          setUpdateCook(response.data[0].cookTime);
+          setUpdateYield(response.data[0].yield);
+          setUpdateServings(response.data[0].servings);
+          setUpdateIng(response.data[0].ingredients);
+          setupdateIns(response.data[0].instructions);
+          setUpdateAdd(response.data[0].addNotes);
         }
-      );
+      });
     }
   }, []);
 

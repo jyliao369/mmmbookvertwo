@@ -12,7 +12,7 @@ const Login = ({ setIsLoggedIn, isLoggedIn, setCurrentUser }) => {
   const navToHome = useNavigate();
 
   const login = () => {
-    Axios.post(`http://localhost:3001/login`, {
+    Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/login`, {
       loginEmail: loginEmail,
       loginPass: loginPass,
     }).then((response) => {

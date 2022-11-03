@@ -159,18 +159,20 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
   const deleteRecipe = (recipeID) => {
     console.log(recipeID);
 
-    Axios.delete(`http://localhost:3001/deleteRecipes/${recipeID}`, {}).then(
-      (response) => {
-        // console.log(response);
-        Axios.get(`http://localhost:3001/getAllRecipesID/${userID}`, {}).then(
-          (response) => {
-            // console.log("hello");
-            // console.log(response.data);
-            setUserRecipes(response.data.reverse());
-          }
-        );
-      }
-    );
+    Axios.delete(
+      `https://mmmbook-vertwo-server.herokuapp.com/deleteRecipes/${recipeID}`,
+      {}
+    ).then((response) => {
+      // console.log(response);
+      Axios.get(
+        `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipesID/${userID}`,
+        {}
+      ).then((response) => {
+        // console.log("hello");
+        // console.log(response.data);
+        setUserRecipes(response.data.reverse());
+      });
+    });
   };
 
   useEffect(() => {
@@ -194,20 +196,22 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
       setUpdateFavCui(response.data[0].favCuisine);
     });
 
-    Axios.get(`http://localhost:3001/getAllRecipesID/${userID}`, {}).then(
-      (response) => {
-        // console.log("hello");
-        console.log(response.data);
-        setUserRecipes(response.data.reverse());
-      }
-    );
+    Axios.get(
+      `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipesID/${userID}`,
+      {}
+    ).then((response) => {
+      // console.log("hello");
+      console.log(response.data);
+      setUserRecipes(response.data.reverse());
+    });
 
-    Axios.get(`http://localhost:3001/getBookmarked/${userID}`, {}).then(
-      (response) => {
-        console.log(response.data);
-        setUserBookmarked(response.data.reverse());
-      }
-    );
+    Axios.get(
+      `https://mmmbook-vertwo-server.herokuapp.com/getBookmarked/${userID}`,
+      {}
+    ).then((response) => {
+      console.log(response.data);
+      setUserBookmarked(response.data.reverse());
+    });
 
     Axios.get(
       `https://mmmbook-vertwo-server.herokuapp.com/getAllReviewsID/${userID}`,

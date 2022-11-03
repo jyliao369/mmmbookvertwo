@@ -27,7 +27,7 @@ const CustomizePage = ({ currentUser }) => {
   const navToRecipe = useNavigate();
 
   const CustomizeRecipe = () => {
-    Axios.post("http://localhost:3001/customizeRecipe", {
+    Axios.post("https://mmmbook-vertwo-server.herokuapp.com/customizeRecipe", {
       userID: currentUser.userID,
       username: currentUser.username,
       origRecipeID: recipeID,
@@ -51,7 +51,7 @@ const CustomizePage = ({ currentUser }) => {
 
       // THIS DELETES THE BOOKMARK FROM USERS LIST
       Axios.delete(
-        `http://localhost:3001/deleteBookmark/${recipeID}_${currentUser.userID}_${currentUser.username}`,
+        `https://mmmbook-vertwo-server.herokuapp.com/deleteBookmark/${recipeID}_${currentUser.userID}_${currentUser.username}`,
         {}
       ).then((response) => {
         console.log(response);
@@ -61,7 +61,7 @@ const CustomizePage = ({ currentUser }) => {
         `https://mmmbook-vertwo-server.herokuapp.com/getRecipeName/${customName}`,
         {}
       ).then((response) => {
-        Axios.post(`http://localhost:3001/createLikes`, {
+        Axios.post(`https://mmmbook-vertwo-server.herokuapp.com/createLikes`, {
           userID: currentUser.userID,
           username: currentUser.username,
           recipeID: response.data[0].recipeID,

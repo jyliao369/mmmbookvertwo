@@ -27,22 +27,25 @@ const UpdatePage = () => {
   const navToRecipe = useNavigate();
 
   const updateRecipe = () => {
-    Axios.put(`http://localhost:3001/updateRecipe/${recipeID}`, {
-      updateImage: updateImage,
-      updateName: updateName,
-      updateDesc: updateDesc,
-      updateCategory: updateCategory,
-      updateCourse: updateCourse,
-      updateCuisine: updateCuisine,
-      updateDiet: updateDiet,
-      updatePrep: updatePrep,
-      updateCook: updateCook,
-      updateYield: updateYield,
-      updateServings: updateServings,
-      updateIng: updateIng,
-      updateIns: updateIns,
-      updateAdd: updateAdd,
-    }).then((response) => {
+    Axios.put(
+      `https://mmmbook-vertwo-server.herokuapp.com/updateRecipe/${recipeID}`,
+      {
+        updateImage: updateImage,
+        updateName: updateName,
+        updateDesc: updateDesc,
+        updateCategory: updateCategory,
+        updateCourse: updateCourse,
+        updateCuisine: updateCuisine,
+        updateDiet: updateDiet,
+        updatePrep: updatePrep,
+        updateCook: updateCook,
+        updateYield: updateYield,
+        updateServings: updateServings,
+        updateIng: updateIng,
+        updateIns: updateIns,
+        updateAdd: updateAdd,
+      }
+    ).then((response) => {
       console.log(response);
       navToRecipe(`/recipe/${recipeID}`);
     });

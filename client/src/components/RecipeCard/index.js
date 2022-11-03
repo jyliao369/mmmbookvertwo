@@ -82,7 +82,7 @@ const RecipeCard = ({
     // console.log(isLoggedIn);
     if (isLoggedIn) {
       Axios.post(
-        `http://localhost:3001/createViews/${recipeID},${currentUser.userID},${currentUser.username}`,
+        `https://mmmbook-vertwo-server.herokuapp.com/createViews/${recipeID},${currentUser.userID},${currentUser.username}`,
         {}
       ).then((response) => {
         // console.log(response);

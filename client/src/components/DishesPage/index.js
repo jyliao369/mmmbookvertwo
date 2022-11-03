@@ -10,7 +10,10 @@ const DishesPage = ({ isLoggedIn, setCurrentUser, currentUser }) => {
   const [dishesOnly, setDishesOnly] = useState([]);
 
   useEffect(() => {
-    Axios.get(`http://localhost:3001/dishesOnly`, {}).then((response) => {
+    Axios.get(
+      `https://mmmbook-vertwo-server.herokuapp.com/dishesOnly`,
+      {}
+    ).then((response) => {
       // console.log("hello");
       console.log(response.data);
       setDishesOnly(response.data.reverse());
