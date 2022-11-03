@@ -63,8 +63,15 @@
   The overall style needs some adjustment and a simple and minimalist style is preferred for this application.
   A mobile version of application is in t he works.
   
+  Login and authentication works fine on local production but a deployed production seems to have difficulties setting a cookie.
+  
+  Overall style needs to be adjusted.
+  
   ## Future Ideas
   -- What are some future ideas to implement? --
+  
+  EDIT on 11/3/2022:
+  A search function so users can look up recipes based on certain criterias, words, or based on specific categories such as cuisine or diet type.
 
   The front-end styling needs adjustment to give it more style and more responsiveness to make the application compatible with desktop and mobile platforms.
 
