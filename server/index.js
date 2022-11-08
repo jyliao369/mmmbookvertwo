@@ -18,8 +18,8 @@ app.use(express.urlencoded({ extended: true }));
 // CORS SETUP
 app.use(
   cors({
-    // origin: ["http://localhost:3000"],
-    origin: ["https://jyliao369.github.io"],
+    origin: ["http://localhost:3000"],
+    // origin: ["https://jyliao369.github.io"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -35,11 +35,12 @@ app.use(
     secret: "testingoutsessionishard",
     resave: false,
     saveUninitialized: false,
+    proxy: true,
     cookie: {
-      path: "/",
-      secure: false,
-      httpOnly: true,
+      secure: true,
+      httpOnly: false,
       expires: 60 * 60 * 1000 * 24,
+      sameSite: "none",
     },
   })
 );
@@ -528,25 +529,23 @@ app.get("/getAllRecipesID/:userID", (req, res) => {
   );
 });
 
-// GETRECIPEBYID
+// #GETRECIPEBYID
 app.get("/getRecipe/:recipeID", (req, res) => {
   const recipeID = req.params.recipeID;
 
   db.query(
-    `SELECT * FROM heroku_289aeecd4cbfb0f.recipes_table,
-      (SELECT COUNT(heroku_289aeecd4cbfb0f.likes_table.recipeID) as totalLike
-        FROM heroku_289aeecd4cbfb0f.likes_table
-        WHERE heroku_289aeecd4cbfb0f.likes_table.recipeID = ${recipeID}
-      ) stat1,
-      (SELECT COUNT(heroku_289aeecd4cbfb0f.bookmark_table.recipeID) as totalBook
-        FROM heroku_289aeecd4cbfb0f.bookmark_table
-        WHERE heroku_289aeecd4cbfb0f.bookmark_table.recipeID = ${recipeID}
-      ) stat2,
-        (SELECT COUNT(heroku_289aeecd4cbfb0f.reviews_table.recipeID) as totalReview
-        FROM heroku_289aeecd4cbfb0f.reviews_table
-        WHERE heroku_289aeecd4cbfb0f.reviews_table.recipeID = ${recipeID}
-      ) stat3
-    WHERE heroku_289aeecd4cbfb0f.recipes_table.recipeID = ${recipeID}`,
+    `SELECT
+     heroku_289aeecd4cbfb0f.recipes_table.*,
+      COUNT(DISTINCT heroku_289aeecd4cbfb0f.likes_table.likeID) AS totalLikes,
+      COUNT(DISTINCT heroku_289aeecd4cbfb0f.reviews_table.reviewID) AS totalReviews,
+      COUNT(DISTINCT heroku_289aeecd4cbfb0f.views_table.viewID) AS totalViews
+     FROM 
+      heroku_289aeecd4cbfb0f.recipes_table
+     LEFT JOIN heroku_289aeecd4cbfb0f.likes_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.likes_table.recipeID
+     LEFT JOIN heroku_289aeecd4cbfb0f.reviews_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.reviews_table.recipeID
+     LEFT JOIN heroku_289aeecd4cbfb0f.views_table ON heroku_289aeecd4cbfb0f.recipes_table.recipeID = heroku_289aeecd4cbfb0f.views_table.recipeID
+     WHERE heroku_289aeecd4cbfb0f.recipes_table.recipeID = "${recipeID}"
+     GROUP BY heroku_289aeecd4cbfb0f.recipes_table.recipeID`,
     [],
     (err, result) => {
       if (err) {
@@ -881,6 +880,24 @@ app.get("/getAllBookmarked/:recipeID", (req, res) => {
     LEFT JOIN heroku_289aeecd4cbfb0f.bookmark_table
       ON heroku_289aeecd4cbfb0f.bookmark_table.recipeID = heroku_289aeecd4cbfb0f.recipes_table.recipeID
     WHERE heroku_289aeecd4cbfb0f.recipes_table.recipeID = ${recipeID}`,
+    [],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+// #DELETEBOOKMARKWHENRECIPEISDELETED
+app.delete("/deleteAllBookmarks/:recipeID", (req, res) => {
+  const recipeID = req.params.recipeID;
+
+  db.query(
+    `DELETE FROM heroku_289aeecd4cbfb0f.bookmark_table
+     WHERE heroku_289aeecd4cbfb0f.bookmark_table.recipeID = "${recipeID}"`,
     [],
     (err, result) => {
       if (err) {

@@ -3,9 +3,15 @@ import Axios from "axios";
 import { useEffect, useState } from "react";
 
 import RecipeCard from "../RecipeCard";
+import LoadingCard from "../LoadingCard";
 
 const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
   const [allRecipes, setAllRecipes] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const changeLoading = () => {
+    setIsLoading(!isLoading);
+  };
 
   useEffect(() => {
     Axios.get(
@@ -14,6 +20,8 @@ const Home = ({ isLoggedIn, setCurrentUser, currentUser }) => {
     ).then((response) => {
       // console.log(response.data);
       setAllRecipes(response.data.reverse());
+
+      setTimeout(changeLoading, 2000);
     });
   }, []);
 

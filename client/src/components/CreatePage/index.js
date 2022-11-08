@@ -59,6 +59,13 @@ const CreatePage = ({ currentUser }) => {
           console.log(response);
         });
 
+        Axios.post(
+          `https://mmmbook-vertwo-server.herokuapp.com/createViews/${response.data[0].recipeID},${currentUser.userID},${currentUser.username}`,
+          {}
+        ).then((response) => {
+          // console.log(response);
+        });
+
         navToRecipe(`/recipe/${response.data[0].recipeID}`);
       });
     });

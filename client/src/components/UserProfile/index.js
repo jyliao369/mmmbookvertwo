@@ -37,7 +37,7 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
     document.getElementById("userFollowers").style.display = "none";
     document.getElementById("userFollowing").style.display = "none";
 
-    document.getElementById("userRecipes").scrollIntoView();
+    document.getElementById("userRecipesTop").scrollIntoView();
   };
 
   const myFavorite = () => {
@@ -47,7 +47,7 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
     document.getElementById("userFollowers").style.display = "none";
     document.getElementById("userFollowing").style.display = "none";
 
-    document.getElementById("userBookmarked").scrollIntoView();
+    document.getElementById("userBookmarkedTop").scrollIntoView();
   };
 
   const myReviews = () => {
@@ -157,13 +157,14 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
   };
 
   const deleteRecipe = (recipeID) => {
-    console.log(recipeID);
+    // console.log(recipeID);
 
     Axios.delete(
       `https://mmmbook-vertwo-server.herokuapp.com/deleteRecipes/${recipeID}`,
       {}
     ).then((response) => {
       // console.log(response);
+
       Axios.get(
         `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipesID/${userID}`,
         {}
@@ -171,6 +172,13 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
         // console.log("hello");
         // console.log(response.data);
         setUserRecipes(response.data.reverse());
+      });
+
+      Axios.delete(
+        `http://localhost:3001/deleteAllBookmarks/${recipeID}`,
+        {}
+      ).then((response) => {
+        console.log(response);
       });
     });
   };
@@ -200,8 +208,7 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
       `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipesID/${userID}`,
       {}
     ).then((response) => {
-      // console.log("hello");
-      console.log(response.data);
+      // console.log(response.data);
       setUserRecipes(response.data.reverse());
     });
 
@@ -209,7 +216,7 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
       `https://mmmbook-vertwo-server.herokuapp.com/getBookmarked/${userID}`,
       {}
     ).then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       setUserBookmarked(response.data.reverse());
     });
 
@@ -320,6 +327,16 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
           </div>
         </div>
       </div>
+
+      <div id="userRecipesTop" />
+      <div id="userBookmarkedTop" />
+      <div id="userReviewsTop" />
+      <div id="userFollowersTop" />
+      <div id="userFollowingTop" />
+
+      <br />
+      <br />
+      <br />
 
       <div className="userProfilePageMain">
         <div className="userProfilePageMainCont">

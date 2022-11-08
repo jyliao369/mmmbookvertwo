@@ -15,7 +15,7 @@ const DishesPage = ({ isLoggedIn, setCurrentUser, currentUser }) => {
       {}
     ).then((response) => {
       // console.log("hello");
-      console.log(response.data);
+      // console.log(response.data);
       setDishesOnly(response.data.reverse());
     });
   }, []);

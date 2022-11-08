@@ -6,8 +6,7 @@ import { Image } from "cloudinary-react";
 
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import ForumRoundedIcon from "@mui/icons-material/ForumRounded";
-import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
-import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 import AccessAlarmsIcon from "@mui/icons-material/AccessAlarms";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -17,6 +16,8 @@ import RoomServiceIcon from "@mui/icons-material/RoomService";
 import RamenDiningIcon from "@mui/icons-material/RamenDining";
 import BrunchDiningIcon from "@mui/icons-material/BrunchDining";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import BookmarkRoundedIcon from "@mui/icons-material/BookmarkRounded";
+import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
 
 const RecipePage = ({ isLoggedIn, currentUser }) => {
   let { recipeID } = useParams();
@@ -26,7 +27,7 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
   const [recipeIng, setRecipeIng] = useState([]);
   const [recipeIns, setRecipeIns] = useState([]);
   const [recipeTotalLikes, setRecipeTotalLikes] = useState("");
-  const [recipeTotalBookmark, setRecipeTotalBookmark] = useState("");
+  const [recipeTotalViews, setRecipeTotalViews] = useState("");
   const [recipeTotalReviews, setRecipeTotalReviews] = useState("");
 
   const [review, setReview] = useState("");
@@ -35,7 +36,7 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
   const [reviews, setReviews] = useState([]);
 
   const instrSplit = (instr) => {
-    setRecipeIns(instr.split("."));
+    setRecipeIns(instr.split("\n"));
   };
 
   const ingrSplit = (ingre) => {
@@ -154,15 +155,7 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
       username: currentUser.username,
       recipeID: recipeID,
     }).then((response) => {
-      if (response.data.message === "bookmarked") {
-        setRecipeTotalBookmark(recipeTotalBookmark + 1);
-        document.getElementById("bookmarkBtn").children[0].style.color =
-          "#E1528E";
-      } else if (response.data.message === "unbookmarked") {
-        setRecipeTotalBookmark(recipeTotalBookmark - 1);
-        document.getElementById("bookmarkBtn").children[0].style.color =
-          "lightgray";
-      }
+      // console.log(response);
     });
   };
 
@@ -180,7 +173,7 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
       } else if (response.data.message === "unliked") {
         setRecipeTotalLikes(recipeTotalLikes - 1);
         document.getElementById("likeBtn").children[0].style.color =
-          "lightgray";
+          "rgb(255, 215, 0, 0.7)";
       }
     });
   };
@@ -192,19 +185,19 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
   useEffect(() => {
     document.documentElement.scrollTop = 0;
 
-    Axios.get(
-      `https://mmmbook-vertwo-server.herokuapp.com/getRecipe/${recipeID}`,
-      {}
-    ).then((response) => {
-      // console.log(response.data[0]);
-      setRecipeInfo(response.data[0]);
-      setRecipeDesc(response.data[0].description);
-      instrSplit(response.data[0].instructions);
-      ingrSplit(response.data[0].ingredients);
-      setRecipeTotalLikes(response.data[0].totalLike);
-      setRecipeTotalBookmark(response.data[0].totalBook);
-      setRecipeTotalReviews(response.data[0].totalReview);
-    });
+    Axios.get(`http://localhost:3001/getRecipe/${recipeID}`, {}).then(
+      (response) => {
+        // console.log(response.data[0]);
+
+        setRecipeInfo(response.data[0]);
+        setRecipeDesc(response.data[0].description);
+        instrSplit(response.data[0].instructions);
+        ingrSplit(response.data[0].ingredients);
+        setRecipeTotalLikes(response.data[0].totalLikes);
+        setRecipeTotalViews(response.data[0].totalViews);
+        setRecipeTotalReviews(response.data[0].totalReviews);
+      }
+    );
 
     Axios.get(
       `https://mmmbook-vertwo-server.herokuapp.com/getReview/${recipeID}`,
@@ -327,30 +320,32 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
               <div className="recipeCardButton">
                 <button
                   style={{ cursor: "pointer" }}
-                  className="chefProfileBtn"
+                  className="recipePageProfile"
                 >
                   <Link to={`/profile/${recipeInfo.userID}`}>
-                    <AccountBoxOutlinedIcon />
+                    <AccountBoxIcon />
                   </Link>
                 </button>
 
                 {isLoggedIn === true ? (
                   <>
                     <button
+                      className="recipePageBookmark"
                       style={{ cursor: "pointer" }}
                       onClick={(event) =>
                         bookmarkRecipe(event, recipeInfo.recipeID)
                       }
-                      className="bookmarkBtn"
-                      id="bookmarkBtn"
                     >
-                      <FavoriteOutlinedIcon />
-                      <p>{recipeTotalBookmark}</p>
+                      <BookmarkRoundedIcon />
+                    </button>
+                    <button className="recipePageViews">
+                      <VisibilityRoundedIcon />
+                      <p>{recipeTotalViews}</p>
                     </button>
                     <button
                       style={{ cursor: "pointer" }}
                       onClick={(event) => addLike(event, recipeInfo.recipeID)}
-                      className="likeBtn"
+                      className="recipePageLike"
                       id="likeBtn"
                     >
                       <StarRoundedIcon />
@@ -359,19 +354,21 @@ const RecipePage = ({ isLoggedIn, currentUser }) => {
                   </>
                 ) : (
                   <>
-                    <button className="bookmarkBtn">
-                      <FavoriteOutlinedIcon />
-                      <p>{recipeTotalBookmark}</p>
+                    <button className="recipePageBookmark">
+                      <BookmarkRoundedIcon />
                     </button>
-                    <button className="likeBtn">
+                    <button className="recipePageViews">
+                      <VisibilityRoundedIcon />
+                      <p>{recipeTotalViews}</p>
+                    </button>
+                    <button className="recipePageLike">
                       <StarRoundedIcon />
                       <p>{recipeTotalLikes}</p>
                     </button>
                   </>
                 )}
-
                 <button
-                  className="reviewBtn"
+                  className="recipePageReview"
                   onClick={() => scrollToReview()}
                   style={{ cursor: "pointer" }}
                 >
