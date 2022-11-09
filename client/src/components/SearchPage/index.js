@@ -4,16 +4,17 @@ import Axios from "axios";
 
 import RecipeCard from "../RecipeCard";
 
-const SearchPage = ({ searchWord, searchedRecipes }) => {
-  console.log("hello");
-  console.log(searchedRecipes);
-
+const SearchPage = ({ searchWord, searchedRecipes, foundRecipe }) => {
   return (
     <div className="searchPage">
-      {searchedRecipes.length > 0 ? (
-        <h2>{searchedRecipes.length} recipes with "earchedWord"</h2>
+      {foundRecipe === false ? (
+        <h3>
+          Sorry!! Couldn't find any recipes. Check out some of these recipes!!
+        </h3>
       ) : (
-        <h2>Sorry!! Couldn't any recipes with "searchedWord"</h2>
+        <h3>
+          Found {searchedRecipes.length} recipes with "{searchWord}"
+        </h3>
       )}
 
       <div className="searchRecipeCont">

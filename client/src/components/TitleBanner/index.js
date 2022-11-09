@@ -13,11 +13,12 @@ const TitleBanner = ({
   isLoggedIn,
   searchWord,
   setSearchWord,
-  searchedRecipes,
   setSearchedRecipes,
+  setFoundRecipe,
 }) => {
   const [isNavBarEx, setIsNavBarEx] = useState(false);
   const [allRecipes, setAllRecipes] = useState([]);
+  const [searchedWord, setSearchedWord] = useState("");
 
   const navToSearch = useNavigate();
 
@@ -78,20 +79,29 @@ const TitleBanner = ({
 
     let fileredRecipes = [];
 
-    for (let a = 0; a < allRecipes.length; a++) {
-      if (
-        allRecipes[a].name.toLowerCase().includes(searchWord) ||
-        allRecipes[a].ingredients.toLowerCase().includes(searchWord) ||
-        allRecipes[a].description.toLowerCase().includes(searchWord)
-      ) {
-        fileredRecipes.push(allRecipes[a]);
+    if (searchWord === "") {
+      setFoundRecipe(false);
+      setSearchedRecipes(allRecipes);
+    } else {
+      for (let a = 0; a < allRecipes.length; a++) {
+        if (
+          allRecipes[a].name.toLowerCase().includes(searchWord) ||
+          allRecipes[a].ingredients.toLowerCase().includes(searchWord) ||
+          allRecipes[a].description.toLowerCase().includes(searchWord)
+        ) {
+          fileredRecipes.push(allRecipes[a]);
+        }
+      }
+
+      if (fileredRecipes.length > 0) {
+        setFoundRecipe(true);
+        setSearchedRecipes(fileredRecipes);
+      } else {
+        setFoundRecipe(false);
+        setSearchedRecipes(allRecipes);
       }
     }
 
-    // console.log("there");
-    // console.log(fileredRecipes);
-
-    setSearchedRecipes(fileredRecipes);
     navToSearch(`/search`);
   };
 

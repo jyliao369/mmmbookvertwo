@@ -123,9 +123,13 @@ body {
   flex-direction: column;
   align-items: center;
 }
+.searchPage h3 {
+  margin: 1em 0em 0em 0em;
+}
 .searchRecipeCont {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   width: 100%;
 }
 /* #EXPLOREPAGE */

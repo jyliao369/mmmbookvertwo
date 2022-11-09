@@ -26,6 +26,7 @@ function App() {
 
   const [searchWord, setSearchWord] = useState("");
   const [searchedRecipes, setSearchedRecipes] = useState([]);
+  const [foundRecipe, setFoundRecipe] = useState(true);
 
   Axios.defaults.withCredentials = true;
 
@@ -49,8 +50,8 @@ function App() {
           isLoggedIn={isLoggedIn}
           searchWord={searchWord}
           setSearchWord={setSearchWord}
-          searchedRecipes={searchedRecipes}
           setSearchedRecipes={setSearchedRecipes}
+          setFoundRecipe={setFoundRecipe}
         />
         <div className="appContTwo">
           <Navbar
@@ -86,6 +87,7 @@ function App() {
                   <SearchPage
                     searchWord={searchWord}
                     searchedRecipes={searchedRecipes}
+                    foundRecipe={foundRecipe}
                   />
                 }
               />
