@@ -13,7 +13,7 @@ const SearchPage = ({ searchWord, searchedRecipes }) => {
       {searchedRecipes.length > 0 ? (
         <h2>{searchedRecipes.length} recipes with "searchedWord"</h2>
       ) : (
-        <h2>Sorry!! Couldn't any recipes with "searchedWord"</h2>
+        <h2>Sorry!! Couldn't any recipes with searchedWord"</h2>
       )}
 
       <div className="searchRecipeCont">
