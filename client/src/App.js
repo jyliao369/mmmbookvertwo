@@ -18,10 +18,14 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import UpdatePage from "./components/UpdatePage";
 import CustomizePage from "./components/CustomizePage";
+import SearchPage from "./components/SearchPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState([]);
+
+  const [searchWord, setSearchWord] = useState("");
+  const [searchedRecipes, setSearchedRecipes] = useState([]);
 
   Axios.defaults.withCredentials = true;
 
@@ -41,7 +45,13 @@ function App() {
   return (
     <Router basename="/mmmbookvertwo">
       <div className="appCont">
-        <TitleBanner isLoggedIn={isLoggedIn} />
+        <TitleBanner
+          isLoggedIn={isLoggedIn}
+          searchWord={searchWord}
+          setSearchWord={setSearchWord}
+          searchedRecipes={searchedRecipes}
+          setSearchedRecipes={setSearchedRecipes}
+        />
         <div className="appContTwo">
           <Navbar
             setIsLoggedIn={setIsLoggedIn}
@@ -67,6 +77,15 @@ function App() {
                     isLoggedIn={isLoggedIn}
                     setCurrentUser={setCurrentUser}
                     currentUser={currentUser}
+                  />
+                }
+              />
+              <Route
+                path="/search"
+                element={
+                  <SearchPage
+                    searchWord={searchWord}
+                    searchedRecipes={searchedRecipes}
                   />
                 }
               />

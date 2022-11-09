@@ -1,14 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import Axios from "axios";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SearchIcon from "@mui/icons-material/Search";
 import LoginIcon from "@mui/icons-material/Login";
 
-const TitleBanner = (isLoggedIn) => {
+const TitleBanner = ({
+  isLoggedIn,
+  searchWord,
+  setSearchWord,
+  searchedRecipes,
+  setSearchedRecipes,
+}) => {
   const [isNavBarEx, setIsNavBarEx] = useState(false);
+  const [allRecipes, setAllRecipes] = useState([]);
+
+  const navToSearch = useNavigate();
 
   const expandNavBar = () => {
     if (
@@ -61,27 +72,39 @@ const TitleBanner = (isLoggedIn) => {
     }
   };
 
-  const goToProfile = () => {
-    console.log("hello");
+  const searchRecipe = () => {
+    // console.log(searchWord);
+    // console.log(allRecipes);
+
+    let fileredRecipes = [];
+
+    for (let a = 0; a < allRecipes.length; a++) {
+      if (
+        allRecipes[a].name.toLowerCase().includes(searchWord) ||
+        allRecipes[a].ingredients.toLowerCase().includes(searchWord) ||
+        allRecipes[a].description.toLowerCase().includes(searchWord)
+      ) {
+        fileredRecipes.push(allRecipes[a]);
+      }
+    }
+
+    // console.log("there");
+    // console.log(fileredRecipes);
+
+    setSearchedRecipes(fileredRecipes);
+    navToSearch(`/search`);
   };
 
-  // const searchRecipe = () => {
-  //   let searchedList = [];
-
-  //   for (let a = 0; a < allRecipes.length; a++) {
-  //     if (
-  //       allRecipes[a].name.includes(searchWord) ||
-  //       allRecipes[a].ingredients.includes(searchWord) ||
-  //       allRecipes[a].description.includes(searchWord)
-  //     ) {
-  //       searchedList.push(allRecipes[a]);
-  //     }
-  //   }
-
-  //   // console.log(searchedList);
-  //   setShowRecipes(searchedList);
-  //   setSearchWord("");
-  // };
+  useEffect(() => {
+    Axios.get(
+      `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipes`,
+      {}
+    ).then((response) => {
+      // console.log("hello");
+      // console.log(response.data);
+      setAllRecipes(response.data.reverse());
+    });
+  }, []);
 
   return (
     <div className="titleBanner">
@@ -93,17 +116,17 @@ const TitleBanner = (isLoggedIn) => {
           </Link>
         </div>
         <div className="titleBannerTwo">
-          <input placeholder="Search" />
-          <div style={{ cursor: "pointer" }}>
+          <input
+            value={searchWord}
+            onChange={(event) => setSearchWord(event.target.value)}
+            placeholder="Search"
+          />
+          <div style={{ cursor: "pointer" }} onClick={() => searchRecipe()}>
             <SearchIcon />
           </div>
         </div>
 
-        {isLoggedIn === true ? (
-          <AccountCircleIcon onClick={() => goToProfile()} />
-        ) : (
-          <LoginIcon />
-        )}
+        {isLoggedIn === true ? <AccountCircleIcon /> : <LoginIcon />}
       </div>
     </div>
   );
