@@ -641,6 +641,8 @@ app.post("/followingUser/:chefUserID", (req, res) => {
   const username = req.body.username;
   const chefUsername = req.body.chefUsername;
 
+  // console.log(chefUserID + " " + userID + " " + username + " " + chefUsername);
+
   db.query(
     `SELECT * FROM heroku_289aeecd4cbfb0f.followchef_table WHERE chefUserID = ? AND userID = ? `,
     [chefUserID, userID],

@@ -27,24 +27,44 @@ const Navbar = ({ setIsLoggedIn, isLoggedIn, currentUser }) => {
   return (
     <div className="navBar" id="navBar">
       <div className="navBarBtn" id="navBarBtn">
-        <Link to="/" className="homeButton" id="homeButton">
-          <HouseIcon />
-          <p>Home</p>
-        </Link>
-        <Link to="/explore" className="exploreButton" id="exploreButton">
-          <SearchIcon />
-          <p>Search</p>
-        </Link>
-        <Link to="/drinks" className="drinkButton" id="drinkButton">
-          <LocalBarIcon />
-          <p>Drinks</p>
-        </Link>
-        <Link to="/dishes" className="entreeButton" id="entreeButton">
-          <RestaurantIcon />
-          <p>Entrees</p>
-        </Link>
+        <div>
+          <Link to="/" className="homeButton" id="homeButton">
+            <HouseIcon />
+            <p>Home</p>
+          </Link>
+          <Link to="/explore" className="exploreButton" id="exploreButton">
+            <SearchIcon />
+            <p>Search</p>
+          </Link>
+          <Link to="/drinks" className="drinkButton" id="drinkButton">
+            <LocalBarIcon />
+            <p>Drinks</p>
+          </Link>
+          <Link to="/dishes" className="entreeButton" id="entreeButton">
+            <RestaurantIcon />
+            <p>Entrees</p>
+          </Link>
+        </div>
 
-        {isLoggedIn === false ? (
+        <div>
+          {isLoggedIn === false ? (
+            <>
+              {/* <Link to="/login" className="logInButton" id="logInButton">
+              <LoginIcon />
+              <p>login</p>
+            </Link> */}
+            </>
+          ) : (
+            <div className="logOutButton" id="logOutButton">
+              <LogoutIcon
+                onClick={() => logout()}
+                style={{ cursor: "pointer" }}
+              />
+            </div>
+          )}
+        </div>
+
+        {/* {isLoggedIn === false ? (
           <></>
         ) : (
           <div>
@@ -61,22 +81,7 @@ const Navbar = ({ setIsLoggedIn, isLoggedIn, currentUser }) => {
               <p>Create</p>
             </Link>
           </div>
-        )}
-
-        {isLoggedIn === false ? (
-          <Link to="/login" className="logInButton" id="logInButton">
-            <LoginIcon />
-            <p>login</p>
-          </Link>
-        ) : (
-          <div className="logOutButton" id="logOutButton">
-            <LogoutIcon
-              onClick={() => logout()}
-              style={{ cursor: "pointer" }}
-            />
-            <p>logout</p>
-          </div>
-        )}
+        )} */}
       </div>
     </div>
   );

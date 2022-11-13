@@ -11,6 +11,7 @@ import LoginIcon from "@mui/icons-material/Login";
 
 const TitleBanner = ({
   isLoggedIn,
+  currentUser,
   searchWord,
   setSearchWord,
   setSearchedRecipes,
@@ -136,7 +137,15 @@ const TitleBanner = ({
           </div>
         </div>
 
-        {isLoggedIn === true ? <AccountCircleIcon /> : <LoginIcon />}
+        {isLoggedIn === true ? (
+          <Link to={`/userProfile/${currentUser.userID}`}>
+            <AccountCircleIcon />
+          </Link>
+        ) : (
+          <Link to="/login">
+            <LoginIcon />
+          </Link>
+        )}
       </div>
     </div>
   );

@@ -76,6 +76,8 @@ body {
 .navBarBtn {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  height: 93.5vh;
 }
 #homeButton,
 #exploreButton,
@@ -885,10 +887,9 @@ body {
   flex-direction: column;
   padding: 2em;
   margin: 2rem 1rem 2rem 2rem;
-  /* border-style: solid;
-  border-width: thin; */
   border-radius: 15px;
   background: white;
+  align-items: center;
 }
 .chefProfileCardAHead,
 .chefProfileCardBHead {
@@ -896,15 +897,45 @@ body {
   justify-content: center;
   margin: 0rem 0rem 1rem 0rem;
 }
-.chefProfileInfo h3 {
-  margin: 0rem 0rem 1.5rem 0rem;
-}
 .chefProfileImage {
-  width: 100%;
-  aspect-ratio: 2.75/2;
+  width: 50%;
+  aspect-ratio: 2/2;
   margin: 0rem 0rem 1.5rem 0rem;
   background: gray;
-  border-radius: 15px;
+  border-radius: 50%;
+}
+.chefProfileInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.chefProfileInfoDesc {
+  background: lightgray;
+  width: 85%;
+  min-height: 5em;
+  padding: 0.5em;
+  margin: 2em 0em 2em 0em;
+  border-radius: 5px;
+}
+.socialBar {
+  display: flex;
+  justify-content: space-around;
+  width: 85%;
+  margin: 0em 0em 2em 0em;
+}
+.socialBar svg {
+  font-size: 2.25em;
+  color: lightslategray;
+}
+.followBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 30%;
+  padding: 0.25em 1em 0.25em 1em;
+  border-radius: 10px;
+  border: none;
 }
 .chefProfileCardB {
   display: flex;

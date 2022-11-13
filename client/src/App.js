@@ -48,6 +48,7 @@ function App() {
       <div className="appCont">
         <TitleBanner
           isLoggedIn={isLoggedIn}
+          currentUser={currentUser}
           searchWord={searchWord}
           setSearchWord={setSearchWord}
           setSearchedRecipes={setSearchedRecipes}

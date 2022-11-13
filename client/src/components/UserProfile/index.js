@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import RecipeCard from "../RecipeCard";
+import ProfileCard from "../ProfileCard";
 
 import StarPurple500OutlinedIcon from "@mui/icons-material/StarPurple500Outlined";
 
@@ -18,17 +19,17 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
   const [chefsFollowing, setChefsFollowing] = useState([]);
   const [chefFollowers, setChefFollowers] = useState([]);
 
-  const [updateUser, setUpdateUser] = useState("");
-  const [updateDesc, setUpdateDesc] = useState("");
-  const [updateFirst, setUpdateFirst] = useState("");
-  const [updateLast, setUpdateLast] = useState("");
-  const [updateEmail, setUpdateEmail] = useState("");
-  const [updatePass, setUpdatePass] = useState("");
-  const [updateRePass, setUpdateRePass] = useState("");
-  const [updateFavRec, setUpdateFavRec] = useState("");
-  const [updateFavBev, setUpdateFavBev] = useState("");
-  const [updateFavDes, setUpdateFavDes] = useState("");
-  const [updateFavCui, setUpdateFavCui] = useState("");
+  // const [updateUser, setUpdateUser] = useState("");
+  // const [updateDesc, setUpdateDesc] = useState("");
+  // const [updateFirst, setUpdateFirst] = useState("");
+  // const [updateLast, setUpdateLast] = useState("");
+  // const [updateEmail, setUpdateEmail] = useState("");
+  // const [updatePass, setUpdatePass] = useState("");
+  // const [updateRePass, setUpdateRePass] = useState("");
+  // const [updateFavRec, setUpdateFavRec] = useState("");
+  // const [updateFavBev, setUpdateFavBev] = useState("");
+  // const [updateFavDes, setUpdateFavDes] = useState("");
+  // const [updateFavCui, setUpdateFavCui] = useState("");
 
   const myRecipes = () => {
     document.getElementById("userRecipes").style.display = "flex";
@@ -137,24 +138,24 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
     }
   };
 
-  const updateProfile = () => {
-    Axios.put(
-      `https://mmmbook-vertwo-server.herokuapp.com/updateUser/${userID}`,
-      {
-        firstName: updateFirst,
-        lastName: updateLast,
-        username: updateUser,
-        email: updateEmail,
-        favRecipe: updateFavRec,
-        favBeverage: updateFavBev,
-        favDessert: updateFavDes,
-        favCuisine: updateFavCui,
-        chefDesc: updateDesc,
-      }
-    ).then((response) => {
-      console.log(response);
-    });
-  };
+  // const updateProfile = () => {
+  //   Axios.put(
+  //     `https://mmmbook-vertwo-server.herokuapp.com/updateUser/${userID}`,
+  //     {
+  //       firstName: updateFirst,
+  //       lastName: updateLast,
+  //       username: updateUser,
+  //       email: updateEmail,
+  //       favRecipe: updateFavRec,
+  //       favBeverage: updateFavBev,
+  //       favDessert: updateFavDes,
+  //       favCuisine: updateFavCui,
+  //       chefDesc: updateDesc,
+  //     }
+  //   ).then((response) => {
+  //     console.log(response);
+  //   });
+  // };
 
   const deleteRecipe = (recipeID) => {
     // console.log(recipeID);
@@ -190,18 +191,18 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
       `https://mmmbook-vertwo-server.herokuapp.com/getUser/${userID}`,
       {}
     ).then((response) => {
-      // console.log(response.data[0]);
+      console.log(response.data[0]);
       setProfileUser(response.data[0]);
 
-      setUpdateUser(response.data[0].username);
-      setUpdateDesc(response.data[0].chefDesc);
-      setUpdateFirst(response.data[0].firstName);
-      setUpdateLast(response.data[0].lastName);
-      setUpdateEmail(response.data[0].email);
-      setUpdateFavRec(response.data[0].favRecipe);
-      setUpdateFavBev(response.data[0].favBeverage);
-      setUpdateFavDes(response.data[0].favDessert);
-      setUpdateFavCui(response.data[0].favCuisine);
+      // setUpdateUser(response.data[0].username);
+      // setUpdateDesc(response.data[0].chefDesc);
+      // setUpdateFirst(response.data[0].firstName);
+      // setUpdateLast(response.data[0].lastName);
+      // setUpdateEmail(response.data[0].email);
+      // setUpdateFavRec(response.data[0].favRecipe);
+      // setUpdateFavBev(response.data[0].favBeverage);
+      // setUpdateFavDes(response.data[0].favDessert);
+      // setUpdateFavCui(response.data[0].favCuisine);
     });
 
     Axios.get(
@@ -246,86 +247,15 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
 
   return (
     <div className="profilePage">
-      <div className="chefProfileCardCont">
-        <div className="chefProfileCard">
-          <div className="chefProfileCardA">
-            <div className="chefProfileCardAHead">
-              <h2>My Profile</h2>
-            </div>
-            <div className="chefProfileImage" />
-            <div className="chefProfileInfo">
-              <h3>{profileUser.username} joined on 'date'</h3>
-              <h3>
-                {profileUser.firstName} {profileUser.lastName}
-              </h3>
-              <h3>{profileUser.email}</h3>
-              <h3>"Rating"</h3>
-            </div>
-          </div>
-          <div className="chefProfileCardB">
-            <div className="chefProfileCardBOne">
-              <div>
-                <div className="chefProfileCardBHead">
-                  <h2>About Me</h2>
-                </div>
-                <div className="chefProfileCardBDesc">
-                  <h3>{profileUser.chefDesc}</h3>
-                </div>
-                <div className="chefProfileCardBInfo">
-                  <div>
-                    <h3>Favorite Recipe: </h3>
-                    <p>{profileUser.favRecipe}</p>
-                  </div>
-                  <div>
-                    <h3>Favorite Beverage: </h3>
-                    <p>{profileUser.favBeverage}</p>
-                  </div>
-                </div>
-                <div className="chefProfileCardBInfo">
-                  <div>
-                    <h3>Favorite Dessert: </h3>
-                    <p>{profileUser.favDessert}</p>
-                  </div>
-                  <div>
-                    <h3>Favorite Cuisine: </h3>
-                    <p>{profileUser.favCuisine}</p>
-                  </div>
-                </div>
-              </div>
-              <div className="chefProfileCardBStats">
-                <div>
-                  <h3>Dishes Created:</h3>
-                  <p>{userRecipes.length}</p>
-                </div>
-                <div>
-                  <h3>Drinks Created:</h3>
-                  <p>"Number"</p>
-                </div>
-                <div>
-                  <h3>Recipes Cooked:</h3>
-                  <p>"Number"</p>
-                </div>
-              </div>
-            </div>
-            <div className="chefProfileNavBar">
-              <div onClick={() => myRecipes()} style={{ cursor: "pointer" }}>
-                My Recipes
-              </div>
-              <div onClick={() => myFavorite()} style={{ cursor: "pointer" }}>
-                My Favorites
-              </div>
-              <div onClick={() => myReviews()} style={{ cursor: "pointer" }}>
-                My Reviews
-              </div>
-              <div onClick={() => myFollowers()} style={{ cursor: "pointer" }}>
-                Followers
-              </div>
-              <div onClick={() => imFollowing()} style={{ cursor: "pointer" }}>
-                Following
-              </div>
-            </div>
-          </div>
-        </div>
+      <div>
+        <ProfileCard
+          profileUser={profileUser}
+          myRecipes={myRecipes}
+          myFavorite={myFavorite}
+          myReviews={myReviews}
+          myFollowers={myFollowers}
+          imFollowing={imFollowing}
+        />
       </div>
 
       <div id="userRecipesTop" />
