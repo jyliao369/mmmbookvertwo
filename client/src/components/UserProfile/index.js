@@ -19,17 +19,22 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
   const [chefsFollowing, setChefsFollowing] = useState([]);
   const [chefFollowers, setChefFollowers] = useState([]);
 
-  // const [updateUser, setUpdateUser] = useState("");
-  // const [updateDesc, setUpdateDesc] = useState("");
-  // const [updateFirst, setUpdateFirst] = useState("");
-  // const [updateLast, setUpdateLast] = useState("");
-  // const [updateEmail, setUpdateEmail] = useState("");
-  // const [updatePass, setUpdatePass] = useState("");
-  // const [updateRePass, setUpdateRePass] = useState("");
-  // const [updateFavRec, setUpdateFavRec] = useState("");
-  // const [updateFavBev, setUpdateFavBev] = useState("");
-  // const [updateFavDes, setUpdateFavDes] = useState("");
-  // const [updateFavCui, setUpdateFavCui] = useState("");
+  const [settingToggle, setSettingToggle] = useState(false);
+
+  const [updateUser, setUpdateUser] = useState("");
+  const [updateDesc, setUpdateDesc] = useState("");
+  const [updateFirst, setUpdateFirst] = useState("");
+  const [updateLast, setUpdateLast] = useState("");
+  const [updateEmail, setUpdateEmail] = useState("");
+  const [updatePass, setUpdatePass] = useState("");
+  const [updateRePass, setUpdateRePass] = useState("");
+  const [updateFavRec, setUpdateFavRec] = useState("");
+  const [favRecipeImage, setFavRecipeImage] = useState("");
+  const [updateFavBev, setUpdateFavBev] = useState("");
+  const [favBeverageImage, setFavBeverageImage] = useState("");
+  const [updateFavDes, setUpdateFavDes] = useState("");
+  const [favDessertImage, setFavDessertImage] = useState("");
+  const [updateFavCui, setUpdateFavCui] = useState("");
 
   const myRecipes = () => {
     document.getElementById("userRecipes").style.display = "flex";
@@ -126,62 +131,109 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
   };
 
   const settingsFlip = () => {
-    if (
-      document.getElementById("chefProfileInfoA").style.display === "flex" ||
-      document.getElementById("chefProfileInfoA").style.display === ""
-    ) {
-      document.getElementById("chefProfileInfoA").style.display = "none";
-      document.getElementById("chefProfileSettings").style.display = "flex";
-    } else {
-      document.getElementById("chefProfileInfoA").style.display = "flex";
-      document.getElementById("chefProfileSettings").style.display = "none";
+    if (settingToggle) {
+      Axios.get(
+        `https://mmmbook-vertwo-server.herokuapp.com/getUser/${userID}`,
+        {}
+      ).then((response) => {
+        console.log(response.data[0]);
+        setProfileUser(response.data[0]);
+
+        setUpdateUser(response.data[0].username);
+        setUpdateDesc(response.data[0].chefDesc);
+        setUpdateFirst(response.data[0].firstName);
+        setUpdateLast(response.data[0].lastName);
+        setUpdateEmail(response.data[0].email);
+        setUpdateFavRec(response.data[0].favRecipe);
+        setUpdateFavBev(response.data[0].favBeverage);
+        setUpdateFavDes(response.data[0].favDessert);
+        setUpdateFavCui(response.data[0].favCuisine);
+      });
+
+      setFavRecipeImage("");
+      setFavBeverageImage("");
+      setFavDessertImage("");
+      setSettingToggle(!settingToggle);
+    } else if (!settingToggle) {
+      console.log("updating profile");
+      setSettingToggle(!settingToggle);
     }
   };
 
-  // const updateProfile = () => {
-  //   Axios.put(
-  //     `https://mmmbook-vertwo-server.herokuapp.com/updateUser/${userID}`,
-  //     {
-  //       firstName: updateFirst,
-  //       lastName: updateLast,
-  //       username: updateUser,
-  //       email: updateEmail,
-  //       favRecipe: updateFavRec,
-  //       favBeverage: updateFavBev,
-  //       favDessert: updateFavDes,
-  //       favCuisine: updateFavCui,
-  //       chefDesc: updateDesc,
-  //     }
-  //   ).then((response) => {
-  //     console.log(response);
-  //   });
-  // };
+  const updateInfo = (type, info) => {
+    if (type === "favRecipe") {
+      console.log("fav recipe");
+      setUpdateFavRec(info.split(",")[0]);
+      setFavRecipeImage(info.split(",")[1]);
+    } else if (type === "favBeverage") {
+      console.log("fav beverage");
+      setUpdateFavBev(info.split(",")[0]);
+      setFavBeverageImage(info.split(",")[1]);
+    } else if (type === "favDessert") {
+      console.log("fav dessert");
+      setUpdateFavDes(info.split(",")[0]);
+      setFavDessertImage(info.split(",")[1]);
+    } else if (type === "favCuisine") {
+      console.log("fav cuisine");
+      setUpdateFavCui(info.split(",")[0]);
+    }
+  };
+
+  const updateProfile = () => {
+    console.log("yo");
+    console.log(updateFirst);
+    console.log(updateLast);
+    console.log(updateUser);
+    console.log(updateEmail);
+    console.log(updateFavRec.split(",")[0]);
+    setFavRecipeImage(updateFavRec.split(",")[1]);
+    console.log(updateFavBev.split(",")[0]);
+    setFavBeverageImage(updateFavBev.split(",")[1]);
+    console.log(updateFavDes.split(",")[0]);
+    setFavDessertImage(updateFavDes.split(",")[1]);
+    console.log(updateFavCui);
+    console.log(updateDesc);
+
+    // Axios.put(
+    //   `https://mmmbook-vertwo-server.herokuapp.com/updateUser/${userID}`,
+    //   {
+    //     firstName: updateFirst,
+    //     lastName: updateLast,
+    //     username: updateUser,
+    //     email: updateEmail,
+    //     favRecipe: updateFavRec,
+    //     favBeverage: updateFavBev,
+    //     favDessert: updateFavDes,
+    //     favCuisine: updateFavCui,
+    //     chefDesc: updateDesc,
+    //   }
+    // ).then((response) => {
+    //   console.log(response);
+    // });
+  };
 
   const deleteRecipe = (recipeID) => {
     // console.log(recipeID);
-
-    Axios.delete(
-      `https://mmmbook-vertwo-server.herokuapp.com/deleteRecipes/${recipeID}`,
-      {}
-    ).then((response) => {
-      // console.log(response);
-
-      Axios.get(
-        `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipesID/${userID}`,
-        {}
-      ).then((response) => {
-        // console.log("hello");
-        // console.log(response.data);
-        setUserRecipes(response.data.reverse());
-      });
-
-      Axios.delete(
-        `http://localhost:3001/deleteAllBookmarks/${recipeID}`,
-        {}
-      ).then((response) => {
-        console.log(response);
-      });
-    });
+    // Axios.delete(
+    //   `https://mmmbook-vertwo-server.herokuapp.com/deleteRecipes/${recipeID}`,
+    //   {}
+    // ).then((response) => {
+    //   // console.log(response);
+    //   Axios.get(
+    //     `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipesID/${userID}`,
+    //     {}
+    //   ).then((response) => {
+    //     // console.log("hello");
+    //     // console.log(response.data);
+    //     setUserRecipes(response.data.reverse());
+    //   });
+    //   Axios.delete(
+    //     `http://localhost:3001/deleteAllBookmarks/${recipeID}`,
+    //     {}
+    //   ).then((response) => {
+    //     console.log(response);
+    //   });
+    // });
   };
 
   useEffect(() => {
@@ -194,15 +246,15 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
       console.log(response.data[0]);
       setProfileUser(response.data[0]);
 
-      // setUpdateUser(response.data[0].username);
-      // setUpdateDesc(response.data[0].chefDesc);
-      // setUpdateFirst(response.data[0].firstName);
-      // setUpdateLast(response.data[0].lastName);
-      // setUpdateEmail(response.data[0].email);
-      // setUpdateFavRec(response.data[0].favRecipe);
-      // setUpdateFavBev(response.data[0].favBeverage);
-      // setUpdateFavDes(response.data[0].favDessert);
-      // setUpdateFavCui(response.data[0].favCuisine);
+      setUpdateUser(response.data[0].username);
+      setUpdateDesc(response.data[0].chefDesc);
+      setUpdateFirst(response.data[0].firstName);
+      setUpdateLast(response.data[0].lastName);
+      setUpdateEmail(response.data[0].email);
+      setUpdateFavRec(response.data[0].favRecipe);
+      setUpdateFavBev(response.data[0].favBeverage);
+      setUpdateFavDes(response.data[0].favDessert);
+      setUpdateFavCui(response.data[0].favCuisine);
     });
 
     Axios.get(
@@ -249,7 +301,28 @@ const UserProfile = ({ isLoggedIn, currentUser }) => {
     <div className="profilePage">
       <div>
         <ProfileCard
+          isLoggedIn={isLoggedIn}
           profileUser={profileUser}
+          userRecipes={userRecipes}
+          settingToggle={settingToggle}
+          settingsFlip={settingsFlip}
+          updateInfo={updateInfo}
+          updateProfile={updateProfile}
+          updateUser={updateUser}
+          setUpdateUser={setUpdateUser}
+          updateDesc={updateDesc}
+          setUpdateDesc={setUpdateDesc}
+          updateFirst={updateFirst}
+          setUpdateFirst={setUpdateFirst}
+          updateLast={updateLast}
+          setUpdateLast={setUpdateLast}
+          updateFavRec={updateFavRec}
+          favRecipeImage={favRecipeImage}
+          updateFavBev={updateFavBev}
+          favBeverageImage={favBeverageImage}
+          updateFavDes={updateFavDes}
+          favDessertImage={favDessertImage}
+          updateFavCui={updateFavCui}
           myRecipes={myRecipes}
           myFavorite={myFavorite}
           myReviews={myReviews}

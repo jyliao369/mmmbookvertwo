@@ -6,41 +6,47 @@ import RecipeCard from "../RecipeCard";
 
 import * as dataList from "../data";
 
-const Explore = ({ isLoggedIn, setCurrentUser, currentUser }) => {
-  const [allRecipes, setAllRecipes] = useState([]);
+const Explore = ({ isLoggedIn, currentUser, searchWord, searchedRecipes }) => {
   const [showRecipes, setShowRecipes] = useState([]);
 
   const filteredSearch = (search) => {
-    console.log(search);
-
     let filteredSearch = [];
 
-    for (let a = 0; a < allRecipes.length; a++) {
-      if (
-        allRecipes[a].category === search ||
-        allRecipes[a].diet === search ||
-        allRecipes[a].course === search ||
-        allRecipes[a].cuisine === search
-      ) {
-        // console.log(true);
-        filteredSearch.push(allRecipes[a]);
-      }
-    }
-
-    // console.log(filteredSearch);
-    setShowRecipes(filteredSearch);
-  };
-
-  useEffect(() => {
     Axios.get(
       `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipes`,
       {}
     ).then((response) => {
-      // console.log(response.data);
-      setAllRecipes(response.data.reverse());
-      setShowRecipes(response.data);
+      let allRecipes = response.data.reverse();
+
+      for (let a = 0; a < allRecipes.length; a++) {
+        if (
+          allRecipes[a].category === search ||
+          allRecipes[a].diet === search ||
+          allRecipes[a].course === search ||
+          allRecipes[a].cuisine === search
+        ) {
+          filteredSearch.push(allRecipes[a]);
+        }
+      }
+
+      setShowRecipes(filteredSearch);
     });
-  }, []);
+  };
+
+  useEffect(() => {
+    if (searchedRecipes.length > 0) {
+      setShowRecipes(searchedRecipes);
+    } else if (searchedRecipes.length <= 0) {
+      Axios.get(
+        `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipes`,
+        {}
+      ).then((response) => {
+        // console.log(response.data);
+        // setAllRecipes(response.data.reverse());
+        setShowRecipes(response.data.reverse());
+      });
+    }
+  }, [searchedRecipes]);
 
   return (
     <div className="explorePage">
@@ -69,7 +75,7 @@ const Explore = ({ isLoggedIn, setCurrentUser, currentUser }) => {
             <option value={diet}>{diet}</option>
           ))}
         </select>
-        <button onClick={() => setShowRecipes(allRecipes)}>Reset</button>
+        {/* <button onClick={() => setShowRecipes(allRecipes)}>Reset</button> */}
       </div>
 
       <div className="allRecipesCont">

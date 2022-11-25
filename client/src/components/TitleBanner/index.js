@@ -15,13 +15,11 @@ const TitleBanner = ({
   searchWord,
   setSearchWord,
   setSearchedRecipes,
-  setFoundRecipe,
 }) => {
   const [isNavBarEx, setIsNavBarEx] = useState(false);
   const [allRecipes, setAllRecipes] = useState([]);
-  const [searchedWord, setSearchedWord] = useState("");
 
-  const navToSearch = useNavigate();
+  const navToExplore = useNavigate();
 
   const expandNavBar = () => {
     if (
@@ -75,47 +73,68 @@ const TitleBanner = ({
   };
 
   const searchRecipe = () => {
-    // console.log(searchWord);
-    // console.log(allRecipes);
-
-    let fileredRecipes = [];
-
-    if (searchWord === "") {
-      setFoundRecipe(false);
-      setSearchedRecipes(allRecipes);
-    } else {
-      for (let a = 0; a < allRecipes.length; a++) {
-        if (
-          allRecipes[a].name.toLowerCase().includes(searchWord) ||
-          allRecipes[a].ingredients.toLowerCase().includes(searchWord) ||
-          allRecipes[a].description.toLowerCase().includes(searchWord)
-        ) {
-          fileredRecipes.push(allRecipes[a]);
-        }
-      }
-
-      if (fileredRecipes.length > 0) {
-        setFoundRecipe(true);
-        setSearchedRecipes(fileredRecipes);
-      } else {
-        setFoundRecipe(false);
-        setSearchedRecipes(allRecipes);
-      }
-    }
-
-    navToSearch(`/search`);
-  };
-
-  useEffect(() => {
     Axios.get(
       `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipes`,
       {}
     ).then((response) => {
-      // console.log("hello");
-      // console.log(response.data);
-      setAllRecipes(response.data.reverse());
+      // console.log(response.data.reverse());
+
+      if (searchWord === "") {
+        setSearchedRecipes(response.data.reverse());
+      } else {
+        console.log("hello There");
+        console.log(searchWord);
+        let allRecipes = response.data.reverse();
+        let filteredRecipes = [];
+
+        for (let a = 0; a < allRecipes.length; a++) {
+          if (
+            allRecipes[a].name.toLowerCase().includes(searchWord) ||
+            allRecipes[a].ingredients.toLowerCase().includes(searchWord) ||
+            allRecipes[a].description.toLowerCase().includes(searchWord)
+          ) {
+            filteredRecipes.push(allRecipes[a]);
+          }
+        }
+        console.log(filteredRecipes);
+        setSearchedRecipes(filteredRecipes);
+      }
     });
-  }, []);
+
+    // let fileredRecipes = [];
+    // if (searchWord === "") {
+    //   setFoundRecipe(false);
+    //   setSearchedRecipes(allRecipes);
+    // } else {
+    //   for (let a = 0; a < allRecipes.length; a++) {
+    //     if (
+    //       allRecipes[a].name.toLowerCase().includes(searchWord) ||
+    //       allRecipes[a].ingredients.toLowerCase().includes(searchWord) ||
+    //       allRecipes[a].description.toLowerCase().includes(searchWord)
+    //     ) {
+    //       fileredRecipes.push(allRecipes[a]);
+    //     }
+    //   }
+    //   if (fileredRecipes.length > 0) {
+    //     setFoundRecipe(true);
+    //     setSearchedRecipes(fileredRecipes);
+    //   } else {
+    //     setFoundRecipe(false);
+    //     setSearchedRecipes(allRecipes);
+    //   }
+    // }
+
+    navToExplore(`/explore`);
+  };
+
+  // useEffect(() => {
+  //   Axios.get(
+  //     `https://mmmbook-vertwo-server.herokuapp.com/getAllRecipes`,
+  //     {}
+  //   ).then((response) => {
+  //     setAllRecipes(response.data);
+  //   });
+  // }, []);
 
   return (
     <div className="titleBanner">
@@ -128,9 +147,10 @@ const TitleBanner = ({
         </div>
         <div className="titleBannerTwo">
           <input
-            value={searchWord}
-            onChange={(event) => setSearchWord(event.target.value)}
+            id="searchInput"
             placeholder="Search"
+            value={searchWord}
+            onChange={(e) => setSearchWord(e.target.value)}
           />
           <div style={{ cursor: "pointer" }} onClick={() => searchRecipe()}>
             <SearchIcon />

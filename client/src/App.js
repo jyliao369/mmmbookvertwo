@@ -18,7 +18,6 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import UpdatePage from "./components/UpdatePage";
 import CustomizePage from "./components/CustomizePage";
-import SearchPage from "./components/SearchPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -26,7 +25,6 @@ function App() {
 
   const [searchWord, setSearchWord] = useState("");
   const [searchedRecipes, setSearchedRecipes] = useState([]);
-  const [foundRecipe, setFoundRecipe] = useState(true);
 
   Axios.defaults.withCredentials = true;
 
@@ -52,7 +50,6 @@ function App() {
           searchWord={searchWord}
           setSearchWord={setSearchWord}
           setSearchedRecipes={setSearchedRecipes}
-          setFoundRecipe={setFoundRecipe}
         />
         <div className="appContTwo">
           <Navbar
@@ -77,18 +74,9 @@ function App() {
                 element={
                   <Explore
                     isLoggedIn={isLoggedIn}
-                    setCurrentUser={setCurrentUser}
                     currentUser={currentUser}
-                  />
-                }
-              />
-              <Route
-                path="/search"
-                element={
-                  <SearchPage
                     searchWord={searchWord}
                     searchedRecipes={searchedRecipes}
-                    foundRecipe={foundRecipe}
                   />
                 }
               />
